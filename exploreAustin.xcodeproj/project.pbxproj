@@ -14,6 +14,10 @@
 		E02991D929087E8500316F3B /* exploreAustin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E02991D729087E8500316F3B /* exploreAustin.xcdatamodeld */; };
 		E02991DB29087E8600316F3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E02991DA29087E8600316F3B /* Assets.xcassets */; };
 		E02991DE29087E8600316F3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E02991DC29087E8600316F3B /* LaunchScreen.storyboard */; };
+		E02991E629087FF300316F3B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E02991E529087FF300316F3B /* GoogleService-Info.plist */; };
+		E02991E9290880E500316F3B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E02991E8290880E500316F3B /* FirebaseAuth */; };
+		E02991EB290881F800316F3B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02991EA290881F800316F3B /* LoginViewController.swift */; };
+		E02991ED2908825F00316F3B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02991EC2908825F00316F3B /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,9 @@
 		E02991DA29087E8600316F3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E02991DD29087E8600316F3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E02991DF29087E8600316F3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E02991E529087FF300316F3B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E02991EA290881F800316F3B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E02991EC2908825F00316F3B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E02991E9290880E500316F3B /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,11 +68,14 @@
 			children = (
 				E02991CE29087E8500316F3B /* AppDelegate.swift */,
 				E02991D029087E8500316F3B /* SceneDelegate.swift */,
+				E02991EA290881F800316F3B /* LoginViewController.swift */,
+				E02991EC2908825F00316F3B /* ProfileViewController.swift */,
 				E02991D229087E8500316F3B /* ViewController.swift */,
 				E02991D429087E8500316F3B /* Main.storyboard */,
 				E02991DA29087E8600316F3B /* Assets.xcassets */,
 				E02991DC29087E8600316F3B /* LaunchScreen.storyboard */,
 				E02991DF29087E8600316F3B /* Info.plist */,
+				E02991E529087FF300316F3B /* GoogleService-Info.plist */,
 				E02991D729087E8500316F3B /* exploreAustin.xcdatamodeld */,
 			);
 			path = exploreAustin;
@@ -86,6 +97,9 @@
 			dependencies = (
 			);
 			name = exploreAustin;
+			packageProductDependencies = (
+				E02991E8290880E500316F3B /* FirebaseAuth */,
+			);
 			productName = exploreAustin;
 			productReference = E02991CB29087E8500316F3B /* exploreAustin.app */;
 			productType = "com.apple.product-type.application";
@@ -114,6 +128,9 @@
 				Base,
 			);
 			mainGroup = E02991C229087E8500316F3B;
+			packageReferences = (
+				E02991E7290880E500316F3B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = E02991CC29087E8500316F3B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -129,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E02991DE29087E8600316F3B /* LaunchScreen.storyboard in Resources */,
+				E02991E629087FF300316F3B /* GoogleService-Info.plist in Resources */,
 				E02991DB29087E8600316F3B /* Assets.xcassets in Resources */,
 				E02991D629087E8500316F3B /* Main.storyboard in Resources */,
 			);
@@ -141,9 +159,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E02991ED2908825F00316F3B /* ProfileViewController.swift in Sources */,
 				E02991D329087E8500316F3B /* ViewController.swift in Sources */,
 				E02991D929087E8500316F3B /* exploreAustin.xcdatamodeld in Sources */,
 				E02991CF29087E8500316F3B /* AppDelegate.swift in Sources */,
+				E02991EB290881F800316F3B /* LoginViewController.swift in Sources */,
 				E02991D129087E8500316F3B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,6 +311,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = exploreAustin/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -318,6 +339,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = exploreAustin/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -360,6 +382,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E02991E7290880E500316F3B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E02991E8290880E500316F3B /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E02991E7290880E500316F3B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		E02991D729087E8500316F3B /* exploreAustin.xcdatamodeld */ = {
