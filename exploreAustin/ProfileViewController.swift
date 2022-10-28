@@ -52,13 +52,12 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
-        //self.performSegue(withIdentifier: "settingsSaveSegue", sender: self)
     }
     
     @IBAction func logOutButtonPressed(_ sender: Any) {
         do{
             try Auth.auth().signOut()
-            //self.performSegue(withIdentifier: "logoutSegue", sender: nil)
+            performSegue(withIdentifier: "logoutSegue", sender: self)
         }
         catch{
             print("error")
