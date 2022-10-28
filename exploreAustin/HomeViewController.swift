@@ -7,10 +7,16 @@
 
 import UIKit
 
-var darkModeIsOn: Bool = false
+
 
 class HomeViewController: UIViewController {
 
+    override func viewWillAppear(_ animated: Bool) {
+        if DarkMode.darkModeIsEnabled == true{
+            overrideUserInterfaceStyle = .dark
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
