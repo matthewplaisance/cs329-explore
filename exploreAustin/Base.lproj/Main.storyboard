@@ -13,7 +13,7 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="HomeViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Explore Austin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ff1-a0-e5c">
@@ -176,7 +176,7 @@
         <!--Login View Controller-->
         <scene sceneID="hiB-Jd-yr3">
             <objects>
-                <viewController id="LBY-yM-iNO" customClass="LoginViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="LBY-yM-iNO" customClass="LoginViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Wz-KF-yfx">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -267,7 +267,7 @@
                         <outlet property="statusLabel" destination="Xec-CQ-L5e" id="VEt-eB-M2D"/>
                         <outlet property="userId" destination="OSx-Wn-h82" id="0P4-zr-CBA"/>
                         <outlet property="userKey" destination="L5a-mi-tde" id="Xdc-5N-5Eb"/>
-                        <segue destination="N6W-gE-jKV" kind="presentation" identifier="loginSeg" modalPresentationStyle="fullScreen" id="hAF-Lw-0fi"/>
+                        <segue destination="gfE-j1-dbk" kind="show" identifier="loginSeg" id="lzd-b8-DiO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jf7-Ka-hUC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -277,8 +277,9 @@
         <!--Navigation Controller-->
         <scene sceneID="zkb-ST-jNK">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gfE-j1-dbk" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="gfE-j1-dbk" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="cxT-1X-SeF"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Shv-7Q-vbk">
                         <rect key="frame" x="0.0" y="47" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -294,8 +295,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ntS-ZH-Pzd"/>
-        <segue reference="5HN-EH-lUR"/>
+        <segue reference="lzd-b8-DiO"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="gear" catalog="system" width="128" height="122"/>
