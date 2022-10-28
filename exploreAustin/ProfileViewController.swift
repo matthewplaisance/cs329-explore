@@ -9,13 +9,30 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    
+    @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var newPasswordField: UITextField!
+    @IBOutlet weak var confirmPasswordField: UITextField!
+    @IBOutlet weak var darkModeToggle: UISwitch!
+    @IBOutlet weak var soundToggle: UISwitch!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-
+    
+    
+    @IBAction func saveButtonPressed(_ sender: Any) {
+    }
+    
+    @IBAction func logOutButtonPressed(_ sender: Any) {
+    }
+    
+    
     /*
     // MARK: - Navigation
 
