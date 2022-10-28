@@ -2,13 +2,12 @@
 //  ProfileViewController.swift
 //  exploreAustin
 //
-//  Created by Matthew Plaisance on 10/25/22.
+//  Created by Robert Binning on 10/25/22.
 //
 
 import UIKit
 
 class ProfileViewController: UIViewController {
-
     
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
@@ -17,14 +16,26 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var darkModeToggle: UISwitch!
     @IBOutlet weak var soundToggle: UISwitch!
     
+    var darkModeIsOn: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
     
+    @IBAction func DarkModeToggle(_ sender: Any) {
+        if darkModeToggle.isOn{
+            
+            overrideUserInterfaceStyle = .dark
+        }
+        else{
+            overrideUserInterfaceStyle = .light
+        }
+    }
+    @IBAction func SoundToggled(_ sender: Any) {
+    }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
     }
