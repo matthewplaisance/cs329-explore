@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8B4D3E0E290B863500DC5F21 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D3E0D290B863500DC5F21 /* HomeViewController.swift */; };
+		8BB828B5290C5CD400DE2E0B /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB828B4290C5CD400DE2E0B /* RestaurantViewController.swift */; };
 		E02991CF29087E8500316F3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02991CE29087E8500316F3B /* AppDelegate.swift */; };
 		E02991D129087E8500316F3B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02991D029087E8500316F3B /* SceneDelegate.swift */; };
 		E02991D629087E8500316F3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E02991D429087E8500316F3B /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		8B4D3E0D290B863500DC5F21 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		8BB828B4290C5CD400DE2E0B /* RestaurantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewController.swift; sourceTree = "<group>"; };
 		E02991CB29087E8500316F3B /* exploreAustin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = exploreAustin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E02991CE29087E8500316F3B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E02991D029087E8500316F3B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				E02991EA290881F800316F3B /* LoginViewController.swift */,
 				E02991EC2908825F00316F3B /* ProfileViewController.swift */,
 				E02991D429087E8500316F3B /* Main.storyboard */,
+				8BB828B4290C5CD400DE2E0B /* RestaurantViewController.swift */,
 				8B4D3E0D290B863500DC5F21 /* HomeViewController.swift */,
 				E02991DA29087E8600316F3B /* Assets.xcassets */,
 				E02991DC29087E8600316F3B /* LaunchScreen.storyboard */,
@@ -161,6 +164,7 @@
 			files = (
 				E02991ED2908825F00316F3B /* ProfileViewController.swift in Sources */,
 				E02991D929087E8500316F3B /* exploreAustin.xcdatamodeld in Sources */,
+				8BB828B5290C5CD400DE2E0B /* RestaurantViewController.swift in Sources */,
 				E02991CF29087E8500316F3B /* AppDelegate.swift in Sources */,
 				E02991EB290881F800316F3B /* LoginViewController.swift in Sources */,
 				E02991D129087E8500316F3B /* SceneDelegate.swift in Sources */,

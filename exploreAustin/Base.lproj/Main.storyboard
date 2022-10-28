@@ -39,6 +39,21 @@
             </objects>
             <point key="canvasLocation" x="1163.0769230769231" y="666.82464454976298"/>
         </scene>
+        <!--Restaurant View Controller-->
+        <scene sceneID="Yhx-gk-YU6">
+            <objects>
+                <viewController id="zps-AF-FWI" customClass="RestaurantViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QuF-89-jC7">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="cv3-a5-7Bc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nnx-5K-HVY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2009" y="18"/>
+        </scene>
         <!--Profile View Controller-->
         <scene sceneID="fTj-YD-NOi">
             <objects>

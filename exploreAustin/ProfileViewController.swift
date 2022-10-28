@@ -7,10 +7,14 @@
 
 import UIKit
 import FirebaseAuth
+import CoreData
 
 struct DarkMode{
     static var darkModeIsEnabled: Bool = false
 }
+
+let appDelegate = UIApplication.shared.delegate as! AppDelegate
+let context = appDelegate.persistentContainer.viewContext
 
 class ProfileViewController: UIViewController {
     
@@ -23,6 +27,12 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var soundToggle: UISwitch!
     
     override func viewWillAppear(_ animated: Bool) {
+        let loadedSettings = retrieveSettings()
+        for i in loadedSettings{
+            if let darkMode = i.value(forKey: "darkMode"){
+                DarkMode.darkModeIsEnabled = darkMode as! Bool
+            }
+        }
         if DarkMode.darkModeIsEnabled == true{
             overrideUserInterfaceStyle = .dark
             darkModeToggle.isOn = true
@@ -49,6 +59,7 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
+        storeSettings(darkMode: DarkMode.darkModeIsEnabled)
         performSegue(withIdentifier: "settingsSaveSegue", sender: self)
     }
     
@@ -61,7 +72,34 @@ class ProfileViewController: UIViewController {
             print("error")
         }
     }
+    func storeSettings(darkMode:Bool) {
+        let dataToStore = NSEntityDescription.insertNewObject(forEntityName: "ProfileSettings", into: context)
+        dataToStore.setValue(darkMode, forKey: "darkMode")
+        saveContext()
+    }
     
+    func retrieveSettings() -> [NSManagedObject] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ProfileSettings")
+        var fetchedResults:[NSManagedObject]? = nil
+        do{
+            try fetchedResults = context.fetch(request) as? [NSManagedObject]
+        } catch {
+            let nserror = error as NSError
+            print(nserror)
+        }
+        return (fetchedResults)!
+    }
+    
+    func saveContext(){
+        if context.hasChanges{
+            do {
+                try context.save()
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
     
     
     /*

@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import CoreData
 
 class LoginViewController: UIViewController {
 
@@ -19,6 +20,12 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var statusLabel: UILabel!
     
     override func viewWillAppear(_ animated: Bool) {
+        let loadedSettings = retrieveSettings()
+        for i in loadedSettings{
+            if let darkMode = i.value(forKey: "darkMode"){
+                DarkMode.darkModeIsEnabled = darkMode as! Bool
+            }
+        }
         if DarkMode.darkModeIsEnabled == true{
             overrideUserInterfaceStyle = .dark
         }
@@ -26,7 +33,6 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         confirmPassword.alpha = 0
         repearUserKeyField.alpha = 0
         userKey.isSecureTextEntry = true
@@ -84,6 +90,18 @@ class LoginViewController: UIViewController {
                 
             }
         }
+    }
+    
+    func retrieveSettings() -> [NSManagedObject] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ProfileSettings")
+        var fetchedResults:[NSManagedObject]? = nil
+        do{
+            try fetchedResults = context.fetch(request) as? [NSManagedObject]
+        } catch {
+            let nserror = error as NSError
+            print(nserror)
+        }
+        return (fetchedResults)!
     }
     
 }
