@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ProfileViewController: UIViewController {
     
@@ -16,18 +17,14 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var darkModeToggle: UISwitch!
     @IBOutlet weak var soundToggle: UISwitch!
     
-    var darkModeIsOn: Bool = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
     }
     
-    
     @IBAction func DarkModeToggle(_ sender: Any) {
         if darkModeToggle.isOn{
-            
             overrideUserInterfaceStyle = .dark
         }
         else{
@@ -41,6 +38,13 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func logOutButtonPressed(_ sender: Any) {
+        do{
+            try Auth.auth().signOut()
+            self.performSegue(withIdentifier: "logoutSegue", sender: nil)
+        }
+        catch{
+            print("error")
+        }
     }
     
     
