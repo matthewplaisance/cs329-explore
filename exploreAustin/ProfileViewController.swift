@@ -5,8 +5,10 @@
 //  Created by Robert Binning on 10/25/22.
 //
 
+
+// test
+
 import UIKit
-import FirebaseCore
 import FirebaseAuth
 
 class ProfileViewController: UIViewController {
@@ -24,7 +26,6 @@ class ProfileViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    
     @IBAction func DarkModeToggle(_ sender: Any) {
         if darkModeToggle.isOn{
             overrideUserInterfaceStyle = .dark
@@ -34,9 +35,6 @@ class ProfileViewController: UIViewController {
         }
     }
     @IBAction func SoundToggled(_ sender: Any) {
-        if soundToggle.isOn{
-            
-        }
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {

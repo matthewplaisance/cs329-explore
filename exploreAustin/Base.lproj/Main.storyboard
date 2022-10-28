@@ -119,7 +119,7 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Log Out"/>
                                 <connections>
                                     <action selector="logOutButtonPressed:" destination="N6W-gE-jKV" eventType="touchUpInside" id="Mwz-Kt-tte"/>
-                                    <segue destination="LBY-yM-iNO" kind="presentation" identifier="logoutSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="tgu-eT-7gR"/>
+                                    <segue destination="LBY-yM-iNO" kind="presentation" identifier="logoutSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="56H-us-b1J"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JgM-pK-8WI">
@@ -142,7 +142,6 @@
                         <viewLayoutGuide key="safeArea" id="OEV-YB-qdB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="4rT-Dc-qm8"/>
                     <connections>
                         <outlet property="confirmPasswordField" destination="gXV-T2-GJp" id="OqI-kv-Sr5"/>
                         <outlet property="darkModeToggle" destination="o89-Ld-ohy" id="QiL-26-5u1"/>
@@ -242,7 +241,6 @@
                             <constraint firstItem="lOl-xo-NTv" firstAttribute="leading" secondItem="JdQ-SF-ELq" secondAttribute="leading" constant="20" id="rmi-FY-Bsg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="6P8-En-0NS"/>
                     <connections>
                         <outlet property="confirmPassword" destination="fnw-Ci-4VN" id="xpe-5j-KnU"/>
                         <outlet property="loginButton" destination="OcL-Af-Egp" id="lCr-iD-Nya"/>
