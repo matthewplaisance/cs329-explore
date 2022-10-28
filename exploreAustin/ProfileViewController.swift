@@ -49,17 +49,19 @@ class ProfileViewController: UIViewController {
         if darkModeToggle.isOn{
             overrideUserInterfaceStyle = .dark
             DarkMode.darkModeIsEnabled = true
+            storeSettings(darkMode: DarkMode.darkModeIsEnabled)
         }
         else{
             overrideUserInterfaceStyle = .light
             DarkMode.darkModeIsEnabled = false
+            storeSettings(darkMode: DarkMode.darkModeIsEnabled)
         }
     }
     @IBAction func SoundToggled(_ sender: Any) {
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
-        storeSettings(darkMode: DarkMode.darkModeIsEnabled)
+
         performSegue(withIdentifier: "settingsSaveSegue", sender: self)
     }
     
