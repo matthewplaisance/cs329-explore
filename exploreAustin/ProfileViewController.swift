@@ -18,14 +18,6 @@ class ProfileViewController: UIViewController {
     
     var darkModeIsOn: Bool = false
     
-    override func viewWillAppear(_ animated: Bool) {
-        if darkModeIsOn == true{
-            overrideUserInterfaceStyle = .dark
-        }else{
-            overrideUserInterfaceStyle = .light
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,11 +27,10 @@ class ProfileViewController: UIViewController {
     
     @IBAction func DarkModeToggle(_ sender: Any) {
         if darkModeToggle.isOn{
-            nameField.text = "On"
+            
             overrideUserInterfaceStyle = .dark
         }
         else{
-            nameField.text = "Off"
             overrideUserInterfaceStyle = .light
         }
     }
