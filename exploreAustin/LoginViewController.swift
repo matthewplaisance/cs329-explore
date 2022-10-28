@@ -18,6 +18,12 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var statusLabel: UILabel!
     
+    override func viewWillAppear(_ animated: Bool) {
+        if DarkMode.darkModeIsEnabled == true{
+            overrideUserInterfaceStyle = .dark
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

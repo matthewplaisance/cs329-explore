@@ -62,7 +62,6 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Log Out"/>
                                 <connections>
                                     <action selector="logOutButtonPressed:" destination="N6W-gE-jKV" eventType="touchUpInside" id="Mwz-Kt-tte"/>
-                                    <segue destination="LBY-yM-iNO" kind="presentation" identifier="logoutSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="56H-us-b1J"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JgM-pK-8WI">
@@ -72,7 +71,6 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Save"/>
                                 <connections>
                                     <action selector="saveButtonPressed:" destination="N6W-gE-jKV" eventType="touchUpInside" id="RW7-Gc-654"/>
-                                    <segue destination="gfE-j1-dbk" kind="presentation" identifier="settingsSaveSegue" modalPresentationStyle="fullScreen" id="ntS-ZH-Pzd"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLx-H7-5rp">
@@ -167,6 +165,8 @@
                         <outlet property="nameField" destination="DiH-9C-y5S" id="1Pi-NZ-1Kd"/>
                         <outlet property="newPasswordField" destination="pXV-Ug-dWM" id="YFJ-r3-xLd"/>
                         <outlet property="soundToggle" destination="GxO-FP-jXq" id="M9E-98-GFF"/>
+                        <segue destination="gfE-j1-dbk" kind="show" identifier="settingsSaveSegue" id="8M5-LX-mSN"/>
+                        <segue destination="LBY-yM-iNO" kind="show" identifier="logoutSegue" id="oJ1-tl-YK4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Io-2R-LAG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -259,6 +259,7 @@
                             <constraint firstItem="lOl-xo-NTv" firstAttribute="leading" secondItem="JdQ-SF-ELq" secondAttribute="leading" constant="20" id="rmi-FY-Bsg"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="cos-q3-xw5"/>
                     <connections>
                         <outlet property="confirmPassword" destination="fnw-Ci-4VN" id="xpe-5j-KnU"/>
                         <outlet property="loginButton" destination="OcL-Af-Egp" id="lCr-iD-Nya"/>
@@ -295,7 +296,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="lzd-b8-DiO"/>
+        <segue reference="8M5-LX-mSN"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="gear" catalog="system" width="128" height="122"/>

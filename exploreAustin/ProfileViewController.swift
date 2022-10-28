@@ -49,6 +49,7 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: "settingsSaveSegue", sender: self)
     }
     
     @IBAction func logOutButtonPressed(_ sender: Any) {
@@ -61,14 +62,6 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "settingsSaveSegue",
-            let nextVC = segue.destination as? HomeViewController {
-            if darkModeToggle.isOn{
-                nextVC.overrideUserInterfaceStyle = .dark
-            }
-        }
-    }
     
     
     /*
