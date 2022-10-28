@@ -8,25 +8,32 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Explore Austin-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="HomdViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Explore Austin" id="vzg-Ch-IES">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="gear" catalog="system" id="cH2-41-EqG">
+                            <connections>
+                                <segue destination="N6W-gE-jKV" kind="presentation" identifier="settingsSegue" modalPresentationStyle="fullScreen" id="5HN-EH-lUR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="255" y="-34"/>
+            <point key="canvasLocation" x="1163.0769230769231" y="666.82464454976298"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="fTj-YD-NOi">
             <objects>
-                <viewController id="N6W-gE-jKV" customClass="ProfileViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="N6W-gE-jKV" customClass="ProfileViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kli-L1-KAN">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -129,6 +136,7 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Save"/>
                                 <connections>
                                     <action selector="saveButtonPressed:" destination="N6W-gE-jKV" eventType="touchUpInside" id="RW7-Gc-654"/>
+                                    <segue destination="gfE-j1-dbk" kind="presentation" identifier="settingsSaveSegue" modalPresentationStyle="fullScreen" id="ntS-ZH-Pzd"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sound:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W9l-TY-W6I">
@@ -142,6 +150,7 @@
                         <viewLayoutGuide key="safeArea" id="OEV-YB-qdB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="g9J-6b-Hh0"/>
                     <connections>
                         <outlet property="confirmPasswordField" destination="gXV-T2-GJp" id="OqI-kv-Sr5"/>
                         <outlet property="darkModeToggle" destination="o89-Ld-ohy" id="QiL-26-5u1"/>
@@ -256,8 +265,32 @@
             </objects>
             <point key="canvasLocation" x="-718" y="-49"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="zkb-ST-jNK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gfE-j1-dbk" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="bbV-5u-e5C"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Shv-7Q-vbk">
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="tLr-Pj-2f4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PjW-WH-s69" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="233.84615384615384" y="666.82464454976298"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="ntS-ZH-Pzd"/>
+        <segue reference="5HN-EH-lUR"/>
+    </inferredMetricsTieBreakers>
     <resources>
+        <image name="gear" catalog="system" width="128" height="122"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

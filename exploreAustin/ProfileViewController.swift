@@ -35,6 +35,7 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
+        self.performSegue(withIdentifier: "settingsSaveSegue", sender: self)
     }
     
     @IBAction func logOutButtonPressed(_ sender: Any) {
