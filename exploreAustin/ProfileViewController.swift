@@ -5,9 +5,6 @@
 //  Created by Robert Binning on 10/25/22.
 //
 
-
-// test
-
 import UIKit
 import FirebaseAuth
 

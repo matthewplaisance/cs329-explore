@@ -14,9 +14,9 @@
             filePath = "exploreAustin/ProfileViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "SoundToggled(_:)"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "logOutButtonPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
