@@ -19,6 +19,7 @@ let context = appDelegate.persistentContainer.viewContext
 class ProfileViewController: UIViewController {
     
     
+    @IBOutlet weak var errorMessage: UILabel!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var newPasswordField: UITextField!
@@ -31,6 +32,12 @@ class ProfileViewController: UIViewController {
         for i in loadedSettings{
             if let darkMode = i.value(forKey: "darkMode"){
                 DarkMode.darkModeIsEnabled = darkMode as! Bool
+            }
+            if let loadedName = i.value(forKey: "name"){
+                nameField.text = loadedName as? String
+            }
+            if let loadedEmail = i.value(forKey: "email"){
+                emailField.text = loadedEmail as? String
             }
         }
         if DarkMode.darkModeIsEnabled == true{
@@ -49,20 +56,26 @@ class ProfileViewController: UIViewController {
         if darkModeToggle.isOn{
             overrideUserInterfaceStyle = .dark
             DarkMode.darkModeIsEnabled = true
-            storeSettings(darkMode: DarkMode.darkModeIsEnabled)
+            saveDarkMode(darkMode: DarkMode.darkModeIsEnabled)
         }
         else{
             overrideUserInterfaceStyle = .light
             DarkMode.darkModeIsEnabled = false
-            storeSettings(darkMode: DarkMode.darkModeIsEnabled)
+            saveDarkMode(darkMode: DarkMode.darkModeIsEnabled)
         }
     }
     @IBAction func SoundToggled(_ sender: Any) {
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
-
-        performSegue(withIdentifier: "settingsSaveSegue", sender: self)
+        if newPasswordField.text != confirmPasswordField.text {
+            errorMessage.text = "New password does not match!"
+        }
+        else{
+            saveName(name: nameField.text!)
+            saveEmail(email: emailField.text!)
+            performSegue(withIdentifier: "settingsSaveSegue", sender: self)
+        }
     }
     
     @IBAction func logOutButtonPressed(_ sender: Any) {
@@ -74,9 +87,21 @@ class ProfileViewController: UIViewController {
             print("error")
         }
     }
-    func storeSettings(darkMode:Bool) {
+    func saveDarkMode(darkMode:Bool) {
         let dataToStore = NSEntityDescription.insertNewObject(forEntityName: "ProfileSettings", into: context)
         dataToStore.setValue(darkMode, forKey: "darkMode")
+        saveContext()
+    }
+    
+    func saveName(name: String){
+        let dataToStore = NSEntityDescription.insertNewObject(forEntityName: "ProfileSettings", into: context)
+        dataToStore.setValue(nameField.text, forKey: "name")
+        saveContext()
+    }
+    
+    func saveEmail(email: String){
+        let dataToStore = NSEntityDescription.insertNewObject(forEntityName: "ProfileSettings", into: context)
+        dataToStore.setValue(emailField.text, forKey: "email")
         saveContext()
     }
     
