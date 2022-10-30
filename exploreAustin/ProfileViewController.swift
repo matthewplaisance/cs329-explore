@@ -44,6 +44,7 @@ class ProfileViewController: UIViewController {
             overrideUserInterfaceStyle = .dark
             darkModeToggle.isOn = true
         }
+        errorMessage.text = ""
     }
     
     override func viewDidLoad() {
