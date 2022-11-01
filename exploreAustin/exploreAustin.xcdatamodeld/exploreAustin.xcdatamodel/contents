@@ -4,5 +4,6 @@
         <attribute name="darkMode" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="soundOn" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>
 </model>

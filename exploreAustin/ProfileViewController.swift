@@ -11,6 +11,10 @@ import CoreData
 
 struct DarkMode{
     static var darkModeIsEnabled: Bool = false
+    
+}
+struct SoundOn{
+    static var soundOn: Bool = true
 }
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -20,7 +24,7 @@ class ProfileViewController: UIViewController {
     
     let user = Auth.auth().currentUser
     
-    
+    // Outlet Variables
     @IBOutlet weak var errorMessage: UILabel!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
@@ -30,6 +34,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var soundToggle: UISwitch!
     
     override func viewWillAppear(_ animated: Bool) {
+        // get CoreData settings
         let loadedSettings = retrieveSettings()
         for i in loadedSettings{
             if let darkMode = i.value(forKey: "darkMode"){
@@ -41,11 +46,15 @@ class ProfileViewController: UIViewController {
             if let loadedEmail = i.value(forKey: "email"){
                 emailField.text = loadedEmail as? String
             }
+            if let loadedSound = i.value(forKey: "soundOn"){
+                SoundOn.soundOn = loadedSound as! Bool
+            }
         }
         if DarkMode.darkModeIsEnabled == true{
             overrideUserInterfaceStyle = .dark
             darkModeToggle.isOn = true
         }
+        // set error message label to blank
         errorMessage.text = ""
     }
     
@@ -68,18 +77,23 @@ class ProfileViewController: UIViewController {
         }
     }
     @IBAction func SoundToggled(_ sender: Any) {
+        if soundToggle.isOn{
+            SoundOn.soundOn = true
+            saveSoundOn(soundOn: SoundOn.soundOn)
+        }
+        else{
+            SoundOn.soundOn = false
+            saveSoundOn(soundOn: SoundOn.soundOn)
+        }
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
-        if newPasswordField.text != confirmPasswordField.text {
-            errorMessage.text = "New password does not match!"
-        }
-        else{
-            saveName(name: nameField.text!)
-            saveEmail(email: emailField.text!)
+        if (newPasswordField.text != "") && (confirmPasswordField.text != "") && (confirmPasswordField.text == newPasswordField.text){
             changePassword(password: confirmPasswordField.text!)
-            performSegue(withIdentifier: "settingsSaveSegue", sender: self)
         }
+        saveName(name: nameField.text!)
+        saveEmail(email: emailField.text!)
+        performSegue(withIdentifier: "settingsSaveSegue", sender: self)
     }
     
     @IBAction func logOutButtonPressed(_ sender: Any) {
@@ -97,6 +111,12 @@ class ProfileViewController: UIViewController {
         saveContext()
     }
     
+    func saveSoundOn(soundOn:Bool) {
+        let dataToStore = NSEntityDescription.insertNewObject(forEntityName: "ProfileSettings", into: context)
+        dataToStore.setValue(soundOn, forKey: "soundOn")
+        saveContext()
+    }
+    
     func saveName(name: String){
         let dataToStore = NSEntityDescription.insertNewObject(forEntityName: "ProfileSettings", into: context)
         dataToStore.setValue(nameField.text, forKey: "name")
@@ -106,6 +126,7 @@ class ProfileViewController: UIViewController {
     func saveEmail(email: String){
         let dataToStore = NSEntityDescription.insertNewObject(forEntityName: "ProfileSettings", into: context)
         dataToStore.setValue(emailField.text, forKey: "email")
+        // change email on firebase
         Auth.auth().currentUser?.updateEmail(to: emailField.text!){
             (error) in self.errorMessage.text = error.debugDescription
         }
