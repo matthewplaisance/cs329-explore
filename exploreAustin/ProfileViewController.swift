@@ -18,6 +18,8 @@ let context = appDelegate.persistentContainer.viewContext
 
 class ProfileViewController: UIViewController {
     
+    let user = Auth.auth().currentUser
+    
     
     @IBOutlet weak var errorMessage: UILabel!
     @IBOutlet weak var nameField: UITextField!
@@ -75,6 +77,7 @@ class ProfileViewController: UIViewController {
         else{
             saveName(name: nameField.text!)
             saveEmail(email: emailField.text!)
+            changePassword(password: confirmPasswordField.text!)
             performSegue(withIdentifier: "settingsSaveSegue", sender: self)
         }
     }
@@ -103,7 +106,16 @@ class ProfileViewController: UIViewController {
     func saveEmail(email: String){
         let dataToStore = NSEntityDescription.insertNewObject(forEntityName: "ProfileSettings", into: context)
         dataToStore.setValue(emailField.text, forKey: "email")
+        Auth.auth().currentUser?.updateEmail(to: emailField.text!){
+            (error) in self.errorMessage.text = error.debugDescription
+        }
         saveContext()
+    }
+    
+    func changePassword(password: String){
+        Auth.auth().currentUser?.updatePassword(to: password){
+            (error) in self.errorMessage.text = error.debugDescription
+        }
     }
     
     func retrieveSettings() -> [NSManagedObject] {
