@@ -7,14 +7,25 @@
 
 import UIKit
 import FirebaseAuth
+import CoreData
 
 struct DarkMode{
     static var darkModeIsEnabled: Bool = false
+    
 }
+struct SoundOn{
+    static var soundOn: Bool = true
+}
+
+let appDelegate = UIApplication.shared.delegate as! AppDelegate
+let context = appDelegate.persistentContainer.viewContext
 
 class ProfileViewController: UIViewController {
     
+    let user = Auth.auth().currentUser
     
+    // Outlet Variables
+    @IBOutlet weak var errorMessage: UILabel!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var newPasswordField: UITextField!
@@ -23,10 +34,29 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var soundToggle: UISwitch!
     
     override func viewWillAppear(_ animated: Bool) {
+        // get CoreData settings
+        let loadedSettings = retrieveSettings()
+        for i in loadedSettings{
+            if let darkMode = i.value(forKey: "darkMode"){
+                DarkMode.darkModeIsEnabled = darkMode as! Bool
+            }
+            if let loadedName = i.value(forKey: "name"){
+                nameField.text = loadedName as? String
+            }
+            if let loadedEmail = i.value(forKey: "email"){
+                emailField.text = loadedEmail as? String
+            }
+            if let loadedSound = i.value(forKey: "soundOn"){
+                SoundOn.soundOn = loadedSound as! Bool
+            }
+        }
+        // check for dark mode
         if DarkMode.darkModeIsEnabled == true{
             overrideUserInterfaceStyle = .dark
             darkModeToggle.isOn = true
         }
+        // set error message label to blank
+        errorMessage.text = ""
     }
     
     override func viewDidLoad() {
@@ -39,17 +69,39 @@ class ProfileViewController: UIViewController {
         if darkModeToggle.isOn{
             overrideUserInterfaceStyle = .dark
             DarkMode.darkModeIsEnabled = true
+            saveDarkMode(darkMode: DarkMode.darkModeIsEnabled)
         }
         else{
             overrideUserInterfaceStyle = .light
             DarkMode.darkModeIsEnabled = false
+            saveDarkMode(darkMode: DarkMode.darkModeIsEnabled)
         }
     }
     @IBAction func SoundToggled(_ sender: Any) {
+        if soundToggle.isOn{
+            SoundOn.soundOn = true
+            saveSoundOn(soundOn: SoundOn.soundOn)
+        }
+        else{
+            SoundOn.soundOn = false
+            saveSoundOn(soundOn: SoundOn.soundOn)
+        }
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: "settingsSaveSegue", sender: self)
+        if (newPasswordField.text != "") && (confirmPasswordField.text == newPasswordField.text){
+            changePassword(password: confirmPasswordField.text!)
+            print("Password changed") // change to alert
+        }
+        else if (newPasswordField.text != "") && (confirmPasswordField.text != newPasswordField.text){
+            errorMessage.text = "New passwords do not match!"
+        }
+        else{
+            saveName(name: nameField.text!)
+            saveEmail(email: emailField.text!)
+            performSegue(withIdentifier: "settingsSaveSegue", sender: self)
+        }
+        
     }
     
     @IBAction func logOutButtonPressed(_ sender: Any) {
@@ -61,7 +113,62 @@ class ProfileViewController: UIViewController {
             print("error")
         }
     }
+    func saveDarkMode(darkMode:Bool) {
+        let dataToStore = NSEntityDescription.insertNewObject(forEntityName: "ProfileSettings", into: context)
+        dataToStore.setValue(darkMode, forKey: "darkMode")
+        saveContext()
+    }
     
+    func saveSoundOn(soundOn:Bool) {
+        let dataToStore = NSEntityDescription.insertNewObject(forEntityName: "ProfileSettings", into: context)
+        dataToStore.setValue(soundOn, forKey: "soundOn")
+        saveContext()
+    }
+    
+    func saveName(name: String){
+        let dataToStore = NSEntityDescription.insertNewObject(forEntityName: "ProfileSettings", into: context)
+        dataToStore.setValue(nameField.text, forKey: "name")
+        saveContext()
+    }
+    
+    func saveEmail(email: String){
+        let dataToStore = NSEntityDescription.insertNewObject(forEntityName: "ProfileSettings", into: context)
+        dataToStore.setValue(emailField.text, forKey: "email")
+        // change email on firebase
+        Auth.auth().currentUser?.updateEmail(to: emailField.text!){
+            (error) in self.errorMessage.text = error.debugDescription
+        }
+        saveContext()
+    }
+    
+    func changePassword(password: String){
+        Auth.auth().currentUser?.updatePassword(to: password){
+            (error) in self.errorMessage.text = error.debugDescription
+        }
+    }
+    
+    func retrieveSettings() -> [NSManagedObject] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ProfileSettings")
+        var fetchedResults:[NSManagedObject]? = nil
+        do{
+            try fetchedResults = context.fetch(request) as? [NSManagedObject]
+        } catch {
+            let nserror = error as NSError
+            print(nserror)
+        }
+        return (fetchedResults)!
+    }
+    
+    func saveContext(){
+        if context.hasChanges{
+            do {
+                try context.save()
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
     
     
     /*
