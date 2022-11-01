@@ -16,7 +16,6 @@ class LoadingScreenViewController: UIViewController {
         UIView.animate(
                withDuration: 3.0,
                animations: {
-                   self.loadingImage.alpha = 1.0
                    self.loadingImage.alpha = 0.0
                    
                },
