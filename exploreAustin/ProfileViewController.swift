@@ -50,6 +50,7 @@ class ProfileViewController: UIViewController {
                 SoundOn.soundOn = loadedSound as! Bool
             }
         }
+        // check for dark mode
         if DarkMode.darkModeIsEnabled == true{
             overrideUserInterfaceStyle = .dark
             darkModeToggle.isOn = true
@@ -88,12 +89,19 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
-        if (newPasswordField.text != "") && (confirmPasswordField.text != "") && (confirmPasswordField.text == newPasswordField.text){
+        if (newPasswordField.text != "") && (confirmPasswordField.text == newPasswordField.text){
             changePassword(password: confirmPasswordField.text!)
+            print("Password changed") // change to alert
         }
-        saveName(name: nameField.text!)
-        saveEmail(email: emailField.text!)
-        performSegue(withIdentifier: "settingsSaveSegue", sender: self)
+        else if (newPasswordField.text != "") && (confirmPasswordField.text != newPasswordField.text){
+            errorMessage.text = "New passwords do not match!"
+        }
+        else{
+            saveName(name: nameField.text!)
+            saveEmail(email: emailField.text!)
+            performSegue(withIdentifier: "settingsSaveSegue", sender: self)
+        }
+        
     }
     
     @IBAction func logOutButtonPressed(_ sender: Any) {
