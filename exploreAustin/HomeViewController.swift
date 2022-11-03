@@ -35,7 +35,9 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         changePicture()
         Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { _ in
-            self.changePicture()
+            UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations:{self.imageView.alpha = 0; self.titleLabel.alpha = 0; self.descriptionLabel.alpha = 0; self.imageCredit.alpha = 0}){_ in
+                self.changePicture()
+            }
         }
 
         // Do any additional setup after loading the view.
@@ -46,6 +48,7 @@ class HomeViewController: UIViewController {
             imageNumber = 0
         }
         imageView.image = UIImage(named: images[imageNumber])
+        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseIn, animations: {self.imageView.alpha = 1; self.titleLabel.alpha = 1; self.descriptionLabel.alpha = 1; self.imageCredit.alpha = 1})
         titleLabel.text = imageTitles[imageNumber]
         descriptionLabel.text = imageDescription[imageNumber]
         imageCredit.text = imageSources[imageNumber]
