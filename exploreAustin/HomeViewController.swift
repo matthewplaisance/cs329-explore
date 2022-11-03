@@ -12,7 +12,7 @@ class HomeViewController: UIViewController {
     
     var images : [String] = ["ZilkerPark", "MountBonnell" ]
     var imageTitles : [String] = ["Zilker Park", "Mount Bonnell", ]
-    var imageDescription : [String] = ["Zilker Metropolitan Park is considered \("Austin's most-loved park.") This 351-acre metropolitan park is home to a variety of recreation opportunities, facilities and special events for individuals and families.", "Mount Bonnell is one of the highest points in Austin at 781 feet! The peak is named for George Bonnell, who served as Commissioner of Indian Affairs for the Texas Republic."]
+    var imageDescription : [String] = ["Zilker Metropolitan Park is considered \"Austin's most-loved park.\" This 351-acre metropolitan park is home to a variety of recreation opportunities, facilities and special events for individuals and families.", "Mount Bonnell is one of the highest points in Austin at 781 feet! The peak is named for George Bonnell, who served as Commissioner of Indian Affairs for the Texas Republic."]
     var imageNumber = 0
     
     @IBOutlet weak var imageView: UIImageView!
@@ -30,7 +30,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         changePicture()
-        Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { _ in
+        Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { _ in
             self.changePicture()
         }
 
