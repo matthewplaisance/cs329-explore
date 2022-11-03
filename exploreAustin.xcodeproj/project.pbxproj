@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8B4D3E0E290B863500DC5F21 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D3E0D290B863500DC5F21 /* HomeViewController.swift */; };
+		8B5617CD291458AD0010732E /* LearnMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5617CC291458AD0010732E /* LearnMoreViewController.swift */; };
 		8BCEFE3D290DAC04005D6C92 /* LoadingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCEFE3C290DAC04005D6C92 /* LoadingScreenViewController.swift */; };
 		E02991CF29087E8500316F3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02991CE29087E8500316F3B /* AppDelegate.swift */; };
 		E02991D129087E8500316F3B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02991D029087E8500316F3B /* SceneDelegate.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		8B4D3E0D290B863500DC5F21 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		8B5617CC291458AD0010732E /* LearnMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreViewController.swift; sourceTree = "<group>"; };
 		8BCEFE3C290DAC04005D6C92 /* LoadingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreenViewController.swift; sourceTree = "<group>"; };
 		E02991CB29087E8500316F3B /* exploreAustin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = exploreAustin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E02991CE29087E8500316F3B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				E02991EA290881F800316F3B /* LoginViewController.swift */,
 				E02991EC2908825F00316F3B /* ProfileViewController.swift */,
 				E02991D429087E8500316F3B /* Main.storyboard */,
+				8B5617CC291458AD0010732E /* LearnMoreViewController.swift */,
 				8BCEFE3C290DAC04005D6C92 /* LoadingScreenViewController.swift */,
 				8B4D3E0D290B863500DC5F21 /* HomeViewController.swift */,
 				E02991DA29087E8600316F3B /* Assets.xcassets */,
@@ -166,6 +169,7 @@
 				8BCEFE3D290DAC04005D6C92 /* LoadingScreenViewController.swift in Sources */,
 				E02991D929087E8500316F3B /* exploreAustin.xcdatamodeld in Sources */,
 				E02991CF29087E8500316F3B /* AppDelegate.swift in Sources */,
+				8B5617CD291458AD0010732E /* LearnMoreViewController.swift in Sources */,
 				E02991EB290881F800316F3B /* LoginViewController.swift in Sources */,
 				E02991D129087E8500316F3B /* SceneDelegate.swift in Sources */,
 				8B4D3E0E290B863500DC5F21 /* HomeViewController.swift in Sources */,

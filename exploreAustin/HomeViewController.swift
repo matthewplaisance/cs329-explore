@@ -42,6 +42,14 @@ class HomeViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "LearnMoreSegue"{
+            let nextVC = segue.destination as? LearnMoreViewController
+            nextVC?.delegate = self
+            nextVC?.learnMoreTitle = self.imageTitles[self.imageNumber - 1]
+            nextVC?.descriptionTextString = self.imageDescription[self.imageNumber - 1]
+        }
+    }
     
     func changePicture(){
         if imageNumber >= images.count{
@@ -55,14 +63,9 @@ class HomeViewController: UIViewController {
         imageNumber += 1
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+     @IBAction func learnMorePressed(_ sender: Any) {
+         performSegue(withIdentifier: "LearnMoreSegue", sender: self)
+     }
 
 }
