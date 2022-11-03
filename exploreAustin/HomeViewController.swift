@@ -10,10 +10,10 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    var images : [String] = ["ZilkerPark", "MountBonnell" ]
-    var imageTitles : [String] = ["Zilker Park", "Mount Bonnell", ]
-    var imageDescription : [String] = ["Zilker Metropolitan Park is considered \"Austin's most-loved park.\" This 351-acre metropolitan park is home to a variety of recreation opportunities, facilities and special events for individuals and families.", "Mount Bonnell is one of the highest points in Austin at 781 feet! The peak is named for George Bonnell, who served as Commissioner of Indian Affairs for the Texas Republic."]
-    var imageSources : [String] = ["austintexas.gov", "austintexas.org"]
+    var images : [String] = ["ZilkerPark", "BartonSprings", "MountBonnell" ]
+    var imageTitles : [String] = ["Zilker Park", "Barton Springs", "Mount Bonnell" ]
+    var imageDescription : [String] = ["Zilker Metropolitan Park is considered \"Austin's most-loved park.\" This 351-acre metropolitan park is home to a variety of recreation opportunities, facilities and special events for individuals and families.", "Within Zilker Park's 358 acres lies one of the crown jewels of Austin - Barton Springs Pool. The pool itself measures three acres in size, and is fed from underground springs with an average temperature of 68-70 degrees, ideal for year-round swimming", "Mount Bonnell is one of the highest points in Austin at 781 feet! The peak is named for George Bonnell, who served as Commissioner of Indian Affairs for the Texas Republic.",]
+    var imageSources : [String] = ["austintexas.gov", "austintexas.org", "austintexas.org"]
     var imageNumber = 0
     
     @IBOutlet weak var imageView: UIImageView!
