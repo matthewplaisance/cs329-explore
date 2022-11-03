@@ -10,7 +10,9 @@ import FirebaseAuth
 import CoreData
 
 class LoginViewController: UIViewController {
-
+    
+    var currUser = Auth.auth().currentUser?.email
+    
     @IBOutlet weak var loginSegCtrl: UISegmentedControl!
     @IBOutlet weak var userId: UITextField!
     @IBOutlet weak var userKey: UITextField!
@@ -20,15 +22,14 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var statusLabel: UILabel!
     
     override func viewWillAppear(_ animated: Bool) {
-        let loadedSettings = retrieveSettings()
-        for i in loadedSettings{
-            if let darkMode = i.value(forKey: "darkMode"){
-                DarkMode.darkModeIsEnabled = darkMode as! Bool
-            }
+        
+        if (currUser != nil) {
+            print("currently logged in as: \(currUser)")
         }
-        if DarkMode.darkModeIsEnabled == true{
-            overrideUserInterfaceStyle = .dark
-        }
+        
+        print("Loading Core Data...")
+        viewCoreData()
+        
     }
     
     override func viewDidLoad() {
@@ -39,7 +40,7 @@ class LoginViewController: UIViewController {
         repearUserKeyField.isSecureTextEntry = true
     }
     
-
+    
     @IBAction func loginSegChange(_ sender: Any) {
         let idx = loginSegCtrl.selectedSegmentIndex
         if idx == 0{//logging in
@@ -56,20 +57,19 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func loginHit(_ sender: Any) {
-        var id = userId.text!
+        let id = userId.text!
         let pass = userKey.text!
         let idx = loginSegCtrl.selectedSegmentIndex
         if idx == 1{//sign up
-            //print("res:\(authCreateUser(id: id, pass: pass))")
             let passConfirm = repearUserKeyField.text!
             if (pass == passConfirm){
                 Auth.auth().createUser(withEmail: id, password: pass){
                     authResult, error in //params from createUser method
                     if let error = error as NSError? {
-                    
-                            self.statusLabel.text = "\(error.localizedDescription)"
+                        
+                        self.statusLabel.text = "\(error.localizedDescription)"
                     }else{
-                        print("signed up")
+                        self.createUserCD(user: id)
                         self.statusLabel.text = "Signed up!"
                     }
                 }
@@ -93,7 +93,7 @@ class LoginViewController: UIViewController {
     }
     
     func retrieveSettings() -> [NSManagedObject] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ProfileSettings")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
         var fetchedResults:[NSManagedObject]? = nil
         do{
             try fetchedResults = context.fetch(request) as? [NSManagedObject]
@@ -104,4 +104,46 @@ class LoginViewController: UIViewController {
         return (fetchedResults)!
     }
     
+    func createUserCD(user:String){
+        let userEntity = NSEntityDescription.insertNewObject(forEntityName: "User", into: context)
+        userEntity.setValue(user, forKey: "email")
+        appDelegate.saveContext()
+    }
+    
+    
+    func viewCoreData () {
+        let data = retrieveSettings()
+        var cnt = 0
+        for user in data{
+            cnt += 1
+            
+            let darkMode = user.value(forKey: "darkMode")
+            let email = user.value(forKey: "email")
+            let name = user.value(forKey: "name")
+            let soundOn = user.value(forKey: "soundOn")
+
+            print("user #\(cnt):\n email: \(email) name: \(name)  darkMode: \(darkMode) soundOn: \(soundOn)")
+            
+        }
+        
+    }
+    
+    func clearCoreData () {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+        var fetchedResults:[NSManagedObject]
+        do{
+            try fetchedResults = context.fetch(request) as! [NSManagedObject]
+            
+            if fetchedResults.count > 0 {
+                for result:AnyObject in fetchedResults {
+                    context.delete(result as! NSManagedObject)
+                    print("user w/ email:\(result.value(forKey: "email")) was deleted.")
+                }
+            }
+            appDelegate.saveContext()
+        }catch {
+            let nserror = error as NSError
+            print(nserror)
+        }
+    }
 }

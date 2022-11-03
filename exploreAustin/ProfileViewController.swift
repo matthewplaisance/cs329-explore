@@ -20,10 +20,10 @@ struct SoundOn{
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let context = appDelegate.persistentContainer.viewContext
 
+
 class ProfileViewController: UIViewController {
     
-    let user = Auth.auth().currentUser
-    
+    var userID = Auth.auth().currentUser?.email
     // Outlet Variables
     @IBOutlet weak var errorMessage: UILabel!
     @IBOutlet weak var nameField: UITextField!
@@ -34,26 +34,34 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var soundToggle: UISwitch!
     
     override func viewWillAppear(_ animated: Bool) {
+        
         // get CoreData settings
-        let loadedSettings = retrieveSettings()
-        for i in loadedSettings{
-            if let darkMode = i.value(forKey: "darkMode"){
-                DarkMode.darkModeIsEnabled = darkMode as! Bool
-            }
-            if let loadedName = i.value(forKey: "name"){
-                nameField.text = loadedName as? String
-            }
-            if let loadedEmail = i.value(forKey: "email"){
-                emailField.text = loadedEmail as? String
-            }
-            if let loadedSound = i.value(forKey: "soundOn"){
-                SoundOn.soundOn = loadedSound as! Bool
-            }
+        print("curruser: \(userID)")
+        let userCD = retrieveUserCD()
+        print("core data: ")
+        viewCoreData()
+        
+    
+        if let darkMode = userCD.value(forKey: "darkMode"){
+            DarkMode.darkModeIsEnabled = darkMode as! Bool
         }
+        if let loadedName = userCD.value(forKey: "name"){
+            nameField.text = loadedName as? String
+        }
+        if let loadedEmail = userCD.value(forKey: "email"){
+            emailField.text = loadedEmail as? String
+        }
+        if let loadedSound = userCD.value(forKey: "soundOn"){
+            SoundOn.soundOn = loadedSound as! Bool
+        }
+        
         // check for dark mode
         if DarkMode.darkModeIsEnabled == true{
             overrideUserInterfaceStyle = .dark
             darkModeToggle.isOn = true
+        }else{
+            overrideUserInterfaceStyle = .light
+            darkModeToggle.isOn = false
         }
         // set error message label to blank
         errorMessage.text = ""
@@ -68,24 +76,14 @@ class ProfileViewController: UIViewController {
     @IBAction func DarkModeToggle(_ sender: Any) {
         if darkModeToggle.isOn{
             overrideUserInterfaceStyle = .dark
-            DarkMode.darkModeIsEnabled = true
-            saveDarkMode(darkMode: DarkMode.darkModeIsEnabled)
-        }
-        else{
+        }else{
             overrideUserInterfaceStyle = .light
-            DarkMode.darkModeIsEnabled = false
-            saveDarkMode(darkMode: DarkMode.darkModeIsEnabled)
         }
+        
     }
+    
     @IBAction func SoundToggled(_ sender: Any) {
-        if soundToggle.isOn{
-            SoundOn.soundOn = true
-            saveSoundOn(soundOn: SoundOn.soundOn)
-        }
-        else{
-            SoundOn.soundOn = false
-            saveSoundOn(soundOn: SoundOn.soundOn)
-        }
+        
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
@@ -96,49 +94,69 @@ class ProfileViewController: UIViewController {
         else if (newPasswordField.text != "") && (confirmPasswordField.text != newPasswordField.text){
             errorMessage.text = "New passwords do not match!"
         }
-        else{
-            saveName(name: nameField.text!)
-            saveEmail(email: emailField.text!)
-            performSegue(withIdentifier: "settingsSaveSegue", sender: self)
-        }
+        updateUserData()
         
     }
     
     @IBAction func logOutButtonPressed(_ sender: Any) {
+        let auth = Auth.auth()
         do{
-            try Auth.auth().signOut()
+            try auth.signOut()
             performSegue(withIdentifier: "logoutSegue", sender: self)
         }
-        catch{
-            print("error")
+        catch let signOutError{
+            print(signOutError)
         }
     }
-    func saveDarkMode(darkMode:Bool) {
-        let dataToStore = NSEntityDescription.insertNewObject(forEntityName: "ProfileSettings", into: context)
-        dataToStore.setValue(darkMode, forKey: "darkMode")
-        saveContext()
+    
+   
+    func retrieveUserCD() -> NSManagedObject {
+        let data = retrieveCoreData()
+        
+        var currUser = data[0]
+        
+        for user in data {
+            let email = user.value(forKey: "email")
+            if (userID == email as? String){
+                print("Found CD for current user: \(userID!)")
+                currUser = user
+            }
+        }
+        print("currUserData: \(currUser)")
+        return currUser
     }
     
-    func saveSoundOn(soundOn:Bool) {
-        let dataToStore = NSEntityDescription.insertNewObject(forEntityName: "ProfileSettings", into: context)
-        dataToStore.setValue(soundOn, forKey: "soundOn")
-        saveContext()
+    
+    
+    func updateUserData() {
+        let data = retrieveCoreData()
+        
+        let darkMode = darkModeToggle.isOn
+        let soundMode = soundToggle.isOn
+        let name = nameField.text!
+        let email = emailField.text!
+        let userData = [email,name,darkMode,soundMode] as [Any]
+        let entry = ["email","name","darkMode","soundOn"]
+        
+        for user in data {
+            let email = user.value(forKey: "email")
+            if userID == email as? String {
+                for (el,id) in zip(userData,entry){
+                    user.setValue(el, forKey: id)
+                }
+            }
+        }
+        appDelegate.saveContext()
+        retrieveUserCD()
     }
     
-    func saveName(name: String){
-        let dataToStore = NSEntityDescription.insertNewObject(forEntityName: "ProfileSettings", into: context)
-        dataToStore.setValue(nameField.text, forKey: "name")
-        saveContext()
-    }
+    
+    
     
     func saveEmail(email: String){
-        let dataToStore = NSEntityDescription.insertNewObject(forEntityName: "ProfileSettings", into: context)
-        dataToStore.setValue(emailField.text, forKey: "email")
-        // change email on firebase
         Auth.auth().currentUser?.updateEmail(to: emailField.text!){
             (error) in self.errorMessage.text = error.debugDescription
         }
-        saveContext()
     }
     
     func changePassword(password: String){
@@ -147,8 +165,8 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    func retrieveSettings() -> [NSManagedObject] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ProfileSettings")
+    func retrieveCoreData() -> [NSManagedObject] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
         var fetchedResults:[NSManagedObject]? = nil
         do{
             try fetchedResults = context.fetch(request) as? [NSManagedObject]
@@ -159,26 +177,28 @@ class ProfileViewController: UIViewController {
         return (fetchedResults)!
     }
     
-    func saveContext(){
-        if context.hasChanges{
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
-    }
     
-    
-    /*
-    // MARK: - Navigation
+    func viewCoreData () {
+        let data = retrieveCoreData()
+        var cnt = 0
+        for user in data{
+            cnt += 1
+            
+            let darkMode = user.value(forKey: "darkMode")
+            let email = user.value(forKey: "email")
+            let name = user.value(forKey: "name")
+            let soundOn = user.value(forKey: "soundOn")
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+            print("user #\(cnt):\n email: \(email) name: \(name)  darkMode: \(darkMode) soundOn: \(soundOn)")
+            
+        }
+        
     }
-    */
+    
+    
+    
+    
+    
 
 }
+
