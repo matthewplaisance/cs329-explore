@@ -13,6 +13,7 @@ class HomeViewController: UIViewController {
     var images : [String] = ["ZilkerPark", "MountBonnell" ]
     var imageTitles : [String] = ["Zilker Park", "Mount Bonnell", ]
     var imageDescription : [String] = ["Zilker Metropolitan Park is considered \"Austin's most-loved park.\" This 351-acre metropolitan park is home to a variety of recreation opportunities, facilities and special events for individuals and families.", "Mount Bonnell is one of the highest points in Austin at 781 feet! The peak is named for George Bonnell, who served as Commissioner of Indian Affairs for the Texas Republic."]
+    var imageSources : [String] = ["austintexas.gov", "austintexas.org"]
     var imageNumber = 0
     
     @IBOutlet weak var imageView: UIImageView!
@@ -20,6 +21,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var descriptionLabel: UILabel!
+    
+    @IBOutlet weak var imageCredit: UILabel!
+    
     
     override func viewWillAppear(_ animated: Bool) {
         if DarkMode.darkModeIsEnabled == true{
@@ -44,6 +48,7 @@ class HomeViewController: UIViewController {
         imageView.image = UIImage(named: images[imageNumber])
         titleLabel.text = imageTitles[imageNumber]
         descriptionLabel.text = imageDescription[imageNumber]
+        imageCredit.text = imageSources[imageNumber]
         imageNumber += 1
     }
 
