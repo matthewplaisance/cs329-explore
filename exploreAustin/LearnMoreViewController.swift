@@ -6,26 +6,49 @@
 //
 
 import UIKit
+import MapKit
 
 class LearnMoreViewController: UIViewController {
     var delegate: UIViewController!
     var learnMoreTitle : String!
     var descriptionTextString: String = ""
+    var coordinatePairs : (Double, Double)!
+    
+
+    
+    @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var titleLabel: UILabel!
     
     
     @IBOutlet weak var descriptionText: UITextView!
     
+    
     override func viewWillAppear(_ animated: Bool) {
-        titleLabel.text = learnMoreTitle
-        descriptionText.text = descriptionTextString
+        mapSetup()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         // Do any additional setup after loading the view.
+    }
+    
+    func mapSetup(){
+        let (lat, long) = coordinatePairs
+        let coordinates = CLLocationCoordinate2D.init(latitude: lat, longitude: long)
+        let annotation = MKPointAnnotation()
+        annotation.title = learnMoreTitle
+        annotation.coordinate = coordinates
+        titleLabel.text = learnMoreTitle
+        descriptionText.text = descriptionTextString
+        mapView.isZoomEnabled = true
+        let regionRadius: CLLocationDistance = 1000
+        let coordinateRegion = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionRadius * 2.0, longitudinalMeters: regionRadius * 2.0)
+        mapView.setRegion(coordinateRegion, animated: true)
+        mapView.isScrollEnabled = true
+        mapView.addAnnotation(annotation)
     }
     
 
