@@ -5,6 +5,7 @@
         <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="friends" optional="YES" attributeType="Transformable"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="sentFriendRequests" optional="YES" attributeType="Transformable"/>
         <attribute name="soundOn" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>
 </model>

@@ -23,7 +23,8 @@ let context = appDelegate.persistentContainer.viewContext
 
 class ProfileViewController: UIViewController {
     
-    var userID = Auth.auth().currentUser?.email
+    var currUserID = Auth.auth().currentUser?.email
+    var friends = [String]()
     // Outlet Variables
     @IBOutlet weak var errorMessage: UILabel!
     @IBOutlet weak var nameField: UITextField!
@@ -32,12 +33,14 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var confirmPasswordField: UITextField!
     @IBOutlet weak var darkModeToggle: UISwitch!
     @IBOutlet weak var soundToggle: UISwitch!
+    @IBOutlet weak var friendsButton: UIButton!
+    
     
     override func viewWillAppear(_ animated: Bool) {
         
         // get CoreData settings
-        print("curruser: \(userID)")
-        let userCD = retrieveUserCD()
+        print("curruser: \(currUserID)")
+        let userCD = retrieveUserCD(user: currUserID!)
         print("core data: ")
         viewCoreData()
         
@@ -86,6 +89,48 @@ class ProfileViewController: UIViewController {
         
     }
     
+    
+    func checkFriendRequests() {
+        
+    }
+    
+    func sendFriendRequest() {
+        let data = retrieveCoreData()
+        let userData = retrieveUserCD(user: currUserID!)
+        
+        var users = [String]()
+        for user in data {
+            let email = user.value(forKey: "email") as? String
+            if (currUserID != email){
+                let name = user.value(forKey: "name") as? String
+                let otherUser = "Name: \(name) email: \(email)"
+                users.append(otherUser)
+            }
+        }
+        print(users)
+        let controller = UIAlertController(title: "Users:", message: "Click to send friend request:", preferredStyle: .actionSheet)
+        for i in users {
+            let friendAction = UIAlertAction(
+                title: i,
+                style: .default,
+                handler: {
+                    (action) in
+                }
+            )
+        }
+        
+    }
+    
+    func addFriendRequest(othUser:String) {
+        let currUser = retrieveUserCD(user: currUserID!)
+        
+    }
+    
+    @IBAction func friendsClicked(_ sender: Any) {
+        
+    }
+    
+    
     @IBAction func saveButtonPressed(_ sender: Any) {
         if (newPasswordField.text != "") && (confirmPasswordField.text == newPasswordField.text){
             changePassword(password: confirmPasswordField.text!)
@@ -94,7 +139,7 @@ class ProfileViewController: UIViewController {
         else if (newPasswordField.text != "") && (confirmPasswordField.text != newPasswordField.text){
             errorMessage.text = "New passwords do not match!"
         }
-        updateUserData()
+        updateUserData(user: currUserID!)
         
     }
     
@@ -110,25 +155,25 @@ class ProfileViewController: UIViewController {
     }
     
    
-    func retrieveUserCD() -> NSManagedObject {
+    func retrieveUserCD(user:String) -> NSManagedObject {
         let data = retrieveCoreData()
         
-        var currUser = data[0]
+        var userLookedUp = data[0]
         
-        for user in data {
-            let email = user.value(forKey: "email")
-            if (userID == email as? String){
-                print("Found CD for current user: \(userID!)")
-                currUser = user
+        for i in data {
+            let email = i.value(forKey: "email")
+            if (user == email as? String){
+                print("Found CD for current user: \(user)")
+                userLookedUp = i
             }
         }
-        print("currUserData: \(currUser)")
-        return currUser
+        print("currUserData: \(userLookedUp)")
+        return userLookedUp
     }
     
     
     
-    func updateUserData() {
+    func updateUserData(user:String) {
         let data = retrieveCoreData()
         
         let darkMode = darkModeToggle.isOn
@@ -138,16 +183,15 @@ class ProfileViewController: UIViewController {
         let userData = [email,name,darkMode,soundMode] as [Any]
         let entry = ["email","name","darkMode","soundOn"]
         
-        for user in data {
-            let email = user.value(forKey: "email")
-            if userID == email as? String {
+        for i in data {
+            let email = i.value(forKey: "email")
+            if user == email as? String {
                 for (el,id) in zip(userData,entry){
-                    user.setValue(el, forKey: id)
+                    i.setValue(el, forKey: id)
                 }
             }
         }
         appDelegate.saveContext()
-        retrieveUserCD()
     }
     
     
