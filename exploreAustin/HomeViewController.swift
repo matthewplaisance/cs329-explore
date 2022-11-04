@@ -14,6 +14,7 @@ class HomeViewController: UIViewController {
     var imageTitles : [String] = ["Zilker Park", "Barton Springs", "Mount Bonnell" ]
     var imageDescription : [String] = ["Zilker Metropolitan Park is considered \"Austin's most-loved park.\" This 351-acre metropolitan park is home to a variety of recreation opportunities, facilities and special events for individuals and families.", "Within Zilker Park's 358 acres lies one of the crown jewels of Austin - Barton Springs Pool. The pool itself measures three acres in size, and is fed from underground springs with an average temperature of 68-70 degrees, ideal for year-round swimming", "Mount Bonnell is one of the highest points in Austin at 781 feet! The peak is named for George Bonnell, who served as Commissioner of Indian Affairs for the Texas Republic.",]
     var imageSources : [String] = ["austintexas.gov", "austintexas.org", "austintexas.org"]
+    var coordinatePairs : [(Double, Double)] = [(30.266962, -97.7688), (30.2639, -97.77), (30.321, -97.7736)]
     var imageNumber = 0
     
     @IBOutlet weak var imageView: UIImageView!
@@ -48,6 +49,7 @@ class HomeViewController: UIViewController {
             nextVC?.delegate = self
             nextVC?.learnMoreTitle = self.imageTitles[self.imageNumber - 1]
             nextVC?.descriptionTextString = self.imageDescription[self.imageNumber - 1]
+            nextVC?.coordinatePairs = self.coordinatePairs[self.imageNumber - 1]
         }
     }
     

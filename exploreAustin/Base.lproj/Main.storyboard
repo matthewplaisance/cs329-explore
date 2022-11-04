@@ -118,6 +118,7 @@
                     <navigationItem key="navigationItem" id="L4b-Ck-8Tj"/>
                     <connections>
                         <outlet property="descriptionText" destination="iOX-yx-4Hs" id="zZw-Qd-t9d"/>
+                        <outlet property="mapView" destination="zKp-oo-41A" id="CtR-Zw-08G"/>
                         <outlet property="titleLabel" destination="gEg-gf-2La" id="vdP-S3-Yjg"/>
                     </connections>
                 </viewController>
