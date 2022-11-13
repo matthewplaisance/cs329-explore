@@ -30,25 +30,10 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        // get CoreData settings
-        print("curruser: \(userID)")
-        let userCD = retrieveUserCD()
-        print("core data: ")
-        viewCoreData()
+        nameField.text = Auth.auth().currentUser?.displayName
         
-    
-        if let darkMode = userCD.value(forKey: "darkMode"){
-            DarkMode.darkModeIsEnabled = darkMode as! Bool
-        }
-        if let loadedName = userCD.value(forKey: "name"){
-            nameField.text = loadedName as? String
-        }
-        if let loadedEmail = userCD.value(forKey: "email"){
-            emailField.text = loadedEmail as? String
-        }
-        if let loadedSound = userCD.value(forKey: "soundOn"){
-            SoundOn.soundOn = loadedSound as! Bool
-        }
+        emailField.text = Auth.auth().currentUser?.email
+        
         saveButton.setTitle("Ok", for: .normal)
         
         // check for dark mode
@@ -100,14 +85,13 @@ class ProfileViewController: UIViewController {
         else if (newPasswordField.text != "") && (confirmPasswordField.text != newPasswordField.text){
             errorMessage.text = "New passwords do not match!"
         }
+        if nameField.text != ""{
+            saveName(name: nameField.text!)
+        }
         if errorMessage.text == "" || (newPasswordField.text == "" && confirmPasswordField.text == "") {
             updateUserData()
             performSegue(withIdentifier: "settingsSaveSegue", sender: self)
         }
-    }
-    
-    func changeButtonText(){
-        print("changed!")
     }
     
     @IBAction func logOutButtonPressed(_ sender: Any) {
@@ -121,7 +105,6 @@ class ProfileViewController: UIViewController {
         }
     }
     
-   
     func retrieveUserCD() -> NSManagedObject {
         let data = retrieveCoreData()
         
@@ -137,8 +120,6 @@ class ProfileViewController: UIViewController {
         print("currUserData: \(currUser)")
         return currUser
     }
-    
-    
     
     func updateUserData() {
         let data = retrieveCoreData()
@@ -159,15 +140,18 @@ class ProfileViewController: UIViewController {
             }
         }
         appDelegate.saveContext()
-        retrieveUserCD()
     }
-    
-    
-    
     
     func saveEmail(email: String){
         Auth.auth().currentUser?.updateEmail(to: emailField.text!){
             (error) in self.errorMessage.text = error.debugDescription
+        }
+    }
+    
+    func saveName(name: String){
+        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+        changeRequest?.displayName = name
+        changeRequest?.commitChanges { error in
         }
     }
     
