@@ -30,6 +30,10 @@ class LoginViewController: UIViewController {
         print("Loading Core Data...")
         viewCoreData()
         
+        if DarkMode.darkModeIsEnabled == true{
+            overrideUserInterfaceStyle = .dark
+        }
+        
     }
     
     override func viewDidLoad() {

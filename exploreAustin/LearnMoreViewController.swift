@@ -26,6 +26,11 @@ class LearnMoreViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         mapSetup()
+        if DarkMode.darkModeIsEnabled == true{
+            overrideUserInterfaceStyle = .dark
+        }else{
+            overrideUserInterfaceStyle = .light
+        }
     }
     
     override func viewDidLoad() {

@@ -10,14 +10,6 @@ import UIKit
 import FirebaseAuth
 import CoreData
 
-struct DarkMode{
-    static var darkModeIsEnabled: Bool = false
-    
-}
-struct SoundOn{
-    static var soundOn: Bool = true
-}
-
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let context = appDelegate.persistentContainer.viewContext
 
@@ -88,8 +80,10 @@ class ProfileViewController: UIViewController {
     @IBAction func DarkModeToggle(_ sender: Any) {
         if darkModeToggle.isOn{
             overrideUserInterfaceStyle = .dark
+            DarkMode.darkModeIsEnabled = true
         }else{
             overrideUserInterfaceStyle = .light
+            DarkMode.darkModeIsEnabled = false
         }
         
     }
