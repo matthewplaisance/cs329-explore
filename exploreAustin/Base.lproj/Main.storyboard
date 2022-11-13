@@ -259,6 +259,7 @@
                         <outlet property="errorMessage" destination="VGN-IH-feN" id="Az3-Wd-23Q"/>
                         <outlet property="nameField" destination="DiH-9C-y5S" id="1Pi-NZ-1Kd"/>
                         <outlet property="newPasswordField" destination="pXV-Ug-dWM" id="YFJ-r3-xLd"/>
+                        <outlet property="saveButton" destination="JgM-pK-8WI" id="Inl-Zy-TFj"/>
                         <outlet property="soundToggle" destination="GxO-FP-jXq" id="M9E-98-GFF"/>
                         <segue destination="gfE-j1-dbk" kind="show" identifier="settingsSaveSegue" id="8M5-LX-mSN"/>
                         <segue destination="LBY-yM-iNO" kind="show" identifier="logoutSegue" id="oJ1-tl-YK4"/>
@@ -417,7 +418,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="8M5-LX-mSN"/>
-        <segue reference="qQF-F3-osR"/>
+        <segue reference="oJ1-tl-YK4"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AustinSkyline1" width="604" height="180"/>

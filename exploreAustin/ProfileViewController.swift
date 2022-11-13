@@ -33,6 +33,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var confirmPasswordField: UITextField!
     @IBOutlet weak var darkModeToggle: UISwitch!
     @IBOutlet weak var soundToggle: UISwitch!
+    @IBOutlet weak var saveButton: UIButton!
+    
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -55,6 +57,7 @@ class ProfileViewController: UIViewController {
         if let loadedSound = userCD.value(forKey: "soundOn"){
             SoundOn.soundOn = loadedSound as! Bool
         }
+        saveButton.setTitle("Ok", for: .normal)
         
         // check for dark mode
         if DarkMode.darkModeIsEnabled == true{
@@ -66,12 +69,20 @@ class ProfileViewController: UIViewController {
         }
         // set error message label to blank
         errorMessage.text = ""
+        //nameField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        nameField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
+        emailField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
+        newPasswordField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
+        confirmPasswordField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        saveButton.setTitle("Save", for: .normal)
     }
     
     @IBAction func DarkModeToggle(_ sender: Any) {
@@ -95,8 +106,14 @@ class ProfileViewController: UIViewController {
         else if (newPasswordField.text != "") && (confirmPasswordField.text != newPasswordField.text){
             errorMessage.text = "New passwords do not match!"
         }
-        updateUserData()
-        
+        if errorMessage.text == "" || (newPasswordField.text == "" && confirmPasswordField.text == "") {
+            updateUserData()
+            performSegue(withIdentifier: "settingsSaveSegue", sender: self)
+        }
+    }
+    
+    func changeButtonText(){
+        print("changed!")
     }
     
     @IBAction func logOutButtonPressed(_ sender: Any) {
