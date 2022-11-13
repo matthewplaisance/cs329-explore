@@ -8,6 +8,9 @@
 import UIKit
 import FirebaseAuth
 import CoreData
+import ZLPhotoBrowser
+
+
 
 struct DarkMode{
     static var darkModeIsEnabled: Bool = false
@@ -32,6 +35,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var confirmPasswordField: UITextField!
     @IBOutlet weak var darkModeToggle: UISwitch!
     @IBOutlet weak var soundToggle: UISwitch!
+    
+    @IBOutlet weak var photoBtn: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -108,6 +113,24 @@ class ProfileViewController: UIViewController {
             print(signOutError)
         }
     }
+    
+    
+    @IBAction func photoClick(_ sender: Any) {
+       let ps = ZLPhotoPreviewSheet()
+        let config = ZLPhotoConfiguration.default()
+        config.maxSelectCount = 1
+        ps.selectImageBlock = { [weak self] results, isOriginal in
+            guard let self = self else {return}
+            guard let img = results.first?.image else { return  }
+            self.photoBtn.setBackgroundImage(img, for: .normal)
+            self.photoBtn.setTitle("", for: .normal)
+        }
+        ps.showPreview(animate: true, sender: self)
+        
+    }
+    
+    
+    
     
    
     func retrieveUserCD() -> NSManagedObject {
