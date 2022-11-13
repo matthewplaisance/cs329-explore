@@ -75,6 +75,19 @@ class LoginViewController: UIViewController {
                     }else{
                         self.createUserCD(user: id)
                         self.statusLabel.text = "Signed up!"
+                        Auth.auth().signIn(withEmail: id, password: pass){
+                            authResult, error in
+                            if let error = error as NSError? {
+                                self.statusLabel.text = "\(error.localizedDescription)"
+                            }else{//no error
+                                
+                                
+                                self.performSegue(withIdentifier: "loginSeg", sender: nil)
+                                self.userKey = nil
+                                self.userId = nil
+                            }
+                            
+                        }
                     }
                 }
             }else{
