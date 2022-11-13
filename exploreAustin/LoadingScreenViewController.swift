@@ -17,22 +17,12 @@ struct SoundOn{
     static var soundOn: Bool = true
 }
 
+
 class LoadingScreenViewController: UIViewController {
     var userID = Auth.auth().currentUser?.email
 
     @IBOutlet weak var loadingImage: UIImageView!
     override func viewWillAppear(_ animated: Bool) {
-        let userCD = retrieveUserCD()
-        if let darkMode = userCD.value(forKey: "darkMode"){
-            DarkMode.darkModeIsEnabled = darkMode as! Bool
-        }
-        if let loadedName = userCD.value(forKey: "name"){
-        }
-        if let loadedEmail = userCD.value(forKey: "email"){
-        }
-        if let loadedSound = userCD.value(forKey: "soundOn"){
-            SoundOn.soundOn = loadedSound as! Bool
-        }
     }
     
     override func viewDidLoad() {
@@ -50,6 +40,13 @@ class LoadingScreenViewController: UIViewController {
                    })
                }
         )
+        let userCD = self.retrieveUserCD()
+        if let darkMode = userCD.value(forKey: "darkMode"){
+            DarkMode.darkModeIsEnabled = darkMode as! Bool
+        }
+        if let loadedSound = userCD.value(forKey: "soundOn"){
+            SoundOn.soundOn = loadedSound as! Bool
+        }
         
     }
     
