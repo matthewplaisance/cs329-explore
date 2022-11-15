@@ -29,6 +29,8 @@ class LoginViewController: UIViewController {
         
         print("Loading Core Data...")
         viewCoreData()
+        //clearCoreData(entity: "User")
+        //clearCoreData(entity: "Friends")
         
     }
     
@@ -92,8 +94,8 @@ class LoginViewController: UIViewController {
         }
     }
     
-    func retrieveSettings() -> [NSManagedObject] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+    func retrieveCoreData(entity:String) -> [NSManagedObject] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
         var fetchedResults:[NSManagedObject]? = nil
         do{
             try fetchedResults = context.fetch(request) as? [NSManagedObject]
@@ -106,13 +108,18 @@ class LoginViewController: UIViewController {
     
     func createUserCD(user:String){
         let userEntity = NSEntityDescription.insertNewObject(forEntityName: "User", into: context)
+        let userFreindsEntity = NSEntityDescription.insertNewObject(forEntityName: "Friends", into: context)
+        
         userEntity.setValue(user, forKey: "email")
+        userFreindsEntity.setValue(user, forKey: "email")
+        
         appDelegate.saveContext()
     }
     
     
     func viewCoreData () {
-        let data = retrieveSettings()
+        let data = retrieveCoreData(entity: "User")
+        let friends = retrieveCoreData(entity: "Friends")
         var cnt = 0
         for user in data{
             cnt += 1
@@ -120,16 +127,28 @@ class LoginViewController: UIViewController {
             let darkMode = user.value(forKey: "darkMode")
             let email = user.value(forKey: "email")
             let name = user.value(forKey: "name")
+            let friends = user.value(forKey: "friends")
             let soundOn = user.value(forKey: "soundOn")
 
-            print("user #\(cnt):\n email: \(email) name: \(name)  darkMode: \(darkMode) soundOn: \(soundOn)")
+            print("user #\(cnt):\n email: \(String(describing: email)) name: \(String(describing: name)) darkMode: \(String(describing: darkMode)) soundOn: \(String(describing: soundOn))")
+            
+        }
+        
+        for i in friends {
+            
+            let userID = i.value(forKey: "email")
+            let f1 = i.value(forKey: "f1")
+            let f2 = i.value(forKey: "f2")
+            let f3 = i.value(forKey: "f3")
+            
+            print("user: \(userID), friend1: \(f1) , friend2: \(f2)")
             
         }
         
     }
     
-    func clearCoreData () {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+    func clearCoreData (entity:String) {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
         var fetchedResults:[NSManagedObject]
         do{
             try fetchedResults = context.fetch(request) as! [NSManagedObject]
