@@ -112,6 +112,11 @@ class LoginViewController: UIViewController {
         
         userEntity.setValue(user, forKey: "email")
         userFreindsEntity.setValue(user, forKey: "email")
+        let keys = ["f1","f2","f3","f4"]
+        
+        for i in keys {
+            userFreindsEntity.setValue(" ", forKey: i)
+        }
         
         appDelegate.saveContext()
     }

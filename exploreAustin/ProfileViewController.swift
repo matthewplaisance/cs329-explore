@@ -120,7 +120,31 @@ class ProfileViewController: UIViewController {
         return [userSettings,userFriends]
     }
     
+    @IBAction func checkFriendsClicked(_ sender: Any) {
+        self.checkFriendRequests()
+    }
     
+    func handleFriendRequest(othUser:String,act:String) {
+        let currUserFriends = retrieveUserCD(user: currUserID!)[1]
+        let othUserFriends = retrieveUserCD(user: othUser)[1]
+        let keys = ["f1","f2","f3","f4"]
+        var tok = " "
+        
+        let ents = [currUserFriends,othUserFriends]
+        let users = [othUser,currUserID!]
+        
+        for (ent,user) in zip(ents,users){
+            if (act == "a"){
+                tok = "\(user)3"
+            }
+            for i in keys {
+                let f = ent.value(forKey: i) as? String
+                if (f! == user) {
+                    ent.setValue(tok, forKey: i)
+                }
+            }
+        }
+    }
     
     func checkFriendRequests() {
         let currUserFriends = retrieveUserCD(user: currUserID!)[1]//friends
@@ -128,15 +152,42 @@ class ProfileViewController: UIViewController {
         var requestingUsers = [String]()
         for i in keys {
             var f = currUserFriends.value(forKey: i) as? String
+            print("f: \(f)")
+            
+            print("flast: \(f!.last)")
             if (f!.last! == "1"){//recieved friend req
                 f!.remove(at: f!.index(before: f!.endIndex))
                 requestingUsers.append(f!)
             }
         }
+        print("reqs: \(requestingUsers)")
         if requestingUsers.count != 0 {
             
+            for i in requestingUsers {
+                let controller = UIAlertController(title: "Users:", message: "Friend request from \(i):", preferredStyle: .alert)
+                
+                let acceptAct = UIAlertAction(
+                    title: "Accept request",
+                    style: .default,
+                    handler: {
+                        (action) in
+                        self.handleFriendRequest(othUser: i, act: "a")
+                    }
+                )
+                let declineAct = UIAlertAction(
+                    title: "Decline request",
+                    style: .cancel,
+                    handler: {
+                        (action) in
+                        self.handleFriendRequest(othUser: i, act: "")
+                    }
+                )
+                controller.addAction(acceptAct)
+                controller.addAction(declineAct)
+                present(controller, animated: true)
+            }
+            
         }
-        
         
     }
    
@@ -198,7 +249,7 @@ class ProfileViewController: UIViewController {
         let keys = ["f1","f2","f3","f4"]
         for i in keys{
             let f = userFriends.value(forKey: i)
-            if f == nil {
+            if f as! String == " " {
                 return i
             }
         }
