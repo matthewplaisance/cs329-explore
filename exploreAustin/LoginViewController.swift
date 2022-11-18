@@ -80,8 +80,6 @@ class LoginViewController: UIViewController {
                             if let error = error as NSError? {
                                 self.statusLabel.text = "\(error.localizedDescription)"
                             }else{//no error
-                                
-                                
                                 self.performSegue(withIdentifier: "loginSeg", sender: nil)
                                 self.userKey = nil
                                 self.userId = nil
