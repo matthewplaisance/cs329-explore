@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -53,9 +54,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="vzg-Ch-IES">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="gear" catalog="system" id="cH2-41-EqG">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="person" catalog="system" id="cH2-41-EqG">
                             <connections>
-                                <segue destination="N6W-gE-jKV" kind="presentation" identifier="settingsSegue" modalPresentationStyle="fullScreen" id="5HN-EH-lUR"/>
+                                <segue destination="srk-rH-yBl" kind="show" identifier="pageSeg" id="7jg-jw-vvp"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -69,6 +70,110 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1127.6923076923076" y="-49.052132701421797"/>
+        </scene>
+        <!--Friends View Controller-->
+        <scene sceneID="sFE-Xi-Szl">
+            <objects>
+                <viewController id="sbe-PT-vMD" customClass="FriendsViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="83g-F2-IOg">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="YWU-xZ-6JB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="0a6-e6-ZjO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dYt-Pr-L37" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1260" y="-845"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="Zx3-Bf-GS0">
+            <objects>
+                <viewController id="srk-rH-yBl" customClass="PageViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bTW-I2-g1T">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BS3-lj-HT1">
+                                <rect key="frame" x="174" y="204" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DWN-Zt-25s">
+                                <rect key="frame" x="16" y="283" width="358" height="470"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="10" id="yI6-vB-W5I">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="estimatedItemSize" width="100" height="100"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="pageCollectionCell" id="aA7-UE-PCg" customClass="PagePhotoCell" customModule="exploreAustin" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="10" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Qej-Jr-B19">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A9N-xX-Fcb">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="100" id="iYC-0V-3li"/>
+                                                        <constraint firstAttribute="height" constant="100" id="zvm-WC-Jjd"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="A9N-xX-Fcb" firstAttribute="centerX" secondItem="Qej-Jr-B19" secondAttribute="centerX" id="Oo1-fu-K4B"/>
+                                                <constraint firstItem="A9N-xX-Fcb" firstAttribute="centerY" secondItem="Qej-Jr-B19" secondAttribute="centerY" id="aHf-vX-Ppc"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="100" height="100"/>
+                                        <connections>
+                                            <outlet property="pageImageView" destination="A9N-xX-Fcb" id="mwu-cc-u1O"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T7B-yZ-G1x">
+                                <rect key="frame" x="75" y="56" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Pl-Om-Mih">
+                                <rect key="frame" x="155" y="233" width="81" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Friends"/>
+                                <connections>
+                                    <action selector="friendsClicked:" destination="srk-rH-yBl" eventType="touchUpInside" id="avS-WB-um2"/>
+                                    <segue destination="sbe-PT-vMD" kind="show" id="Sm7-55-StI"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="PWs-jT-KuQ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="wSs-GP-vx3">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="gear" catalog="system" id="chq-kt-NVt">
+                            <connections>
+                                <segue destination="N6W-gE-jKV" kind="show" identifier="profileSeg" id="p4i-Hn-ebC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="pageCollectionView" destination="DWN-Zt-25s" id="qSS-NM-9Fo"/>
+                        <outlet property="usernameLabel" destination="BS3-lj-HT1" id="Ulh-ax-yKl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Im-B5-CEO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-392.30769230769232" y="-844.54976303317528"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="fTj-YD-NOi">
@@ -224,12 +329,12 @@
                         <outlet property="newPasswordField" destination="pXV-Ug-dWM" id="YFJ-r3-xLd"/>
                         <outlet property="soundToggle" destination="GxO-FP-jXq" id="M9E-98-GFF"/>
                         <segue destination="gfE-j1-dbk" kind="show" identifier="settingsSaveSegue" id="8M5-LX-mSN"/>
-                        <segue destination="LBY-yM-iNO" kind="show" identifier="logoutSegue" id="oJ1-tl-YK4"/>
+                        <segue destination="LBY-yM-iNO" kind="presentation" identifier="logoutSegue" id="oJ1-tl-YK4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Io-2R-LAG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1128" y="-837"/>
+            <point key="canvasLocation" x="557" y="-865"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="hiB-Jd-yr3">
@@ -379,6 +484,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="p4i-Hn-ebC"/>
         <segue reference="8M5-LX-mSN"/>
         <segue reference="oJ1-tl-YK4"/>
     </inferredMetricsTieBreakers>
@@ -386,6 +492,7 @@
         <image name="AustinSkyline1" width="604" height="180"/>
         <image name="ZilkerPark" width="1200" height="800"/>
         <image name="gear" catalog="system" width="128" height="122"/>
+        <image name="person" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
