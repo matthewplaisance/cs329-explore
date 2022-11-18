@@ -1,4 +1,3 @@
-
 //
 //  ProfileViewController.swift
 //  exploreAustin
@@ -9,6 +8,17 @@
 import UIKit
 import FirebaseAuth
 import CoreData
+import ZLPhotoBrowser
+
+
+
+struct DarkMode{
+    static var darkModeIsEnabled: Bool = false
+    
+}
+struct SoundOn{
+    static var soundOn: Bool = true
+}
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let context = appDelegate.persistentContainer.viewContext
@@ -25,16 +35,30 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var confirmPasswordField: UITextField!
     @IBOutlet weak var darkModeToggle: UISwitch!
     @IBOutlet weak var soundToggle: UISwitch!
-    @IBOutlet weak var saveButton: UIButton!
     
+    @IBOutlet weak var photoBtn: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
         
-        nameField.text = Auth.auth().currentUser?.displayName
+        // get CoreData settings
+        print("curruser: \(userID)")
+        let userCD = retrieveUserCD()
+        print("core data: ")
+        viewCoreData()
         
-        emailField.text = Auth.auth().currentUser?.email
-        
-        saveButton.setTitle("Ok", for: .normal)
+    
+        if let darkMode = userCD.value(forKey: "darkMode"){
+            DarkMode.darkModeIsEnabled = darkMode as! Bool
+        }
+        if let loadedName = userCD.value(forKey: "name"){
+            nameField.text = loadedName as? String
+        }
+        if let loadedEmail = userCD.value(forKey: "email"){
+            emailField.text = loadedEmail as? String
+        }
+        if let loadedSound = userCD.value(forKey: "soundOn"){
+            SoundOn.soundOn = loadedSound as! Bool
+        }
         
         // check for dark mode
         if DarkMode.darkModeIsEnabled == true{
@@ -46,29 +70,19 @@ class ProfileViewController: UIViewController {
         }
         // set error message label to blank
         errorMessage.text = ""
-        //nameField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
-        emailField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
-        newPasswordField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
-        confirmPasswordField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
+        
         // Do any additional setup after loading the view.
-    }
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        saveButton.setTitle("Save", for: .normal)
     }
     
     @IBAction func DarkModeToggle(_ sender: Any) {
         if darkModeToggle.isOn{
             overrideUserInterfaceStyle = .dark
-            DarkMode.darkModeIsEnabled = true
         }else{
             overrideUserInterfaceStyle = .light
-            DarkMode.darkModeIsEnabled = false
         }
         
     }
@@ -85,13 +99,8 @@ class ProfileViewController: UIViewController {
         else if (newPasswordField.text != "") && (confirmPasswordField.text != newPasswordField.text){
             errorMessage.text = "New passwords do not match!"
         }
-        if nameField.text != ""{
-            saveName(name: nameField.text!)
-        }
-        if errorMessage.text == "" || (newPasswordField.text == "" && confirmPasswordField.text == "") {
-            updateUserData()
-            performSegue(withIdentifier: "settingsSaveSegue", sender: self)
-        }
+        updateUserData()
+        
     }
     
     @IBAction func logOutButtonPressed(_ sender: Any) {
@@ -105,6 +114,25 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func photoClick(_ sender: Any) {
+       let ps = ZLPhotoPreviewSheet()
+        let config = ZLPhotoConfiguration.default()
+        config.maxSelectCount = 1
+        ps.selectImageBlock = { [weak self] results, isOriginal in
+            guard let self = self else {return}
+            guard let img = results.first?.image else { return  }
+            self.photoBtn.setBackgroundImage(img, for: .normal)
+            self.photoBtn.setTitle("", for: .normal)
+        }
+        ps.showPreview(animate: true, sender: self)
+        
+    }
+    
+    
+    
+    
+   
     func retrieveUserCD() -> NSManagedObject {
         let data = retrieveCoreData()
         
@@ -120,6 +148,8 @@ class ProfileViewController: UIViewController {
         print("currUserData: \(currUser)")
         return currUser
     }
+    
+    
     
     func updateUserData() {
         let data = retrieveCoreData()
@@ -140,18 +170,15 @@ class ProfileViewController: UIViewController {
             }
         }
         appDelegate.saveContext()
+        retrieveUserCD()
     }
+    
+    
+    
     
     func saveEmail(email: String){
         Auth.auth().currentUser?.updateEmail(to: emailField.text!){
             (error) in self.errorMessage.text = error.debugDescription
-        }
-    }
-    
-    func saveName(name: String){
-        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-        changeRequest?.displayName = name
-        changeRequest?.commitChanges { error in
         }
     }
     
