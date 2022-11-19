@@ -8,6 +8,7 @@
 import UIKit
 
 let collectionCellID = "pageCollectionCell"
+let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
 
 class PageViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -16,6 +17,7 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     @IBOutlet weak var pageCollectionView: UICollectionView!
     
+    @IBOutlet weak var profileImage: UIImageView!
     
     var data : [String] = ["ZilkerPark","MountBonnell"]
     
@@ -25,6 +27,30 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
         pageCollectionView.delegate = self
         pageCollectionView.dataSource = self
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        var storyboardId: String {
+               return value(forKey: "storyboardIdentifier") as? String ?? "none"
+           }
+        if storyboardId == "PageVC"{
+            let homeIcon = UIImage(systemName: "house")
+            self.navigationController?.navigationBar.backIndicatorImage = homeIcon
+            self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = homeIcon
+            self.navigationController?.navigationBar.backItem?.title = ""
+        }
+        var myImages = [UIImage(named: "ZilkerPark")!,UIImage(named: "MountBonnell")!]
+        
+        var imageData = convertImagesToData(myImagesArray: myImages)
+        
+        saveUIImages(imagesData: imageData)
+        
+        var fetchedImageData = fetchUIimages()
+        
+        var fetchedImages = convertDataToImages(imageDataArray: fetchedImageData)
+        
+        profileImage.image = fetchedImages[0]
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -38,8 +64,7 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionCellID, for: indexPath) as! PagePhotoCell//new reuseable cell for table
         let row = indexPath.row
-        //cell.textLabel?.numberOfLines = 0
-        //cell.textLabel?.lineBreakMode = .byWordWrapping
+        
         cell.pageImageView.image = UIImage(named: data[row])
         
         return cell
@@ -50,13 +75,14 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
 
-   
-    @IBAction func friendsClicked(_ sender: Any) {
-        
+    @IBAction func friendsHit(_ sender: Any) {
+        let friendsVC = storyBoard.instantiateViewController(withIdentifier: "friendsVC") as! FriendsViewController
+        self.present(friendsVC, animated:true, completion:nil)
     }
     
     
-
-   
-
+    @IBAction func eventsHit(_ sender: Any) {
+        let eventsVC = storyBoard.instantiateViewController(withIdentifier: "eventsVC") as! EventsViewController
+        self.present(eventsVC, animated:true, completion:nil)
+    }
 }

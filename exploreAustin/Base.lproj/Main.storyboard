@@ -72,20 +72,34 @@
             <point key="canvasLocation" x="1127.6923076923076" y="-49.052132701421797"/>
         </scene>
         <!--Friends View Controller-->
-        <scene sceneID="sFE-Xi-Szl">
+        <scene sceneID="Q2v-Id-nP3">
             <objects>
-                <viewController id="sbe-PT-vMD" customClass="FriendsViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="83g-F2-IOg">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
+                <viewController storyboardIdentifier="friendsVC" id="ZWK-vU-OjE" customClass="FriendsViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tBx-ox-hic">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="YWU-xZ-6JB"/>
+                        <viewLayoutGuide key="safeArea" id="q3i-C3-G88"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="0a6-e6-ZjO"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dYt-Pr-L37" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eBQ-Y9-aO1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1260" y="-845"/>
+            <point key="canvasLocation" x="-2000" y="-845"/>
+        </scene>
+        <!--Events View Controller-->
+        <scene sceneID="JNE-9X-S7o">
+            <objects>
+                <viewController storyboardIdentifier="eventsVC" id="GSs-sA-KPj" customClass="EventsViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8gP-Fk-Zjk">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Uhx-jj-TnT"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iV4-dt-MdU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1214" y="-845"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="Zx3-Bf-GS0">
@@ -145,14 +159,22 @@
                                 <rect key="frame" x="75" y="56" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Pl-Om-Mih">
-                                <rect key="frame" x="155" y="233" width="81" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n24-5A-XdT">
+                                <rect key="frame" x="13" y="240" width="81" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Friends"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Friends"/>
                                 <connections>
-                                    <action selector="friendsClicked:" destination="srk-rH-yBl" eventType="touchUpInside" id="avS-WB-um2"/>
-                                    <segue destination="sbe-PT-vMD" kind="show" id="Sm7-55-StI"/>
+                                    <action selector="friendsHit:" destination="srk-rH-yBl" eventType="touchUpInside" id="g8p-2B-Y7M"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SJO-bS-2fD">
+                                <rect key="frame" x="299" y="240" width="75" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Events"/>
+                                <connections>
+                                    <action selector="eventsHit:" destination="srk-rH-yBl" eventType="touchUpInside" id="lhX-98-Lb5"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -168,6 +190,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="pageCollectionView" destination="DWN-Zt-25s" id="qSS-NM-9Fo"/>
+                        <outlet property="profileImage" destination="T7B-yZ-G1x" id="uR5-Y7-PUb"/>
                         <outlet property="usernameLabel" destination="BS3-lj-HT1" id="Ulh-ax-yKl"/>
                     </connections>
                 </viewController>
@@ -180,7 +203,7 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="N6W-gE-jKV" customClass="ProfileViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kli-L1-KAN">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Profile Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R3p-2k-cYC">
@@ -484,7 +507,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="p4i-Hn-ebC"/>
         <segue reference="8M5-LX-mSN"/>
         <segue reference="oJ1-tl-YK4"/>
     </inferredMetricsTieBreakers>

@@ -1,5 +1,5 @@
 //
-//  FriendsViewController.swift
+//  EventsViewController.swift
 //  exploreAustin
 //
 //  Created by Matthew Plaisance on 11/19/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FriendsViewController: UIViewController {
+class EventsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
