@@ -27,16 +27,11 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var soundToggle: UISwitch!
     
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var confirmPasswordLabel: UILabel!
     
     @IBOutlet weak var photoBtn: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        // get CoreData settings
-        print("curruser: \(userID)")
-        let userCD = retrieveUserCD()
-        print("core data: ")
-        viewCoreData()
         
         nameField.text = Auth.auth().currentUser?.displayName
         emailField.text = Auth.auth().currentUser?.email
@@ -52,27 +47,37 @@ class ProfileViewController: UIViewController {
         // set error message label to blank
         errorMessage.text = ""
         saveButton.setTitle("Ok", for: .normal)
+        confirmPasswordField.alpha = 0
+        confirmPasswordLabel.alpha = 0
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nameField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
         emailField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
-        newPasswordField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
+        newPasswordField.addTarget(self, action: #selector(ProfileViewController.passwordFieldDiedChange(_:)), for: .editingChanged)
         confirmPasswordField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
         
         // Do any additional setup after loading the view.
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-            saveButton.setTitle("Save", for: .normal)
-        }
+        saveButton.setTitle("Save", for: .normal)
+    }
+    
+    @objc func passwordFieldDiedChange(_ textField: UITextField){
+        confirmPasswordField.alpha = 1
+        confirmPasswordLabel.alpha = 1
+        saveButton.setTitle("Save", for: .normal)
+    }
     
     @IBAction func DarkModeToggle(_ sender: Any) {
         if darkModeToggle.isOn{
             overrideUserInterfaceStyle = .dark
+            DarkMode.darkModeIsEnabled = true
         }else{
             overrideUserInterfaceStyle = .light
+            DarkMode.darkModeIsEnabled = false
         }
         
     }

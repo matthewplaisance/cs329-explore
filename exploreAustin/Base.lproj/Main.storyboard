@@ -270,6 +270,7 @@
                     <navigationItem key="navigationItem" id="g9J-6b-Hh0"/>
                     <connections>
                         <outlet property="confirmPasswordField" destination="gXV-T2-GJp" id="OqI-kv-Sr5"/>
+                        <outlet property="confirmPasswordLabel" destination="fr7-i3-bua" id="GID-nH-eXO"/>
                         <outlet property="darkModeToggle" destination="o89-Ld-ohy" id="QiL-26-5u1"/>
                         <outlet property="emailField" destination="OaO-Hv-iOm" id="bub-yj-Sus"/>
                         <outlet property="errorMessage" destination="VGN-IH-feN" id="Az3-Wd-23Q"/>
