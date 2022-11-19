@@ -247,6 +247,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jnf-ES-pTu">
+                                <rect key="frame" x="37" y="135" width="45" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="er8-BP-EBE">
+                                <rect key="frame" x="237" y="128" width="132" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Choose Photo"/>
+                                <connections>
+                                    <action selector="photoClick:" destination="N6W-gE-jKV" eventType="touchUpInside" id="hc3-81-XJ2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OEV-YB-qdB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -259,7 +275,8 @@
                         <outlet property="errorMessage" destination="VGN-IH-feN" id="Az3-Wd-23Q"/>
                         <outlet property="nameField" destination="DiH-9C-y5S" id="1Pi-NZ-1Kd"/>
                         <outlet property="newPasswordField" destination="pXV-Ug-dWM" id="YFJ-r3-xLd"/>
-                        <outlet property="saveButton" destination="JgM-pK-8WI" id="Inl-Zy-TFj"/>
+                        <outlet property="photoBtn" destination="er8-BP-EBE" id="Upa-6h-5Zp"/>
+                        <outlet property="saveButton" destination="JgM-pK-8WI" id="cpT-EG-zOk"/>
                         <outlet property="soundToggle" destination="GxO-FP-jXq" id="M9E-98-GFF"/>
                         <segue destination="gfE-j1-dbk" kind="show" identifier="settingsSaveSegue" id="8M5-LX-mSN"/>
                         <segue destination="LBY-yM-iNO" kind="show" identifier="logoutSegue" id="oJ1-tl-YK4"/>
