@@ -10,16 +10,6 @@ import FirebaseAuth
 import CoreData
 import ZLPhotoBrowser
 
-
-
-struct DarkMode{
-    static var darkModeIsEnabled: Bool = false
-    
-}
-struct SoundOn{
-    static var soundOn: Bool = true
-}
-
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let context = appDelegate.persistentContainer.viewContext
 
@@ -36,6 +26,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var darkModeToggle: UISwitch!
     @IBOutlet weak var soundToggle: UISwitch!
     
+    @IBOutlet weak var saveButton: UIButton!
+    
     @IBOutlet weak var photoBtn: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,19 +38,8 @@ class ProfileViewController: UIViewController {
         print("core data: ")
         viewCoreData()
         
-    
-        if let darkMode = userCD.value(forKey: "darkMode"){
-            DarkMode.darkModeIsEnabled = darkMode as! Bool
-        }
-        if let loadedName = userCD.value(forKey: "name"){
-            nameField.text = loadedName as? String
-        }
-        if let loadedEmail = userCD.value(forKey: "email"){
-            emailField.text = loadedEmail as? String
-        }
-        if let loadedSound = userCD.value(forKey: "soundOn"){
-            SoundOn.soundOn = loadedSound as! Bool
-        }
+        nameField.text = Auth.auth().currentUser?.displayName
+        emailField.text = Auth.auth().currentUser?.email
         
         // check for dark mode
         if DarkMode.darkModeIsEnabled == true{
@@ -70,13 +51,22 @@ class ProfileViewController: UIViewController {
         }
         // set error message label to blank
         errorMessage.text = ""
+        saveButton.setTitle("Ok", for: .normal)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        nameField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
+        emailField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
+        newPasswordField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
+        confirmPasswordField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
         
         // Do any additional setup after loading the view.
     }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+            saveButton.setTitle("Save", for: .normal)
+        }
     
     @IBAction func DarkModeToggle(_ sender: Any) {
         if darkModeToggle.isOn{
@@ -98,10 +88,16 @@ class ProfileViewController: UIViewController {
         }
         else if (newPasswordField.text != "") && (confirmPasswordField.text != newPasswordField.text){
             errorMessage.text = "New passwords do not match!"
+            return
+        }
+        if nameField.text != ""{
+            saveName(name: nameField.text!)
         }
         updateUserData()
-        
+        performSegue(withIdentifier: "settingsSaveSegue", sender: self)
     }
+    
+    
     
     @IBAction func logOutButtonPressed(_ sender: Any) {
         let auth = Auth.auth()
@@ -116,7 +112,7 @@ class ProfileViewController: UIViewController {
     
     
     @IBAction func photoClick(_ sender: Any) {
-       let ps = ZLPhotoPreviewSheet()
+        let ps = ZLPhotoPreviewSheet()
         let config = ZLPhotoConfiguration.default()
         config.maxSelectCount = 1
         ps.selectImageBlock = { [weak self] results, isOriginal in
@@ -129,9 +125,12 @@ class ProfileViewController: UIViewController {
         
     }
     
-    
-    
-    
+    func saveName(name: String){
+         let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+         changeRequest?.displayName = name
+         changeRequest?.commitChanges { error in
+         }
+     }
    
     func retrieveUserCD() -> NSManagedObject {
         let data = retrieveCoreData()

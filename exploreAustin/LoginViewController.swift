@@ -30,6 +30,10 @@ class LoginViewController: UIViewController {
         print("Loading Core Data...")
         viewCoreData()
         
+        if DarkMode.darkModeIsEnabled == true{
+            overrideUserInterfaceStyle = .dark
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -71,6 +75,17 @@ class LoginViewController: UIViewController {
                     }else{
                         self.createUserCD(user: id)
                         self.statusLabel.text = "Signed up!"
+                        Auth.auth().signIn(withEmail: id, password: pass){
+                            authResult, error in
+                            if let error = error as NSError? {
+                                self.statusLabel.text = "\(error.localizedDescription)"
+                            }else{//no error
+                                self.performSegue(withIdentifier: "loginSeg", sender: nil)
+                                self.userKey = nil
+                                self.userId = nil
+                            }
+                            
+                        }
                     }
                 }
             }else{
@@ -83,6 +98,8 @@ class LoginViewController: UIViewController {
                 if let error = error as NSError? {
                     self.statusLabel.text = "\(error.localizedDescription)"
                 }else{//no error
+                    
+                    
                     self.performSegue(withIdentifier: "loginSeg", sender: nil)
                     self.userKey = nil
                     self.userId = nil
@@ -128,6 +145,10 @@ class LoginViewController: UIViewController {
         
     }
     
+    
+    
+    
+    
     func clearCoreData () {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
         var fetchedResults:[NSManagedObject]
@@ -147,3 +168,4 @@ class LoginViewController: UIViewController {
         }
     }
 }
+
