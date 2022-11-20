@@ -24,14 +24,14 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         if (currUser != nil) {
-            print("currently logged in as: \(currUser)")
+            print("currently logged in as: \(currUser!)")
         }
         
         print("Loading Core Data...")
         viewCoreData()
         //clearCoreData(entity: "User")
         //clearCoreData(entity: "Friends")
-        
+        //clearCoreData(entity: "Photo")
     }
     
     override func viewDidLoad() {
@@ -108,15 +108,10 @@ class LoginViewController: UIViewController {
     
     func createUserCD(user:String){
         let userEntity = NSEntityDescription.insertNewObject(forEntityName: "User", into: context)
-        let userFreindsEntity = NSEntityDescription.insertNewObject(forEntityName: "Friends", into: context)
+        //let userFreindsEntity = NSEntityDescription.insertNewObject(forEntityName: "Friends", into: context)
         
         userEntity.setValue(user, forKey: "email")
-        userFreindsEntity.setValue(user, forKey: "email")
-        let keys = ["f1","f2","f3","f4"]
-        
-        for i in keys {
-            userFreindsEntity.setValue(" ", forKey: i)
-        }
+        userEntity.setValue(" ", forKey: "friends")
         
         appDelegate.saveContext()
     }
@@ -135,18 +130,7 @@ class LoginViewController: UIViewController {
             let friends = user.value(forKey: "friends")
             let soundOn = user.value(forKey: "soundOn")
 
-            print("user #\(cnt):\n email: \(String(describing: email)) name: \(String(describing: name)) darkMode: \(String(describing: darkMode)) soundOn: \(String(describing: soundOn))")
-            
-        }
-        
-        for i in friends {
-            
-            let userID = i.value(forKey: "email")
-            let f1 = i.value(forKey: "f1")
-            let f2 = i.value(forKey: "f2")
-            let f3 = i.value(forKey: "f3")
-            
-            print("user: \(userID), friend1: \(f1) , friend2: \(f2)")
+            print("user #\(cnt):\n email: \(String(describing: email)) name: \(String(describing: name)) darkMode: \(String(describing: darkMode)) soundOn: \(String(describing: soundOn))\n friends: \(friends)")
             
         }
         
@@ -161,7 +145,8 @@ class LoginViewController: UIViewController {
             if fetchedResults.count > 0 {
                 for result:AnyObject in fetchedResults {
                     context.delete(result as! NSManagedObject)
-                    print("user w/ email:\(result.value(forKey: "email")) was deleted.")
+                    //print("user w/ email:\(result.value(forKey: "email")) was deleted.")
+                    print("deleted.")
                 }
             }
             appDelegate.saveContext()
