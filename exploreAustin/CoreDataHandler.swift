@@ -65,90 +65,22 @@ func convertDataToImages(imageDataArray: [Data]) -> [UIImage] {
   return myImagesArray
 }
 
-func fetchUserCoreData(user:String,entity:String) -> NSManagedObject{
+func fetchUserCoreData(user:String,entity:String) -> [NSManagedObject]{
     let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
     
-    request.predicate = NSPredicate(format: "email CONTAINS %@",user)
+    if user != "all"{
+        request.predicate = NSPredicate(format: "email CONTAINS %@",user)
+    }
     
-    var res:[NSManagedObject]? = nil
+    var fetchedResults:[NSManagedObject]? = nil
     
     do{
-        try res = context.fetch(request) as? [NSManagedObject]
+        try fetchedResults = context.fetch(request) as? [NSManagedObject]
     } catch {
         let nserror = error as NSError
         print("errorhere:")
         print(nserror)
     }
-    return (res![0])
-}
 
-func retrieveCoreData(entity:String) -> [NSManagedObject] {
-    let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
-    var fetchedResults:[NSManagedObject]? = nil
-    do{
-        try fetchedResults = context.fetch(request) as? [NSManagedObject]
-    } catch {
-        let nserror = error as NSError
-        print(nserror)
-    }
-    return (fetchedResults)!
-}
-
-func retrieveUserCD(user:String) -> [NSManagedObject] {
-    let settingData = retrieveCoreData(entity: "User")
-    let friendsData = retrieveCoreData(entity: "Friends")
-    
-    var userFriends = friendsData[0]
-    var userSettings = settingData[0]
-    
-    for i in settingData {
-        let email = i.value(forKey: "email")
-        if (user == email as? String){
-            print("Found CD for current user: \(user)")
-            userSettings = i
-        }
-    }
-    for i in friendsData {
-        let email = i.value(forKey: "email")
-        if (user == email as? String){
-            userFriends = i
-        }
-    }
-    
-    
-    print("currUserData: \(userSettings)")
-    print("currUserFriends: \(userFriends)")
-    
-    
-    return [userSettings,userFriends]
-}
-
-func viewCoreData () {
-    let data = retrieveCoreData(entity: "User")
-    let friends = retrieveCoreData(entity: "Friends")
-    var cnt = 0
-    for user in data{
-        cnt += 1
-        
-        let darkMode = user.value(forKey: "darkMode")
-        let email = user.value(forKey: "email")
-        let name = user.value(forKey: "name")
-        let friends = user.value(forKey: "friends")
-        let soundOn = user.value(forKey: "soundOn")
-
-        print("user #\(cnt):\n email: \(String(describing: email)) name: \(String(describing: name)) darkMode: \(String(describing: darkMode)) soundOn: \(String(describing: soundOn))")
-        
-    }
-    
-    for i in friends {
-        
-        let userID = i.value(forKey: "email")
-        let f1 = i.value(forKey: "f1")
-        let f2 = i.value(forKey: "f2")
-        let f3 = i.value(forKey: "f3")
-        
-        print("user: \(userID), friend1: \(f1) , friend2: \(f2)")
-        
-    }
-    
+    return fetchedResults!//if filtered for specifc user, call res with [0]
 }

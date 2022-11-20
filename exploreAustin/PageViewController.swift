@@ -12,7 +12,6 @@ let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
 
 class PageViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    
     @IBOutlet weak var usernameLabel: UILabel!
     
     @IBOutlet weak var pageCollectionView: UICollectionView!
@@ -40,15 +39,15 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
             self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = homeIcon
             self.navigationController?.navigationBar.backItem?.title = ""
         }
-        var myImages = [UIImage(named: "ZilkerPark")!,UIImage(named: "MountBonnell")!]
+        let myImages = [UIImage(named: "ZilkerPark")!,UIImage(named: "MountBonnell")!]
         
-        var imageData = convertImagesToData(myImagesArray: myImages)
+        let imageData = convertImagesToData(myImagesArray: myImages)
         
         saveUIImages(imagesData: imageData)
         
-        var fetchedImageData = fetchUIimages()
+        let fetchedImageData = fetchUIimages()
         
-        var fetchedImages = convertDataToImages(imageDataArray: fetchedImageData)
+        let fetchedImages = convertDataToImages(imageDataArray: fetchedImageData)
         
         profileImage.image = fetchedImages[0]
     }
@@ -84,5 +83,10 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBAction func eventsHit(_ sender: Any) {
         let eventsVC = storyBoard.instantiateViewController(withIdentifier: "eventsVC") as! EventsViewController
         self.present(eventsVC, animated:true, completion:nil)
+    }
+    
+    @IBAction func postBtnHit(_ sender: Any) {
+        let postVC = storyBoard.instantiateViewController(withIdentifier: "postVC") as! PostViewController
+        self.present(postVC, animated:true, completion:nil)
     }
 }

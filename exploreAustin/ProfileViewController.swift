@@ -39,8 +39,7 @@ class ProfileViewController: UIViewController {
         print("curruser: \(String(describing: currUID))\n user cd:")
         //let userSettings = fetchUserCoreData(user: currUserID!, entity: "User")
         //let userFriends = fetchUserCoreData(user: currUserID!, entity: "Friends")
-        print("core data: ")
-        viewCoreData()
+        var currUserData = fetchUserCoreData(user: currUID!, entity: "User")[0]
         
         
         if let darkMode = currUserData.value(forKey: "darkMode"){
@@ -125,6 +124,7 @@ class ProfileViewController: UIViewController {
     }
     
     func updateUserData(user:String) {
+        var currUserData = fetchUserCoreData(user: currUID!, entity: "User")[0]
         
         let darkMode = darkModeToggle.isOn
         let soundMode = soundToggle.isOn

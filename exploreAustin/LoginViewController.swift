@@ -23,14 +23,13 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        if (currUser != nil) {
-            print("currently logged in as: \(currUser!)")
+        if let user = currUser {
+            print("curr user: \(user)")
         }
         
         print("Loading Core Data...")
-        viewCoreData()
+        self.viewCoreData()
         //clearCoreData(entity: "User")
-        //clearCoreData(entity: "Friends")
         //clearCoreData(entity: "Photo")
     }
     
@@ -94,18 +93,6 @@ class LoginViewController: UIViewController {
         }
     }
     
-    func retrieveCoreData(entity:String) -> [NSManagedObject] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
-        var fetchedResults:[NSManagedObject]? = nil
-        do{
-            try fetchedResults = context.fetch(request) as? [NSManagedObject]
-        } catch {
-            let nserror = error as NSError
-            print(nserror)
-        }
-        return (fetchedResults)!
-    }
-    
     func createUserCD(user:String){
         let userEntity = NSEntityDescription.insertNewObject(forEntityName: "User", into: context)
         //let userFreindsEntity = NSEntityDescription.insertNewObject(forEntityName: "Friends", into: context)
@@ -118,8 +105,7 @@ class LoginViewController: UIViewController {
     
     
     func viewCoreData () {
-        let data = retrieveCoreData(entity: "User")
-        let friends = retrieveCoreData(entity: "Friends")
+        let data = fetchUserCoreData(user: "all", entity: "User")
         var cnt = 0
         for user in data{
             cnt += 1

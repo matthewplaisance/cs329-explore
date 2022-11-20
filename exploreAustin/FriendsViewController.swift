@@ -9,10 +9,10 @@ import UIKit
 import FirebaseAuth
 import CoreData
 
-var currUID = Auth.auth().currentUser?.email
-var currUserData = fetchUserCoreData(user: currUID!, entity: "User")
 
 class FriendsViewController: UIViewController {
+    
+    var currUID = Auth.auth().currentUser?.email
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +21,7 @@ class FriendsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        var currUserData = fetchUserCoreData(user: currUID!, entity: "User")[0]
         print("userData: ")
         let userData = fetchUserCoreData(user: currUID!, entity: "User")
         print(userData)
@@ -35,13 +36,14 @@ class FriendsViewController: UIViewController {
     }
     
     func handleFriendRequest(othUser:String,act:String) {
-        let othUserData = fetchUserCoreData(user: othUser, entity: "User")
+        let currUserData = fetchUserCoreData(user: currUID!, entity: "User")[0]
+        let othUserData = fetchUserCoreData(user: othUser, entity: "User")[0]
         
         let cf = currUserData.value(forKey: "friends") as! String
         let of = othUserData.value(forKey: "friends") as! String
         
-        let currUserFriends = cf.components(separatedBy: ",")
-        let othUserFriends = of.components(separatedBy: ",")
+        var othUserFriends = customSep(str: of)
+        var currUserFriends = customSep(str: cf)
         
         var currRes = [String]()
         var othRes = [String]()
@@ -52,8 +54,8 @@ class FriendsViewController: UIViewController {
             
             if ii == othUser {
                 if act == "a"{
-                    currRes.append("\(othUser)3")
-                    othRes.append("\(currUID!)3")
+                    currRes.append("\(othUser)3,")
+                    othRes.append("\(currUID!)3,")
                     continue
                 }
                 if act == "d"{
@@ -92,8 +94,9 @@ class FriendsViewController: UIViewController {
     }
     
     func checkFriendRequests() {
+        var currUserData = fetchUserCoreData(user: currUID!, entity: "User")[0]
         let cf = currUserData.value(forKey: "friends") as! String
-        var currUserFriends = cf.components(separatedBy: ",")
+        var currUserFriends = customSep(str: cf)
         var requestingUsers = [String]()
         for f in currUserFriends{
             if f.last! == "1"{
@@ -135,7 +138,7 @@ class FriendsViewController: UIViewController {
 
 
     func showOtherUsers() {
-        let userEntity = retrieveCoreData(entity: "User")
+        let userEntity = fetchUserCoreData(user: "all", entity: "User")
         
         var users = [String]()
         for user in userEntity {
@@ -163,13 +166,14 @@ class FriendsViewController: UIViewController {
 
 
     func sendFriendRequest(othUser:String) {
-        let othUserData = fetchUserCoreData(user: othUser, entity: "User")
+        let currUserData = fetchUserCoreData(user: currUID!, entity: "User")[0]
+        let othUserData = fetchUserCoreData(user: othUser, entity: "User")[0]
         
         let othFriends = othUserData.value(forKey: "friends") as! String
         let currFriends = currUserData.value(forKey: "friends") as! String
         
-        var othUserFriends = othFriends.components(separatedBy: ",")
-        var currUserFriends = currFriends.components(separatedBy: ",")
+        var othUserFriends = customSep(str: othFriends)
+        var currUserFriends = customSep(str: currFriends)
         
         if othUserFriends[0] == " " {
             othUserFriends.removeFirst()
@@ -178,8 +182,8 @@ class FriendsViewController: UIViewController {
             currUserFriends.removeFirst()
         }
         
-        othUserFriends.append("\(currUID!)1")
-        currUserFriends.append("\(othUser)2")
+        othUserFriends.append("\(currUID!)1,")
+        currUserFriends.append("\(othUser)2,")
         
         var othRes = ""
         var currRes = ""
@@ -196,10 +200,15 @@ class FriendsViewController: UIViewController {
         appDelegate.saveContext()
     }
     
-    
-
-   
-    
-
+    //removes nil string from seperating at ","
+    func customSep (str:String) -> Array<String>{
+        var res = str.components(separatedBy: ",")
+        for (idx,el) in res.enumerated() {
+            if el.count == 0 {
+                res.remove(at: idx)
+            }
+        }
+        return res
+    }
 
 }
