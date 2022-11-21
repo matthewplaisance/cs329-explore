@@ -1,5 +1,5 @@
 //
-//  PostViewController.swift
+//  ProfilePhotoViewController.swift
 //  exploreAustin
 //
 //  Created by Matthew Plaisance on 11/20/22.
@@ -8,37 +8,37 @@
 import UIKit
 import AVFoundation
 
-class PostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
-    let postImagePicker = UIImagePickerController()
+class ProfilePhotoViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
+    @IBOutlet weak var tempProfPhotoView: UIImageView!
     
-    @IBOutlet weak var postComment: UITextField!
+    let profImagePicker = UIImagePickerController()
     
-    @IBOutlet weak var selectedImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        postImagePicker.delegate = self
+        profImagePicker.delegate = self
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let selectedImage = info[.originalImage] as! UIImage
-        selectedImageView.contentMode = .scaleAspectFit
-        selectedImageView.image = selectedImage
+        tempProfPhotoView.contentMode = .scaleAspectFit
+        tempProfPhotoView.image = selectedImage
         dismiss(animated: true)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true)
     }
+    
 
+    
     @IBAction func libraryBtnHit(_ sender: Any) {
-        postImagePicker.sourceType = .photoLibrary
-        present(postImagePicker,animated: true)
+        profImagePicker.sourceType = .photoLibrary
+        present(profImagePicker,animated: true)
     }
     
+    
     @IBAction func cameraBtnHit(_ sender: Any) {
-        
         if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
             
             switch AVCaptureDevice.authorizationStatus(for: .video) {
@@ -54,14 +54,29 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 return
             }
             
-            postImagePicker.sourceType = .camera
-            postImagePicker.cameraCaptureMode = .photo
+            profImagePicker.sourceType = .camera
+            profImagePicker.cameraCaptureMode = .photo
             
-            present(postImagePicker,animated: true)
+            present(profImagePicker,animated: true)
             
         }else{
             print("no rear camera")
             return
         }
     }
+    
+    
+    
+    
+    @IBAction func saveHit(_ sender: Any) {
+        let profVC = storyBoard.instantiateViewController(withIdentifier: "profVC") as! ProfileViewController
+        
+        if let profImage = tempProfPhotoView.image {
+            profVC.profImage = profImage
+        }
+        self.present(profVC, animated:true, completion:nil)
+    }
+    
+   
+    
 }

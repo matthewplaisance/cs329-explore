@@ -24,15 +24,15 @@ let context = appDelegate.persistentContainer.viewContext
 class ProfileViewController: UIViewController {
     
     var currUID = Auth.auth().currentUser?.email
+    var profImage: UIImage?
+    
     // Outlet Variables
     @IBOutlet weak var errorMessage: UILabel!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var newPasswordField: UITextField!
-    @IBOutlet weak var confirmPasswordField: UITextField!
     @IBOutlet weak var darkModeToggle: UISwitch!
     @IBOutlet weak var soundToggle: UISwitch!
-    
+    @IBOutlet weak var profImageView: UIImageView!
     
     override func viewWillAppear(_ animated: Bool) {
         // get CoreData settings
@@ -66,6 +66,11 @@ class ProfileViewController: UIViewController {
         // set error message label to blank
         errorMessage.text = ""
         
+        if let profileImage = profImage{
+            print("setting image...")
+            profImageView.image = profileImage
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -89,15 +94,7 @@ class ProfileViewController: UIViewController {
     
     
     @IBAction func saveButtonPressed(_ sender: Any) {
-        if (newPasswordField.text != "") && (confirmPasswordField.text == newPasswordField.text){
-            changePassword(password: confirmPasswordField.text!)
-            print("Password changed") // change to alert
-        }
-        else if (newPasswordField.text != "") && (confirmPasswordField.text != newPasswordField.text){
-            errorMessage.text = "New passwords do not match!"
-        }
         updateUserData(user: currUID!)
-        
     }
     
     @IBAction func logOutButtonPressed(_ sender: Any) {
@@ -140,6 +137,17 @@ class ProfileViewController: UIViewController {
         appDelegate.saveContext()
         
     }
+    
+    
+    @IBAction func changeProfPhotoHit(_ sender: Any) {
+        self.performSegue(withIdentifier: "changeProfPhotoSeg", sender: self)
+    }
+    
+    
+    
+    @IBAction func changePasswordHit(_ sender: Any) {
+    }
+    
 }
 
 
