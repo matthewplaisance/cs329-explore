@@ -29,8 +29,9 @@ class LoginViewController: UIViewController {
         
         print("Loading Core Data...")
         self.viewCoreData()
+        self.viewPosts()
+        //clearCoreData(entity: "Post")
         //clearCoreData(entity: "User")
-        //clearCoreData(entity: "Photo")
     }
     
     override func viewDidLoad() {
@@ -39,6 +40,8 @@ class LoginViewController: UIViewController {
         repearUserKeyField.alpha = 0
         userKey.isSecureTextEntry = true
         repearUserKeyField.isSecureTextEntry = true
+        statusLabel.lineBreakMode = .byWordWrapping
+        statusLabel.numberOfLines = 0
     }
     
     
@@ -58,6 +61,9 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func loginHit(_ sender: Any) {
+        let devId = "matt@tst.com"
+        let devPass = "qazxsw"
+        //fix below returning nil causing crash
         let id = userId.text!
         let pass = userKey.text!
         let idx = loginSegCtrl.selectedSegmentIndex
@@ -67,7 +73,6 @@ class LoginViewController: UIViewController {
                 Auth.auth().createUser(withEmail: id, password: pass){
                     authResult, error in //params from createUser method
                     if let error = error as NSError? {
-                        
                         self.statusLabel.text = "\(error.localizedDescription)"
                     }else{
                         self.createUserCD(user: id)
@@ -96,9 +101,12 @@ class LoginViewController: UIViewController {
     func createUserCD(user:String){
         let userEntity = NSEntityDescription.insertNewObject(forEntityName: "User", into: context)
         //let userFreindsEntity = NSEntityDescription.insertNewObject(forEntityName: "Friends", into: context)
+        let defualtPhoto = UIImage(systemName: "person")
+        let photoData = defualtPhoto!.jpegData(compressionQuality: 1)!
         
         userEntity.setValue(user, forKey: "email")
         userEntity.setValue(" ", forKey: "friends")
+        userEntity.setValue(photoData, forKey: "profilePhoto")
         
         appDelegate.saveContext()
     }
@@ -119,7 +127,19 @@ class LoginViewController: UIViewController {
             print("user #\(cnt):\n email: \(String(describing: email)) name: \(String(describing: name)) darkMode: \(String(describing: darkMode)) soundOn: \(String(describing: soundOn))\n friends: \(friends)")
             
         }
-        
+    }
+    
+    func viewPosts(){
+        let posts = fetchUserCoreData(user: "all", entity: "Post")
+        print("posts: ")
+        for post in posts{
+            let uid = post.value(forKey: "uid")
+            let bio = post.value(forKey: "bio")
+            let date = post.value(forKey: "date")
+            
+            print("user: \(uid) date: \(date)\n bio: \(bio)")
+            
+        }
     }
     
     func clearCoreData (entity:String) {

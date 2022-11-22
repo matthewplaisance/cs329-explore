@@ -7,15 +7,19 @@
 
 import UIKit
 import AVFoundation
+import FirebaseAuth
 
 class PostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
+    var currUID = Auth.auth().currentUser?.email
+    
     let postImagePicker = UIImagePickerController()
     
     
-    @IBOutlet weak var postComment: UITextField!
-    
     @IBOutlet weak var selectedImageView: UIImageView!
+    
+    @IBOutlet weak var postBio: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         postImagePicker.delegate = self
@@ -63,5 +67,14 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             print("no rear camera")
             return
         }
+    }
+    
+    @IBAction func postBtnHit(_ sender: Any) {
+        if let postImage = selectedImageView.image {
+            createPost(image: postImage, bio: postBio.text!, uid: currUID!)
+        }else{
+            print("select image.")
+        }
+        
     }
 }

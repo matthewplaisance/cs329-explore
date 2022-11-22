@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 let collectionCellID = "pageCollectionCell"
 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
@@ -18,7 +19,9 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     @IBOutlet weak var profileImage: UIImageView!
     
-    var data : [String] = ["ZilkerPark","MountBonnell"]
+    var data1 : [String] = ["ZilkerPark","MountBonnell"]
+    var currUid = Auth.auth().currentUser?.email
+    var data = [UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,17 +42,11 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
             self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = homeIcon
             self.navigationController?.navigationBar.backItem?.title = ""
         }
-        let myImages = [UIImage(named: "ZilkerPark")!,UIImage(named: "MountBonnell")!]
+        let profPhoto = fetchUIImage(uid: currUid!)
+        profileImage.image = profPhoto
         
-        let imageData = convertImagesToData(myImagesArray: myImages)
-        
-        saveUIImages(imagesData: imageData)
-        
-        let fetchedImageData = fetchUIimages()
-        
-        let fetchedImages = convertDataToImages(imageDataArray: fetchedImageData)
-        
-        profileImage.image = fetchedImages[0]
+        updatePosts()
+        pageCollectionView.reloadData()
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -64,7 +61,7 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionCellID, for: indexPath) as! PagePhotoCell//new reuseable cell for table
         let row = indexPath.row
         
-        cell.pageImageView.image = UIImage(named: data[row])
+        cell.pageImageView.image = data[row]
         
         return cell
     }
@@ -88,5 +85,15 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBAction func postBtnHit(_ sender: Any) {
         let postVC = storyBoard.instantiateViewController(withIdentifier: "postVC") as! PostViewController
         self.present(postVC, animated:true, completion:nil)
+    }
+    
+    func updatePosts() {
+        let posts = fetchUserCoreData(user: currUid!, entity: "Post")
+        
+        for post in posts {
+            let postImageData = post.value(forKey: "content") as! Data
+            let postImage = UIImage(data: postImageData)
+            data.append(postImage!)
+        }
     }
 }

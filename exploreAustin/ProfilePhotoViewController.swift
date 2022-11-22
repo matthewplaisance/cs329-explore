@@ -7,8 +7,12 @@
 
 import UIKit
 import AVFoundation
+import FirebaseAuth
 
+//get rid of of cancel toolbar if we keep nav controller flow, but want to change it to bottom toolbar on each page like instagram
 class ProfilePhotoViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    
+    var currUid = Auth.auth().currentUser?.email
     
     @IBOutlet weak var tempProfPhotoView: UIImageView!
     
@@ -29,8 +33,6 @@ class ProfilePhotoViewController: UIViewController,UIImagePickerControllerDelega
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true)
     }
-    
-
     
     @IBAction func libraryBtnHit(_ sender: Any) {
         profImagePicker.sourceType = .photoLibrary
@@ -66,17 +68,14 @@ class ProfilePhotoViewController: UIViewController,UIImagePickerControllerDelega
     }
     
     
-    
-    
     @IBAction func saveHit(_ sender: Any) {
         let profVC = storyBoard.instantiateViewController(withIdentifier: "profVC") as! ProfileViewController
         
         if let profImage = tempProfPhotoView.image {
             profVC.profImage = profImage
         }
+        saveUIImage(image: tempProfPhotoView.image!, uid: currUid!)
         self.present(profVC, animated:true, completion:nil)
     }
-    
-   
     
 }

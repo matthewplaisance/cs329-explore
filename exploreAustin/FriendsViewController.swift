@@ -9,7 +9,7 @@ import UIKit
 import FirebaseAuth
 import CoreData
 
-
+//will change how requests show up, sholuldnt be an alert 
 class FriendsViewController: UIViewController {
     
     var currUID = Auth.auth().currentUser?.email
@@ -74,13 +74,13 @@ class FriendsViewController: UIViewController {
             othRes.append(" ")
         }
         
-        print(currRes)
-        print(othRes)
+        //print(currRes)
+        //print(othRes)
         
         var othResStr = ""
         var currResStr = ""
         
-        //back to strs
+        //back to strs for cd
         for (f1,f2) in zip(currRes,othRes){
             currResStr += f1
             othResStr += f2

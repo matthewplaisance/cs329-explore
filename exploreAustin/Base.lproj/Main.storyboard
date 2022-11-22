@@ -69,7 +69,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1127.6923076923076" y="-49.052132701421797"/>
+            <point key="canvasLocation" x="-1569" y="1469"/>
         </scene>
         <!--Friends View Controller-->
         <scene sceneID="Q2v-Id-nP3">
@@ -95,7 +95,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eBQ-Y9-aO1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2678" y="-845"/>
+            <point key="canvasLocation" x="-486" y="813"/>
         </scene>
         <!--Events View Controller-->
         <scene sceneID="JNE-9X-S7o">
@@ -110,7 +110,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iV4-dt-MdU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1214" y="-845"/>
+            <point key="canvasLocation" x="-486" y="-525"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="bV9-x9-58f">
@@ -144,6 +144,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Kv-Pn-zZ4">
+                                <rect key="frame" x="167" y="574" width="58" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Post"/>
+                                <connections>
+                                    <action selector="postBtnHit:" destination="YYV-dH-Sbb" eventType="touchUpInside" id="3Ub-iN-8zD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ytf-eM-R2a"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -165,13 +174,13 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="postComment" destination="Pmg-yN-smv" id="raP-mP-EQM"/>
+                        <outlet property="postBio" destination="Pmg-yN-smv" id="r2Q-Bz-1W6"/>
                         <outlet property="selectedImageView" destination="Vlt-zo-FRC" id="OqU-H0-qbw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iIh-OT-cCu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1940" y="-845.26066350710892"/>
+            <point key="canvasLocation" x="-486" y="146"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="Zx3-Bf-GS0">
@@ -277,7 +286,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Im-B5-CEO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-392.30769230769232" y="-844.54976303317528"/>
+            <point key="canvasLocation" x="-485" y="1459"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="fTj-YD-NOi">
@@ -415,7 +424,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Io-2R-LAG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="556.92307692307691" y="-865.16587677725113"/>
+            <point key="canvasLocation" x="429" y="1459"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="hiB-Jd-yr3">
@@ -435,8 +444,8 @@
                                     <action selector="loginSegChange:" destination="LBY-yM-iNO" eventType="valueChanged" id="EXD-PY-oJg"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2F-ye-Oid">
-                                <rect key="frame" x="35" y="154" width="83" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2F-ye-Oid">
+                                <rect key="frame" x="35" y="154" width="45.333333333333343" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -517,7 +526,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jf7-Ka-hUC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-718" y="-49"/>
+            <point key="canvasLocation" x="-1569" y="813"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zkb-ST-jNK">
@@ -536,7 +545,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PjW-WH-s69" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="146" y="-49"/>
+            <point key="canvasLocation" x="-2502" y="1469"/>
         </scene>
         <!--Loading Screen View Controller-->
         <scene sceneID="HJ9-b6-RjR">
@@ -561,7 +570,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uzS-kG-ciK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1569" y="-49"/>
+            <point key="canvasLocation" x="-1569" y="146"/>
         </scene>
         <!--Profile Photo View Controller-->
         <scene sceneID="fKn-pL-Uk2">
@@ -572,7 +581,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JTj-D8-wm3">
-                                <rect key="frame" x="0.0" y="56" width="390" height="44"/>
+                                <rect key="frame" x="0.0" y="47" width="390" height="44"/>
                                 <items>
                                     <barButtonItem title="Cancel" id="oM5-QB-6wZ"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="6FD-90-L29"/>
@@ -621,7 +630,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lZU-U1-umD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1341.5384615384614" y="-865.16587677725113"/>
+            <point key="canvasLocation" x="1277" y="1459"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

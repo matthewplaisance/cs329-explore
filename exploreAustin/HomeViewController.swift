@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 
 class HomeViewController: UIViewController {
@@ -26,9 +27,17 @@ class HomeViewController: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        
-        
+        let user = Auth.auth().currentUser
+        if let user = user {
+          let uid = user.uid
+          let email = user.email
+          print(uid)
+          var multiFactorString = "MultiFactor: "
+          for info in user.multiFactor.enrolledFactors {
+            multiFactorString += info.displayName ?? "[DispayName]"
+            multiFactorString += " "
+          }
+        }
     }
     
     

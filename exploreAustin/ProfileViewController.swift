@@ -66,10 +66,8 @@ class ProfileViewController: UIViewController {
         // set error message label to blank
         errorMessage.text = ""
         
-        if let profileImage = profImage{
-            print("setting image...")
-            profImageView.image = profileImage
-        }
+        let profPhoto = fetchUIImage(uid: currUID!)
+        profImageView.image = profPhoto
         
     }
     
@@ -116,7 +114,7 @@ class ProfileViewController: UIViewController {
     
     func changePassword(password: String){
         Auth.auth().currentUser?.updatePassword(to: password){
-            (error) in self.errorMessage.text = error.debugDescription
+            (error) in self.errorMessage.text = error?.localizedDescription
         }
     }
     
@@ -146,6 +144,38 @@ class ProfileViewController: UIViewController {
     
     
     @IBAction func changePasswordHit(_ sender: Any) {
+        let passwordAlert = UIAlertController(title: "Change Password: ", message: "", preferredStyle: .alert)
+
+        for i in 1...2 {
+            passwordAlert.addTextField { (textField) in
+                if i == 1 {
+                    textField.placeholder = "New password"
+                }else{
+                    textField.placeholder = "Repeat password"
+                }
+                
+            }
+        }
+
+        passwordAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak passwordAlert] (action) in
+            let pass = passwordAlert?.textFields![0].text!
+            let passRepeat = passwordAlert?.textFields![1].text!
+            
+            if pass  == "" || passRepeat == "" {
+                passwordAlert?.dismiss(animated: true)
+            }
+            if pass == passRepeat {
+                self.changePassword(password: pass!)
+            }else{
+                passwordAlert?.message = "Passwords do not match"
+            }
+        }))
+        
+        passwordAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak passwordAlert] (action) in
+            return
+        }))
+
+        self.present(passwordAlert, animated: true, completion: nil)
     }
     
 }

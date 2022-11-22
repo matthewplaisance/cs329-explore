@@ -8,6 +8,91 @@ import Foundation
 import CoreData
 import UIKit
 
+func createPost(image:UIImage,bio:String,uid:String) {
+    let postEntity = NSEntityDescription.insertNewObject(forEntityName: "Post", into: context)
+    let date = Date().timeIntervalSince1970//unix time
+    let imageData = image.jpegData(compressionQuality: 1)!
+    
+    postEntity.setValue(uid, forKey: "uid")
+    postEntity.setValue(imageData, forKey: "content")
+    postEntity.setValue(bio, forKey: "bio")
+    postEntity.setValue(date, forKey: "date")
+    
+    appDelegate.saveContext()
+}
+
+func saveUIImage(image:UIImage,uid:String) {
+    let imageData = image.jpegData(compressionQuality: 1)!
+    
+    //let entityName =  NSEntityDescription.entity(forEntityName: "User", in: context)!
+    //let content = NSManagedObject(entity: entityName, insertInto: context)
+    let userData = fetchUserCoreData(user: uid, entity: "User")[0]
+    userData.setValue(imageData, forKey: "profilePhoto")
+    
+    do {
+      try context.save()
+    } catch let error as NSError {
+      print("Could not save. \(error), \(error.userInfo)")
+    }
+}
+
+func fetchUIImage(uid:String) -> UIImage? {
+    let request = NSFetchRequest<NSManagedObject>(entityName: "User")
+    request.predicate = NSPredicate(format: "email CONTAINS %@",uid)
+    
+    var storedImageData = [Data]()
+    
+    do {
+      let res = try context.fetch(request)
+        for data in res {
+        storedImageData.append(data.value(forKey: "profilePhoto") as! Data)
+      }
+    } catch let error as NSError {
+      print("Could not fetch. \(error), \(error.userInfo)")
+    }
+    
+    var resImage: UIImage?
+    
+    if let image = UIImage(data: storedImageData[0]) {
+        resImage = image
+    }else{
+        print("no profilephoto")
+    }
+    return resImage
+}
+
+func fetchUserPosts(uid:String) -> [UIImage] {
+    let request = NSFetchRequest<NSManagedObject>(entityName: "Post")
+    request.predicate = NSPredicate(format: "uid CONTAINS %@",uid)
+    
+    var fetchedImages = [Data]()
+    var fetchedImagesData = [Data]()
+    
+    do {
+      let result = try context.fetch(request)
+        for data in result {
+            fetchedImages.append(data.value(forKey: "content") as! Data)
+      }
+    } catch let error as NSError {
+      print("\(error), \(error.userInfo)")
+    }
+
+    
+    fetchedImages.forEach { (imageData) in
+        var dataArray = [Data]()
+        do {
+            dataArray = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSArray.self, from: imageData) as! [Data]
+            fetchedImagesData.append(contentsOf: dataArray)
+        } catch {
+            print("Error: \(error)")
+        }
+    }
+    
+    var fetchedUIImages = convertDataToImages(imageDataArray: fetchedImagesData)
+    
+    return fetchedUIImages
+}
+
 func convertImagesToData(myImagesArray: [UIImage]) -> [Data]{
   var myImagesDataArray = [Data]()
   myImagesArray.forEach({ (image) in
@@ -44,7 +129,7 @@ func fetchUIimages() -> Array<Data>{
     }
     
     var myImagesdataArray = [Data]()
-    //fetch image using decoding
+    //get binaryData of images
     imageDataArray.forEach { (imageData) in
         var dataArray = [Data]()
         do {
@@ -69,7 +154,11 @@ func fetchUserCoreData(user:String,entity:String) -> [NSManagedObject]{
     let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
     
     if user != "all"{
-        request.predicate = NSPredicate(format: "email CONTAINS %@",user)
+        if entity == "User"{
+            request.predicate = NSPredicate(format: "email CONTAINS %@",user)
+        }else if entity == "Post"{
+            request.predicate = NSPredicate(format: "uid CONTAINS %@",user)
+        }
     }
     
     var fetchedResults:[NSManagedObject]? = nil
