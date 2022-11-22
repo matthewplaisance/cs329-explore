@@ -151,6 +151,7 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Post"/>
                                 <connections>
                                     <action selector="postBtnHit:" destination="YYV-dH-Sbb" eventType="touchUpInside" id="3Ub-iN-8zD"/>
+                                    <segue destination="srk-rH-yBl" kind="showDetail" identifier="postSeg" id="mAn-cC-eCb"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -201,37 +202,30 @@
                                 <rect key="frame" x="16" y="283" width="358" height="470"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="10" id="yI6-vB-W5I">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="estimatedItemSize" width="100" height="100"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="yI6-vB-W5I">
+                                    <size key="itemSize" width="180" height="200"/>
+                                    <size key="estimatedItemSize" width="175" height="195"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                                    <inset key="sectionInset" minX="1" minY="1" maxX="1" maxY="1"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="pageCollectionCell" id="aA7-UE-PCg" customClass="PagePhotoCell" customModule="exploreAustin" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="10" width="100" height="100"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" reuseIdentifier="pageCollectionCell" id="aA7-UE-PCg" customClass="PagePhotoCell" customModule="exploreAustin" customModuleProvider="target">
+                                        <rect key="frame" x="89" y="1" width="180" height="180"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Qej-Jr-B19">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Qej-Jr-B19">
+                                            <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A9N-xX-Fcb">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="100" id="iYC-0V-3li"/>
-                                                        <constraint firstAttribute="height" constant="100" id="zvm-WC-Jjd"/>
-                                                    </constraints>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rOu-Qj-2sW">
+                                                    <rect key="frame" x="8" y="8" width="164" height="164"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="A9N-xX-Fcb" firstAttribute="centerX" secondItem="Qej-Jr-B19" secondAttribute="centerX" id="Oo1-fu-K4B"/>
-                                                <constraint firstItem="A9N-xX-Fcb" firstAttribute="centerY" secondItem="Qej-Jr-B19" secondAttribute="centerY" id="aHf-vX-Ppc"/>
-                                            </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="100" height="100"/>
+                                        <size key="customSize" width="180" height="180"/>
                                         <connections>
-                                            <outlet property="pageImageView" destination="A9N-xX-Fcb" id="mwu-cc-u1O"/>
+                                            <outlet property="pageImageView" destination="rOu-Qj-2sW" id="YQa-e7-LVF"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -267,6 +261,16 @@
                                     <action selector="postBtnHit:" destination="srk-rH-yBl" eventType="touchUpInside" id="55K-ge-smw"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8xX-vt-eaV">
+                                <rect key="frame" x="238" y="197" width="58" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="feed"/>
+                                <connections>
+                                    <action selector="tempFeedBtn:" destination="srk-rH-yBl" eventType="touchUpInside" id="0hY-kF-uMG"/>
+                                    <segue destination="9vT-79-mxk" kind="show" identifier="tempFeed" id="1ya-c2-Uee"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PWs-jT-KuQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -286,14 +290,54 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Im-B5-CEO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-485" y="1459"/>
+            <point key="canvasLocation" x="-486.15384615384613" y="1458.7677725118483"/>
+        </scene>
+        <!--Feed View Controller-->
+        <scene sceneID="fH7-wG-FUS">
+            <objects>
+                <viewController id="9vT-79-mxk" customClass="FeedViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9Pe-lt-1qU">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VL9-BE-qAU">
+                                <rect key="frame" x="0.0" y="-10" width="390" height="44"/>
+                                <items>
+                                    <barButtonItem title="Item" id="Rve-M3-MnY"/>
+                                </items>
+                            </toolbar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="arb-qS-lET">
+                                <rect key="frame" x="0.0" y="91" width="390" height="696"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="PcK-XG-hBJ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="VL9-BE-qAU" firstAttribute="top" secondItem="PcK-XG-hBJ" secondAttribute="top" id="2m6-En-NwA"/>
+                            <constraint firstItem="VL9-BE-qAU" firstAttribute="trailing" secondItem="arb-qS-lET" secondAttribute="trailing" id="BnO-Cc-fRv"/>
+                            <constraint firstItem="PcK-XG-hBJ" firstAttribute="bottom" secondItem="arb-qS-lET" secondAttribute="bottom" id="L55-DW-3t8"/>
+                            <constraint firstItem="VL9-BE-qAU" firstAttribute="leading" secondItem="arb-qS-lET" secondAttribute="leading" id="wAO-Xe-drY"/>
+                            <constraint firstItem="arb-qS-lET" firstAttribute="leading" secondItem="PcK-XG-hBJ" secondAttribute="leading" id="wFh-qe-1GJ"/>
+                            <constraint firstItem="PcK-XG-hBJ" firstAttribute="trailing" secondItem="arb-qS-lET" secondAttribute="trailing" id="xUx-UE-TbQ"/>
+                            <constraint firstItem="arb-qS-lET" firstAttribute="top" secondItem="VL9-BE-qAU" secondAttribute="bottom" id="zpe-BS-pMJ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="LEE-pH-ZF2"/>
+                    <connections>
+                        <outlet property="feedTable" destination="arb-qS-lET" id="iT3-RC-gBf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pok-Ua-35q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-486.15384615384613" y="2151.8957345971562"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="fTj-YD-NOi">
             <objects>
                 <viewController storyboardIdentifier="profVC" modalPresentationStyle="fullScreen" id="N6W-gE-jKV" customClass="ProfileViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kli-L1-KAN">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Profile Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R3p-2k-cYC">
@@ -636,6 +680,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="8M5-LX-mSN"/>
         <segue reference="oJ1-tl-YK4"/>
+        <segue reference="mAn-cC-eCb"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AustinSkyline1" width="604" height="180"/>

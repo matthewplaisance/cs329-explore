@@ -11,7 +11,7 @@ import FirebaseAuth
 let collectionCellID = "pageCollectionCell"
 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
 
-class PageViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class PageViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var usernameLabel: UILabel!
     
@@ -21,11 +21,12 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     var data1 : [String] = ["ZilkerPark","MountBonnell"]
     var currUid = Auth.auth().currentUser?.email
-    var data = [UIImage]()
+    var data = [Dictionary<String, Any>]()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         pageCollectionView.delegate = self
         pageCollectionView.dataSource = self
         
@@ -42,6 +43,9 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
             self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = homeIcon
             self.navigationController?.navigationBar.backItem?.title = ""
         }
+        
+        
+        
         let profPhoto = fetchUIImage(uid: currUid!)
         profileImage.image = profPhoto
         
@@ -61,14 +65,18 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionCellID, for: indexPath) as! PagePhotoCell//new reuseable cell for table
         let row = indexPath.row
         
-        cell.pageImageView.image = data[row]
+        cell.pageImageView.image = (data[row]["content"] as! UIImage)
+        
         
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(50, 414)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        
     }
+    
+    
     
 
     @IBAction func friendsHit(_ sender: Any) {
@@ -89,11 +97,23 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func updatePosts() {
         let posts = fetchUserCoreData(user: currUid!, entity: "Post")
+        data.removeAll()
         
         for post in posts {
+            var temp = Dictionary<String, Any>()
             let postImageData = post.value(forKey: "content") as! Data
             let postImage = UIImage(data: postImageData)
-            data.append(postImage!)
+            
+            temp["content"] = postImage
+            temp["date"] = post.value(forKey: "date")
+            temp["bio"] = post.value(forKey: "bio")
+            
+            data.append(temp)
         }
+    }
+    
+   
+    @IBAction func tempFeedBtn(_ sender: Any) {
+        performSegue(withIdentifier: "tempFeed", sender: self)
     }
 }

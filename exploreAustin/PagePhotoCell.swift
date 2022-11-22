@@ -9,5 +9,8 @@ import UIKit
 
 class PagePhotoCell: UICollectionViewCell {
     
+    
     @IBOutlet weak var pageImageView: UIImageView!
+    
+    
 }

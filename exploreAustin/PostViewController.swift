@@ -72,6 +72,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBAction func postBtnHit(_ sender: Any) {
         if let postImage = selectedImageView.image {
             createPost(image: postImage, bio: postBio.text!, uid: currUID!)
+            performSegue(withIdentifier: "postSeg", sender: self)
         }else{
             print("select image.")
         }

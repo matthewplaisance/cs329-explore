@@ -16,6 +16,9 @@
 		C9791CA8292AB42E007DACE5 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9791CA7292AB42E007DACE5 /* PostViewController.swift */; };
 		C9791CAC292AF91E007DACE5 /* ProfilePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9791CAB292AF91E007DACE5 /* ProfilePhotoViewController.swift */; };
 		C98CE3E82927EA9700E545E5 /* PagePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98CE3E72927EA9700E545E5 /* PagePhotoCell.swift */; };
+		C9C05C90292D4D4C0094CBB3 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C05C8F292D4D4C0094CBB3 /* FeedViewController.swift */; };
+		C9C05C93292D52800094CBB3 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C05C91292D52800094CBB3 /* FeedTableViewCell.swift */; };
+		C9C05C94292D52800094CBB3 /* FeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9C05C92292D52800094CBB3 /* FeedTableViewCell.xib */; };
 		E02991CF29087E8500316F3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02991CE29087E8500316F3B /* AppDelegate.swift */; };
 		E02991D129087E8500316F3B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02991D029087E8500316F3B /* SceneDelegate.swift */; };
 		E02991D629087E8500316F3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E02991D429087E8500316F3B /* Main.storyboard */; };
@@ -38,6 +41,9 @@
 		C9791CA7292AB42E007DACE5 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		C9791CAB292AF91E007DACE5 /* ProfilePhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePhotoViewController.swift; sourceTree = "<group>"; };
 		C98CE3E72927EA9700E545E5 /* PagePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagePhotoCell.swift; sourceTree = "<group>"; };
+		C9C05C8F292D4D4C0094CBB3 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		C9C05C91292D52800094CBB3 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
+		C9C05C92292D52800094CBB3 /* FeedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedTableViewCell.xib; sourceTree = "<group>"; };
 		E02991CB29087E8500316F3B /* exploreAustin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = exploreAustin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E02991CE29087E8500316F3B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E02991D029087E8500316F3B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,10 +97,13 @@
 				E02991EC2908825F00316F3B /* ProfileViewController.swift */,
 				C9791CAB292AF91E007DACE5 /* ProfilePhotoViewController.swift */,
 				C9791C9F29298583007DACE5 /* FriendsViewController.swift */,
+				C9C05C8F292D4D4C0094CBB3 /* FeedViewController.swift */,
 				C9791CA7292AB42E007DACE5 /* PostViewController.swift */,
 				C9791CA12929858D007DACE5 /* EventsViewController.swift */,
-				E02991D429087E8500316F3B /* Main.storyboard */,
+				C9C05C91292D52800094CBB3 /* FeedTableViewCell.swift */,
+				C9C05C92292D52800094CBB3 /* FeedTableViewCell.xib */,
 				E02991DC29087E8600316F3B /* LaunchScreen.storyboard */,
+				E02991D429087E8500316F3B /* Main.storyboard */,
 				E02991DA29087E8600316F3B /* Assets.xcassets */,
 				E02991DF29087E8600316F3B /* Info.plist */,
 				E02991E529087FF300316F3B /* GoogleService-Info.plist */,
@@ -170,6 +179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E02991DE29087E8600316F3B /* LaunchScreen.storyboard in Resources */,
+				C9C05C94292D52800094CBB3 /* FeedTableViewCell.xib in Resources */,
 				E02991E629087FF300316F3B /* GoogleService-Info.plist in Resources */,
 				E02991DB29087E8600316F3B /* Assets.xcassets in Resources */,
 				E02991D629087E8500316F3B /* Main.storyboard in Resources */,
@@ -190,7 +200,9 @@
 				C9791CA8292AB42E007DACE5 /* PostViewController.swift in Sources */,
 				E02991D929087E8500316F3B /* exploreAustin.xcdatamodeld in Sources */,
 				C98CE3E82927EA9700E545E5 /* PagePhotoCell.swift in Sources */,
+				C9C05C90292D4D4C0094CBB3 /* FeedViewController.swift in Sources */,
 				C9791CA22929858D007DACE5 /* EventsViewController.swift in Sources */,
+				C9C05C93292D52800094CBB3 /* FeedTableViewCell.swift in Sources */,
 				E02991CF29087E8500316F3B /* AppDelegate.swift in Sources */,
 				C9791CA029298583007DACE5 /* FriendsViewController.swift in Sources */,
 				E02991EB290881F800316F3B /* LoginViewController.swift in Sources */,

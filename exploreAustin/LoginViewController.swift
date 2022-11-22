@@ -84,7 +84,7 @@ class LoginViewController: UIViewController {
             }
         }
         if idx == 0{//login
-            Auth.auth().signIn(withEmail: id, password: pass){
+            Auth.auth().signIn(withEmail: devId, password: devPass){
                 authResult, error in
                 if let error = error as NSError? {
                     self.statusLabel.text = "\(error.localizedDescription)"
