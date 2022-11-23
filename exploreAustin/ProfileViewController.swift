@@ -45,7 +45,7 @@ class ProfileViewController: UIViewController {
         if let darkMode = currUserData.value(forKey: "darkMode"){
             DarkMode.darkModeIsEnabled = darkMode as! Bool
         }
-        if let loadedName = currUserData.value(forKey: "name"){
+        if let loadedName = currUserData.value(forKey: "username"){
             nameField.text = loadedName as? String
         }
         if let loadedEmail = currUserData.value(forKey: "email"){
@@ -126,7 +126,7 @@ class ProfileViewController: UIViewController {
         let name = nameField.text!
         let email = emailField.text!
         let userData = [email,name,darkMode,soundMode] as [Any]
-        let entry = ["email","name","darkMode","soundOn"]
+        let entry = ["email","username","darkMode","soundOn"]
         
         for (el,id) in zip(userData,entry){
             currUserData.setValue(el, forKey: id)

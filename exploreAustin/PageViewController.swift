@@ -24,7 +24,6 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var data = [Dictionary<String, Any>]()
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         pageCollectionView.delegate = self
@@ -43,11 +42,11 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
             self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = homeIcon
             self.navigationController?.navigationBar.backItem?.title = ""
         }
-        
-        
-        
-        let profPhoto = fetchUIImage(uid: currUid!)
+        let userData = fetchUserCoreData(user: currUid!, entity: "User")[0]
+        let profPhotoData = userData.value(forKey: "profilePhoto") as! Data
+        let profPhoto = UIImage(data: profPhotoData)
         profileImage.image = profPhoto
+        usernameLabel.text = userData.value(forKey: "username") as! String
         
         updatePosts()
         pageCollectionView.reloadData()
@@ -73,6 +72,15 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
+        let row = indexPath.row
+        print("row: \(row)")
+        let postKey = data[row]["date"]
+        
+        let feedVC = storyBoard.instantiateViewController(withIdentifier: "feedVC") as! FeedViewController
+        
+        feedVC.data = self.data
+        feedVC.scrollTo = row
+        self.present(feedVC, animated:true, completion:nil)
         
     }
     
@@ -104,16 +112,15 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
             let postImageData = post.value(forKey: "content") as! Data
             let postImage = UIImage(data: postImageData)
             
-            temp["content"] = postImage
             temp["date"] = post.value(forKey: "date")
             temp["bio"] = post.value(forKey: "bio")
+            temp["hearts"] = post.value(forKey: "hearts")
+            temp["content"] = postImage
+            temp["profPic"] = self.profileImage.image
+            temp["username"] = self.usernameLabel.text
             
             data.append(temp)
         }
     }
     
-   
-    @IBAction func tempFeedBtn(_ sender: Any) {
-        performSegue(withIdentifier: "tempFeed", sender: self)
-    }
 }

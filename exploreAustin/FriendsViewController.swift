@@ -144,7 +144,7 @@ class FriendsViewController: UIViewController {
         for user in userEntity {
             let email = user.value(forKey: "email") as? String
             if (currUID != email){
-                let name = user.value(forKey: "name") as? String
+                let username = user.value(forKey: "username") as? String
                 users.append(email!)
             }
         }

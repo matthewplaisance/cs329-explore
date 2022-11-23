@@ -20,6 +20,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var confirmPassword: UILabel!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var username: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -32,6 +33,7 @@ class LoginViewController: UIViewController {
         self.viewPosts()
         //clearCoreData(entity: "Post")
         //clearCoreData(entity: "User")
+       
     }
     
     override func viewDidLoad() {
@@ -64,47 +66,55 @@ class LoginViewController: UIViewController {
         let devId = "matt@tst.com"
         let devPass = "qazxsw"
         //fix below returning nil causing crash
-        let id = userId.text!
-        let pass = userKey.text!
         let idx = loginSegCtrl.selectedSegmentIndex
+        
         if idx == 1{//sign up
-            let passConfirm = repearUserKeyField.text!
-            if (pass == passConfirm){
-                Auth.auth().createUser(withEmail: id, password: pass){
-                    authResult, error in //params from createUser method
-                    if let error = error as NSError? {
-                        self.statusLabel.text = "\(error.localizedDescription)"
-                    }else{
-                        self.createUserCD(user: id)
-                        self.statusLabel.text = "Signed up!"
+            if let id = userId.text, let pass = userKey.text, let username = username.text {
+                let passConfirm = repearUserKeyField.text!
+                if (pass == passConfirm){
+                    Auth.auth().createUser(withEmail: id, password: pass){
+                        authResult, error in //params from createUser method
+                        if let error = error as NSError? {
+                            self.statusLabel.text = "\(error.localizedDescription)"
+                        }else{
+                            self.createUserCD(user: id, username: username)
+                            self.statusLabel.text = "Signed up!"
+                        }
                     }
+                }else{
+                    self.statusLabel.text = "Passwords do not match."
                 }
             }else{
-                self.statusLabel.text = "Passwords do not match."
+                self.statusLabel.text = "Please enter all fields."
             }
         }
         if idx == 0{//login
-            Auth.auth().signIn(withEmail: devId, password: devPass){
-                authResult, error in
-                if let error = error as NSError? {
-                    self.statusLabel.text = "\(error.localizedDescription)"
-                }else{//no error
-                    self.performSegue(withIdentifier: "loginSeg", sender: nil)
-                    self.userKey = nil
-                    self.userId = nil
+            if let id = userId.text, let pass = userKey.text{
+                Auth.auth().signIn(withEmail: id, password: pass){
+                    authResult, error in
+                    if let error = error as NSError? {
+                        self.statusLabel.text = "\(error.localizedDescription)"
+                    }else{//no error
+                        self.performSegue(withIdentifier: "loginSeg", sender: nil)
+                        self.userKey = nil
+                        self.userId = nil
+                    }
+                    
                 }
-                
+            }else{
+                self.statusLabel.text = "Please enter all fields."
             }
         }
     }
     
-    func createUserCD(user:String){
+    func createUserCD(user:String,username:String){
         let userEntity = NSEntityDescription.insertNewObject(forEntityName: "User", into: context)
-        //let userFreindsEntity = NSEntityDescription.insertNewObject(forEntityName: "Friends", into: context)
+        
         let defualtPhoto = UIImage(systemName: "person")
         let photoData = defualtPhoto!.jpegData(compressionQuality: 1)!
         
         userEntity.setValue(user, forKey: "email")
+        userEntity.setValue(username, forKey: "username")
         userEntity.setValue(" ", forKey: "friends")
         userEntity.setValue(photoData, forKey: "profilePhoto")
         
@@ -120,11 +130,10 @@ class LoginViewController: UIViewController {
             
             let darkMode = user.value(forKey: "darkMode")
             let email = user.value(forKey: "email")
-            let name = user.value(forKey: "name")
             let friends = user.value(forKey: "friends")
             let soundOn = user.value(forKey: "soundOn")
-
-            print("user #\(cnt):\n email: \(String(describing: email)) name: \(String(describing: name)) darkMode: \(String(describing: darkMode)) soundOn: \(String(describing: soundOn))\n friends: \(friends)")
+            let username = user.value(forKey: "username")
+            print("user #\(cnt):\n email: \(String(describing: email)) username: \(String(describing: username)) darkMode: \(String(describing: darkMode)) soundOn: \(String(describing: soundOn))\n friends: \(friends)")
             
         }
     }

@@ -8,18 +8,6 @@ import Foundation
 import CoreData
 import UIKit
 
-func createPost(image:UIImage,bio:String,uid:String) {
-    let postEntity = NSEntityDescription.insertNewObject(forEntityName: "Post", into: context)
-    let date = Date().timeIntervalSince1970//unix time
-    let imageData = image.jpegData(compressionQuality: 1)!
-    
-    postEntity.setValue(uid, forKey: "uid")
-    postEntity.setValue(imageData, forKey: "content")
-    postEntity.setValue(bio, forKey: "bio")
-    postEntity.setValue(date, forKey: "date")
-    
-    appDelegate.saveContext()
-}
 
 func saveUIImage(image:UIImage,uid:String) {
     let imageData = image.jpegData(compressionQuality: 1)!
@@ -172,4 +160,29 @@ func fetchUserCoreData(user:String,entity:String) -> [NSManagedObject]{
     }
 
     return fetchedResults!//if filtered for specifc user, call res with [0]
+}
+
+func createPost(image:UIImage,bio:String,uid:String) {
+    let postEntity = NSEntityDescription.insertNewObject(forEntityName: "Post", into: context)
+    let date = Date().timeIntervalSince1970//unix time
+    let imageData = image.jpegData(compressionQuality: 1)!
+    
+    postEntity.setValue(uid, forKey: "uid")
+    postEntity.setValue(imageData, forKey: "content")
+    postEntity.setValue(bio, forKey: "bio")
+    postEntity.setValue(date, forKey: "date")
+    postEntity.setValue("0", forKey: "hearts")
+    
+    appDelegate.saveContext()
+}
+
+//request.predicate = NSPredicate(format: "date CONTAINS %lf",postKey) gives error after calling function twice in same build(works first time called), so implementing myself:
+func filterPosts(posts:[NSManagedObject],key:Double) -> NSManagedObject{
+    var res:NSManagedObject? = nil
+    posts.forEach{(post) in
+        if post.value(forKey: "date") as! Double == key {
+            res = post
+        }
+    }
+    return res!
 }
