@@ -68,13 +68,15 @@ class ProfilePhotoViewController: UIViewController,UIImagePickerControllerDelega
     }
     
     
-    @IBAction func saveHit(_ sender: Any) {
+
+    @IBAction func saveBtnHit(_ sender: Any) {
         let profVC = storyBoard.instantiateViewController(withIdentifier: "profVC") as! ProfileViewController
         
         if let profImage = tempProfPhotoView.image {
             profVC.profImage = profImage
         }
         saveUIImage(image: tempProfPhotoView.image!, uid: currUid!)
+        
         self.present(profVC, animated:true, completion:nil)
     }
     

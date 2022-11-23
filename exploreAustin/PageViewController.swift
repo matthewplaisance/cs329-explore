@@ -21,7 +21,11 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     var data1 : [String] = ["ZilkerPark","MountBonnell"]
     var currUid = Auth.auth().currentUser?.email
+    var userPage: String = ""
     var data = [Dictionary<String, Any>]()
+    
+    @IBOutlet weak var homeBtn: UIBarButtonItem!
+    @IBOutlet weak var profileBtn: UIBarButtonItem!
     
     
     override func viewDidLoad() {
@@ -32,23 +36,12 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("displaying page for : \(userPage)")
+        self.homeBtn.image = UIImage(systemName: "house")
+        self.profileBtn.image = UIImage(systemName: "person.fill")
         
-        var storyboardId: String {
-               return value(forKey: "storyboardIdentifier") as? String ?? "none"
-           }
-        if storyboardId == "PageVC"{
-            let homeIcon = UIImage(systemName: "house")
-            self.navigationController?.navigationBar.backIndicatorImage = homeIcon
-            self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = homeIcon
-            self.navigationController?.navigationBar.backItem?.title = ""
-        }
-        let userData = fetchUserCoreData(user: currUid!, entity: "User")[0]
-        let profPhotoData = userData.value(forKey: "profilePhoto") as! Data
-        let profPhoto = UIImage(data: profPhotoData)
-        profileImage.image = profPhoto
-        usernameLabel.text = userData.value(forKey: "username") as! String
         
-        updatePosts()
+        self.contentToDisplay()
         pageCollectionView.reloadData()
     }
     
@@ -79,6 +72,7 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let feedVC = storyBoard.instantiateViewController(withIdentifier: "feedVC") as! FeedViewController
         
         feedVC.data = self.data
+        feedVC.userPage = self.userPage//implent later
         feedVC.scrollTo = row
         self.present(feedVC, animated:true, completion:nil)
         
@@ -103,10 +97,16 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.present(postVC, animated:true, completion:nil)
     }
     
-    func updatePosts() {
-        let posts = fetchUserCoreData(user: currUid!, entity: "Post")
-        data.removeAll()
+    func updatePage(user:String) {
+        let posts = fetchUserCoreData(user: user, entity: "Post")
+        let userData = fetchUserCoreData(user: user, entity: "User")[0]
         
+        let profPhotoData = userData.value(forKey: "profilePhoto") as! Data
+        let profPhoto = UIImage(data: profPhotoData)
+        profileImage.image = profPhoto
+        usernameLabel.text = userData.value(forKey: "username") as! String
+        
+        data.removeAll()
         for post in posts {
             var temp = Dictionary<String, Any>()
             let postImageData = post.value(forKey: "content") as! Data
@@ -123,4 +123,20 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     
+    @IBAction func homeToolBarHit(_ sender: Any) {
+        performSegue(withIdentifier: "feedSeg", sender: self)
+    }
+    
+    @IBAction func settingBtnHit(_ sender: Any) {
+        performSegue(withIdentifier: "settingsSeg", sender: self)
+    }
+    
+    
+    func contentToDisplay() {
+        if self.userPage == self.currUid! || self.userPage == ""{
+            self.updatePage(user: self.currUid!)
+        }else{
+            self.updatePage(user: self.userPage)
+        }
+    }
 }

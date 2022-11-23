@@ -18,12 +18,16 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var userKey: UITextField!
     @IBOutlet weak var repearUserKeyField: UITextField!
     @IBOutlet weak var confirmPassword: UILabel!
-    @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var username: UITextField!
+    @IBOutlet weak var loginBtn: UIButton!
+    @IBOutlet weak var usernameLabel: UILabel!
+    
+    
+    var userIdtext:String? = nil
+    var userKeytext:String? = nil
     
     override func viewWillAppear(_ animated: Bool) {
-        
         if let user = currUser {
             print("curr user: \(user)")
         }
@@ -40,6 +44,8 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         confirmPassword.alpha = 0
         repearUserKeyField.alpha = 0
+        username.alpha = 0
+        usernameLabel.alpha = 0
         userKey.isSecureTextEntry = true
         repearUserKeyField.isSecureTextEntry = true
         statusLabel.lineBreakMode = .byWordWrapping
@@ -50,21 +56,25 @@ class LoginViewController: UIViewController {
     @IBAction func loginSegChange(_ sender: Any) {
         let idx = loginSegCtrl.selectedSegmentIndex
         if idx == 0{//logging in
+            username.alpha = 0
+            usernameLabel.alpha = 0
             repearUserKeyField.alpha = 0
             confirmPassword.alpha = 0
-            loginButton.setTitle("Sign In", for: .normal)
+            loginBtn.setTitle("Sign In", for: .normal)
         }
         if idx == 1{
+            username.alpha = 1
+            usernameLabel.alpha = 1
             repearUserKeyField.alpha = 1
             confirmPassword.alpha = 1
-            loginButton.setTitle("Sign Up", for: .normal)
+            loginBtn.setTitle("Sign Up", for: .normal)
         }
     }
     
     
-    @IBAction func loginHit(_ sender: Any) {
-        let devId = "matt@tst.com"
-        let devPass = "qazxsw"
+    @IBAction func loginBtnHit(_ sender: Any) {
+        var devId = "matt@tst.com"
+        var devPass = "qazxsw"
         //fix below returning nil causing crash
         let idx = loginSegCtrl.selectedSegmentIndex
         
@@ -89,23 +99,28 @@ class LoginViewController: UIViewController {
             }
         }
         if idx == 0{//login
-            if let id = userId.text, let pass = userKey.text{
-                Auth.auth().signIn(withEmail: id, password: pass){
-                    authResult, error in
-                    if let error = error as NSError? {
-                        self.statusLabel.text = "\(error.localizedDescription)"
-                    }else{//no error
-                        self.performSegue(withIdentifier: "loginSeg", sender: nil)
-                        self.userKey = nil
-                        self.userId = nil
-                    }
-                    
+            devId = userId.text!
+            devPass = userKey.text!
+            Auth.auth().signIn(withEmail: devId, password: devPass){
+                authResult, error in
+                if let error = error as NSError? {
+                    print("error")
+                    self.statusLabel.text = "\(error.localizedDescription)"
+                }else{//no error
+                    let feedVC = storyBoard.instantiateViewController(withIdentifier: "feedVC") as! FeedViewController
+                    feedVC.isModalInPresentation = true
+                    feedVC.modalPresentationStyle = .fullScreen
+                    feedVC.userPage = "all"
+                    self.present(feedVC, animated: true,completion: nil)
+                    self.userKey = nil
+                    self.userId = nil
                 }
-            }else{
-                self.statusLabel.text = "Please enter all fields."
             }
+            
         }
     }
+    
+    
     
     func createUserCD(user:String,username:String){
         let userEntity = NSEntityDescription.insertNewObject(forEntityName: "User", into: context)

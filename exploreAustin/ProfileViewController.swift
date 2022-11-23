@@ -34,6 +34,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var soundToggle: UISwitch!
     @IBOutlet weak var profImageView: UIImageView!
     
+    
     override func viewWillAppear(_ animated: Bool) {
         // get CoreData settings
         print("curruser: \(String(describing: currUID))\n user cd:")
@@ -177,6 +178,18 @@ class ProfileViewController: UIViewController {
 
         self.present(passwordAlert, animated: true, completion: nil)
     }
+    
+    
+    
+    
+    @IBAction func backBtn(_ sender: Any) {
+        let pageVC = storyBoard.instantiateViewController(withIdentifier: "pageVC") as! PageViewController
+        pageVC.isModalInPresentation = true
+        pageVC.modalPresentationStyle = .fullScreen
+        pageVC.userPage = currUID!
+        self.present(pageVC, animated: true,completion: nil)
+    }
+    
     
 }
 

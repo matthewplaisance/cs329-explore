@@ -20,6 +20,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBOutlet weak var postBio: UITextField!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         postImagePicker.delegate = self
@@ -71,8 +72,13 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBAction func postBtnHit(_ sender: Any) {
         if let postImage = selectedImageView.image {
+            print("posting...")
             createPost(image: postImage, bio: postBio.text!, uid: currUID!)
-            performSegue(withIdentifier: "postSeg", sender: self)
+            let pageVC = storyBoard.instantiateViewController(withIdentifier: "pageVC") as! PageViewController
+            pageVC.isModalInPresentation = true
+            pageVC.modalPresentationStyle = .fullScreen
+            pageVC.userPage = currUID!
+            self.present(pageVC, animated: true,completion: nil)
         }else{
             print("select image.")
         }
