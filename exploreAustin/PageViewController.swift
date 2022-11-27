@@ -14,25 +14,25 @@ let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
 class PageViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var usernameLabel: UILabel!
-    
     @IBOutlet weak var pageCollectionView: UICollectionView!
-    
     @IBOutlet weak var profileImage: UIImageView!
     
     var data1 : [String] = ["ZilkerPark","MountBonnell"]
-    var currUid = Auth.auth().currentUser?.email
-    var userPage: String = ""
+    //var currUid = Auth.auth().currentUser?.email
+    var userPage: String = currUid//user email
     var data = [Dictionary<String, Any>]()
+    var othProfPhoto:UIImage?
     
     @IBOutlet weak var homeBtn: UIBarButtonItem!
     @IBOutlet weak var profileBtn: UIBarButtonItem!
+    @IBOutlet weak var settingsBtn: UIButton!
+    @IBOutlet weak var postBtn: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         pageCollectionView.delegate = self
         pageCollectionView.dataSource = self
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,9 +40,33 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.homeBtn.image = UIImage(systemName: "house")
         self.profileBtn.image = UIImage(systemName: "person.fill")
         
+        if currentUserData.updataPosts == true {//user just posted photo
+            
+        }
         
-        self.contentToDisplay()
+        if userPage == currUid {
+            print("grabbing data..")
+            data = currUserPosts
+            usernameLabel.text = currUsrData.value(forKey: "username") as? String
+            
+            let profPhoto = fetchUIImage(uid: currUid)
+            print("image name \(profPhoto?.accessibilityIdentifier)")
+            profileImage.image = profPhoto
+            
+        }else{//display different users page
+            let othUserPosts = fetchPostCdAsArray(user: userPage).0
+            self.usernameLabel.text = othUserPosts[0]["username"] as? String
+            self.profileImage.image = othProfPhoto
+            data = othUserPosts
+        }
+        
+        //self.contentToDisplay()
+        //self.profileImage.image!.setRounded()
         pageCollectionView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.userPage = currUid
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -64,10 +88,10 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
+        //let cell = collectionView.cellForItem(at: indexPath)
         let row = indexPath.row
         print("row: \(row)")
-        let postKey = data[row]["date"]
+        //let postKey = data[row]["date"]
         
         let feedVC = storyBoard.instantiateViewController(withIdentifier: "feedVC") as! FeedViewController
         
@@ -77,15 +101,11 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.present(feedVC, animated:true, completion:nil)
         
     }
-    
-    
-    
 
     @IBAction func friendsHit(_ sender: Any) {
         let friendsVC = storyBoard.instantiateViewController(withIdentifier: "friendsVC") as! FriendsViewController
         self.present(friendsVC, animated:true, completion:nil)
     }
-    
     
     @IBAction func eventsHit(_ sender: Any) {
         let eventsVC = storyBoard.instantiateViewController(withIdentifier: "eventsVC") as! EventsViewController
@@ -93,18 +113,24 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     @IBAction func postBtnHit(_ sender: Any) {
-        let postVC = storyBoard.instantiateViewController(withIdentifier: "postVC") as! PostViewController
-        self.present(postVC, animated:true, completion:nil)
+        if self.userPage == currUid {
+            let postVC = storyBoard.instantiateViewController(withIdentifier: "postVC") as! PostViewController
+            postVC.username = self.usernameLabel.text!
+            postVC.profilePhoto = self.profileImage.image
+            self.present(postVC, animated:true, completion:nil)
+        }
     }
     
     func updatePage(user:String) {
+        print("updating..")
         let posts = fetchUserCoreData(user: user, entity: "Post")
         let userData = fetchUserCoreData(user: user, entity: "User")[0]
         
+        print("postrequest: \(posts)")
         let profPhotoData = userData.value(forKey: "profilePhoto") as! Data
         let profPhoto = UIImage(data: profPhotoData)
         profileImage.image = profPhoto
-        usernameLabel.text = userData.value(forKey: "username") as! String
+        usernameLabel.text = userData.value(forKey: "username") as? String
         
         data.removeAll()
         for post in posts {
@@ -118,9 +144,10 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
             temp["content"] = postImage
             temp["profPic"] = self.profileImage.image
             temp["username"] = self.usernameLabel.text
-            
+            print("temp: \(temp)")
             data.append(temp)
         }
+        print("post data: \(data)")
     }
     
     @IBAction func homeToolBarHit(_ sender: Any) {
@@ -128,15 +155,22 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     @IBAction func settingBtnHit(_ sender: Any) {
-        performSegue(withIdentifier: "settingsSeg", sender: self)
+        if self.userPage == currUid{
+            performSegue(withIdentifier: "settingsSeg", sender: self)
+        }
+        
     }
     
     
     func contentToDisplay() {
-        if self.userPage == self.currUid! || self.userPage == ""{
-            self.updatePage(user: self.currUid!)
+        if self.userPage == currUid{
+            self.updatePage(user: currUid)
+            settingsBtn.alpha = 1
+            postBtn.alpha = 1
         }else{
             self.updatePage(user: self.userPage)
+            settingsBtn.alpha = 0
+            postBtn.alpha = 0
         }
     }
 }

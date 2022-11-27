@@ -7,13 +7,18 @@
 
 import UIKit
 import FirebaseAuth
+import CoreData
 
-class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+var currUserUid = Auth.auth().currentUser?.email
+
+//var currUserData = fetchUserCoreData(user: currUserUid!, entity: "User")[0]
+//var currUserPosts = fetchUserCoreData(user: currUserUid!, entity: "Post")
+//var displayForCurrUser = true
+
+class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,FeedCellDelegator {
     
     @IBOutlet weak var homeBtn: UIBarButtonItem!
-    
     @IBOutlet weak var feedTable: UITableView!
-
     @IBOutlet weak var profBtn: UIBarButtonItem!
     
     var currUid = Auth.auth().currentUser?.email
@@ -21,6 +26,7 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     var dataTst : [String] = ["ZilkerPark","MountBonnell","asapRocky"]
     
     var data = [Dictionary<String, Any>]()
+    //var data = [NSManagedObject]()
     
     var userPage:String = "all"
     
@@ -37,7 +43,24 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         self.homeBtn.image = UIImage(systemName: "house.fill")
         self.profBtn.image = UIImage(systemName: "person")
         
-        self.contentToDisplay()
+        //let currUID = Auth.auth().currentUser?.email
+        print("curr usr loading: \(currUid)")
+        let postData = fetchPostCdAsArray(user: currUid!)
+        currPosts = postData.1
+        currUserPosts = postData.0
+        currUsrData = fetchUserCoreData(user: currUid!, entity: "User")[0]
+        //currUid = currUID!
+        //self.contentToDisplay()
+        
+        if  userPage == "all" {
+            print("posts:")
+            data = currPosts
+        }else if userPage == currUid {//clicked post from own page
+            data = currUserPosts
+        }else{//clicked post from another user's page
+            
+        }
+        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -45,20 +68,24 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        data.count
+        return data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = feedTable.dequeueReusableCell(withIdentifier: FeedTableViewCell.id, for: indexPath) as! FeedTableViewCell
         let row = indexPath.row
         
-        let currLikes = data[row]["hearts"] as! String
-        //let date = NSDate(timeIntervalSince1970: cell.postKey )
-        //let bio = data[row]["bio"] as! String
+        cell.delegate = self//delegate from feedCell protocol
         
-        cell.usernameLabel.text = (data[row]["username"] as! String)
+        let currLikes = data[row]["hearts"] as! String
+        //let date = NSDate(timeIntervalSince1970: cell.postKey)
+        
+        cell.profilePhoto.image = (data[row]["profilePhoto"] as! UIImage)
+        cell.bio = data[row]["bio"] as? String
+        cell.comments = data[row]["comments"] as? String
+        cell.usernameBtn.setTitle(data[row]["username"] as? String, for: .normal)
         cell.postImageView.image = (data[row]["content"] as! UIImage)
-        //cell.profilePhoto.image = (data[row]["profPic"] as! UIImage)
+        cell.userEmail = data[row]["email"] as! String
         cell.numLikes.text = currLikes
         cell.postKey = data[row]["date"] as! Double
         
@@ -66,7 +93,7 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 600
+        return 677
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -77,19 +104,28 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         scrollTo = nil//allows free scrolling once on feed
     }
     
+    func segTocomments(postedUser: String, postImage: UIImage, bio: String, comments: String, postKey:Double) {
+        let commVC = storyboard?.instantiateViewController(withIdentifier: "commentsVC") as! CommentsViewController
+        commVC.commentsStr = comments
+        commVC.bio = bio
+        commVC.postedImage = postImage
+        commVC.postedUser = postedUser
+        commVC.postKey = postKey
+        self.present(commVC, animated: true)
+    }
 
-    @IBAction func profileToolbarHit(_ sender: Any) {
+    @IBAction func profBtnHit(_ sender: Any) {
         let pageVC = storyBoard.instantiateViewController(withIdentifier: "pageVC") as! PageViewController
         pageVC.isModalInPresentation = true
         pageVC.modalPresentationStyle = .fullScreen
         pageVC.userPage = currUid!
-        print(type(of: currUid!))
-        self.present(pageVC, animated: true,completion: nil)
+        self.present(pageVC, animated: false,completion: nil)
     }
     
+    
     func contentToDisplay() {
-        if self.userPage != "all"{//clicked photo from user page view, data is already passed, dont re-fetch
-            
+        if self.userPage != "all"{//clicked photo from user page view, data is already passed to var data, dont re-fetch
+            //pass
         }else{
             let posts = fetchUserCoreData(user: self.userPage, entity: "Post")
             
@@ -103,13 +139,18 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 temp["bio"] = post.value(forKey: "bio")
                 temp["hearts"] = post.value(forKey: "hearts")
                 temp["content"] = postImage
-                temp["username"] = post.value(forKey: "uid")
+                temp["username"] = post.value(forKey: "username")
+                temp["email"] = post.value(forKey: "email")
                 
                 data.append(temp)
             }
         }
-        
     }
+    
 }
+
+
+
+
 
 

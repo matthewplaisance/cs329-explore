@@ -51,7 +51,7 @@ func fetchUIImage(uid:String) -> UIImage? {
 
 func fetchUserPosts(uid:String) -> [UIImage] {
     let request = NSFetchRequest<NSManagedObject>(entityName: "Post")
-    request.predicate = NSPredicate(format: "uid CONTAINS %@",uid)
+    request.predicate = NSPredicate(format: "email CONTAINS %@",uid)
     
     var fetchedImages = [Data]()
     var fetchedImagesData = [Data]()
@@ -142,11 +142,7 @@ func fetchUserCoreData(user:String,entity:String) -> [NSManagedObject]{
     let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
     
     if user != "all"{
-        if entity == "User"{
-            request.predicate = NSPredicate(format: "email CONTAINS %@",user)
-        }else if entity == "Post"{
-            request.predicate = NSPredicate(format: "uid CONTAINS %@",user)
-        }
+        request.predicate = NSPredicate(format: "email CONTAINS %@",user)
     }
     
     var fetchedResults:[NSManagedObject]? = nil
@@ -158,17 +154,19 @@ func fetchUserCoreData(user:String,entity:String) -> [NSManagedObject]{
         print("errorhere:")
         print(nserror)
     }
-
     return fetchedResults!//if filtered for specifc user, call res with [0]
 }
 
-func createPost(image:UIImage,bio:String,uid:String) {
+func createPost(image:UIImage,profImage:UIImage,bio:String,username:String,email:String) {
     let postEntity = NSEntityDescription.insertNewObject(forEntityName: "Post", into: context)
     let date = Date().timeIntervalSince1970//unix time
     let imageData = image.jpegData(compressionQuality: 1)!
+    let profImageData = profImage.jpegData(compressionQuality: 1)!
     
-    postEntity.setValue(uid, forKey: "uid")
+    postEntity.setValue(email, forKey: "email")//used as key
+    postEntity.setValue(username, forKey: "username")
     postEntity.setValue(imageData, forKey: "content")
+    postEntity.setValue(profImageData, forKey: "profilePhoto")
     postEntity.setValue(bio, forKey: "bio")
     postEntity.setValue(date, forKey: "date")
     postEntity.setValue("0", forKey: "hearts")
@@ -179,6 +177,7 @@ func createPost(image:UIImage,bio:String,uid:String) {
 //request.predicate = NSPredicate(format: "date CONTAINS %lf",postKey) gives error after calling function twice in same build(works first time called), so implementing myself:
 func filterPosts(posts:[NSManagedObject],key:Double) -> NSManagedObject{
     var res:NSManagedObject? = nil
+    
     posts.forEach{(post) in
         if post.value(forKey: "date") as! Double == key {
             res = post
@@ -186,3 +185,48 @@ func filterPosts(posts:[NSManagedObject],key:Double) -> NSManagedObject{
     }
     return res!
 }
+
+func fetchUserCdAsArray(user:String) -> Dictionary<String, Any> {
+    let userCD = fetchUserCoreData(user: user, entity: "User")[0]
+    var userData = Dictionary<String, Any>()
+    
+    userData["profPhotoData"] = userCD.value(forKey: "profilePhoto")
+    
+    return userData
+}
+
+func fetchPostCdAsArray(user:String) -> ([Dictionary<String, Any>],[Dictionary<String, Any>]) {
+    let userPostCD = fetchUserCoreData(user: user, entity: "Post")
+    let allPostsCd = fetchUserCoreData(user: "all", entity: "Post")
+    
+    let userPostData = nsPostObjToDict(postCd: userPostCD)
+    let allPostsData = nsPostObjToDict(postCd: allPostsCd)
+    
+    return (userPostData, allPostsData)
+}
+
+func nsPostObjToDict(postCd:[NSManagedObject]) -> [Dictionary<String, Any>] {
+    var postData = [Dictionary<String, Any>]()
+    
+    for post in postCd {
+        var temp = Dictionary<String, Any>()
+        let postImageData = post.value(forKey: "content") as! Data
+        let profImageData = post.value(forKey: "profilePhoto") as! Data
+        let profImage = UIImage(data: profImageData)
+        let postImage = UIImage(data: postImageData)
+        
+        temp["content"] = postImage
+        temp["profilePhoto"] = profImage
+        temp["comments"] = post.value(forKey: "comments")
+        temp["date"] = post.value(forKey: "date")
+        temp["bio"] = post.value(forKey: "bio")
+        temp["hearts"] = post.value(forKey: "hearts")
+        temp["username"] = post.value(forKey: "username")
+        temp["email"] = post.value(forKey: "email")
+        
+        postData.append(temp)
+    }
+    return postData
+}
+
+

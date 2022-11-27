@@ -73,8 +73,8 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func loginBtnHit(_ sender: Any) {
-        var devId = "matt@tst.com"
-        var devPass = "qazxsw"
+        //var devId = "matt@tst.com"
+        //var devPass = "qazxsw"
         //fix below returning nil causing crash
         let idx = loginSegCtrl.selectedSegmentIndex
         
@@ -99,24 +99,29 @@ class LoginViewController: UIViewController {
             }
         }
         if idx == 0{//login
-            devId = userId.text!
-            devPass = userKey.text!
+            print("login")
+            let devId = userId.text!
+            let devPass = userKey.text!
             Auth.auth().signIn(withEmail: devId, password: devPass){
                 authResult, error in
+                print("checking????")
                 if let error = error as NSError? {
                     print("error")
                     self.statusLabel.text = "\(error.localizedDescription)"
                 }else{//no error
-                    let feedVC = storyBoard.instantiateViewController(withIdentifier: "feedVC") as! FeedViewController
-                    feedVC.isModalInPresentation = true
-                    feedVC.modalPresentationStyle = .fullScreen
-                    feedVC.userPage = "all"
-                    self.present(feedVC, animated: true,completion: nil)
+                    print("logging in? ")
+                    let loadingVC = storyBoard.instantiateViewController(withIdentifier: "loadingVC") as! LoadingScreenViewController
+                    currUid = devId
+                    print("devID \(devId)")
+                    print("currId! \(currUid)")
+                    //self.performSegue(withIdentifier: "loadingScreenSeg", sender: self)
+                    loadingVC.isModalInPresentation = true
+                    loadingVC.modalPresentationStyle = .fullScreen
+                    self.present(loadingVC, animated: true,completion: nil)
                     self.userKey = nil
                     self.userId = nil
                 }
             }
-            
         }
     }
     
@@ -154,17 +159,21 @@ class LoginViewController: UIViewController {
     }
     
     func viewPosts(){
-        let posts = fetchUserCoreData(user: "all", entity: "Post")
+        let data = fetchUserCoreData(user: "all", entity: "Post")
         print("posts: ")
-        for post in posts{
-            let uid = post.value(forKey: "uid")
-            let bio = post.value(forKey: "bio")
-            let date = post.value(forKey: "date")
+        for post in data{
+            if let comm = post.value(forKey: "comments"){
+                print("comments: \(comm)")
+            }
+           
             
-            print("user: \(uid) date: \(date)\n bio: \(bio)")
+            
+            
             
         }
     }
+    
+    
     
     func clearCoreData (entity:String) {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)

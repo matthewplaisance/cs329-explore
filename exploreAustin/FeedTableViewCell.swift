@@ -16,15 +16,21 @@ class FeedTableViewCell: UITableViewCell {
         return UINib(nibName: "FeedTableViewCell", bundle: nil)
     }
     
-    var postKey: Double = 0
+    var delegate:FeedCellDelegator!
+    var postKey: Double!
     
     @IBOutlet weak var postImageView: UIImageView!
-    @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var profilePhoto: UIImageView!
     @IBOutlet weak var likeBtn: UIButton!
     @IBOutlet weak var commentBtn: UIButton!
     @IBOutlet weak var postDate: UILabel!
     @IBOutlet weak var numLikes: UILabel!
+    @IBOutlet weak var usernameBtn: UIButton!
+    
+    var userEmail:String = ""//used as user key
+    var comments:String?
+    var bio:String?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -51,5 +57,32 @@ class FeedTableViewCell: UITableViewCell {
     
     
     @IBAction func commentBtnHit(_ sender: Any) {
+        var bio:String = ""
+        var comments:String = ""
+        if let hasBio = self.bio {
+            bio = hasBio
+        }
+     
+        if let hasComments = self.comments {
+            comments = hasComments
+        }
+        
+        if self.delegate != nil {
+            self.delegate.segTocomments(postedUser: self.userEmail, postImage: self.postImageView.image!, bio: bio, comments: comments, postKey: self.postKey)
+        }
     }
+    
+    
+    @IBAction func usernameBtnHit(_ sender: Any) {
+        let pageVC = storyBoard.instantiateViewController(withIdentifier: "pageVC") as! PageViewController
+    
+        pageVC.userPage = self.userEmail
+        pageVC.isModalInPresentation = true
+        pageVC.modalPresentationStyle = .fullScreen
+        
+    }
+}
+
+protocol FeedCellDelegator {
+    func segTocomments(postedUser:String,postImage:UIImage,bio:String,comments:String,postKey:Double)
 }

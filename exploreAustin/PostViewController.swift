@@ -17,9 +17,10 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     
     @IBOutlet weak var selectedImageView: UIImageView!
-    
     @IBOutlet weak var postBio: UITextField!
     
+    var username:String = ""
+    var profilePhoto:UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +74,14 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBAction func postBtnHit(_ sender: Any) {
         if let postImage = selectedImageView.image {
             print("posting...")
-            createPost(image: postImage, bio: postBio.text!, uid: currUID!)
+            createPost(image: postImage, profImage: self.profilePhoto, bio: postBio.text!, username: username, email: currUID!)
+            
+            //update current data struct
+            let postData = fetchPostCdAsArray(user: currUid)
+            currUserPosts = postData.0
+            currPosts = postData.1
+            
+            
             let pageVC = storyBoard.instantiateViewController(withIdentifier: "pageVC") as! PageViewController
             pageVC.isModalInPresentation = true
             pageVC.modalPresentationStyle = .fullScreen

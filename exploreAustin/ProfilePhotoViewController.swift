@@ -77,6 +77,9 @@ class ProfilePhotoViewController: UIViewController,UIImagePickerControllerDelega
         }
         saveUIImage(image: tempProfPhotoView.image!, uid: currUid!)
         
+        let data = fetchUserCdAsArray(user: currUid!)
+        currentUserData.currUserData = data
+        
         self.present(profVC, animated:true, completion:nil)
     }
     

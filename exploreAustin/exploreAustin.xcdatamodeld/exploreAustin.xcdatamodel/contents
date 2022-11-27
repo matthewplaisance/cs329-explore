@@ -18,8 +18,10 @@
         <attribute name="comments" optional="YES" attributeType="String"/>
         <attribute name="content" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="date" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="hearts" optional="YES" attributeType="String"/>
-        <attribute name="uid" optional="YES" attributeType="String"/>
+        <attribute name="profilePhoto" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="username" optional="YES" attributeType="String"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
         <attribute name="darkMode" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>

@@ -49,13 +49,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOP-HR-7b1">
-                                <rect key="frame" x="86" y="23" width="135" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TuI-Xe-PlZ">
                                 <rect key="frame" x="252" y="29" width="35" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -63,6 +56,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MId-sy-zPP">
+                                <rect key="frame" x="70" y="10" width="75" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="usernameBtnHit:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="CcP-5f-26W"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                         <constraints>
@@ -90,6 +92,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                 <constraints>
                     <constraint firstItem="rbM-fY-7T0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Gai-Sq-EvL"/>
                     <constraint firstAttribute="trailing" secondItem="rbM-fY-7T0" secondAttribute="trailing" id="H3D-mD-HwS"/>
@@ -108,7 +111,7 @@
                 <outlet property="postDate" destination="MzM-3r-ua4" id="j5F-PJ-OA6"/>
                 <outlet property="postImageView" destination="NqU-o3-LhU" id="RLd-3P-lxF"/>
                 <outlet property="profilePhoto" destination="o6Q-aD-1mj" id="vXR-ct-MRS"/>
-                <outlet property="usernameLabel" destination="eOP-HR-7b1" id="kOM-8A-A6Q"/>
+                <outlet property="usernameBtn" destination="MId-sy-zPP" id="YTI-oJ-q1V"/>
             </connections>
             <point key="canvasLocation" x="-676.33587786259534" y="253.87323943661974"/>
         </tableViewCell>

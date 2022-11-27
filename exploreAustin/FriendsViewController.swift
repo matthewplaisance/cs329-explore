@@ -10,25 +10,52 @@ import FirebaseAuth
 import CoreData
 
 //will change how requests show up, sholuldnt be an alert 
-class FriendsViewController: UIViewController {
+class FriendsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+    
+    @IBOutlet weak var friendsTableView: UITableView!
     
     var currUID = Auth.auth().currentUser?.email
+    
+    var friendsData = [Dictionary<String,Any>]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        friendsTableView.register(FriendsTableViewCell.nib(), forCellReuseIdentifier: FriendsTableViewCell.id)
+        friendsTableView.delegate = self
+        friendsTableView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        var currUserData = fetchUserCoreData(user: currUID!, entity: "User")[0]
-        print("userData: ")
-        let userData = fetchUserCoreData(user: currUID!, entity: "User")
-        print(userData)
-        
-        print("friends: \(currUserData.value(forKey: "friends"))")
         self.checkFriendRequests()
+        self.displayFriends()
+        friendsTableView.reloadData()
         
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.friendsData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FriendsTableViewCell.id, for: indexPath) as! FriendsTableViewCell
+        let row = indexPath.row
+        
+        cell.usernameLabel.text = friendsData[row]["username"] as? String
+        cell.friendProfImageView.image = friendsData[row]["profilePhoto"] as? UIImage
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let row = indexPath.row
+        
+        let pageVC = storyboard?.instantiateViewController(withIdentifier: "pageVC") as! PageViewController
+        let userEmail = friendsData[row]["email"] as! String//clicked email key
+        pageVC.userPage = userEmail
+        pageVC.othProfPhoto = friendsData[row]["profilePhoto"] as? UIImage
+        //pageVC.usernameLabel.text = userEmail
+        //pageVC.profileImage.image = friendsData[row]["content"] as? UIImage
+        self.present(pageVC, animated: true)
     }
     
     @IBAction func plusHit(_ sender: Any) {
@@ -42,8 +69,8 @@ class FriendsViewController: UIViewController {
         let cf = currUserData.value(forKey: "friends") as! String
         let of = othUserData.value(forKey: "friends") as! String
         
-        var othUserFriends = customSep(str: of)
-        var currUserFriends = customSep(str: cf)
+        let othUserFriends = customSep(str: of,sepBy: ",")
+        let currUserFriends = customSep(str: cf,sepBy: ",")
         
         var currRes = [String]()
         var othRes = [String]()
@@ -93,10 +120,35 @@ class FriendsViewController: UIViewController {
         
     }
     
+    func displayFriends() {
+        let friendsStr = currUsrData.value(forKey: "friends") as! String
+        let friends = customSep(str: friendsStr,sepBy: ",")
+        
+        friends.forEach {(f) in
+            if f.last! == "3"{
+                var user = f
+                var temp = Dictionary<String, Any>()
+                user.remove(at: user.index(before: user.endIndex))
+                
+                let friendData = fetchUserCoreData(user: user, entity: "User")[0]
+                let username = friendData.value(forKey: "username")
+                let email = friendData.value(forKey: "email")
+                let profPhotoData = friendData.value(forKey: "profilePhoto") as! Data
+                let profPhoto = UIImage(data: profPhotoData)
+                
+                temp["email"] = email
+                temp["username"] = username
+                temp["profilePhoto"] = profPhoto
+                
+                self.friendsData.append(temp)
+            }
+        }
+    }
+    
     func checkFriendRequests() {
         var currUserData = fetchUserCoreData(user: currUID!, entity: "User")[0]
         let cf = currUserData.value(forKey: "friends") as! String
-        var currUserFriends = customSep(str: cf)
+        var currUserFriends = customSep(str: cf,sepBy: ",")
         var requestingUsers = [String]()
         for f in currUserFriends{
             if f.last! == "1"{
@@ -172,8 +224,8 @@ class FriendsViewController: UIViewController {
         let othFriends = othUserData.value(forKey: "friends") as! String
         let currFriends = currUserData.value(forKey: "friends") as! String
         
-        var othUserFriends = customSep(str: othFriends)
-        var currUserFriends = customSep(str: currFriends)
+        var othUserFriends = customSep(str: othFriends,sepBy: ",")
+        var currUserFriends = customSep(str: currFriends,sepBy: ",")
         
         if othUserFriends[0] == " " {
             othUserFriends.removeFirst()
@@ -199,16 +251,4 @@ class FriendsViewController: UIViewController {
         
         appDelegate.saveContext()
     }
-    
-    //removes nil string from seperating at ","
-    func customSep (str:String) -> Array<String>{
-        var res = str.components(separatedBy: ",")
-        for (idx,el) in res.enumerated() {
-            if el.count == 0 {
-                res.remove(at: idx)
-            }
-        }
-        return res
-    }
-
 }
