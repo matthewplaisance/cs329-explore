@@ -34,6 +34,7 @@ class FeedTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
 
     }
 
@@ -45,7 +46,7 @@ class FeedTableViewCell: UITableViewCell {
     @IBAction func likeBtnHit(_ sender: Any) {
         likeBtn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         let likes = numLikes.text
-        var currLikes = String(Int(likes!)! + 1)
+        let currLikes = String(Int(likes!)! + 1)
         numLikes.text = currLikes
        
         let posts = fetchUserCoreData(user: "all", entity: "Post")

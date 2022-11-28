@@ -60,6 +60,10 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }else{//clicked post from another user's page
             
         }
+        //sort posts by recent
+        data.sort{
+            ((($0 as Dictionary<String, AnyObject>)["date"] as? Double)!) > ((($1 as Dictionary<String, AnyObject>)["date"] as? Double)!)
+        }
         
     }
     
@@ -76,10 +80,12 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         let row = indexPath.row
         
         cell.delegate = self//delegate from feedCell protocol
+        cell.postKey = data[row]["date"] as? Double
         
         let currLikes = data[row]["hearts"] as! String
-        //let date = NSDate(timeIntervalSince1970: cell.postKey)
-        
+        let date = customDataFormat(date: Date(timeIntervalSince1970: cell.postKey),long: false)
+        print("type; \(type(of: data[row]["date"]))")
+        cell.postDate.text = date
         cell.profilePhoto.image = (data[row]["profilePhoto"] as! UIImage)
         cell.bio = data[row]["bio"] as? String
         cell.comments = data[row]["comments"] as? String
@@ -87,7 +93,7 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         cell.postImageView.image = (data[row]["content"] as! UIImage)
         cell.userEmail = data[row]["email"] as! String
         cell.numLikes.text = currLikes
-        cell.postKey = data[row]["date"] as! Double
+    
         
         return cell
     }
@@ -122,32 +128,8 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         self.present(pageVC, animated: false,completion: nil)
     }
     
-    
-    func contentToDisplay() {
-        if self.userPage != "all"{//clicked photo from user page view, data is already passed to var data, dont re-fetch
-            //pass
-        }else{
-            let posts = fetchUserCoreData(user: self.userPage, entity: "Post")
-            
-            data.removeAll()
-            for post in posts {
-                var temp = Dictionary<String, Any>()
-                let postImageData = post.value(forKey: "content") as! Data
-                let postImage = UIImage(data: postImageData)
-                
-                temp["date"] = post.value(forKey: "date")
-                temp["bio"] = post.value(forKey: "bio")
-                temp["hearts"] = post.value(forKey: "hearts")
-                temp["content"] = postImage
-                temp["username"] = post.value(forKey: "username")
-                temp["email"] = post.value(forKey: "email")
-                
-                data.append(temp)
-            }
-        }
-    }
-    
 }
+
 
 
 

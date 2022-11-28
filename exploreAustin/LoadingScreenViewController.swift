@@ -10,7 +10,7 @@ import FirebaseAuth
 import CoreData
 
 var currUid = String()
-
+//current user data, used across app until user posts/updates their data
 var currPosts = [Dictionary<String, Any>]()
 var currUserPosts = [Dictionary<String, Any>]()
 var currUsrData = NSManagedObject()

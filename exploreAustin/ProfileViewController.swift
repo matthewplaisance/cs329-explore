@@ -40,7 +40,7 @@ class ProfileViewController: UIViewController {
         print("curruser: \(String(describing: currUID))\n user cd:")
         //let userSettings = fetchUserCoreData(user: currUserID!, entity: "User")
         //let userFriends = fetchUserCoreData(user: currUserID!, entity: "Friends")
-        var currUserData = fetchUserCoreData(user: currUID!, entity: "User")[0]
+        let currUserData = fetchUserCoreData(user: currUID!, entity: "User")[0]
         
         
         if let darkMode = currUserData.value(forKey: "darkMode"){
