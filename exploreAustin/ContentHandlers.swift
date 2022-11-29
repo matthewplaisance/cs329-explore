@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 
 //removes nil string from seperating 
@@ -31,7 +32,67 @@ func customDataFormat(date:Date,long:Bool) -> String{
     return formatter.string(from: date)
 }
 
+func sendFriendRequest(othUser:String) {
+    let currUserData = fetchUserCoreData(user: currUid, entity: "User")[0]
+    let othUserData = fetchUserCoreData(user: othUser, entity: "User")[0]
+    
+    let othFriends = othUserData.value(forKey: "friends") as! String
+    let currFriends = currUserData.value(forKey: "friends") as! String
+    
+    var othUserFriends = customSep(str: othFriends,sepBy: ",")
+    var currUserFriends = customSep(str: currFriends,sepBy: ",")
+    
+    if othUserFriends[0] == " " {
+        othUserFriends.removeFirst()
+    }
+    if currUserFriends[0] == " " {
+        currUserFriends.removeFirst()
+    }
+    
+    othUserFriends.append("\(currUid)1,")
+    currUserFriends.append("\(othUser)2,")
+    
+    var othRes = ""
+    var currRes = ""
+    
+    //back to strs
+    for (f1,f2) in zip(currUserFriends,othUserFriends){
+        currRes += f1
+        othRes += f2
+    }
+    
+    othUserData.setValue(othRes, forKey: "friends")
+    currUserData.setValue(currRes, forKey: "friends")
+    
+    appDelegate.saveContext()
+}
 
+func userFriends() -> [Dictionary<String,Any>]{
+    let friendsStr = currUsrData.value(forKey: "friends") as! String
+    let friends = customSep(str: friendsStr,sepBy: ",")
+    
+    var data = [Dictionary<String,Any>]()
+    friends.forEach {(f) in
+        if f.last! == "3"{
+            var user = f
+            var temp = Dictionary<String, Any>()
+            user.remove(at: user.index(before: user.endIndex))
+            
+            let friendData = fetchUserCoreData(user: user, entity: "User")[0]
+            let username = friendData.value(forKey: "username")
+            let email = friendData.value(forKey: "email")
+            let profPhotoData = friendData.value(forKey: "profilePhoto") as! Data
+            let profPhoto = UIImage(data: profPhotoData)
+            
+            temp["email"] = email
+            temp["username"] = username
+            temp["profilePhoto"] = profPhoto
+            
+            data.append(temp)
+        }
+    }
+    return data
+}
 
 extension String {
     func capitalizingFirstLetter() -> String {

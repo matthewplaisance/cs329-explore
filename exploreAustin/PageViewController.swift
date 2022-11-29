@@ -53,13 +53,6 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
             print("image name \(profPhoto?.accessibilityIdentifier)")
             profileImage.image = profPhoto
             
-        }else{//display different users page
-            print("other user")
-            let othUserPosts = fetchPostCdAsArray(user: userPage).0
-            print("other username obj: \(othUserPosts[0]["username"] as? String)")
-            self.usernameLabel.text = othUserPosts[0]["username"] as? String
-            self.profileImage.image = othProfPhoto
-            self.data = othUserPosts
         }
         
         //self.contentToDisplay()
@@ -111,8 +104,8 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     @IBAction func eventsHit(_ sender: Any) {
         let eventsVC = storyBoard.instantiateViewController(withIdentifier: "eventsNavController") as! UINavigationController
-        //eventsVC.isModalInPresentation = true
-        //eventsVC.modalPresentationStyle = .fullScreen
+        eventsVC.isModalInPresentation = true
+        eventsVC.modalPresentationStyle = .fullScreen
         self.present(eventsVC, animated:true, completion:nil)
     }
     

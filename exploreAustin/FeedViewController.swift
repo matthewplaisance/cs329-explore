@@ -50,6 +50,7 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         currPosts = postData.1
         currUserPosts = postData.0
         currUsrData = fetchUserCoreData(user: currUid!, entity: "User")[0]
+        currUserFriends = userFriends()
         for post in currUserPosts {
             print("user: \(post["email"])")
         }
