@@ -46,7 +46,7 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         if userPage == currUid {
             print("grabbing data..")
-            data = currUserPosts
+            self.data = currUserPosts
             usernameLabel.text = currUsrData.value(forKey: "username") as? String
             
             let profPhoto = fetchUIImage(uid: currUid)
@@ -54,10 +54,12 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
             profileImage.image = profPhoto
             
         }else{//display different users page
+            print("other user")
             let othUserPosts = fetchPostCdAsArray(user: userPage).0
+            print("other username obj: \(othUserPosts[0]["username"] as? String)")
             self.usernameLabel.text = othUserPosts[0]["username"] as? String
             self.profileImage.image = othProfPhoto
-            data = othUserPosts
+            self.data = othUserPosts
         }
         
         //self.contentToDisplay()
@@ -108,7 +110,9 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     @IBAction func eventsHit(_ sender: Any) {
-        let eventsVC = storyBoard.instantiateViewController(withIdentifier: "eventsVC") as! EventsViewController
+        let eventsVC = storyBoard.instantiateViewController(withIdentifier: "eventsNavController") as! UINavigationController
+        //eventsVC.isModalInPresentation = true
+        //eventsVC.modalPresentationStyle = .fullScreen
         self.present(eventsVC, animated:true, completion:nil)
     }
     
@@ -154,6 +158,9 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
         performSegue(withIdentifier: "feedSeg", sender: self)
     }
     
+    @IBAction func profileBtnHit(_ sender: Any) {
+        //self.view.setNeedsLayout()
+    }
     @IBAction func settingBtnHit(_ sender: Any) {
         if self.userPage == currUid{
             performSegue(withIdentifier: "settingsSeg", sender: self)

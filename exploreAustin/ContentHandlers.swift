@@ -31,6 +31,14 @@ func customDataFormat(date:Date,long:Bool) -> String{
     return formatter.string(from: date)
 }
 
+
+
+extension String {
+    func capitalizingFirstLetter() -> String {
+      return prefix(1).uppercased() + self.lowercased().dropFirst()
+    }
+}
+
 //no longer using, most likely
 func contentToDisplay(userPage:String) {
     var res = [Dictionary<String,Any>]()

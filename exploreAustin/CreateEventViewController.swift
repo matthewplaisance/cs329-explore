@@ -8,18 +8,23 @@
 import UIKit
 import CoreData
 
-class CreateEventViewController: UIViewController {
+var locFromSearch = ""
 
-    let searchController = UISearchController()
+class CreateEventViewController: UIViewController {
     
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var eventDate: UIDatePicker!// gives 7 pm as 00:00:00 for military time for some stupid reason
+    @IBOutlet weak var locatinSearchField: UITextField!
+    @IBOutlet weak var eventDate: UIDatePicker!
     @IBOutlet weak var eventNameField: UITextField!
     @IBOutlet weak var privateSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if locFromSearch != "" {
+            self.locatinSearchField.text = locFromSearch
+        }
     }
     
 
@@ -36,12 +41,25 @@ class CreateEventViewController: UIViewController {
             privateEvent = true
         }
         print("d: \(date)")
+        
         let eventEntity = NSEntityDescription.insertNewObject(forEntityName: "Event", into: context)
         
         eventEntity.setValue(currUid, forKey: "owner")
+        eventEntity.setValue(self.locatinSearchField.text, forKey: "location")
         eventEntity.setValue(date, forKey: "date")
         eventEntity.setValue(key, forKey: "key")
         eventEntity.setValue(privateEvent, forKey: "privateEvent")
     }
     
+    @IBAction func searchBtnHit(_ sender: Any) {
+        self.performSegue(withIdentifier: "searchEventLocation", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dest = segue.destination as? SearchViewController, segue.identifier == "searchEventLocation"{
+            dest.searchId = "locations"
+            dest.searchName = "Austin Locations:"
+            dest.tstData = austinLocatins
+        }
+    }
 }

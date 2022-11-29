@@ -37,6 +37,7 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         feedTable.register(FeedTableViewCell.nib(), forCellReuseIdentifier: FeedTableViewCell.id)
         feedTable.delegate = self
         feedTable.dataSource = self
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,12 +50,20 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         currPosts = postData.1
         currUserPosts = postData.0
         currUsrData = fetchUserCoreData(user: currUid!, entity: "User")[0]
+        for post in currUserPosts {
+            print("user: \(post["email"])")
+        }
         //currUid = currUID!
         //self.contentToDisplay()
         
         if  userPage == "all" {
             print("posts:")
             data = currPosts
+            
+            for post in data{
+                print("user:")
+                print(post["email"])
+            }
         }else if userPage == currUid {//clicked post from own page
             data = currUserPosts
         }else{//clicked post from another user's page

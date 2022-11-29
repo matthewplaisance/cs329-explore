@@ -17,7 +17,10 @@ class FriendsViewController: UIViewController,UITableViewDelegate,UITableViewDat
     var currUID = Auth.auth().currentUser?.email
     
     var friendsData = [Dictionary<String,Any>]()
-
+    var otherUsers = [String]()
+    var otherUsersEmail = [String]()
+    var otherUsersProfPhotos = [UIImage]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         friendsTableView.register(FriendsTableViewCell.nib(), forCellReuseIdentifier: FriendsTableViewCell.id)
@@ -30,6 +33,16 @@ class FriendsViewController: UIViewController,UITableViewDelegate,UITableViewDat
         self.displayFriends()
         friendsTableView.reloadData()
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dest = segue.destination as? SearchViewController, segue.identifier == "usersSearch"{
+            dest.tstData = self.otherUsers
+            dest.photos = self.otherUsersProfPhotos
+            dest.userEmails = self.otherUsersEmail
+            dest.searchId = "users"
+            dest.searchName = "Users:"
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -59,7 +72,18 @@ class FriendsViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     
     @IBAction func plusHit(_ sender: Any) {
-        self.showOtherUsers()
+        var othUsers = fetchUserCoreData(user: "otherUsers", entity: "User")
+        
+        for user in othUsers {
+            let username = user.value(forKey: "username") as! String
+            let photoData = user.value(forKey: "profilePhoto") as! Data
+            let email = user.value(forKey: "email") as! String
+            let photo = UIImage(data: photoData)
+            self.otherUsers.append(username)
+            self.otherUsersEmail.append(email)
+            self.otherUsersProfPhotos.append(photo!)
+        }
+        self.performSegue(withIdentifier: "usersSearch", sender: self)
     }
     
     func handleFriendRequest(othUser:String,act:String) {
@@ -186,34 +210,6 @@ class FriendsViewController: UIViewController,UITableViewDelegate,UITableViewDat
             
         }
         
-    }
-
-
-    func showOtherUsers() {
-        let userEntity = fetchUserCoreData(user: "all", entity: "User")
-        
-        var users = [String]()
-        for user in userEntity {
-            let email = user.value(forKey: "email") as? String
-            if (currUID != email){
-                let username = user.value(forKey: "username") as? String
-                users.append(email!)
-            }
-        }
-        
-        let controller = UIAlertController(title: "Users:", message: "Click to send friend request:", preferredStyle: .actionSheet)
-        for i in users {
-            let friendAction = UIAlertAction(
-                title: i,
-                style: .default,
-                handler: {
-                    (action) in
-                    self.sendFriendRequest(othUser: i)
-                }
-            )
-            controller.addAction(friendAction)
-        }
-        present(controller,animated: true)
     }
 
 

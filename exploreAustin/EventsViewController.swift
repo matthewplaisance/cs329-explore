@@ -9,7 +9,7 @@ import UIKit
 
 class EventsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
-    @IBOutlet weak var addEventBtn: UIButton!
+    
     @IBOutlet weak var eventsTableView: UITableView!
     
     var data = [Dictionary<String,Any>]()
@@ -35,8 +35,14 @@ class EventsViewController: UIViewController,UITableViewDelegate,UITableViewData
         return cell
     }
 
-    @IBAction func addEventHit(_ sender: Any) {
-        let createVC = storyBoard.instantiateViewController(withIdentifier: "createEventVC") as! CreateEventViewController
-        self.present(createVC, animated: true)
+    @IBAction func addEventBtnHit(_ sender: Any) {
+        self.performSegue(withIdentifier: "createEventSeg", sender: self)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dest = segue.destination as? CreateEventViewController, segue.identifier == "createEventSeg"{
+            print("seg")
+        }
+    }
+    
 }

@@ -16,6 +16,8 @@
 		C93D86712926A74B002BA3B2 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93D86702926A74B002BA3B2 /* PageViewController.swift */; };
 		C94307CA29342F150088D1A8 /* EventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94307C829342F150088D1A8 /* EventsTableViewCell.swift */; };
 		C94307CB29342F150088D1A8 /* EventsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C94307C929342F150088D1A8 /* EventsTableViewCell.xib */; };
+		C9595F022935A57600ADAA46 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9595F002935A57600ADAA46 /* SearchTableViewCell.swift */; };
+		C9595F032935A57600ADAA46 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9595F012935A57600ADAA46 /* SearchTableViewCell.xib */; };
 		C9791C9E29297C68007DACE5 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9791C9D29297C68007DACE5 /* CoreDataHandler.swift */; };
 		C9791CA029298583007DACE5 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9791C9F29298583007DACE5 /* FriendsViewController.swift */; };
 		C9791CA22929858D007DACE5 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9791CA12929858D007DACE5 /* EventsViewController.swift */; };
@@ -26,6 +28,7 @@
 		C9C05C93292D52800094CBB3 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C05C91292D52800094CBB3 /* FeedTableViewCell.swift */; };
 		C9C05C94292D52800094CBB3 /* FeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9C05C92292D52800094CBB3 /* FeedTableViewCell.xib */; };
 		C9CCC7AF2934322D009731F1 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CCC7AE2934322D009731F1 /* CreateEventViewController.swift */; };
+		C9CCC7B129356B59009731F1 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CCC7B029356B59009731F1 /* SearchViewController.swift */; };
 		E02991CF29087E8500316F3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02991CE29087E8500316F3B /* AppDelegate.swift */; };
 		E02991D129087E8500316F3B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02991D029087E8500316F3B /* SceneDelegate.swift */; };
 		E02991D629087E8500316F3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E02991D429087E8500316F3B /* Main.storyboard */; };
@@ -48,6 +51,8 @@
 		C93D86702926A74B002BA3B2 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		C94307C829342F150088D1A8 /* EventsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewCell.swift; sourceTree = "<group>"; };
 		C94307C929342F150088D1A8 /* EventsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventsTableViewCell.xib; sourceTree = "<group>"; };
+		C9595F002935A57600ADAA46 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		C9595F012935A57600ADAA46 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
 		C9791C9D29297C68007DACE5 /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
 		C9791C9F29298583007DACE5 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		C9791CA12929858D007DACE5 /* EventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +63,7 @@
 		C9C05C91292D52800094CBB3 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		C9C05C92292D52800094CBB3 /* FeedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedTableViewCell.xib; sourceTree = "<group>"; };
 		C9CCC7AE2934322D009731F1 /* CreateEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
+		C9CCC7B029356B59009731F1 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		E02991CB29087E8500316F3B /* exploreAustin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = exploreAustin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E02991CE29087E8500316F3B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E02991D029087E8500316F3B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,7 +125,10 @@
 				C9CCC7AE2934322D009731F1 /* CreateEventViewController.swift */,
 				C9791CA12929858D007DACE5 /* EventsViewController.swift */,
 				C94307C829342F150088D1A8 /* EventsTableViewCell.swift */,
+				C9CCC7B029356B59009731F1 /* SearchViewController.swift */,
+				C9595F002935A57600ADAA46 /* SearchTableViewCell.swift */,
 				E02991D429087E8500316F3B /* Main.storyboard */,
+				C9595F012935A57600ADAA46 /* SearchTableViewCell.xib */,
 				C94307C929342F150088D1A8 /* EventsTableViewCell.xib */,
 				C9C05C92292D52800094CBB3 /* FeedTableViewCell.xib */,
 				C906D2B42931909600A026BE /* FriendsTableViewCell.xib */,
@@ -200,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E02991DE29087E8600316F3B /* LaunchScreen.storyboard in Resources */,
+				C9595F032935A57600ADAA46 /* SearchTableViewCell.xib in Resources */,
 				C9C05C94292D52800094CBB3 /* FeedTableViewCell.xib in Resources */,
 				C94307CB29342F150088D1A8 /* EventsTableViewCell.xib in Resources */,
 				E02991E629087FF300316F3B /* GoogleService-Info.plist in Resources */,
@@ -224,10 +234,12 @@
 				E02991D929087E8500316F3B /* exploreAustin.xcdatamodeld in Sources */,
 				C906D2B52931909600A026BE /* FriendsTableViewCell.swift in Sources */,
 				C98CE3E82927EA9700E545E5 /* PagePhotoCell.swift in Sources */,
+				C9595F022935A57600ADAA46 /* SearchTableViewCell.swift in Sources */,
 				C92377922931BBAC00BCCBC5 /* CommentsViewController.swift in Sources */,
 				C92377942931C94F00BCCBC5 /* ContentHandlers.swift in Sources */,
 				C9C05C90292D4D4C0094CBB3 /* FeedViewController.swift in Sources */,
 				C9791CA22929858D007DACE5 /* EventsViewController.swift in Sources */,
+				C9CCC7B129356B59009731F1 /* SearchViewController.swift in Sources */,
 				C94307CA29342F150088D1A8 /* EventsTableViewCell.swift in Sources */,
 				C9C05C93292D52800094CBB3 /* FeedTableViewCell.swift in Sources */,
 				E02991CF29087E8500316F3B /* AppDelegate.swift in Sources */,

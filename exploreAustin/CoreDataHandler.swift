@@ -141,9 +141,14 @@ func convertDataToImages(imageDataArray: [Data]) -> [UIImage] {
 func fetchUserCoreData(user:String,entity:String) -> [NSManagedObject]{
     let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
     
-    if user != "all"{
+    if user == "all"{
+        
+    }else if user == "otherUsers"{
+        request.predicate = NSPredicate(format: "email != %@",currUid)
+    }else{//passed specif user id
         request.predicate = NSPredicate(format: "email CONTAINS %@",user)
     }
+    
     
     var fetchedResults:[NSManagedObject]? = nil
     
@@ -193,6 +198,21 @@ func fetchUserCdAsArray(user:String) -> Dictionary<String, Any> {
     userData["profPhotoData"] = userCD.value(forKey: "profilePhoto")
     
     return userData
+}
+
+func fetchOtherUsers() -> [Dictionary<String,Any>]{
+    let otherUserData = fetchUserCoreData(user: "otherUsers", entity: "User")
+    //no performance enhances for using forEach here(and almsot all the other times i used it) unlike say js
+    var res = [Dictionary<String, Any>]()
+    
+    for user in otherUserData{
+        var temp = Dictionary<String, Any>()
+        temp["username"] = user.value(forKey: "username") as! String
+        temp["email"] = user.value(forKey: "email") as! String
+        temp["profilePhoto"] = user.value(forKey: "profilePhoto") as! Data
+        res.append(temp)
+    }
+    return res
 }
 
 func fetchPostCdAsArray(user:String) -> ([Dictionary<String, Any>],[Dictionary<String, Any>]) {
