@@ -94,6 +94,22 @@ func userFriends() -> [Dictionary<String,Any>]{
     return data
 }
 
+func getOtherUser() -> [Dictionary<String,Any>]{
+    let othUsers = fetchUserCoreData(user: "otherUsers", entity: "User")
+    var res = [Dictionary<String,Any>]()
+    for user in othUsers {
+        var temp = Dictionary<String,Any>()
+        
+        let photoData = user.value(forKey: "profilePhoto") as! Data
+        let photo = UIImage(data: photoData)
+        temp["username"] = user.value(forKey: "username") as! String
+        temp["email"] = user.value(forKey: "email") as! String
+        temp["profilePhoto"] = photo
+        res.append(temp)
+    }
+    return res
+}
+
 extension String {
     func capitalizingFirstLetter() -> String {
       return prefix(1).uppercased() + self.lowercased().dropFirst()

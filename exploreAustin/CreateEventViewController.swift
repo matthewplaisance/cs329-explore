@@ -12,11 +12,12 @@ import CoreLocation
 
 var locFromSearch = ""
 
-class CreateEventViewController: UIViewController,MKMapViewDelegate,UISearchBarDelegate, CLLocationManagerDelegate{
+class CreateEventViewController: UIViewController,MKMapViewDelegate,UISearchBarDelegate{
     
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var eventName: UITextField!
-    @IBOutlet weak var eventData: UIDatePicker!
+    
+    @IBOutlet weak var eventDate: UIDatePicker!
+    
     
     let locationManager = CLLocationManager()
     var eventLocation:String?
@@ -25,10 +26,10 @@ class CreateEventViewController: UIViewController,MKMapViewDelegate,UISearchBarD
         super.viewDidLoad()
         self.mapView.delegate = self
         self.mapView.showsUserLocation = true
-        self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.requestLocation()
+        //self.locationManager.delegate = self
+        //self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        //self.locationManager.requestWhenInUseAuthorization()
+        //self.locationManager.requestLocation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,9 +53,12 @@ class CreateEventViewController: UIViewController,MKMapViewDelegate,UISearchBarD
     }
     
     
+    
+    
     @IBAction func searchBtnHit(_ sender: Any) {
         let searchContr = UISearchController(searchResultsController: nil)
         searchContr.searchBar.delegate = self
+        
         present(searchContr,animated: true,completion: nil)
     
     }
@@ -110,35 +114,20 @@ class CreateEventViewController: UIViewController,MKMapViewDelegate,UISearchBarD
         self.mapView.setZoomByDelta(delta: 0.5, animated: true)
     }
     
+    @IBAction func nextBtnHit(_ sender: Any) {
+        self.performSegue(withIdentifier: "finalizeEventSeg", sender: self)
+    }
     
     @IBAction func zoomInHit(_ sender: Any) {
         self.mapView.setZoomByDelta(delta: 2.0, animated: true)
     }
     
-    @IBAction func createEventBtnHit(_ sender: Any) {
-        print(self.eventData.date)
-        let date = customDataFormat(date: self.eventData.date, long: true)
-        let key = Date().timeIntervalSince1970
-        var privateEvent = false
-        
-        print("d: \(date)")
-        
-        let eventEntity = NSEntityDescription.insertNewObject(forEntityName: "Event", into: context)
-        
-        eventEntity.setValue(currUid, forKey: "owner")
-        //eventEntity.setValue(self.locatinSearchField.text, forKey: "location")
-        eventEntity.setValue(date, forKey: "date")
-        eventEntity.setValue(key, forKey: "key")
-        eventEntity.setValue(privateEvent, forKey: "privateEvent")
-    }
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let dest = segue.destination as? SearchUsersViewController, segue.identifier == "searchEventLocation"{
-            dest.searchId = "locations"
-            dest.searchName = "Austin Locations:"
-            dest.searchData = austinLocatins
+        if let dest = segue.destination as? FinalizeEventViewController, segue.identifier == "finalizeEventSeg"{
+            dest.eventLocation = self.eventLocation
+            dest.eventDate = self.eventDate.date
         }
+        
     }
 }
 

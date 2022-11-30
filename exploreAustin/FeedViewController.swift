@@ -43,14 +43,22 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     override func viewWillAppear(_ animated: Bool) {
         self.homeBtn.image = UIImage(systemName: "house.fill")
         self.profBtn.image = UIImage(systemName: "person")
+        let activityIndicator = UIActivityIndicatorView()
         
-        //let currUID = Auth.auth().currentUser?.email
+        activityIndicator.style = .medium
+        activityIndicator.center = self.feedTable.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        self.feedTable.addSubview(activityIndicator)
+        
         print("curr usr loading: \(currUid)")
         let postData = fetchPostCdAsArray(user: currUid!)
         currPosts = postData.1
         currUserPosts = postData.0
         currUsrData = fetchUserCoreData(user: currUid!, entity: "User")[0]
         currUserFriends = userFriends()
+        otherUsers = getOtherUser()
+        
         for post in currUserPosts {
             print("user: \(post["email"])")
         }
@@ -74,6 +82,7 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         data.sort{
             ((($0 as Dictionary<String, AnyObject>)["date"] as? Double)!) > ((($1 as Dictionary<String, AnyObject>)["date"] as? Double)!)
         }
+        activityIndicator.stopAnimating()
         
     }
     
@@ -137,6 +146,8 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         pageVC.userPage = currUid!
         self.present(pageVC, animated: false,completion: nil)
     }
+    
+    
     
 }
 

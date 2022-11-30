@@ -15,6 +15,7 @@ var currPosts = [Dictionary<String, Any>]()
 var currUserPosts = [Dictionary<String, Any>]()
 var currUsrData = NSManagedObject()
 var currUserFriends = [Dictionary<String, Any>]()
+var otherUsers = [Dictionary<String, Any>]()
 
 class LoadingScreenViewController: UIViewController {
 

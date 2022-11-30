@@ -23,6 +23,7 @@ class SearchUsersViewController: UIViewController {
     
     //var tstData = ["austin","houston","huntington beach","dallas","dubai","amersterdam","nuuk"]
     var data = [Dictionary<String,Any>]()
+    var checkedUsers = [Dictionary<String,Any>]()
     var searchData = [String]()
     var dupSearchData = [String]()
     
@@ -32,17 +33,24 @@ class SearchUsersViewController: UIViewController {
         self.searchTableView.delegate = self
         self.searchTableView.dataSource = self
         
-        if self.searchId == "users"{
-            searchTableView.register(FriendsTableViewCell.nib(), forCellReuseIdentifier: FriendsTableViewCell.id)
-        }
+        searchTableView.register(FriendsTableViewCell.nib(), forCellReuseIdentifier: FriendsTableViewCell.id)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.searchTitle.text = searchName
+        
         for i in data {
             self.searchData.append(i["username"] as! String)
         }
         self.dupSearchData = self.searchData
+        print("data \(self.dupSearchData)")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if self.searchId == "friends"{
+            friendsInvited = self.checkedUsers
+        }
     }
     
 
@@ -72,14 +80,37 @@ extension SearchUsersViewController:UITableViewDelegate,UITableViewDataSource {
         print("row: \(indexPath.row)")
         let username = cell.usernameLabel.text!
         let idx = self.searchData.firstIndex(of: username)!
-        let userEmail = self.data[idx]["email"]
+        let userEmail = self.data[idx]["email"] as! String
+
         
-        let pageVC = storyboard?.instantiateViewController(withIdentifier: "othUserPage") as! OthUserPageViewController
         
-        pageVC.pageFor = userEmail as? String
-        self.present(pageVC, animated: true)
-        
+        if self.searchId == "users"{
+            let pageVC = storyboard?.instantiateViewController(withIdentifier: "othUserPage") as! OthUserPageViewController
+            pageVC.pageFor = userEmail as? String
+            self.present(pageVC, animated: true)
+        }else if self.searchId == "friends"{
+            if cell.checkImageView.image == UIImage(systemName: "checkmark"){
+                cell.checkImageView.image = nil
+                let idxRemove = self.checkedUsers.firstIndex { i in
+                    i["email"] as! String == userEmail
+                }
+                self.checkedUsers.remove(at: idxRemove!)
+                
+            }else{
+                cell.checkImageView.image = UIImage(systemName: "checkmark")
+                var temp = Dictionary<String,Any>()
+                temp["username"] = username
+                temp["email"] = userEmail
+    
+                self.checkedUsers.append(temp)
+            }
+        }
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+    
 }
 
 extension SearchUsersViewController:UISearchBarDelegate {

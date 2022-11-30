@@ -35,6 +35,7 @@ class LoginViewController: UIViewController {
         print("Loading Core Data...")
         self.viewCoreData()
         self.viewPosts()
+        self.viewEvents()
         //clearCoreData(entity: "Post")
         //clearCoreData(entity: "User")
        
@@ -73,8 +74,8 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func loginBtnHit(_ sender: Any) {
-        //var devId = "matt@tst.com"
-        //var devPass = "qazxsw"
+        var devId = "matt@tst.com"
+        var devPass = "qazxsw"
         //fix below returning nil causing crash
         let idx = loginSegCtrl.selectedSegmentIndex
         
@@ -100,8 +101,8 @@ class LoginViewController: UIViewController {
         }
         if idx == 0{//login
             print("login")
-            let devId = userId.text!
-            let devPass = userKey.text!
+            //let devId = userId.text!
+            //let devPass = userKey.text!
             Auth.auth().signIn(withEmail: devId, password: devPass){
                 authResult, error in
                 print("checking????")
@@ -165,11 +166,16 @@ class LoginViewController: UIViewController {
             if let comm = post.value(forKey: "comments"){
                 print("comments: \(comm)")
             }
-           
-            
-            
-            
-            
+        }
+    }
+    
+    func viewEvents(){
+        let data = fetchUserCoreData(user: "all", entity: "Event")
+        let keys = ["owner","participants","location","date","privateEvent","key"]
+        for event in data {
+            for key in keys{
+                print("\(key): \(event.value(forKey: key))")
+            }
         }
     }
     
