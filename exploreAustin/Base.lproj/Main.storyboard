@@ -761,7 +761,7 @@
                                     <barButtonItem title="Item" image="house" catalog="system" id="t74-Fz-71A">
                                         <connections>
                                             <action selector="homeToolBarHit:" destination="srk-rH-yBl" id="K4v-z0-esb"/>
-                                            <segue destination="9vT-79-mxk" kind="presentation" identifier="feedSeg" animates="NO" modalPresentationStyle="fullScreen" id="GCp-QH-gGA"/>
+                                            <segue destination="9vT-79-mxk" kind="presentation" identifier="homeSeg" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="pnT-QD-qQg"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="FFE-lE-Lsb"/>
@@ -1261,7 +1261,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="QkM-8P-iDy"/>
         <segue reference="oJ1-tl-YK4"/>
-        <segue reference="GCp-QH-gGA"/>
+        <segue reference="pnT-QD-qQg"/>
         <segue reference="Sel-aU-hok"/>
     </inferredMetricsTieBreakers>
     <resources>
