@@ -149,7 +149,7 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     @IBAction func homeToolBarHit(_ sender: Any) {
-        performSegue(withIdentifier: "feedSeg", sender: self)
+        performSegue(withIdentifier: "homeSeg", sender: self)
     }
     
     @IBAction func profileBtnHit(_ sender: Any) {
