@@ -18,139 +18,173 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var userKey: UITextField!
     @IBOutlet weak var repearUserKeyField: UITextField!
     @IBOutlet weak var confirmPassword: UILabel!
-    @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var username: UITextField!
+    @IBOutlet weak var loginBtn: UIButton!
+    @IBOutlet weak var usernameLabel: UILabel!
+    
+    
+    var userIdtext:String? = nil
+    var userKeytext:String? = nil
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        if (currUser != nil) {
-            print("currently logged in as: \(currUser)")
+        if let user = currUser {
+            print("curr user: \(user)")
         }
         
         print("Loading Core Data...")
-        viewCoreData()
-        
-        if DarkMode.darkModeIsEnabled == true{
-            overrideUserInterfaceStyle = .dark
-        }
-        
+        self.viewCoreData()
+        self.viewPosts()
+        self.viewEvents()
+        //clearCoreData(entity: "Event")
+        //clearCoreData(entity: "Post")
+        //clearCoreData(entity: "User")
+       
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         confirmPassword.alpha = 0
         repearUserKeyField.alpha = 0
+        username.alpha = 0
+        usernameLabel.alpha = 0
         userKey.isSecureTextEntry = true
         repearUserKeyField.isSecureTextEntry = true
+        statusLabel.lineBreakMode = .byWordWrapping
+        statusLabel.numberOfLines = 0
     }
     
     
     @IBAction func loginSegChange(_ sender: Any) {
         let idx = loginSegCtrl.selectedSegmentIndex
         if idx == 0{//logging in
+            username.alpha = 0
+            usernameLabel.alpha = 0
             repearUserKeyField.alpha = 0
             confirmPassword.alpha = 0
-            loginButton.setTitle("Sign In", for: .normal)
+            loginBtn.setTitle("Sign In", for: .normal)
         }
         if idx == 1{
+            username.alpha = 1
+            usernameLabel.alpha = 1
             repearUserKeyField.alpha = 1
             confirmPassword.alpha = 1
-            loginButton.setTitle("Sign Up", for: .normal)
+            loginBtn.setTitle("Sign Up", for: .normal)
         }
     }
     
     
-    @IBAction func loginHit(_ sender: Any) {
-        let id = userId.text!
-        let pass = userKey.text!
+    @IBAction func loginBtnHit(_ sender: Any) {
+        //var devId = "mp@tst.com"
+        //var devPass = "qazxsw"
+        //fix below returning nil causing crash
         let idx = loginSegCtrl.selectedSegmentIndex
+        
         if idx == 1{//sign up
-            let passConfirm = repearUserKeyField.text!
-            if (pass == passConfirm){
-                Auth.auth().createUser(withEmail: id, password: pass){
-                    authResult, error in //params from createUser method
-                    if let error = error as NSError? {
-                        
-                        self.statusLabel.text = "\(error.localizedDescription)"
-                    }else{
-                        self.createUserCD(user: id)
-                        self.statusLabel.text = "Signed up!"
-                        Auth.auth().signIn(withEmail: id, password: pass){
-                            authResult, error in
-                            if let error = error as NSError? {
-                                self.statusLabel.text = "\(error.localizedDescription)"
-                            }else{//no error
-                                self.performSegue(withIdentifier: "loginSeg", sender: nil)
-                                self.userKey = nil
-                                self.userId = nil
-                            }
-                            
+            if let id = userId.text, let pass = userKey.text, let username = username.text {
+                let passConfirm = repearUserKeyField.text!
+                if (pass == passConfirm){
+                    Auth.auth().createUser(withEmail: id, password: pass){
+                        authResult, error in //params from createUser method
+                        if let error = error as NSError? {
+                            self.statusLabel.text = "\(error.localizedDescription)"
+                        }else{
+                            self.createUserCD(user: id, username: username)
+                            self.statusLabel.text = "Signed up!"
                         }
                     }
+                }else{
+                    self.statusLabel.text = "Passwords do not match."
                 }
             }else{
-                self.statusLabel.text = "Passwords do not match."
+                self.statusLabel.text = "Please enter all fields."
             }
         }
         if idx == 0{//login
+            print("login")
+            let id = userId.text!
+            let pass = userKey.text!
             Auth.auth().signIn(withEmail: id, password: pass){
                 authResult, error in
+                print("checking????")
                 if let error = error as NSError? {
+                    print("error")
                     self.statusLabel.text = "\(error.localizedDescription)"
                 }else{//no error
-                    
-                    
-                    self.performSegue(withIdentifier: "loginSeg", sender: nil)
+                    print("logging in? ")
+                    let loadingVC = storyBoard.instantiateViewController(withIdentifier: "loadingVC") as! LoadingScreenViewController
+                
+                    print("currId! \(currUid)")
+                    //self.performSegue(withIdentifier: "loadingScreenSeg", sender: self)
+                    loadingVC.isModalInPresentation = true
+                    loadingVC.modalPresentationStyle = .fullScreen
+                    self.present(loadingVC, animated: true,completion: nil)
                     self.userKey = nil
                     self.userId = nil
                 }
-                
             }
         }
     }
     
-    func retrieveSettings() -> [NSManagedObject] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
-        var fetchedResults:[NSManagedObject]? = nil
-        do{
-            try fetchedResults = context.fetch(request) as? [NSManagedObject]
-        } catch {
-            let nserror = error as NSError
-            print(nserror)
-        }
-        return (fetchedResults)!
-    }
     
-    func createUserCD(user:String){
+    
+    func createUserCD(user:String,username:String){
         let userEntity = NSEntityDescription.insertNewObject(forEntityName: "User", into: context)
+        
+        let defualtPhoto = UIImage(systemName: "person")
+        let photoData = defualtPhoto!.jpegData(compressionQuality: 1)!
+        
         userEntity.setValue(user, forKey: "email")
+        userEntity.setValue(username, forKey: "username")
+        userEntity.setValue("", forKey: "friends")
+        userEntity.setValue("", forKey: "recievedReqsF")
+        userEntity.setValue(photoData, forKey: "profilePhoto")
+        
         appDelegate.saveContext()
     }
     
     
     func viewCoreData () {
-        let data = retrieveSettings()
+        let data = fetchUserCoreData(user: "all", entity: "User")
         var cnt = 0
         for user in data{
             cnt += 1
             
             let darkMode = user.value(forKey: "darkMode")
             let email = user.value(forKey: "email")
-            let name = user.value(forKey: "name")
+            let friends = user.value(forKey: "friends")
+            let req = user.value(forKey: "recievedReqsF")
             let soundOn = user.value(forKey: "soundOn")
-
-            print("user #\(cnt):\n email: \(email) name: \(name)  darkMode: \(darkMode) soundOn: \(soundOn)")
+            let username = user.value(forKey: "username")
+            print("user #\(cnt):\n email: \(String(describing: email)) username: \(String(describing: username)) darkMode: \(String(describing: darkMode)) soundOn: \(String(describing: soundOn))\n friends: \(friends)\n f reqs: \(req)")
             
         }
-        
+    }
+    
+    func viewPosts(){
+        let data = fetchUserCoreData(user: "all", entity: "Post")
+        print("posts: ")
+        for post in data{
+            if let comm = post.value(forKey: "comments"){
+                print("comments: \(comm)")
+            }
+        }
+    }
+    
+    func viewEvents(){
+        let data = fetchUserCoreData(user: "all", entity: "Event")
+        let keys = ["owner","participants","location","date","privateEvent","key"]
+        for event in data {
+            for key in keys{
+                print("\(key): \(event.value(forKey: key))")
+            }
+        }
     }
     
     
     
-    
-    
-    func clearCoreData () {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+    func clearCoreData (entity:String) {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
         var fetchedResults:[NSManagedObject]
         do{
             try fetchedResults = context.fetch(request) as! [NSManagedObject]
@@ -158,7 +192,8 @@ class LoginViewController: UIViewController {
             if fetchedResults.count > 0 {
                 for result:AnyObject in fetchedResults {
                     context.delete(result as! NSManagedObject)
-                    print("user w/ email:\(result.value(forKey: "email")) was deleted.")
+                    //print("user w/ email:\(result.value(forKey: "email")) was deleted.")
+                    print("deleted.")
                 }
             }
             appDelegate.saveContext()
@@ -168,4 +203,3 @@ class LoginViewController: UIViewController {
         }
     }
 }
-
