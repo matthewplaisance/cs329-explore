@@ -33,7 +33,11 @@ class CreateEventViewController: UIViewController,MKMapViewDelegate,UISearchBarD
     }
     
     override func viewWillAppear(_ animated: Bool) {
-    
+        if DarkMode.darkModeIsEnabled == true{
+            overrideUserInterfaceStyle = .dark
+        }else{
+            overrideUserInterfaceStyle = .light
+        }
         let userLocation = mapView.userLocation
         let c = userLocation.location?.coordinate
         print("user location: \(c)")

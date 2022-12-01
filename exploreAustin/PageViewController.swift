@@ -37,6 +37,11 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if DarkMode.darkModeIsEnabled == true{
+            overrideUserInterfaceStyle = .dark
+        }else{
+            overrideUserInterfaceStyle = .light
+        }
         print("displaying page for : \(userPage)")
         self.homeBtn.image = UIImage(systemName: "house")
         self.profileBtn.image = UIImage(systemName: "person.fill")

@@ -22,6 +22,14 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     var username:String = ""
     var profilePhoto:UIImage!
     
+    override func viewWillAppear(_ animated: Bool){
+        if DarkMode.darkModeIsEnabled == true{
+            overrideUserInterfaceStyle = .dark
+        }else{
+            overrideUserInterfaceStyle = .light
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         postImagePicker.delegate = self

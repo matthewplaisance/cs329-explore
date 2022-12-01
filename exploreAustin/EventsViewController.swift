@@ -17,6 +17,14 @@ class EventsViewController: UIViewController{
     
     var data = [Dictionary<String,Any>]()
     
+    override func viewWillAppear(_ animated: Bool){
+        if DarkMode.darkModeIsEnabled == true{
+            overrideUserInterfaceStyle = .dark
+        }else{
+            overrideUserInterfaceStyle = .light
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(EventsTableViewCell.nib(), forCellReuseIdentifier: EventsTableViewCell.id)

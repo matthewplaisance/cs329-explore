@@ -41,6 +41,10 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        let userCD = self.retrieveUserCD()
+        if let darkMode = userCD.value(forKey: "darkMode"){
+                    DarkMode.darkModeIsEnabled = darkMode as! Bool
+                }
         if DarkMode.darkModeIsEnabled == true{
             overrideUserInterfaceStyle = .dark
         }else{
@@ -153,6 +157,33 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         pageVC.userPage = currUid!
         self.present(pageVC, animated: false,completion: nil)
     }
+    func retrieveUserCD() -> NSManagedObject {
+            let data = retrieveCoreData()
+            
+            var currUser = data[0]
+            
+            for user in data {
+                let email = user.value(forKey: "email")
+                if (currUid == email as? String){
+                    print("Found CD for current user: \(currUid!)")
+                    currUser = user
+                }
+            }
+            print("currUserData: \(currUser)")
+            return currUser
+        }
+        
+        func retrieveCoreData() -> [NSManagedObject] {
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+            var fetchedResults:[NSManagedObject]? = nil
+            do{
+                try fetchedResults = context.fetch(request) as? [NSManagedObject]
+            } catch {
+                let nserror = error as NSError
+                print(nserror)
+            }
+            return (fetchedResults)!
+        }
     
     
     

@@ -31,6 +31,11 @@ class FriendsViewController: UIViewController {
         //self.checkFriendRequests()
         self.data = currUserFriends
         friendsTableView.reloadData()
+        if DarkMode.darkModeIsEnabled == true{
+            overrideUserInterfaceStyle = .dark
+        }else{
+            overrideUserInterfaceStyle = .light
+        }
         
     }
     
