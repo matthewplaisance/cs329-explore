@@ -6,19 +6,22 @@
 //
 
 import UIKit
+import MapKit
+import CoreData
+import CoreLocation
 
-class EventsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
-    
-    
-    @IBOutlet weak var eventsTableView: UITableView!
+class EventsViewController: UIViewController{
+
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var tableView: UITableView!
     
     var data = [Dictionary<String,Any>]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        eventsTableView.register(EventsTableViewCell.nib(), forCellReuseIdentifier: EventsTableViewCell.id)
-        eventsTableView.dataSource = self
-        eventsTableView.delegate = self
+        tableView.register(EventsTableViewCell.nib(), forCellReuseIdentifier: EventsTableViewCell.id)
+        tableView.dataSource = self
+        tableView.delegate = self
         // Do any additional setup after loading the view.
     }
     
@@ -28,7 +31,7 @@ class EventsViewController: UIViewController,UITableViewDelegate,UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = eventsTableView.dequeueReusableCell(withIdentifier: EventsTableViewCell.id, for: indexPath) as! EventsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: EventsTableViewCell.id, for: indexPath) as! EventsTableViewCell
         let row = indexPath.row
         
         
@@ -44,5 +47,13 @@ class EventsViewController: UIViewController,UITableViewDelegate,UITableViewData
             print("seg")
         }
     }
+    
+}
+
+extension EventsViewController: MKMapViewDelegate {
+    
+}
+
+extension EventsViewController: UITableViewDelegate, UITableViewDataSource {
     
 }

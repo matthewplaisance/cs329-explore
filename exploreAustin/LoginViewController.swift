@@ -36,6 +36,7 @@ class LoginViewController: UIViewController {
         self.viewCoreData()
         self.viewPosts()
         self.viewEvents()
+        //clearCoreData(entity: "Event")
         //clearCoreData(entity: "Post")
         //clearCoreData(entity: "User")
        
@@ -74,8 +75,8 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func loginBtnHit(_ sender: Any) {
-        var devId = "matt@tst.com"
-        var devPass = "qazxsw"
+        //var devId = "mp@tst.com"
+        //var devPass = "qazxsw"
         //fix below returning nil causing crash
         let idx = loginSegCtrl.selectedSegmentIndex
         
@@ -101,9 +102,9 @@ class LoginViewController: UIViewController {
         }
         if idx == 0{//login
             print("login")
-            //let devId = userId.text!
-            //let devPass = userKey.text!
-            Auth.auth().signIn(withEmail: devId, password: devPass){
+            let id = userId.text!
+            let pass = userKey.text!
+            Auth.auth().signIn(withEmail: id, password: pass){
                 authResult, error in
                 print("checking????")
                 if let error = error as NSError? {
@@ -112,8 +113,7 @@ class LoginViewController: UIViewController {
                 }else{//no error
                     print("logging in? ")
                     let loadingVC = storyBoard.instantiateViewController(withIdentifier: "loadingVC") as! LoadingScreenViewController
-                    currUid = devId
-                    print("devID \(devId)")
+                
                     print("currId! \(currUid)")
                     //self.performSegue(withIdentifier: "loadingScreenSeg", sender: self)
                     loadingVC.isModalInPresentation = true
@@ -136,7 +136,8 @@ class LoginViewController: UIViewController {
         
         userEntity.setValue(user, forKey: "email")
         userEntity.setValue(username, forKey: "username")
-        userEntity.setValue(" ", forKey: "friends")
+        userEntity.setValue("", forKey: "friends")
+        userEntity.setValue("", forKey: "recievedReqsF")
         userEntity.setValue(photoData, forKey: "profilePhoto")
         
         appDelegate.saveContext()
@@ -152,9 +153,10 @@ class LoginViewController: UIViewController {
             let darkMode = user.value(forKey: "darkMode")
             let email = user.value(forKey: "email")
             let friends = user.value(forKey: "friends")
+            let req = user.value(forKey: "recievedReqsF")
             let soundOn = user.value(forKey: "soundOn")
             let username = user.value(forKey: "username")
-            print("user #\(cnt):\n email: \(String(describing: email)) username: \(String(describing: username)) darkMode: \(String(describing: darkMode)) soundOn: \(String(describing: soundOn))\n friends: \(friends)")
+            print("user #\(cnt):\n email: \(String(describing: email)) username: \(String(describing: username)) darkMode: \(String(describing: darkMode)) soundOn: \(String(describing: soundOn))\n friends: \(friends)\n f reqs: \(req)")
             
         }
     }

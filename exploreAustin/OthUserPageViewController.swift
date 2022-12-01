@@ -46,7 +46,7 @@ class OthUserPageViewController: UIViewController {
     @IBAction func friendBtnHit(_ sender: Any) {
         if self.areFriends == false {
             self.friendBtn.setTitle("Request Sent", for: .normal)
-            sendFriendRequest(othUser: self.pageFor)
+            sendFriendRequest(othUser: self.pageFor)//0 if youve alr sent a req
         }else{
             //alert to remove friend
         }
@@ -54,7 +54,11 @@ class OthUserPageViewController: UIViewController {
     
     
     @IBAction func homeBtnHit(_ sender: Any) {
-        performSegue(withIdentifier: "feedSeg", sender: nil)
+        let feedVC = storyBoard.instantiateViewController(withIdentifier: "feedVC") as! FeedViewController
+        
+        feedVC.isModalInPresentation = true
+        feedVC.modalPresentationStyle = .fullScreen
+        self.present(feedVC, animated:true, completion:nil)
     }
     
     @IBAction func pageBtnHit(_ sender: Any) {

@@ -14,6 +14,9 @@
 		C91CFC67293688A7005351EB /* OthUserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91CFC66293688A7005351EB /* OthUserPageViewController.swift */; };
 		C91CFC6A29369823005351EB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C91CFC6929369823005351EB /* MapKit.framework */; };
 		C91CFC6C2936E57D005351EB /* FinalizeEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91CFC6B2936E57D005351EB /* FinalizeEventViewController.swift */; };
+		C922DB7529382B600092B61B /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C922DB7429382B600092B61B /* NotificationsViewController.swift */; };
+		C922DB78293840710092B61B /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C922DB76293840710092B61B /* NotificationTableViewCell.swift */; };
+		C922DB79293840710092B61B /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C922DB77293840710092B61B /* NotificationTableViewCell.xib */; };
 		C92377922931BBAC00BCCBC5 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92377912931BBAC00BCCBC5 /* CommentsViewController.swift */; };
 		C92377942931C94F00BCCBC5 /* ContentHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92377932931C94F00BCCBC5 /* ContentHandlers.swift */; };
 		C93D86712926A74B002BA3B2 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93D86702926A74B002BA3B2 /* PageViewController.swift */; };
@@ -50,6 +53,9 @@
 		C91CFC66293688A7005351EB /* OthUserPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthUserPageViewController.swift; sourceTree = "<group>"; };
 		C91CFC6929369823005351EB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		C91CFC6B2936E57D005351EB /* FinalizeEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalizeEventViewController.swift; sourceTree = "<group>"; };
+		C922DB7429382B600092B61B /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		C922DB76293840710092B61B /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		C922DB77293840710092B61B /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
 		C92377912931BBAC00BCCBC5 /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		C92377932931C94F00BCCBC5 /* ContentHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentHandlers.swift; sourceTree = "<group>"; };
 		C93D86702926A74B002BA3B2 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +132,8 @@
 				E02991EA290881F800316F3B /* LoginViewController.swift */,
 				8B4D3E0D290B863500DC5F21 /* HomeViewController.swift */,
 				C93D86702926A74B002BA3B2 /* PageViewController.swift */,
+				C922DB7429382B600092B61B /* NotificationsViewController.swift */,
+				C922DB76293840710092B61B /* NotificationTableViewCell.swift */,
 				C91CFC66293688A7005351EB /* OthUserPageViewController.swift */,
 				E02991EC2908825F00316F3B /* ProfileViewController.swift */,
 				C9791CAB292AF91E007DACE5 /* ProfilePhotoViewController.swift */,
@@ -141,6 +149,7 @@
 				C91CFC6B2936E57D005351EB /* FinalizeEventViewController.swift */,
 				C9595F0429367B9500ADAA46 /* SearchUsersViewController.swift */,
 				E02991D429087E8500316F3B /* Main.storyboard */,
+				C922DB77293840710092B61B /* NotificationTableViewCell.xib */,
 				C94307C929342F150088D1A8 /* EventsTableViewCell.xib */,
 				C9C05C92292D52800094CBB3 /* FeedTableViewCell.xib */,
 				C906D2B42931909600A026BE /* FriendsTableViewCell.xib */,
@@ -220,6 +229,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C922DB79293840710092B61B /* NotificationTableViewCell.xib in Resources */,
 				E02991DE29087E8600316F3B /* LaunchScreen.storyboard in Resources */,
 				C9C05C94292D52800094CBB3 /* FeedTableViewCell.xib in Resources */,
 				C94307CB29342F150088D1A8 /* EventsTableViewCell.xib in Resources */,
@@ -239,9 +249,11 @@
 			files = (
 				E02991ED2908825F00316F3B /* ProfileViewController.swift in Sources */,
 				8BCEFE3D290DAC04005D6C92 /* LoadingScreenViewController.swift in Sources */,
+				C922DB78293840710092B61B /* NotificationTableViewCell.swift in Sources */,
 				C9791CAC292AF91E007DACE5 /* ProfilePhotoViewController.swift in Sources */,
 				C9791C9E29297C68007DACE5 /* CoreDataHandler.swift in Sources */,
 				C9791CA8292AB42E007DACE5 /* PostViewController.swift in Sources */,
+				C922DB7529382B600092B61B /* NotificationsViewController.swift in Sources */,
 				E02991D929087E8500316F3B /* exploreAustin.xcdatamodeld in Sources */,
 				C906D2B52931909600A026BE /* FriendsTableViewCell.swift in Sources */,
 				C98CE3E82927EA9700E545E5 /* PagePhotoCell.swift in Sources */,

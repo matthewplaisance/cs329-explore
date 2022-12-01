@@ -16,7 +16,7 @@ class FinalizeEventViewController: UIViewController, UITextViewDelegate{
     var eventLocation:String!
     var data = [Dictionary<String,Any>]()
     
-    @IBOutlet weak var publicSwitch: UISwitch!
+    @IBOutlet weak var privateSwitch: UISwitch!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var tableView: UITableView!
     
@@ -31,10 +31,17 @@ class FinalizeEventViewController: UIViewController, UITextViewDelegate{
         
         self.descriptionTextView.text = "Event Description ..."
         self.descriptionTextView.textColor = UIColor.lightGray
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.data = friendsInvited
+        if self.data.isEmpty == true{
+            var defualt = Dictionary<String,Any>()
+            defualt["username"] = "Click to invite friends!"
+            defualt["email"] = ""
+            self.data.append(defualt)
+        }
         print("data: \(self.data)")
         self.tableView.reloadData()
     }
@@ -47,18 +54,18 @@ class FinalizeEventViewController: UIViewController, UITextViewDelegate{
     }
     
     @IBAction func createBtnHit(_ sender: Any) {
-        print("date1: \(self.eventDate)")
-        let date = customDataFormat(date: self.eventDate, long: true)
-        print("date2: \(date)")
         let key = Date().timeIntervalSince1970
-        var publicEvent = false
-        if publicSwitch.isOn {
-            publicEvent = true
-        }
-        var invitedStr = ""
+        self.sendInvites(users: self.data, eventKey: key)
+        let date = customDataFormat(date: self.eventDate, long: true)
         
+        var privateEvent = false
+        if privateSwitch.isOn {
+            privateEvent = true
+        }
+        
+        var invitedStr = ""
         for i in self.data {
-            invitedStr += "\(i["email"] as! String)\\"
+            invitedStr += "\(i["email"] ?? "")//"
         }
         
         let eventEntity = NSEntityDescription.insertNewObject(forEntityName: "Event", into: context)
@@ -68,7 +75,7 @@ class FinalizeEventViewController: UIViewController, UITextViewDelegate{
         eventEntity.setValue(self.eventLocation, forKey: "location")
         eventEntity.setValue(date, forKey: "date")
         eventEntity.setValue(key, forKey: "key")
-        eventEntity.setValue(publicEvent, forKey: "privateEvent")
+        eventEntity.setValue(privateEvent, forKey: "privateEvent")
         appDelegate.saveContext()
         navigationController?.popToRootViewController(animated: true)
     }
@@ -91,6 +98,20 @@ class FinalizeEventViewController: UIViewController, UITextViewDelegate{
             self.descriptionTextView.textColor = UIColor.lightGray
         }
     }
+    
+    func sendInvites(users:[Dictionary<String,Any>],eventKey:Double){
+        print("invites: \(users)")
+        
+        for user in users {
+            let userEmail = user["email"] as! String
+            let userCd = fetchUserCoreData(user: userEmail, entity: "User")[0]
+            var invites = userCd.value(forKey: "invitations") as! String//string of doubles sep by //
+            let strKey:String = String(format: "%f", eventKey) + "//"
+            invites += strKey
+            userCd.setValue(invites, forKey: "invitations")
+            appDelegate.saveContext()
+        }
+    }
 }
 
 extension FinalizeEventViewController:UITableViewDelegate,UITableViewDataSource {
@@ -108,6 +129,9 @@ extension FinalizeEventViewController:UITableViewDelegate,UITableViewDataSource 
         cell.friendProfImageView.image = nil
         cell.checkImageView.image = nil
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "friendsSearch", sender: self)
     }
     
     

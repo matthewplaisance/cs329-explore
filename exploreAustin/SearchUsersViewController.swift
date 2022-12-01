@@ -86,7 +86,9 @@ extension SearchUsersViewController:UITableViewDelegate,UITableViewDataSource {
         
         if self.searchId == "users"{
             let pageVC = storyboard?.instantiateViewController(withIdentifier: "othUserPage") as! OthUserPageViewController
-            pageVC.pageFor = userEmail as? String
+            
+            pageVC.pageFor = userEmail
+            
             self.present(pageVC, animated: true)
         }else if self.searchId == "friends"{
             if cell.checkImageView.image == UIImage(systemName: "checkmark"){

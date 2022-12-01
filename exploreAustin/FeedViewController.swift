@@ -41,6 +41,7 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("CURRENT USER :: \(currUid!)")
         self.homeBtn.image = UIImage(systemName: "house.fill")
         self.profBtn.image = UIImage(systemName: "person")
         let activityIndicator = UIActivityIndicatorView()
@@ -56,7 +57,7 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         currPosts = postData.1
         currUserPosts = postData.0
         currUsrData = fetchUserCoreData(user: currUid!, entity: "User")[0]
-        currUserFriends = userFriends()
+        currUserFriends = userFriends(key: "friends")
         otherUsers = getOtherUser()
         
         for post in currUserPosts {

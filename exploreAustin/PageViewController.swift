@@ -17,9 +17,10 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var pageCollectionView: UICollectionView!
     @IBOutlet weak var profileImage: UIImageView!
     
+    @IBOutlet weak var notificationsBtn: UIButton!
     var data1 : [String] = ["ZilkerPark","MountBonnell"]
     //var currUid = Auth.auth().currentUser?.email
-    var userPage: String = currUid//user email
+    var userPage: String = currUid!//user email
     var data = [Dictionary<String, Any>]()
     var othProfPhoto:UIImage?
     
@@ -40,28 +41,17 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.homeBtn.image = UIImage(systemName: "house")
         self.profileBtn.image = UIImage(systemName: "person.fill")
         
-        if currentUserData.updataPosts == true {//user just posted photo
-            
-        }
+        self.data = currUserPosts
+        usernameLabel.text = currUsrData.value(forKey: "username") as? String
         
-        if userPage == currUid {
-            print("grabbing data..")
-            self.data = currUserPosts
-            usernameLabel.text = currUsrData.value(forKey: "username") as? String
+        let profPhoto = fetchUIImage(uid: currUid!)
+        profileImage.image = profPhoto
             
-            let profPhoto = fetchUIImage(uid: currUid)
-            print("image name \(profPhoto?.accessibilityIdentifier)")
-            profileImage.image = profPhoto
-            
-        }
-        
-        //self.contentToDisplay()
-        //self.profileImage.image!.setRounded()
         pageCollectionView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.userPage = currUid
+        self.userPage = currUid!
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -118,6 +108,12 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     
+    @IBAction func notificationBtnHit(_ sender: Any) {
+        let notVC = storyBoard.instantiateViewController(withIdentifier: "notificationsVC") as! NotificationsViewController
+        
+        self.present(notVC, animated:true, completion:nil)
+    }
+    
     func updatePage(user:String) {
         print("updating..")
         let posts = fetchUserCoreData(user: user, entity: "Post")
@@ -164,7 +160,7 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func contentToDisplay() {
         if self.userPage == currUid{
-            self.updatePage(user: currUid)
+            self.updatePage(user: currUid!)
             settingsBtn.alpha = 1
             postBtn.alpha = 1
         }else{

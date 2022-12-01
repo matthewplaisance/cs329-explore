@@ -75,7 +75,18 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(recognizer:)))
+        self.profImageView.isUserInteractionEnabled = true
+        self.profImageView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc func imageTapped(recognizer: UITapGestureRecognizer)
+    {
+        let tappedImage = recognizer.view as! UIImageView
+        let profPhotoVC = storyBoard.instantiateViewController(withIdentifier: "profPhotoVC") as! ProfilePhotoViewController
+        
+        self.present(profPhotoVC, animated: true)
+        
     }
     
     @IBAction func DarkModeToggle(_ sender: Any) {

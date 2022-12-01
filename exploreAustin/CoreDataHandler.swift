@@ -144,7 +144,7 @@ func fetchUserCoreData(user:String,entity:String) -> [NSManagedObject]{
     if user == "all"{
         
     }else if user == "otherUsers"{
-        request.predicate = NSPredicate(format: "email != %@",currUid)
+        request.predicate = NSPredicate(format: "email != %@",currUid!)
     }else{//passed specif user id
         request.predicate = NSPredicate(format: "email CONTAINS %@",user)
     }
@@ -161,6 +161,8 @@ func fetchUserCoreData(user:String,entity:String) -> [NSManagedObject]{
     }
     return fetchedResults!//if filtered for specifc user, call res with [0]
 }
+
+
 
 func createPost(image:UIImage,profImage:UIImage,bio:String,username:String,email:String) {
     let postEntity = NSEntityDescription.insertNewObject(forEntityName: "Post", into: context)

@@ -9,13 +9,14 @@ import UIKit
 import FirebaseAuth
 import CoreData
 
-var currUid = String()
+var currUid = Auth.auth().currentUser?.email!
 //current user data, used across app until user posts/updates their data
 var currPosts = [Dictionary<String, Any>]()
 var currUserPosts = [Dictionary<String, Any>]()
 var currUsrData = NSManagedObject()
 var currUserFriends = [Dictionary<String, Any>]()
 var otherUsers = [Dictionary<String, Any>]()
+var userEvents = [NSManagedObject]()
 
 class LoadingScreenViewController: UIViewController {
 
@@ -26,11 +27,13 @@ class LoadingScreenViewController: UIViewController {
           if let user = user {
               print("user for state: \(user)")
               print(user.email)
+              currUid = user.email
               //currUid = user.email as! String
           } else {
             // No User is signed in. Show user the login screen
           }
         }
+        
     }
     
     override func viewDidLoad() {

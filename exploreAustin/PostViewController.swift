@@ -77,7 +77,7 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             createPost(image: postImage, profImage: self.profilePhoto, bio: postBio.text!, username: username, email: currUID!)
             
             //update current data struct
-            let postData = fetchPostCdAsArray(user: currUid)
+            let postData = fetchPostCdAsArray(user: currUid!)
             currUserPosts = postData.0
             currPosts = postData.1
             

@@ -15,6 +15,7 @@ class FriendsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var friendProfImageView: UIImageView!
     @IBOutlet weak var checkImageView: UIImageView!
+    
     static func nib() -> UINib {
         return UINib(nibName: self.id, bundle: nil)
     }

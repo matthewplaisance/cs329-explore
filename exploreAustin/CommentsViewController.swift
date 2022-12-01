@@ -114,7 +114,7 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         post.setValue(comments, forKey: "comments")
         appDelegate.saveContext()
         //update current data struct
-        let postData = fetchPostCdAsArray(user: currUid)
+        let postData = fetchPostCdAsArray(user: currUid!)
         currPosts = postData.1
     }
 }
