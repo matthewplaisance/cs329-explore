@@ -112,8 +112,6 @@ class LoginViewController: UIViewController {
                     self.statusLabel.text = "\(error.localizedDescription)"
                 }else{//no error
                     print("logging in? ")
-                    let loadingVC = storyBoard.instantiateViewController(withIdentifier: "loadingVC") as! LoadingScreenViewController
-                
                     print("currId! \(currUid)")
                     self.userKey = nil
                     self.userId = nil

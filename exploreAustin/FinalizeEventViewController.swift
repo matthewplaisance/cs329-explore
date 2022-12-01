@@ -35,6 +35,11 @@ class FinalizeEventViewController: UIViewController, UITextViewDelegate{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if DarkMode.darkModeIsEnabled == true{
+            overrideUserInterfaceStyle = .dark
+        }else{
+            overrideUserInterfaceStyle = .light
+        }
         self.data = friendsInvited
         if self.data.isEmpty == true{
             var defualt = Dictionary<String,Any>()
