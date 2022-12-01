@@ -115,12 +115,9 @@ class LoginViewController: UIViewController {
                     let loadingVC = storyBoard.instantiateViewController(withIdentifier: "loadingVC") as! LoadingScreenViewController
                 
                     print("currId! \(currUid)")
-                    //self.performSegue(withIdentifier: "loadingScreenSeg", sender: self)
-                    loadingVC.isModalInPresentation = true
-                    loadingVC.modalPresentationStyle = .fullScreen
-                    self.present(loadingVC, animated: true,completion: nil)
                     self.userKey = nil
                     self.userId = nil
+                    self.performSegue(withIdentifier: "feedSeg", sender: self)
                 }
             }
         }

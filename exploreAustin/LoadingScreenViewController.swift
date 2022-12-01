@@ -5,6 +5,14 @@
 //  Created by Robert Binning on 10/29/22.
 //
 
+struct DarkMode{
+    static var darkModeIsEnabled: Bool = false
+    
+}
+struct SoundOn{
+    static var soundOn: Bool = false
+}
+
 import UIKit
 import FirebaseAuth
 import CoreData
@@ -21,6 +29,9 @@ var userEvents = [NSManagedObject]()
 class LoadingScreenViewController: UIViewController {
 
     @IBOutlet weak var loadingImage: UIImageView!
+    
+    var currUID = Auth.auth().currentUser?.email
+    
     override func viewWillAppear(_ animated: Bool) {
         //load current user data
         Auth.auth().addStateDidChangeListener { auth, user in
@@ -47,7 +58,7 @@ class LoadingScreenViewController: UIViewController {
                    UIView.animate(withDuration: 0.5, animations: {
                        self.loadingImage.alpha = 0.0
                    }, completion: {finished in
-                       self.performSegue(withIdentifier: "feedSegue", sender: self)
+                       self.performSegue(withIdentifier: "initialLoginSegue", sender: self)
                    })
                }
         )
