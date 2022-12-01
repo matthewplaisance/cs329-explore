@@ -2,13 +2,20 @@
 //  ProfileViewController.swift
 //  exploreAustin
 //
-//  Created by Robert Binning on 10/25/22.
+//  Created by Matthew Plaisance on 10/25/22.
 //
 
 import UIKit
 import FirebaseAuth
 import CoreData
-import ZLPhotoBrowser
+
+struct DarkMode{
+    static var darkModeIsEnabled: Bool = false
+    
+}
+struct SoundOn{
+    static var soundOn: Bool = true
+}
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let context = appDelegate.persistentContainer.viewContext
@@ -16,25 +23,38 @@ let context = appDelegate.persistentContainer.viewContext
 
 class ProfileViewController: UIViewController {
     
-    var userID = Auth.auth().currentUser?.email
+    var currUID = Auth.auth().currentUser?.email
+    var profImage: UIImage?
+    
     // Outlet Variables
     @IBOutlet weak var errorMessage: UILabel!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var newPasswordField: UITextField!
-    @IBOutlet weak var confirmPasswordField: UITextField!
     @IBOutlet weak var darkModeToggle: UISwitch!
     @IBOutlet weak var soundToggle: UISwitch!
+    @IBOutlet weak var profImageView: UIImageView!
     
-    @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var confirmPasswordLabel: UILabel!
-    
-    @IBOutlet weak var photoBtn: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
+        // get CoreData settings
+        print("curruser: \(String(describing: currUID))\n user cd:")
+        //let userSettings = fetchUserCoreData(user: currUserID!, entity: "User")
+        //let userFriends = fetchUserCoreData(user: currUserID!, entity: "Friends")
+        let currUserData = fetchUserCoreData(user: currUID!, entity: "User")[0]
         
-        nameField.text = Auth.auth().currentUser?.displayName
-        emailField.text = Auth.auth().currentUser?.email
+        
+        if let darkMode = currUserData.value(forKey: "darkMode"){
+            DarkMode.darkModeIsEnabled = darkMode as! Bool
+        }
+        if let loadedName = currUserData.value(forKey: "username"){
+            nameField.text = loadedName as? String
+        }
+        if let loadedEmail = currUserData.value(forKey: "email"){
+            emailField.text = loadedEmail as? String
+        }
+        if let loadedSound = currUserData.value(forKey: "soundOn"){
+            SoundOn.soundOn = loadedSound as! Bool
+        }
         
         // check for dark mode
         if DarkMode.darkModeIsEnabled == true{
@@ -46,38 +66,34 @@ class ProfileViewController: UIViewController {
         }
         // set error message label to blank
         errorMessage.text = ""
-        saveButton.setTitle("Ok", for: .normal)
-        confirmPasswordField.alpha = 0
-        confirmPasswordLabel.alpha = 0
+        
+        let profPhoto = fetchUIImage(uid: currUID!)
+        profImageView.image = profPhoto
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
-        emailField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
-        newPasswordField.addTarget(self, action: #selector(ProfileViewController.passwordFieldDiedChange(_:)), for: .editingChanged)
-        confirmPasswordField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
         
-        // Do any additional setup after loading the view.
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(recognizer:)))
+        self.profImageView.isUserInteractionEnabled = true
+        self.profImageView.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        saveButton.setTitle("Save", for: .normal)
-    }
-    
-    @objc func passwordFieldDiedChange(_ textField: UITextField){
-        confirmPasswordField.alpha = 1
-        confirmPasswordLabel.alpha = 1
-        saveButton.setTitle("Save", for: .normal)
+    @objc func imageTapped(recognizer: UITapGestureRecognizer)
+    {
+        let tappedImage = recognizer.view as! UIImageView
+        let profPhotoVC = storyBoard.instantiateViewController(withIdentifier: "profPhotoVC") as! ProfilePhotoViewController
+        
+        self.present(profPhotoVC, animated: true)
+        
     }
     
     @IBAction func DarkModeToggle(_ sender: Any) {
         if darkModeToggle.isOn{
             overrideUserInterfaceStyle = .dark
-            DarkMode.darkModeIsEnabled = true
         }else{
             overrideUserInterfaceStyle = .light
-            DarkMode.darkModeIsEnabled = false
         }
         
     }
@@ -86,23 +102,10 @@ class ProfileViewController: UIViewController {
         
     }
     
+    
     @IBAction func saveButtonPressed(_ sender: Any) {
-        if (newPasswordField.text != "") && (confirmPasswordField.text == newPasswordField.text){
-            changePassword(password: confirmPasswordField.text!)
-            print("Password changed") // change to alert
-        }
-        else if (newPasswordField.text != "") && (confirmPasswordField.text != newPasswordField.text){
-            errorMessage.text = "New passwords do not match!"
-            return
-        }
-        if nameField.text != ""{
-            saveName(name: nameField.text!)
-        }
-        updateUserData()
-        performSegue(withIdentifier: "settingsSaveSegue", sender: self)
+        updateUserData(user: currUID!)
     }
-    
-    
     
     @IBAction func logOutButtonPressed(_ sender: Any) {
         let auth = Auth.auth()
@@ -115,71 +118,6 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    
-    @IBAction func photoClick(_ sender: Any) {
-        let ps = ZLPhotoPreviewSheet()
-        let config = ZLPhotoConfiguration.default()
-        config.maxSelectCount = 1
-        ps.selectImageBlock = { [weak self] results, isOriginal in
-            guard let self = self else {return}
-            guard let img = results.first?.image else { return  }
-            self.photoBtn.setBackgroundImage(img, for: .normal)
-            self.photoBtn.setTitle("", for: .normal)
-        }
-        ps.showPreview(animate: true, sender: self)
-        
-    }
-    
-    func saveName(name: String){
-         let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-         changeRequest?.displayName = name
-         changeRequest?.commitChanges { error in
-         }
-     }
-   
-    func retrieveUserCD() -> NSManagedObject {
-        let data = retrieveCoreData()
-        
-        var currUser = data[0]
-        
-        for user in data {
-            let email = user.value(forKey: "email")
-            if (userID == email as? String){
-                print("Found CD for current user: \(userID!)")
-                currUser = user
-            }
-        }
-        print("currUserData: \(currUser)")
-        return currUser
-    }
-    
-    
-    
-    func updateUserData() {
-        let data = retrieveCoreData()
-        
-        let darkMode = darkModeToggle.isOn
-        let soundMode = soundToggle.isOn
-        let name = nameField.text!
-        let email = emailField.text!
-        let userData = [email,name,darkMode,soundMode] as [Any]
-        let entry = ["email","name","darkMode","soundOn"]
-        
-        for user in data {
-            let email = user.value(forKey: "email")
-            if userID == email as? String {
-                for (el,id) in zip(userData,entry){
-                    user.setValue(el, forKey: id)
-                }
-            }
-        }
-        appDelegate.saveContext()
-        retrieveUserCD()
-    }
-    
-    
-    
-    
     func saveEmail(email: String){
         Auth.auth().currentUser?.updateEmail(to: emailField.text!){
             (error) in self.errorMessage.text = error.debugDescription
@@ -188,44 +126,82 @@ class ProfileViewController: UIViewController {
     
     func changePassword(password: String){
         Auth.auth().currentUser?.updatePassword(to: password){
-            (error) in self.errorMessage.text = error.debugDescription
+            (error) in self.errorMessage.text = error?.localizedDescription
         }
     }
     
-    func retrieveCoreData() -> [NSManagedObject] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
-        var fetchedResults:[NSManagedObject]? = nil
-        do{
-            try fetchedResults = context.fetch(request) as? [NSManagedObject]
-        } catch {
-            let nserror = error as NSError
-            print(nserror)
+    func updateUserData(user:String) {
+        var currUserData = fetchUserCoreData(user: currUID!, entity: "User")[0]
+        
+        let darkMode = darkModeToggle.isOn
+        let soundMode = soundToggle.isOn
+        let name = nameField.text!
+        let email = emailField.text!
+        let userData = [email,name,darkMode,soundMode] as [Any]
+        let entry = ["email","username","darkMode","soundOn"]
+        
+        for (el,id) in zip(userData,entry){
+            currUserData.setValue(el, forKey: id)
         }
-        return (fetchedResults)!
-    }
-    
-    
-    func viewCoreData () {
-        let data = retrieveCoreData()
-        var cnt = 0
-        for user in data{
-            cnt += 1
-            
-            let darkMode = user.value(forKey: "darkMode")
-            let email = user.value(forKey: "email")
-            let name = user.value(forKey: "name")
-            let soundOn = user.value(forKey: "soundOn")
-
-            print("user #\(cnt):\n email: \(email) name: \(name)  darkMode: \(darkMode) soundOn: \(soundOn)")
-            
-        }
+        
+        appDelegate.saveContext()
         
     }
     
     
+    @IBAction func changeProfPhotoHit(_ sender: Any) {
+        self.performSegue(withIdentifier: "changeProfPhotoSeg", sender: self)
+    }
     
     
     
+    @IBAction func changePasswordHit(_ sender: Any) {
+        let passwordAlert = UIAlertController(title: "Change Password: ", message: "", preferredStyle: .alert)
 
+        for i in 1...2 {
+            passwordAlert.addTextField { (textField) in
+                if i == 1 {
+                    textField.placeholder = "New password"
+                }else{
+                    textField.placeholder = "Repeat password"
+                }
+                
+            }
+        }
+
+        passwordAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak passwordAlert] (action) in
+            let pass = passwordAlert?.textFields![0].text!
+            let passRepeat = passwordAlert?.textFields![1].text!
+            
+            if pass  == "" || passRepeat == "" {
+                passwordAlert?.dismiss(animated: true)
+            }
+            if pass == passRepeat {
+                self.changePassword(password: pass!)
+            }else{
+                passwordAlert?.message = "Passwords do not match"
+            }
+        }))
+        
+        passwordAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak passwordAlert] (action) in
+            return
+        }))
+
+        self.present(passwordAlert, animated: true, completion: nil)
+    }
+    
+    
+    
+    
+    @IBAction func backBtn(_ sender: Any) {
+        let pageVC = storyBoard.instantiateViewController(withIdentifier: "pageVC") as! PageViewController
+        pageVC.isModalInPresentation = true
+        pageVC.modalPresentationStyle = .fullScreen
+        pageVC.userPage = currUID!
+        self.present(pageVC, animated: true,completion: nil)
+    }
+    
+    
 }
+
 

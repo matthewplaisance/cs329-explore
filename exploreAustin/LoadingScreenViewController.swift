@@ -6,77 +6,67 @@
 //
 
 import UIKit
-import CoreData
 import FirebaseAuth
+import CoreData
 
-struct DarkMode{
-    static var darkModeIsEnabled: Bool = false
-    
-}
-struct SoundOn{
-    static var soundOn: Bool = true
-}
-
+var currUid = Auth.auth().currentUser?.email!
+//current user data, used across app until user posts/updates their data
+var currPosts = [Dictionary<String, Any>]()
+var currUserPosts = [Dictionary<String, Any>]()
+var currUsrData = NSManagedObject()
+var currUserFriends = [Dictionary<String, Any>]()
+var otherUsers = [Dictionary<String, Any>]()
+var userEvents = [NSManagedObject]()
 
 class LoadingScreenViewController: UIViewController {
-    var userID = Auth.auth().currentUser?.email
 
     @IBOutlet weak var loadingImage: UIImageView!
     override func viewWillAppear(_ animated: Bool) {
+        //load current user data
+        Auth.auth().addStateDidChangeListener { auth, user in
+          if let user = user {
+              print("user for state: \(user)")
+              print(user.email)
+              currUid = user.email
+              //currUid = user.email as! String
+          } else {
+            // No User is signed in. Show user the login screen
+          }
+        }
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         UIView.animate(
-            withDuration: 2.0,
+            withDuration: 0.5,
                animations: {
                    self.loadingImage.alpha = 1.0
                },
                completion: { finished in
-                   UIView.animate(withDuration: 2.0, animations: {
+                   UIView.animate(withDuration: 0.5, animations: {
                        self.loadingImage.alpha = 0.0
                    }, completion: {finished in
-                       self.performSegue(withIdentifier: "LoadingScreenSegue", sender: self)
+                       self.performSegue(withIdentifier: "feedSegue", sender: self)
                    })
                }
         )
-        let userCD = self.retrieveUserCD()
-        if let darkMode = userCD.value(forKey: "darkMode"){
-            DarkMode.darkModeIsEnabled = darkMode as! Bool
-        }
-        if let loadedSound = userCD.value(forKey: "soundOn"){
-            SoundOn.soundOn = loadedSound as! Bool
-        }
         
-    }
-    
-    func retrieveUserCD() -> NSManagedObject {
-        let data = retrieveCoreData()
-        
-        var currUser = data[0]
-        
-        for user in data {
-            let email = user.value(forKey: "email")
-            if (userID == email as? String){
-                print("Found CD for current user: \(userID!)")
-                currUser = user
-            }
-        }
-        print("currUserData: \(currUser)")
-        return currUser
-    }
-    
-    func retrieveCoreData() -> [NSManagedObject] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
-        var fetchedResults:[NSManagedObject]? = nil
-        do{
-            try fetchedResults = context.fetch(request) as? [NSManagedObject]
-        } catch {
-            let nserror = error as NSError
-            print(nserror)
-        }
-        return (fetchedResults)!
     }
         
 }
     
+struct currentUserData {
+    static var currUserData = Dictionary<String, Any>()
+    static var currUserPosts = [Dictionary<String, Any>]()
+    static var currPosts = [Dictionary<String, Any>]()
+    static var updataPosts = false
+}
+
+extension UIImageView {
+
+    func setRounded() {
+        self.layer.cornerRadius = (self.frame.width / 2) //instead of let radius = CGRectGetWidth(self.frame) / 2
+        self.layer.masksToBounds = true
+    }
+}
