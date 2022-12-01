@@ -595,7 +595,11 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="12E-da-3Bz"/>
                                     <barButtonItem title="Item" image="magnifyingglass" catalog="system" id="VG5-hS-hcF"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="B6D-Fq-Ro1"/>
-                                    <barButtonItem title="Item" image="map" catalog="system" id="qri-Zi-181"/>
+                                    <barButtonItem title="Item" image="map" catalog="system" id="qri-Zi-181">
+                                        <connections>
+                                            <segue destination="U99-HZ-kk7" kind="presentation" identifier="mapSeg" modalPresentationStyle="automatic" id="Bpt-QB-SVb"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="KHF-4Q-26j"/>
                                     <barButtonItem title="Item" id="sKU-l0-xxL"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="mcA-kq-qlP"/>
@@ -767,7 +771,11 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="FFE-lE-Lsb"/>
                                     <barButtonItem title="Item" image="magnifyingglass" catalog="system" id="jnO-d8-4qR"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="24V-je-6bx"/>
-                                    <barButtonItem title="Item" image="map" catalog="system" id="HH9-cd-Imq"/>
+                                    <barButtonItem title="Item" image="map" catalog="system" id="HH9-cd-Imq">
+                                        <connections>
+                                            <segue destination="U99-HZ-kk7" kind="presentation" identifier="mapSeg" id="JyZ-vQ-CfD"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="mvf-HT-Xal"/>
                                     <barButtonItem title="Item" image="party.popper" catalog="system" id="3AQ-y5-Mv6"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="kkX-kz-yew"/>
@@ -844,7 +852,11 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="h9w-Cd-yw0"/>
                                     <barButtonItem title="Item" image="magnifyingglass" catalog="system" id="Rl1-sM-ayK"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="dwr-KB-eH2"/>
-                                    <barButtonItem title="Item" image="map" catalog="system" id="Ins-27-6Yl"/>
+                                    <barButtonItem title="Item" image="map" catalog="system" id="Ins-27-6Yl">
+                                        <connections>
+                                            <segue destination="U99-HZ-kk7" kind="presentation" identifier="mapSeg" modalPresentationStyle="automatic" id="YJL-5x-OOw"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="y0N-ye-4xV"/>
                                     <barButtonItem title="Item" image="party.popper" catalog="system" id="K7e-pV-bml"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Pqf-uq-EQn"/>
@@ -1257,9 +1269,35 @@
             </objects>
             <point key="canvasLocation" x="-486.15384615384613" y="812.55924170616106"/>
         </scene>
+        <!--Map View Controller-->
+        <scene sceneID="8PT-Tg-5Rv">
+            <objects>
+                <viewController id="U99-HZ-kk7" customClass="MapViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TGg-1t-P2L">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="344-qh-9J4">
+                                <rect key="frame" x="0.0" y="47" width="390" height="763"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <standardMapConfiguration key="preferredConfiguration"/>
+                            </mapView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="zeS-ar-uYO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="344-qh-9J4" id="rum-Bt-TwD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xZT-T7-OsO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1370.7692307692307" y="812.55924170616106"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="QkM-8P-iDy"/>
+        <segue reference="YJL-5x-OOw"/>
         <segue reference="oJ1-tl-YK4"/>
         <segue reference="pnT-QD-qQg"/>
         <segue reference="Sel-aU-hok"/>
