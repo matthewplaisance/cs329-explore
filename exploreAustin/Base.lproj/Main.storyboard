@@ -832,7 +832,7 @@
             <objects>
                 <viewController storyboardIdentifier="feedVC" id="9vT-79-mxk" customClass="FeedViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9Pe-lt-1qU">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="arb-qS-lET">
@@ -841,7 +841,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2AT-5Z-h8X">
-                                <rect key="frame" x="-12" y="767" width="396" height="47"/>
+                                <rect key="frame" x="-12" y="710" width="396" height="47"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem title="Item" image="house" catalog="system" id="cjm-of-9kM">
@@ -1303,7 +1303,7 @@
         <segue reference="QkM-8P-iDy"/>
         <segue reference="YJL-5x-OOw"/>
         <segue reference="oJ1-tl-YK4"/>
-        <segue reference="pnT-QD-qQg"/>
+        <segue reference="I2Y-Hu-zCI"/>
         <segue reference="Sel-aU-hok"/>
     </inferredMetricsTieBreakers>
     <resources>
