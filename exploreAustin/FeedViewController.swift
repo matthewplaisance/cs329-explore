@@ -11,9 +11,14 @@ import CoreData
 
 var currUserUid = Auth.auth().currentUser?.email
 
-//var currUserData = fetchUserCoreData(user: currUserUid!, entity: "User")[0]
-//var currUserPosts = fetchUserCoreData(user: currUserUid!, entity: "Post")
-//var displayForCurrUser = true
+var currUid = Auth.auth().currentUser?.email!
+//current user data, used across app until user posts/updates their data
+var currPosts = [Dictionary<String, Any>]()
+var currUserPosts = [Dictionary<String, Any>]()
+var currUsrData = NSManagedObject()
+var currUserFriends = [Dictionary<String, Any>]()
+var otherUsers = [Dictionary<String, Any>]()
+var userEvents = [NSManagedObject]()
 
 class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,FeedCellDelegator {
     
@@ -38,6 +43,10 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         feedTable.delegate = self
         feedTable.dataSource = self
         
+        self.loadingDataIndicator(done: false)
+        mainFetchUserData()
+        self.loadingDataIndicator(done: true)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,37 +59,19 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }else{
             overrideUserInterfaceStyle = .light
         }
-        
-        print("CURRENT USER :: \(currUid!)")
         self.homeBtn.image = UIImage(systemName: "house.fill")
         self.profBtn.image = UIImage(systemName: "person")
-        let activityIndicator = UIActivityIndicatorView()
         
-        activityIndicator.style = .medium
-        activityIndicator.center = self.feedTable.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.startAnimating()
-        self.feedTable.addSubview(activityIndicator)
         
-        print("curr usr loading: \(currUid)")
-        let postData = fetchPostCdAsArray(user: currUid!)
-        currPosts = postData.1
-        currUserPosts = postData.0
-        currUsrData = fetchUserCoreData(user: currUid!, entity: "User")[0]
-        currUserFriends = userFriends(key: "friends")
-        otherUsers = getOtherUser()
         
-        for post in currUserPosts {
-            print("user: \(post["email"])")
-        }
         //currUid = currUID!
         //self.contentToDisplay()
         
         if  userPage == "all" {
             print("posts:")
-            data = currPosts
+            self.data = currPosts
             
-            for post in data{
+            for post in self.data{
                 print("user:")
                 print(post["email"])
             }
@@ -93,7 +84,7 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         data.sort{
             ((($0 as Dictionary<String, AnyObject>)["date"] as? Double)!) > ((($1 as Dictionary<String, AnyObject>)["date"] as? Double)!)
         }
-        activityIndicator.stopAnimating()
+        
         
     }
     
@@ -156,6 +147,27 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         pageVC.modalPresentationStyle = .fullScreen
         pageVC.userPage = currUid!
         self.present(pageVC, animated: false,completion: nil)
+    }
+    
+    @IBAction func eventsBtnHit(_ sender: Any) {
+        let eventsVC = storyBoard.instantiateViewController(withIdentifier: "eventsNavController") as! UINavigationController
+        eventsVC.isModalInPresentation = true
+        eventsVC.modalPresentationStyle = .fullScreen
+        self.present(eventsVC, animated:true, completion:nil)
+    }
+    func loadingDataIndicator(done:Bool) {
+        let activityIndicator = UIActivityIndicatorView()
+        
+        if done == false{
+            activityIndicator.style = .medium
+            activityIndicator.center = self.feedTable.center
+            activityIndicator.hidesWhenStopped = true
+            activityIndicator.startAnimating()
+            self.feedTable.addSubview(activityIndicator)
+        }else{
+            activityIndicator.stopAnimating()
+        }
+        
     }
     func retrieveUserCD() -> NSManagedObject {
             let data = retrieveCoreData()

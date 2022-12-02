@@ -23,6 +23,7 @@
 		C93D86712926A74B002BA3B2 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93D86702926A74B002BA3B2 /* PageViewController.swift */; };
 		C94307CA29342F150088D1A8 /* EventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94307C829342F150088D1A8 /* EventsTableViewCell.swift */; };
 		C94307CB29342F150088D1A8 /* EventsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C94307C929342F150088D1A8 /* EventsTableViewCell.xib */; };
+		C9471EB02939A876002B6570 /* EventDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9471EAF2939A876002B6570 /* EventDescriptionViewController.swift */; };
 		C9595F0529367B9500ADAA46 /* SearchUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9595F0429367B9500ADAA46 /* SearchUsersViewController.swift */; };
 		C9791C9E29297C68007DACE5 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9791C9D29297C68007DACE5 /* CoreDataHandler.swift */; };
 		C9791CA029298583007DACE5 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9791C9F29298583007DACE5 /* FriendsViewController.swift */; };
@@ -63,6 +64,7 @@
 		C93D86702926A74B002BA3B2 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		C94307C829342F150088D1A8 /* EventsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewCell.swift; sourceTree = "<group>"; };
 		C94307C929342F150088D1A8 /* EventsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventsTableViewCell.xib; sourceTree = "<group>"; };
+		C9471EAF2939A876002B6570 /* EventDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDescriptionViewController.swift; sourceTree = "<group>"; };
 		C9595F0429367B9500ADAA46 /* SearchUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersViewController.swift; sourceTree = "<group>"; };
 		C9791C9D29297C68007DACE5 /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
 		C9791C9F29298583007DACE5 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
@@ -146,17 +148,18 @@
 				C92377912931BBAC00BCCBC5 /* CommentsViewController.swift */,
 				C9791CA7292AB42E007DACE5 /* PostViewController.swift */,
 				C9791CA12929858D007DACE5 /* EventsViewController.swift */,
+				C9471EAF2939A876002B6570 /* EventDescriptionViewController.swift */,
 				C94307C829342F150088D1A8 /* EventsTableViewCell.swift */,
 				C9CCC7AE2934322D009731F1 /* CreateEventViewController.swift */,
 				C91CFC6B2936E57D005351EB /* FinalizeEventViewController.swift */,
 				C9595F0429367B9500ADAA46 /* SearchUsersViewController.swift */,
 				E02991D429087E8500316F3B /* Main.storyboard */,
-				8B8AC79229395E8A00A45ACE /* MapViewController.swift */,
 				C922DB77293840710092B61B /* NotificationTableViewCell.xib */,
 				C94307C929342F150088D1A8 /* EventsTableViewCell.xib */,
 				C9C05C92292D52800094CBB3 /* FeedTableViewCell.xib */,
 				C906D2B42931909600A026BE /* FriendsTableViewCell.xib */,
 				E02991DC29087E8600316F3B /* LaunchScreen.storyboard */,
+				8B8AC79229395E8A00A45ACE /* MapViewController.swift */,
 				E02991DA29087E8600316F3B /* Assets.xcassets */,
 				E02991DF29087E8600316F3B /* Info.plist */,
 				E02991E529087FF300316F3B /* GoogleService-Info.plist */,
@@ -274,6 +277,7 @@
 				C91CFC67293688A7005351EB /* OthUserPageViewController.swift in Sources */,
 				8B8AC79329395E8A00A45ACE /* MapViewController.swift in Sources */,
 				C9CCC7AF2934322D009731F1 /* CreateEventViewController.swift in Sources */,
+				C9471EB02939A876002B6570 /* EventDescriptionViewController.swift in Sources */,
 				E02991D129087E8500316F3B /* SceneDelegate.swift in Sources */,
 				8B4D3E0E290B863500DC5F21 /* HomeViewController.swift in Sources */,
 				C93D86712926A74B002BA3B2 /* PageViewController.swift in Sources */,

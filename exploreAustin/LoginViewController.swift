@@ -102,8 +102,10 @@ class LoginViewController: UIViewController {
         }
         if idx == 0{//login
             print("login")
-            let id = userId.text!
-            let pass = userKey.text!
+            //let id = userId.text!
+            //let pass = userKey.text!
+            let id = "matt@tst.com"
+            let pass = "qazxsw"
             Auth.auth().signIn(withEmail: id, password: pass){
                 authResult, error in
                 print("checking????")
@@ -168,7 +170,8 @@ class LoginViewController: UIViewController {
     
     func viewEvents(){
         let data = fetchUserCoreData(user: "all", entity: "Event")
-        let keys = ["owner","participants","location","date","privateEvent","key"]
+        let keys = ["ownerUid","invitedUid","location","date","privateEvent","key"]
+        print("ALL EVENTS ::")
         for event in data {
             for key in keys{
                 print("\(key): \(event.value(forKey: key))")

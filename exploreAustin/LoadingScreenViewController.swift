@@ -17,14 +17,7 @@ import UIKit
 import FirebaseAuth
 import CoreData
 
-var currUid = Auth.auth().currentUser?.email!
-//current user data, used across app until user posts/updates their data
-var currPosts = [Dictionary<String, Any>]()
-var currUserPosts = [Dictionary<String, Any>]()
-var currUsrData = NSManagedObject()
-var currUserFriends = [Dictionary<String, Any>]()
-var otherUsers = [Dictionary<String, Any>]()
-var userEvents = [NSManagedObject]()
+
 
 class LoadingScreenViewController: UIViewController {
 

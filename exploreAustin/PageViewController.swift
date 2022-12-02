@@ -24,8 +24,10 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var data = [Dictionary<String, Any>]()
     var othProfPhoto:UIImage?
     
-    @IBOutlet weak var homeBtn: UIBarButtonItem!
     @IBOutlet weak var profileBtn: UIBarButtonItem!
+    
+    @IBOutlet weak var homeBtn: UIBarButtonItem!
+    
     @IBOutlet weak var settingsBtn: UIButton!
     @IBOutlet weak var postBtn: UIButton!
     
@@ -116,6 +118,7 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     @IBAction func eventsHit(_ sender: Any) {
+        print("event hit")
         let eventsVC = storyBoard.instantiateViewController(withIdentifier: "eventsNavController") as! UINavigationController
         eventsVC.isModalInPresentation = true
         eventsVC.modalPresentationStyle = .fullScreen
@@ -165,6 +168,15 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
         print("post data: \(data)")
     }
+    
+    
+    @IBAction func eventBtnHit(_ sender: Any) {
+        let eventsVC = storyBoard.instantiateViewController(withIdentifier: "eventsNavController") as! UINavigationController
+        eventsVC.isModalInPresentation = true
+        eventsVC.modalPresentationStyle = .fullScreen
+        self.present(eventsVC, animated:true, completion:nil)
+    }
+    
     
     @IBAction func homeToolBarHit(_ sender: Any) {
         performSegue(withIdentifier: "homeSeg", sender: self)

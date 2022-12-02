@@ -51,7 +51,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N3m-mc-F6d">
-                                <rect key="frame" x="10" y="757" width="359" height="45"/>
+                                <rect key="frame" x="8" y="755" width="361" height="45"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem title="Item" image="house" catalog="system" id="9J8-0c-nRt"/>
@@ -135,43 +135,84 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Byx-nV-8Wi">
-                                <rect key="frame" x="0.0" y="91" width="390" height="719"/>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q2x-es-73V">
+                                <rect key="frame" x="-12" y="766" width="402" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Iy0-DN-F0q"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="Item" image="house" catalog="system" id="cpI-8S-8lE">
+                                        <connections>
+                                            <action selector="homeBtnHit:" destination="GSs-sA-KPj" id="zRD-0o-o5k"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="4WB-qn-I51"/>
+                                    <barButtonItem title="Item" image="magnifyingglass" catalog="system" id="iCP-5f-uud"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="LK4-jI-bds"/>
+                                    <barButtonItem title="Item" image="map" catalog="system" id="Wv6-OJ-Max"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Af9-je-tN0"/>
+                                    <barButtonItem title="Item" image="party.popper" catalog="system" id="aHu-8U-K12">
+                                        <connections>
+                                            <action selector="eventBtnHit:" destination="srk-rH-yBl" id="DdT-ge-Wlx"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="2ww-Dg-4M6"/>
+                                    <barButtonItem title="Item" image="person" catalog="system" id="8uz-DL-abX">
+                                        <connections>
+                                            <action selector="profileBtnHit:" destination="GSs-sA-KPj" id="Rzv-S3-Y6l"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y6G-fS-Gns">
+                                <rect key="frame" x="0.0" y="91" width="390" height="674"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="1qE-97-9Cx">
-                                        <rect key="frame" x="0.0" y="500" width="390" height="219"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QC8-np-eDq">
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="442"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="219" id="gq5-1X-Qvu"/>
+                                            <constraint firstAttribute="height" constant="442" id="UkY-7P-XtT"/>
                                         </constraints>
-                                    </tableView>
-                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Lq-S9-uu2">
-                                        <rect key="frame" x="0.0" y="0.0" width="390" height="500"/>
                                         <standardMapConfiguration key="preferredConfiguration"/>
                                     </mapView>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="PB7-PC-WFT">
+                                        <rect key="frame" x="0.0" y="442" width="390" height="232"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="3Lq-S9-uu2" firstAttribute="leading" secondItem="Byx-nV-8Wi" secondAttribute="leading" id="75X-Fc-ddp"/>
-                                    <constraint firstItem="3Lq-S9-uu2" firstAttribute="top" secondItem="Byx-nV-8Wi" secondAttribute="top" id="Drc-Jr-Jpf"/>
-                                    <constraint firstAttribute="bottom" secondItem="1qE-97-9Cx" secondAttribute="bottom" id="HU5-yi-X7R"/>
-                                    <constraint firstItem="1qE-97-9Cx" firstAttribute="leading" secondItem="Byx-nV-8Wi" secondAttribute="leading" id="LBd-Aw-iLr"/>
-                                    <constraint firstAttribute="trailing" secondItem="1qE-97-9Cx" secondAttribute="trailing" id="Wl1-FY-GXj"/>
-                                    <constraint firstAttribute="trailing" secondItem="3Lq-S9-uu2" secondAttribute="trailing" id="l2m-L8-5AD"/>
-                                    <constraint firstItem="1qE-97-9Cx" firstAttribute="top" secondItem="3Lq-S9-uu2" secondAttribute="bottom" id="sWM-42-ty0"/>
+                                    <constraint firstItem="PB7-PC-WFT" firstAttribute="top" secondItem="QC8-np-eDq" secondAttribute="bottom" id="04g-o9-2Pe"/>
+                                    <constraint firstItem="QC8-np-eDq" firstAttribute="trailing" secondItem="PB7-PC-WFT" secondAttribute="trailing" id="6o4-5c-4yE"/>
+                                    <constraint firstItem="QC8-np-eDq" firstAttribute="top" secondItem="Y6G-fS-Gns" secondAttribute="top" id="MIG-cx-ExZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="PB7-PC-WFT" secondAttribute="bottom" id="N0D-dh-Glk"/>
+                                    <constraint firstItem="QC8-np-eDq" firstAttribute="leading" secondItem="Y6G-fS-Gns" secondAttribute="leading" id="bk6-du-ceg"/>
+                                    <constraint firstItem="PB7-PC-WFT" firstAttribute="top" secondItem="QC8-np-eDq" secondAttribute="bottom" id="cYf-X1-kX7"/>
+                                    <constraint firstItem="QC8-np-eDq" firstAttribute="leading" secondItem="PB7-PC-WFT" secondAttribute="leading" id="dRn-QX-jE6"/>
+                                    <constraint firstItem="QC8-np-eDq" firstAttribute="centerX" secondItem="Y6G-fS-Gns" secondAttribute="centerX" id="pOI-dW-1W2"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Uhx-jj-TnT"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Byx-nV-8Wi" firstAttribute="top" secondItem="Uhx-jj-TnT" secondAttribute="top" id="BBh-Tx-5js"/>
-                            <constraint firstItem="Uhx-jj-TnT" firstAttribute="bottom" secondItem="Byx-nV-8Wi" secondAttribute="bottom" id="bmh-ks-dDI"/>
-                            <constraint firstItem="Uhx-jj-TnT" firstAttribute="trailing" secondItem="Byx-nV-8Wi" secondAttribute="trailing" id="cOm-Xl-cV2"/>
-                            <constraint firstItem="Byx-nV-8Wi" firstAttribute="leading" secondItem="Uhx-jj-TnT" secondAttribute="leading" id="sdL-Wf-9uY"/>
+                            <constraint firstItem="q2x-es-73V" firstAttribute="leading" secondItem="8gP-Fk-Zjk" secondAttribute="leadingMargin" constant="-29" id="5G0-WF-dpw"/>
+                            <constraint firstItem="Uhx-jj-TnT" firstAttribute="trailing" secondItem="q2x-es-73V" secondAttribute="trailing" constant="7" id="IGF-86-Xqm"/>
+                            <constraint firstItem="q2x-es-73V" firstAttribute="top" secondItem="Y6G-fS-Gns" secondAttribute="bottom" id="Jxp-VH-6UN"/>
+                            <constraint firstItem="Y6G-fS-Gns" firstAttribute="top" secondItem="Uhx-jj-TnT" secondAttribute="top" id="PFY-Xn-1sd"/>
+                            <constraint firstItem="Y6G-fS-Gns" firstAttribute="leading" secondItem="Uhx-jj-TnT" secondAttribute="leading" id="aTn-Mn-n68"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="q2x-es-73V" secondAttribute="bottom" constant="-3" id="rrK-oh-irY"/>
+                            <constraint firstItem="Uhx-jj-TnT" firstAttribute="trailing" secondItem="Y6G-fS-Gns" secondAttribute="trailing" id="vb4-De-mhU"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Events" id="vDH-gX-aTA">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="GJA-lg-dxm">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="W16-yJ-ytb">
+                                <rect key="frame" x="16" y="5" width="86" height="34.333333333333336"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                            </button>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="XiG-wA-EbA">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="xan-rg-TER">
                                 <rect key="frame" x="288" y="5" width="86" height="34.333333333333336"/>
@@ -185,8 +226,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="mapView" destination="3Lq-S9-uu2" id="QFs-HA-bXw"/>
-                        <outlet property="tableView" destination="1qE-97-9Cx" id="dbe-yK-sVz"/>
+                        <outlet property="mapView" destination="QC8-np-eDq" id="REd-m7-mhE"/>
+                        <outlet property="tableView" destination="PB7-PC-WFT" id="D8C-Cr-YTt"/>
                         <segue destination="cAH-C9-Qud" kind="show" identifier="createEventSeg" id="X12-Ib-pxg"/>
                     </connections>
                 </viewController>
@@ -242,7 +283,7 @@
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="TLk-Bo-WVw">
-                                <rect key="frame" x="-6" y="676" width="386" height="134"/>
+                                <rect key="frame" x="2" y="676" width="386" height="134"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </datePicker>
                         </subviews>
@@ -426,7 +467,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F1l-c6-a6n">
-                                <rect key="frame" x="14" y="105" width="356" height="44"/>
+                                <rect key="frame" x="13" y="105" width="357" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
@@ -584,7 +625,7 @@
                                 </cells>
                             </collectionView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CEG-PS-b5M">
-                                <rect key="frame" x="-2" y="779" width="389" height="42"/>
+                                <rect key="frame" x="-3" y="779" width="388" height="41"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem title="Item" image="house" catalog="system" id="bGl-mw-5xf">
@@ -677,6 +718,32 @@
             </objects>
             <point key="canvasLocation" x="1281.5384615384614" y="2238.6255924170614"/>
         </scene>
+        <!--Event Description View Controller-->
+        <scene sceneID="3be-4Z-KBP">
+            <objects>
+                <viewController storyboardIdentifier="eventDescriptVC" id="t2C-E6-ogd" customClass="EventDescriptionViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FIw-Ze-j0Y">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iDc-V2-tNb">
+                                <rect key="frame" x="16" y="47" width="358" height="320"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="cGi-Wh-aUb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <connections>
+                        <outlet property="halfView" destination="iDc-V2-tNb" id="i6p-eK-DHp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QwW-JZ-Bu9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2204.6153846153848" y="2238.6255924170614"/>
+        </scene>
         <!--Page View Controller-->
         <scene sceneID="Zx3-Bf-GS0">
             <objects>
@@ -693,7 +760,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DWN-Zt-25s">
-                                <rect key="frame" x="0.0" y="298" width="390" height="475"/>
+                                <rect key="frame" x="0.0" y="298" width="390" height="373"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="yI6-vB-W5I">
@@ -758,34 +825,6 @@
                                     <action selector="postBtnHit:" destination="srk-rH-yBl" eventType="touchUpInside" id="55K-ge-smw"/>
                                 </connections>
                             </button>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v8G-dS-9IL">
-                                <rect key="frame" x="-2" y="773" width="395" height="42"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items>
-                                    <barButtonItem title="Item" image="house" catalog="system" id="t74-Fz-71A">
-                                        <connections>
-                                            <action selector="homeToolBarHit:" destination="srk-rH-yBl" id="K4v-z0-esb"/>
-                                            <segue destination="9vT-79-mxk" kind="presentation" identifier="homeSeg" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="pnT-QD-qQg"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="FFE-lE-Lsb"/>
-                                    <barButtonItem title="Item" image="magnifyingglass" catalog="system" id="jnO-d8-4qR"/>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="24V-je-6bx"/>
-                                    <barButtonItem title="Item" image="map" catalog="system" id="HH9-cd-Imq">
-                                        <connections>
-                                            <segue destination="U99-HZ-kk7" kind="presentation" identifier="mapSeg" id="JyZ-vQ-CfD"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="mvf-HT-Xal"/>
-                                    <barButtonItem title="Item" image="party.popper" catalog="system" id="3AQ-y5-Mv6"/>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="kkX-kz-yew"/>
-                                    <barButtonItem title="Item" image="person" catalog="system" id="HOu-Jv-u6O">
-                                        <connections>
-                                            <action selector="profileBtnHit:" destination="srk-rH-yBl" id="CtE-tU-gL4"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pqh-RG-Cki">
                                 <rect key="frame" x="131" y="240" width="51" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -805,6 +844,33 @@
                                     <segue destination="dK3-09-lI7" kind="presentation" identifier="settingsSeg" modalPresentationStyle="fullScreen" id="QkM-8P-iDy"/>
                                 </connections>
                             </button>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bNF-ic-CSj">
+                                <rect key="frame" x="-13" y="765" width="396" height="48"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem title="Item" image="house" catalog="system" id="dWU-8R-SI5">
+                                        <connections>
+                                            <action selector="homeToolBarHit:" destination="srk-rH-yBl" id="0gd-8Q-kJB"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="hbH-H3-AoS"/>
+                                    <barButtonItem title="Item" image="magnifyingglass" catalog="system" id="pY8-xT-1gK"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="brl-Gy-hb0"/>
+                                    <barButtonItem title="Item" image="map" catalog="system" id="8te-OT-22O"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="bdj-s1-74g"/>
+                                    <barButtonItem title="Item" image="party.popper" catalog="system" id="kVK-NS-OPT">
+                                        <connections>
+                                            <action selector="eventBtnHit:" destination="srk-rH-yBl" id="5do-KI-N6e"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="osf-N8-fSC"/>
+                                    <barButtonItem title="Item" image="person" catalog="system" id="ibt-f8-BqJ">
+                                        <connections>
+                                            <action selector="profBtnHit:" destination="9vT-79-mxk" id="daX-kj-I61"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PWs-jT-KuQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -813,14 +879,15 @@
                         <barButtonItem key="rightBarButtonItem" title="Item" image="gear" catalog="system" id="chq-kt-NVt"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="homeBtn" destination="t74-Fz-71A" id="Hjf-Re-Ueo"/>
+                        <outlet property="homeBtn" destination="dWU-8R-SI5" id="QAK-hQ-Gau"/>
                         <outlet property="notificationsBtn" destination="pqh-RG-Cki" id="5mZ-m6-cD9"/>
                         <outlet property="pageCollectionView" destination="DWN-Zt-25s" id="qSS-NM-9Fo"/>
                         <outlet property="postBtn" destination="cVH-XJ-rkW" id="CZt-ES-KZY"/>
-                        <outlet property="profileBtn" destination="HOu-Jv-u6O" id="zs9-LW-bCp"/>
+                        <outlet property="profileBtn" destination="ibt-f8-BqJ" id="r2u-kX-sYx"/>
                         <outlet property="profileImage" destination="T7B-yZ-G1x" id="uR5-Y7-PUb"/>
                         <outlet property="settingsBtn" destination="rSB-ww-Ll9" id="jCP-Mj-0Wb"/>
                         <outlet property="usernameLabel" destination="BS3-lj-HT1" id="Ulh-ax-yKl"/>
+                        <segue destination="9vT-79-mxk" kind="presentation" identifier="homeSeg" id="i7W-sT-ZKt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Im-B5-CEO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -832,7 +899,7 @@
             <objects>
                 <viewController storyboardIdentifier="feedVC" id="9vT-79-mxk" customClass="FeedViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9Pe-lt-1qU">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="arb-qS-lET">
@@ -841,7 +908,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2AT-5Z-h8X">
-                                <rect key="frame" x="-11" y="767" width="396" height="48"/>
+                                <rect key="frame" x="-13" y="708" width="397" height="48"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem title="Item" image="house" catalog="system" id="cjm-of-9kM">
@@ -858,7 +925,11 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="y0N-ye-4xV"/>
-                                    <barButtonItem title="Item" image="party.popper" catalog="system" id="K7e-pV-bml"/>
+                                    <barButtonItem title="Item" image="party.popper" catalog="system" id="K7e-pV-bml">
+                                        <connections>
+                                            <action selector="eventsBtnHit:" destination="9vT-79-mxk" id="UJF-lN-BxE"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Pqf-uq-EQn"/>
                                     <barButtonItem title="Item" image="person" catalog="system" id="KA3-Rz-GoZ">
                                         <connections>
@@ -1299,7 +1370,7 @@
         <segue reference="QkM-8P-iDy"/>
         <segue reference="YJL-5x-OOw"/>
         <segue reference="oJ1-tl-YK4"/>
-        <segue reference="pnT-QD-qQg"/>
+        <segue reference="i7W-sT-ZKt"/>
         <segue reference="Sel-aU-hok"/>
     </inferredMetricsTieBreakers>
     <resources>
