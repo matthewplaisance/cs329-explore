@@ -2,10 +2,14 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="21G83" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Event" representedClassName="Event" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="descript" optional="YES" attributeType="String"/>
+        <attribute name="invitedUid" optional="YES" attributeType="String"/>
         <attribute name="key" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="location" optional="YES" attributeType="String"/>
-        <attribute name="owner" optional="YES" attributeType="String"/>
-        <attribute name="participants" optional="YES" attributeType="String"/>
+        <attribute name="long" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="ownerUid" optional="YES" attributeType="String"/>
+        <attribute name="participantsNames" optional="YES" attributeType="String"/>
         <attribute name="privateEvent" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>
     <entity name="Friends" representedClassName="Friends" syncable="YES" codeGenerationType="class">

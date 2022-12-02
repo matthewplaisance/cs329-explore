@@ -24,8 +24,10 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var data = [Dictionary<String, Any>]()
     var othProfPhoto:UIImage?
     
-    @IBOutlet weak var homeBtn: UIBarButtonItem!
     @IBOutlet weak var profileBtn: UIBarButtonItem!
+    
+    @IBOutlet weak var homeBtn: UIBarButtonItem!
+    
     @IBOutlet weak var settingsBtn: UIButton!
     @IBOutlet weak var postBtn: UIButton!
     
@@ -37,6 +39,11 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if DarkMode.darkModeIsEnabled == true{
+            overrideUserInterfaceStyle = .dark
+        }else{
+            overrideUserInterfaceStyle = .light
+        }
         print("displaying page for : \(userPage)")
         self.homeBtn.image = UIImage(systemName: "house")
         self.profileBtn.image = UIImage(systemName: "person.fill")
@@ -86,6 +93,24 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.present(feedVC, animated:true, completion:nil)
         
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 4)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let layout = UICollectionViewFlowLayout()
+        let containerWidth = pageCollectionView.bounds.width
+        let cellWidth = (containerWidth-18) / 3
+        
+        layout.itemSize = CGSize(width: cellWidth, height: cellWidth)
+        layout.minimumInteritemSpacing = 4
+        layout.minimumLineSpacing = 4
+        
+        pageCollectionView.collectionViewLayout = layout
+    }
 
     @IBAction func friendsHit(_ sender: Any) {
         let friendsVC = storyBoard.instantiateViewController(withIdentifier: "friendsVC") as! FriendsViewController
@@ -93,6 +118,7 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     @IBAction func eventsHit(_ sender: Any) {
+        print("event hit")
         let eventsVC = storyBoard.instantiateViewController(withIdentifier: "eventsNavController") as! UINavigationController
         eventsVC.isModalInPresentation = true
         eventsVC.modalPresentationStyle = .fullScreen
@@ -143,8 +169,17 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
         print("post data: \(data)")
     }
     
+    
+    @IBAction func eventBtnHit(_ sender: Any) {
+        let eventsVC = storyBoard.instantiateViewController(withIdentifier: "eventsNavController") as! UINavigationController
+        eventsVC.isModalInPresentation = true
+        eventsVC.modalPresentationStyle = .fullScreen
+        self.present(eventsVC, animated:true, completion:nil)
+    }
+    
+    
     @IBAction func homeToolBarHit(_ sender: Any) {
-        performSegue(withIdentifier: "feedSeg", sender: self)
+        performSegue(withIdentifier: "homeSeg", sender: self)
     }
     
     @IBAction func profileBtnHit(_ sender: Any) {
