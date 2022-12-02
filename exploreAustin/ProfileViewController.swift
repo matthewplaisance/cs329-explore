@@ -9,6 +9,14 @@ import UIKit
 import FirebaseAuth
 import CoreData
 
+struct DarkMode{
+    static var darkModeIsEnabled: Bool = false
+    
+}
+struct SoundOn{
+    static var soundOn: Bool = true
+}
+
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let context = appDelegate.persistentContainer.viewContext
 
@@ -25,8 +33,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var darkModeToggle: UISwitch!
     @IBOutlet weak var soundToggle: UISwitch!
     @IBOutlet weak var profImageView: UIImageView!
-
-    @IBOutlet weak var saveButton: UIButton!
+    
     
     override func viewWillAppear(_ animated: Bool) {
         // get CoreData settings
@@ -57,14 +64,8 @@ class ProfileViewController: UIViewController {
             overrideUserInterfaceStyle = .light
             darkModeToggle.isOn = false
         }
-        if SoundOn.soundOn == true{
-            soundToggle.isOn = true
-        }else{
-            soundToggle.isOn = false
-        }
         // set error message label to blank
         errorMessage.text = ""
-        saveButton.setTitle("Ok", for: .normal)
         
         let profPhoto = fetchUIImage(uid: currUID!)
         profImageView.image = profPhoto
@@ -77,13 +78,7 @@ class ProfileViewController: UIViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(recognizer:)))
         self.profImageView.isUserInteractionEnabled = true
         self.profImageView.addGestureRecognizer(tapGestureRecognizer)
-        nameField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
-        emailField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
     }
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-           saveButton.setTitle("Save", for: .normal)
-       }
     
     @objc func imageTapped(recognizer: UITapGestureRecognizer)
     {
@@ -96,10 +91,8 @@ class ProfileViewController: UIViewController {
     
     @IBAction func DarkModeToggle(_ sender: Any) {
         if darkModeToggle.isOn{
-            DarkMode.darkModeIsEnabled = true
             overrideUserInterfaceStyle = .dark
         }else{
-            DarkMode.darkModeIsEnabled = false
             overrideUserInterfaceStyle = .light
         }
         
@@ -112,7 +105,6 @@ class ProfileViewController: UIViewController {
     
     @IBAction func saveButtonPressed(_ sender: Any) {
         updateUserData(user: currUID!)
-        performSegue(withIdentifier: "settingsBackSegue", sender: self)
     }
     
     @IBAction func logOutButtonPressed(_ sender: Any) {
@@ -136,7 +128,6 @@ class ProfileViewController: UIViewController {
         Auth.auth().currentUser?.updatePassword(to: password){
             (error) in self.errorMessage.text = error?.localizedDescription
         }
-        self.saveButton.setTitle("Save", for: .normal)
     }
     
     func updateUserData(user:String) {
@@ -203,7 +194,11 @@ class ProfileViewController: UIViewController {
     
     
     @IBAction func backBtn(_ sender: Any) {
-        performSegue(withIdentifier: "settingsBackSegue", sender: self)
+        let pageVC = storyBoard.instantiateViewController(withIdentifier: "pageVC") as! PageViewController
+        pageVC.isModalInPresentation = true
+        pageVC.modalPresentationStyle = .fullScreen
+        pageVC.userPage = currUID!
+        self.present(pageVC, animated: true,completion: nil)
     }
     
     

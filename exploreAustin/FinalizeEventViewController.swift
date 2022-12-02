@@ -14,8 +14,6 @@ class FinalizeEventViewController: UIViewController, UITextViewDelegate{
 
     var eventDate:Date!
     var eventLocation:String!
-    var lat:Double!
-    var long:Double!
     var data = [Dictionary<String,Any>]()
     
     @IBOutlet weak var privateSwitch: UISwitch!
@@ -37,11 +35,6 @@ class FinalizeEventViewController: UIViewController, UITextViewDelegate{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if DarkMode.darkModeIsEnabled == true{
-            overrideUserInterfaceStyle = .dark
-        }else{
-            overrideUserInterfaceStyle = .light
-        }
         self.data = friendsInvited
         if self.data.isEmpty == true{
             var defualt = Dictionary<String,Any>()
@@ -70,28 +63,20 @@ class FinalizeEventViewController: UIViewController, UITextViewDelegate{
             privateEvent = true
         }
         
-        var invitedUidStr = ""
-        var invitedStr = "\(currUsrData.value(forKey: "username") ?? "")//"
+        var invitedStr = ""
         for i in self.data {
-            invitedUidStr += "\(i["email"] ?? "")//"
-            invitedStr += "\(i["username"] ?? "")//"
+            invitedStr += "\(i["email"] ?? "")//"
         }
         
         let eventEntity = NSEntityDescription.insertNewObject(forEntityName: "Event", into: context)
         
-        eventEntity.setValue(currUid, forKey: "ownerUid")
-        eventEntity.setValue(invitedUidStr, forKey: "invitedUid")
-        eventEntity.setValue(invitedStr, forKey: "participantsNames")//one less cd req
+        eventEntity.setValue(currUid, forKey: "owner")
+        eventEntity.setValue(invitedStr, forKey: "participants")
         eventEntity.setValue(self.eventLocation, forKey: "location")
         eventEntity.setValue(date, forKey: "date")
         eventEntity.setValue(key, forKey: "key")
         eventEntity.setValue(privateEvent, forKey: "privateEvent")
-        eventEntity.setValue(self.lat, forKey: "lat")
-        eventEntity.setValue(self.long, forKey: "long")
-        eventEntity.setValue(self.descriptionTextView.text ?? "", forKey: "descript")
         appDelegate.saveContext()
-        
-        userEvents = fetchUserCoreData(user: currUid!, entity: "Event")//update
         navigationController?.popToRootViewController(animated: true)
     }
     
@@ -118,18 +103,12 @@ class FinalizeEventViewController: UIViewController, UITextViewDelegate{
         print("invites: \(users)")
         
         for user in users {
-            if user["username"] as! String == "Click to invite friends!"{
-                continue
-            }
             let userEmail = user["email"] as! String
             let userCd = fetchUserCoreData(user: userEmail, entity: "User")[0]
-            var invites = userCd.value(forKey: "eventInvites") as? String
-            if invites == nil {
-                invites = ""
-            }
+            var invites = userCd.value(forKey: "invitations") as! String//string of doubles sep by //
             let strKey:String = String(format: "%f", eventKey) + "//"
-            invites! += strKey
-            userCd.setValue(invites, forKey: "eventInvites")
+            invites += strKey
+            userCd.setValue(invites, forKey: "invitations")
             appDelegate.saveContext()
         }
     }

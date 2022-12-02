@@ -14,17 +14,7 @@ import CoreData
 
 
 
-func mainFetchUserData() {
-    print("CURRENT USER :: \(currUid!)")
-    let postData = fetchPostCdAsArray(user: currUid!)
-    currPosts = postData.1
-    currUserPosts = postData.0
-    currUsrData = fetchUserCoreData(user: currUid!, entity: "User")[0]
-    currUserFriends = userFriends(key: "friends")
-    otherUsers = getOtherUser()
-    userEvents = fetchUserCoreData(user: currUid!, entity: "Event")
-    print("user events: \(userEvents)")
-}
+
 //removes nil string from seperating 
 func customSep (str:String,sepBy:String) -> Array<String>{
     var res = str.components(separatedBy: sepBy)
