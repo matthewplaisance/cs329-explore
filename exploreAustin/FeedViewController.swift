@@ -43,15 +43,11 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         feedTable.delegate = self
         feedTable.dataSource = self
         
-        self.loadingDataIndicator(done: false)
-        mainFetchUserData()
-        self.loadingDataIndicator(done: true)
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let userCD = self.retrieveUserCD()
-        if let darkMode = userCD.value(forKey: "darkMode"){
+        if let darkMode = currUsrData.value(forKey: "darkMode"){
                     DarkMode.darkModeIsEnabled = darkMode as! Bool
                 }
         if DarkMode.darkModeIsEnabled == true{
@@ -61,11 +57,6 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         self.homeBtn.image = UIImage(systemName: "house.fill")
         self.profBtn.image = UIImage(systemName: "person")
-        
-        
-        
-        //currUid = currUID!
-        //self.contentToDisplay()
         
         if  userPage == "all" {
             print("posts:")
@@ -155,50 +146,6 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         eventsVC.modalPresentationStyle = .fullScreen
         self.present(eventsVC, animated:true, completion:nil)
     }
-    func loadingDataIndicator(done:Bool) {
-        let activityIndicator = UIActivityIndicatorView()
-        
-        if done == false{
-            activityIndicator.style = .medium
-            activityIndicator.center = self.feedTable.center
-            activityIndicator.hidesWhenStopped = true
-            activityIndicator.startAnimating()
-            self.feedTable.addSubview(activityIndicator)
-        }else{
-            activityIndicator.stopAnimating()
-        }
-        
-    }
-    func retrieveUserCD() -> NSManagedObject {
-            let data = retrieveCoreData()
-            
-            var currUser = data[0]
-            
-            for user in data {
-                let email = user.value(forKey: "email")
-                if (currUid == email as? String){
-                    print("Found CD for current user: \(currUid!)")
-                    currUser = user
-                }
-            }
-            print("currUserData: \(currUser)")
-            return currUser
-        }
-        
-        func retrieveCoreData() -> [NSManagedObject] {
-            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
-            var fetchedResults:[NSManagedObject]? = nil
-            do{
-                try fetchedResults = context.fetch(request) as? [NSManagedObject]
-            } catch {
-                let nserror = error as NSError
-                print(nserror)
-            }
-            return (fetchedResults)!
-        }
-    
-    
-    
 }
 
 

@@ -182,26 +182,10 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
         performSegue(withIdentifier: "homeSeg", sender: self)
     }
     
-    @IBAction func profileBtnHit(_ sender: Any) {
-        //self.view.setNeedsLayout()
-    }
     @IBAction func settingBtnHit(_ sender: Any) {
         if self.userPage == currUid{
             performSegue(withIdentifier: "settingsSeg", sender: self)
         }
         
-    }
-    
-    
-    func contentToDisplay() {
-        if self.userPage == currUid{
-            self.updatePage(user: currUid!)
-            settingsBtn.alpha = 1
-            postBtn.alpha = 1
-        }else{
-            self.updatePage(user: self.userPage)
-            settingsBtn.alpha = 0
-            postBtn.alpha = 0
-        }
     }
 }

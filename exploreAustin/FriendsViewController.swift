@@ -46,7 +46,6 @@ class FriendsViewController: UIViewController {
             dest.searchName = "Users:"
         }
         if let dest = segue.destination as? OthUserPageViewController, segue.identifier == "friendsPage"{
-            print("f email :: \(self.segEmail)")
             dest.pageFor = self.segEmail
         }
     }

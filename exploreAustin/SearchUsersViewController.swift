@@ -93,7 +93,8 @@ extension SearchUsersViewController:UITableViewDelegate,UITableViewDataSource {
             let pageVC = storyboard?.instantiateViewController(withIdentifier: "othUserPage") as! OthUserPageViewController
             
             pageVC.pageFor = userEmail
-            
+            pageVC.isModalInPresentation = true
+            pageVC.modalPresentationStyle = .fullScreen
             self.present(pageVC, animated: true)
         }else if self.searchId == "friends"{
             if cell.checkImageView.image == UIImage(systemName: "checkmark"){

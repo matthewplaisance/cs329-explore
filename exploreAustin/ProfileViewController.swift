@@ -29,23 +29,17 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
-        // get CoreData settings
-        print("curruser: \(String(describing: currUID))\n user cd:")
-        //let userSettings = fetchUserCoreData(user: currUserID!, entity: "User")
-        //let userFriends = fetchUserCoreData(user: currUserID!, entity: "Friends")
-        let currUserData = fetchUserCoreData(user: currUID!, entity: "User")[0]
-        
-        
-        if let darkMode = currUserData.value(forKey: "darkMode"){
+    
+        if let darkMode = currUsrData.value(forKey: "darkMode"){
             DarkMode.darkModeIsEnabled = darkMode as! Bool
         }
-        if let loadedName = currUserData.value(forKey: "username"){
+        if let loadedName = currUsrData.value(forKey: "username"){
             nameField.text = loadedName as? String
         }
-        if let loadedEmail = currUserData.value(forKey: "email"){
+        if let loadedEmail = currUsrData.value(forKey: "email"){
             emailField.text = loadedEmail as? String
         }
-        if let loadedSound = currUserData.value(forKey: "soundOn"){
+        if let loadedSound = currUsrData.value(forKey: "soundOn"){
             SoundOn.soundOn = loadedSound as! Bool
         }
         
@@ -112,6 +106,7 @@ class ProfileViewController: UIViewController {
     
     @IBAction func saveButtonPressed(_ sender: Any) {
         updateUserData(user: currUID!)
+        currUsrData = fetchUserCoreData(user: currUid!, entity: "User")[0]
         performSegue(withIdentifier: "settingsBackSegue", sender: self)
     }
     

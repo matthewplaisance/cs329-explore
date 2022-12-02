@@ -14,6 +14,7 @@ class OthUserPageViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var profilePhotoView: UIImageView!
     
+    @IBOutlet weak var pageBtn: UIBarButtonItem!
     @IBOutlet weak var friendBtn: UIButton!
     var data = [NSManagedObject]()
     var pageFor:String!
@@ -46,6 +47,11 @@ class OthUserPageViewController: UIViewController {
                 self.areFriends = true
             }
         }
+        self.pageBtn.image = UIImage(systemName: "person.fill")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.pageBtn.image = UIImage(systemName: "person")
     }
     
     @IBAction func friendBtnHit(_ sender: Any) {
@@ -66,7 +72,22 @@ class OthUserPageViewController: UIViewController {
         self.present(feedVC, animated:true, completion:nil)
     }
     
+    
+    @IBAction func feedBtnHit(_ sender: Any) {
+        let feedVC = storyBoard.instantiateViewController(withIdentifier: "feedVC") as! FeedViewController
+        
+        feedVC.isModalInPresentation = true
+        feedVC.modalPresentationStyle = .fullScreen
+        self.present(feedVC, animated:true, completion:nil)
+    }
+    
+    
     @IBAction func pageBtnHit(_ sender: Any) {
+        let pageVC = storyBoard.instantiateViewController(withIdentifier: "pageVC") as! PageViewController
+        
+        pageVC.isModalInPresentation = true
+        pageVC.modalPresentationStyle = .fullScreen
+        self.present(pageVC, animated:true, completion:nil)
     }
 }
 

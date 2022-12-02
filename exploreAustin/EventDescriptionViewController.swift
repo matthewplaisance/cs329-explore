@@ -57,12 +57,12 @@ class EventDescriptionViewController: UIViewController, UITableViewDelegate, UIT
         if section == 1 {
             cell.textLabel?.text = "\(self.attendees[0])"//owner's name , substring! so \()
         }else if section == 2{
-            cell.textLabel?.text = "\(self.attendees[row])"
+            cell.textLabel?.text = "\(self.attendees[row + 1])"
         }else if section == 3 {
             cell.textLabel?.text = self.data.value(forKey: "descript") as? String
         }else if section == 4 {
             cell.textLabel?.text = self.data.value(forKey: "location") as? String
-        } else {
+        } else if section == 5{
             cell.textLabel?.text = self.data.value(forKey: "date") as? String
         }
         return cell
@@ -75,7 +75,7 @@ class EventDescriptionViewController: UIViewController, UITableViewDelegate, UIT
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 2 {
-            
+            print("MEMS COUNT \(self.memsCount)")
             return self.memsCount - 1//less owner
         }else {
             return 1
@@ -87,9 +87,14 @@ class EventDescriptionViewController: UIViewController, UITableViewDelegate, UIT
             return "Host"
         }else if section == 2 {
             return "members"
-        }else {
-            return nil
+        }else if section == 3{
+            return "desciption"
+        }else if section == 4{
+            return "location"
+        }else if section == 5{
+            return "date"
         }
+        return nil
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         

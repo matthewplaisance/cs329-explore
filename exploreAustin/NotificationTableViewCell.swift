@@ -25,6 +25,8 @@ class NotificationTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        rejectBtn.titleLabel?.font =  UIFont(name: "system", size: 12)
+        acceptBtn.titleLabel?.font =  UIFont(name: "system", size: 12)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

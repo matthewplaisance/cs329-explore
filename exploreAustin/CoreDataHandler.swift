@@ -8,6 +8,40 @@ import Foundation
 import CoreData
 import UIKit
 
+func createUserCD(user:String,username:String){
+    let userEntity = NSEntityDescription.insertNewObject(forEntityName: "User", into: context)
+    
+    let defualtPhoto = UIImage(systemName: "person")
+    let photoData = defualtPhoto!.jpegData(compressionQuality: 1)!
+    
+    userEntity.setValue(user, forKey: "email")
+    userEntity.setValue(username, forKey: "username")
+    userEntity.setValue("", forKey: "friends")
+    userEntity.setValue("", forKey: "recievedReqsF")
+    userEntity.setValue(photoData, forKey: "profilePhoto")
+    
+    appDelegate.saveContext()
+}
+
+func clearCoreData (entity:String) {
+    let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+    var fetchedResults:[NSManagedObject]
+    do{
+        try fetchedResults = context.fetch(request) as! [NSManagedObject]
+        
+        if fetchedResults.count > 0 {
+            for result:AnyObject in fetchedResults {
+                context.delete(result as! NSManagedObject)
+                //print("user w/ email:\(result.value(forKey: "email")) was deleted.")
+                print("deleted.")
+            }
+        }
+        appDelegate.saveContext()
+    }catch {
+        let nserror = error as NSError
+        print(nserror)
+    }
+}
 
 func saveUIImage(image:UIImage,uid:String) {
     let imageData = image.jpegData(compressionQuality: 1)!
