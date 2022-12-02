@@ -51,7 +51,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N3m-mc-F6d">
-                                <rect key="frame" x="10" y="757" width="359" height="45"/>
+                                <rect key="frame" x="10" y="756" width="359" height="46"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem title="Item" image="house" catalog="system" id="9J8-0c-nRt"/>
@@ -242,7 +242,7 @@
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="TLk-Bo-WVw">
-                                <rect key="frame" x="-6" y="676" width="386" height="134"/>
+                                <rect key="frame" x="-7" y="676" width="386" height="134"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </datePicker>
                         </subviews>
@@ -759,7 +759,7 @@
                                 </connections>
                             </button>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v8G-dS-9IL">
-                                <rect key="frame" x="-2" y="773" width="395" height="42"/>
+                                <rect key="frame" x="-3" y="772" width="396" height="42"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem title="Item" image="house" catalog="system" id="t74-Fz-71A">
@@ -841,7 +841,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2AT-5Z-h8X">
-                                <rect key="frame" x="-11" y="767" width="396" height="48"/>
+                                <rect key="frame" x="-12" y="767" width="396" height="47"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem title="Item" image="house" catalog="system" id="cjm-of-9kM">
@@ -850,7 +850,11 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="h9w-Cd-yw0"/>
-                                    <barButtonItem title="Item" image="magnifyingglass" catalog="system" id="Rl1-sM-ayK"/>
+                                    <barButtonItem title="Item" image="magnifyingglass" catalog="system" id="Rl1-sM-ayK">
+                                        <connections>
+                                            <action selector="touchToPicVC:" destination="9vT-79-mxk" id="2w8-a1-fm8"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="dwr-KB-eH2"/>
                                     <barButtonItem title="Item" image="map" catalog="system" id="Ins-27-6Yl">
                                         <connections>
