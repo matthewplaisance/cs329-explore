@@ -38,11 +38,6 @@ class SearchUsersViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if DarkMode.darkModeIsEnabled == true{
-            overrideUserInterfaceStyle = .dark
-        }else{
-            overrideUserInterfaceStyle = .light
-        }
         self.searchTitle.text = searchName
         
         for i in data {

@@ -27,11 +27,6 @@ class OthUserPageViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if DarkMode.darkModeIsEnabled == true{
-            overrideUserInterfaceStyle = .dark
-        }else{
-            overrideUserInterfaceStyle = .light
-        }
         self.data = fetchUserCoreData(user: self.pageFor, entity: "Post")
         let userData = fetchUserCoreData(user: self.pageFor, entity: "User")[0]
         let profPhotoData = userData.value(forKey: "profilePhoto") as! Data

@@ -21,8 +21,6 @@ class CreateEventViewController: UIViewController,MKMapViewDelegate,UISearchBarD
     
     let locationManager = CLLocationManager()
     var eventLocation:String?
-    var lat:Double?
-    var long:Double?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,11 +33,7 @@ class CreateEventViewController: UIViewController,MKMapViewDelegate,UISearchBarD
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if DarkMode.darkModeIsEnabled == true{
-            overrideUserInterfaceStyle = .dark
-        }else{
-            overrideUserInterfaceStyle = .light
-        }
+    
         let userLocation = mapView.userLocation
         let c = userLocation.location?.coordinate
         print("user location: \(c)")
@@ -103,9 +97,6 @@ class CreateEventViewController: UIViewController,MKMapViewDelegate,UISearchBarD
                 pin.title = searchBar.text
                 pin.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
                 self.mapView.addAnnotation(pin)
-                
-                self.lat = lat
-                self.long = long
                 self.eventLocation = searchBar.text
                 //zoom into pin
                 self.mapView.zoomToRegion(lat: lat, long: long, NSdist: 3000.0, EWdist: 2000.0)
@@ -135,8 +126,6 @@ class CreateEventViewController: UIViewController,MKMapViewDelegate,UISearchBarD
         if let dest = segue.destination as? FinalizeEventViewController, segue.identifier == "finalizeEventSeg"{
             dest.eventLocation = self.eventLocation
             dest.eventDate = self.eventDate.date
-            dest.lat = self.lat
-            dest.long = self.long
         }
         
     }

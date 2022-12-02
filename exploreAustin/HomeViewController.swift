@@ -38,11 +38,6 @@ class HomeViewController: UIViewController {
             multiFactorString += " "
           }
         }
-        if DarkMode.darkModeIsEnabled == true{
-            overrideUserInterfaceStyle = .dark
-        }else{
-            overrideUserInterfaceStyle = .light
-        }
     }
     
     

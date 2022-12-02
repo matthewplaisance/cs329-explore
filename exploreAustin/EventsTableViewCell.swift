@@ -9,8 +9,9 @@ import UIKit
 
 class EventsTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var loctionDateLabel: UILabel!
-    @IBOutlet weak var ownerLabel: UILabel!
+    @IBOutlet weak var eventNameLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var memberCountLabel: UILabel!
     
     static let id = "EventsTableViewCell"
     

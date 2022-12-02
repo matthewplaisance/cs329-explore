@@ -32,11 +32,6 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if DarkMode.darkModeIsEnabled == true{
-            overrideUserInterfaceStyle = .dark
-        }else{
-            overrideUserInterfaceStyle = .light
-        }
         self.postImageView.image = postedImage
         self.parseComments(commentsStr: self.commentsStr)
         let commentingUser = currUid
