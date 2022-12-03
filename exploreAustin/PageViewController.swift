@@ -28,7 +28,7 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var homeBtn: UIBarButtonItem!
     @IBOutlet weak var settingsBtn: UIButton!
     @IBOutlet weak var postBtn: UIButton!
-    
+    @IBOutlet weak var infoButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()

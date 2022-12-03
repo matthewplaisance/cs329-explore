@@ -121,5 +121,23 @@ extension OthUserPageViewController:UICollectionViewDelegate,UICollectionViewDat
         self.present(feedVC, animated:true, completion:nil)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 4)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let layout = UICollectionViewFlowLayout()
+        let containerWidth = collectionView.bounds.width
+        let cellWidth = (containerWidth-18) / 3
+        
+        layout.itemSize = CGSize(width: cellWidth, height: cellWidth)
+        layout.minimumInteritemSpacing = 4
+        layout.minimumLineSpacing = 4
+        
+        collectionView.collectionViewLayout = layout
+    }
+    
     
 }

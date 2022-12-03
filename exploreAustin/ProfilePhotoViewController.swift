@@ -33,7 +33,7 @@ class ProfilePhotoViewController: UIViewController,UIImagePickerControllerDelega
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let selectedImage = info[.originalImage] as! UIImage
-        tempProfPhotoView.contentMode = .scaleAspectFit
+        tempProfPhotoView.contentMode = .scaleAspectFill
         tempProfPhotoView.image = selectedImage
         dismiss(animated: true)
     }
