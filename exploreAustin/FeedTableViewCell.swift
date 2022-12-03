@@ -75,15 +75,11 @@ class FeedTableViewCell: UITableViewCell {
     
     
     @IBAction func usernameBtnHit(_ sender: Any) {
-        let pageVC = storyBoard.instantiateViewController(withIdentifier: "pageVC") as! PageViewController
-    
-        pageVC.userPage = self.userEmail
-        pageVC.isModalInPresentation = true
-        pageVC.modalPresentationStyle = .fullScreen
-        
+        self.delegate.segToPage(postedUser: self.userEmail)
     }
 }
 
 protocol FeedCellDelegator {
     func segTocomments(postedUser:String,postImage:UIImage,bio:String,comments:String,postKey:Double)
+    func segToPage(postedUser:String)
 }

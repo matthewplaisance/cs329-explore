@@ -39,11 +39,15 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        feedTable.register(FeedTableViewCell.nib(), forCellReuseIdentifier: FeedTableViewCell.id)
-        feedTable.delegate = self
-        feedTable.dataSource = self
-        
-        
+        self.feedTable.register(FeedTableViewCell.nib(), forCellReuseIdentifier: FeedTableViewCell.id)
+        self.feedTable.delegate = self
+        self.feedTable.dataSource = self
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+        leftSwipe.direction = .left
+        rightSwipe.direction = .right
+        self.view.addGestureRecognizer(leftSwipe)
+        self.view.addGestureRecognizer(rightSwipe)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,6 +83,20 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
     }
     
+    
+    @objc func handleSwipes(_ sender: UISwipeGestureRecognizer)
+    {
+        if sender.direction == .left
+        {
+           //
+        }
+
+        if sender.direction == .right
+        {
+           //
+        }
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         1
     }
@@ -96,8 +114,8 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         let currLikes = data[row]["hearts"] as! String
         let date = customDataFormat(date: Date(timeIntervalSince1970: cell.postKey),long: false)
-        print("type; \(type(of: data[row]["date"]))")
-        cell.postDate.text = date
+    
+        cell.postDate.text = " \(date)"
         cell.profilePhoto.image = (data[row]["profilePhoto"] as! UIImage)
         cell.bio = data[row]["bio"] as? String
         cell.comments = data[row]["comments"] as? String
@@ -105,7 +123,6 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         cell.postImageView.image = (data[row]["content"] as! UIImage)
         cell.userEmail = data[row]["email"] as! String
         cell.numLikes.text = currLikes
-    
         
         return cell
     }
@@ -130,6 +147,12 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         commVC.postedUser = postedUser
         commVC.postKey = postKey
         self.present(commVC, animated: true)
+    }
+    
+    func segToPage(postedUser: String) {
+        let userPage = storyboard?.instantiateViewController(withIdentifier: "othUserPage") as! OthUserPageViewController
+        userPage.pageFor = postedUser
+        self.present(userPage, animated: false)
     }
 
     @IBAction func profBtnHit(_ sender: Any) {

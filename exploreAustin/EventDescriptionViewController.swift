@@ -48,6 +48,7 @@ class EventDescriptionViewController: UIViewController, UITableViewDelegate, UIT
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
         cell.textLabel?.numberOfLines=0
         cell.textLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
+        cell.selectionStyle = .none
         let row = indexPath.row
         let section = indexPath.section
         

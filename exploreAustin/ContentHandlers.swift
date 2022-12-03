@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import CoreData
+import SwiftUI
 
 
 
@@ -158,6 +159,24 @@ func getOtherUser() -> [Dictionary<String,Any>]{
 extension String {
     func capitalizingFirstLetter() -> String {
       return prefix(1).uppercased() + self.lowercased().dropFirst()
+    }
+}
+
+
+
+protocol segHandlers{
+    func segToPageVc()
+}
+
+
+extension UIFont {
+
+    /// Font Work Sans Light
+    ///
+    /// - Parameter size: Font size you need
+    /// - Returns: your custom font for custom size
+    class func menloCustom() -> UIFont {
+        return UIFont(name: "Menlo-Regular", size: 13)!
     }
 }
 

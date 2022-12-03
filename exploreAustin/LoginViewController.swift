@@ -31,6 +31,9 @@ class LoginViewController: UIViewController {
         repearUserKeyField.isSecureTextEntry = true
         statusLabel.lineBreakMode = .byWordWrapping
         statusLabel.numberOfLines = 0
+        
+        self.continueBtn.titleLabel?.font = UIFont.menloCustom()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

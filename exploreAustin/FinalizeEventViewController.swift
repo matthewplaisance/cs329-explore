@@ -34,6 +34,7 @@ class FinalizeEventViewController: UIViewController, UITextViewDelegate{
         self.descriptionTextView.text = "Event Description ..."
         self.descriptionTextView.textColor = UIColor.lightGray
         
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,11 +94,6 @@ class FinalizeEventViewController: UIViewController, UITextViewDelegate{
         
         userEvents = fetchUserCoreData(user: currUid!, entity: "Event")//update
         navigationController?.popToRootViewController(animated: true)
-    }
-    
-
-    @IBAction func friendsBtnHit(_ sender: Any) {
-        self.performSegue(withIdentifier: "friendsSearch", sender: self)
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {

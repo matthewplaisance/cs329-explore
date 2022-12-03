@@ -31,6 +31,12 @@ class EventsViewController: UIViewController{
         }
         self.addEventsToMapView()
         self.tableView.reloadData()
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+        leftSwipe.direction = .left
+        rightSwipe.direction = .right
+        self.view.addGestureRecognizer(leftSwipe)
+        self.view.addGestureRecognizer(rightSwipe)
         
     }
     
@@ -43,6 +49,7 @@ class EventsViewController: UIViewController{
         self.mapView.delegate = self
         self.mapView.showsUserLocation = true
     }
+    
 
     @IBAction func addEventBtnHit(_ sender: Any) {
         self.performSegue(withIdentifier: "createEventSeg", sender: self)
@@ -81,6 +88,19 @@ class EventsViewController: UIViewController{
             pin.title = event.value(forKey: "location") as? String
             pin.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
             self.mapView.addAnnotation(pin)
+        }
+    }
+    
+    @objc func handleSwipes(_ sender: UISwipeGestureRecognizer)
+    {
+        if sender.direction == .left
+        {
+           //
+        }
+
+        if sender.direction == .right
+        {
+           
         }
     }
     

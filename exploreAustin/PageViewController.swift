@@ -25,17 +25,22 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var othProfPhoto:UIImage?
     
     @IBOutlet weak var profileBtn: UIBarButtonItem!
-    
     @IBOutlet weak var homeBtn: UIBarButtonItem!
-    
     @IBOutlet weak var settingsBtn: UIButton!
     @IBOutlet weak var postBtn: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        pageCollectionView.delegate = self
-        pageCollectionView.dataSource = self
+        self.pageCollectionView.delegate = self
+        self.pageCollectionView.dataSource = self
+        
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+        leftSwipe.direction = .left
+        rightSwipe.direction = .right
+        self.view.addGestureRecognizer(leftSwipe)
+        self.view.addGestureRecognizer(rightSwipe)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -187,5 +192,18 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
             performSegue(withIdentifier: "settingsSeg", sender: self)
         }
         
+    }
+    
+    @objc func handleSwipes(_ sender: UISwipeGestureRecognizer)
+    {
+        if sender.direction == .left
+        {
+            
+        }
+
+        if sender.direction == .right
+        {
+            //
+        }
     }
 }
