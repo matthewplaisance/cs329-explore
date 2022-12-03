@@ -83,20 +83,6 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
     }
     
-    
-    @objc func handleSwipes(_ sender: UISwipeGestureRecognizer)
-    {
-        if sender.direction == .left
-        {
-           //
-        }
-
-        if sender.direction == .right
-        {
-           //
-        }
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         1
     }
@@ -152,7 +138,7 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func segToPage(postedUser: String) {
         let userPage = storyboard?.instantiateViewController(withIdentifier: "othUserPage") as! OthUserPageViewController
         userPage.pageFor = postedUser
-        self.present(userPage, animated: false)
+        self.present(userPage, animated: true)
     }
 
     @IBAction func profBtnHit(_ sender: Any) {
@@ -168,6 +154,19 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         eventsVC.isModalInPresentation = true
         eventsVC.modalPresentationStyle = .fullScreen
         self.present(eventsVC, animated:true, completion:nil)
+    }
+    
+    @objc func handleSwipes(_ sender: UISwipeGestureRecognizer)
+    {
+        if sender.direction == .left
+        {
+           //
+        }
+
+        if sender.direction == .right
+        {
+           //
+        }
     }
 }
 
