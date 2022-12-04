@@ -18,6 +18,7 @@ class RegisterViewController: UIViewController {
         self.registerBtn.layer.shadowRadius = 10
         self.loginBtn.titleLabel?.font = UIFont.menloCustom()
         self.registerBtn.titleLabel?.font = UIFont.menloCustom()
+        
     }
     
     @IBAction func registerBtnHit(_ sender: Any) {

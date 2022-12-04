@@ -23,6 +23,8 @@ class FriendsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.friendProfImageView.layer.cornerRadius = self.friendProfImageView.frame.height/2
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

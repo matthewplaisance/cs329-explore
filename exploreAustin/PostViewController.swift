@@ -12,12 +12,12 @@ import FirebaseAuth
 class PostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var currUID = Auth.auth().currentUser?.email
-    
     let postImagePicker = UIImagePickerController()
     
     
     @IBOutlet weak var selectedImageView: UIImageView!
     @IBOutlet weak var postBio: UITextField!
+    @IBOutlet weak var postTags: UITextField!
     
     var username:String = ""
     var profilePhoto:UIImage!
@@ -82,7 +82,9 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBAction func postBtnHit(_ sender: Any) {
         if let postImage = selectedImageView.image {
             print("posting...")
-            createPost(image: postImage, profImage: self.profilePhoto, bio: postBio.text!, username: username, email: currUID!)
+    
+            
+            createPost(image: postImage, profImage: self.profilePhoto, bio: postBio.text!, username: username, email: currUID!,tags:self.postTags.text!)
             
             //update current data struct
             let postData = fetchPostCdAsArray(user: currUid!)
@@ -98,6 +100,10 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         }else{
             print("select image.")
         }
+        
+    }
+    
+    func formatTags(){
         
     }
 }

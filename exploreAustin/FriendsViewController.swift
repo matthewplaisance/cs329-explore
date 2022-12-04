@@ -22,9 +22,9 @@ class FriendsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        friendsTableView.register(FriendsTableViewCell.nib(), forCellReuseIdentifier: FriendsTableViewCell.id)
-        friendsTableView.delegate = self
-        friendsTableView.dataSource = self
+        self.friendsTableView.register(FriendsTableViewCell.nib(), forCellReuseIdentifier: FriendsTableViewCell.id)
+        self.friendsTableView.delegate = self
+        self.friendsTableView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {

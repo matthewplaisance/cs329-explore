@@ -46,18 +46,18 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
         leftSwipe.direction = .left
         rightSwipe.direction = .right
-        self.view.addGestureRecognizer(leftSwipe)
-        self.view.addGestureRecognizer(rightSwipe)
+        self.feedTable.addGestureRecognizer(leftSwipe)
+        self.feedTable.addGestureRecognizer(rightSwipe)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         if let darkMode = currUsrData.value(forKey: "darkMode"){
                     DarkMode.darkModeIsEnabled = darkMode as! Bool
-                }
+        }
         if DarkMode.darkModeIsEnabled == true{
             overrideUserInterfaceStyle = .dark
         }else{
-            overrideUserInterfaceStyle = .light
+            self.view.backgroundColor = .systemGray3
         }
         self.homeBtn.image = UIImage(systemName: "house.fill")
         self.profBtn.image = UIImage(systemName: "person")
@@ -71,12 +71,12 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 print(post["email"])
             }
         }else if userPage == currUid {//clicked post from own page
-            data = currUserPosts
+            self.data = currUserPosts
         }else{//clicked post from another user's page
             
         }
         //sort posts by recent
-        data.sort{
+        self.data.sort{
             ((($0 as Dictionary<String, AnyObject>)["date"] as? Double)!) > ((($1 as Dictionary<String, AnyObject>)["date"] as? Double)!)
         }
         
@@ -136,9 +136,16 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     func segToPage(postedUser: String) {
-        let userPage = storyboard?.instantiateViewController(withIdentifier: "othUserPage") as! OthUserPageViewController
-        userPage.pageFor = postedUser
-        self.present(userPage, animated: true)
+        if postedUser == currUid{
+            let userPage = storyboard?.instantiateViewController(withIdentifier: "pageVC") as! PageViewController
+            self.present(userPage, animated: true)
+            
+        }else{
+            let userPage = storyboard?.instantiateViewController(withIdentifier: "othUserPage") as! OthUserPageViewController
+            userPage.pageFor = postedUser
+            self.present(userPage, animated: true)
+        }
+        
     }
 
     @IBAction func profBtnHit(_ sender: Any) {
@@ -156,6 +163,11 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         self.present(eventsVC, animated:true, completion:nil)
     }
     
+    @IBAction func searchBtnHit(_ sender: Any) {
+        self.performSegue(withIdentifier: "searchVcSeg", sender: self)
+        
+    }
+    
     @objc func handleSwipes(_ sender: UISwipeGestureRecognizer)
     {
         if sender.direction == .left
@@ -165,7 +177,7 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
 
         if sender.direction == .right
         {
-           //
+           print("RIGHT")
         }
     }
 }

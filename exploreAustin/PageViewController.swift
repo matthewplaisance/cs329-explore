@@ -85,15 +85,13 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //let cell = collectionView.cellForItem(at: indexPath)
         let row = indexPath.row
         print("row: \(row)")
-        //let postKey = data[row]["date"]
         
         let feedVC = storyBoard.instantiateViewController(withIdentifier: "feedVC") as! FeedViewController
         
         feedVC.data = self.data
-        feedVC.userPage = self.userPage//implent later
+        feedVC.userPage = self.userPage
         feedVC.scrollTo = row
         self.present(feedVC, animated:true, completion:nil)
         
@@ -201,9 +199,12 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
             
         }
 
-        if sender.direction == .right
+        if sender.direction == .right//move left on toolbar
         {
-            //
+            let eventsVC = storyBoard.instantiateViewController(withIdentifier: "eventsNavController") as! UINavigationController
+            eventsVC.isModalInPresentation = true
+            eventsVC.modalPresentationStyle = .fullScreen
+            self.present(eventsVC, animated:true, completion:nil)
         }
     }
 }

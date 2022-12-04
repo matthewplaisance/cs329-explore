@@ -31,7 +31,6 @@ class LoginViewController: UIViewController {
         repearUserKeyField.isSecureTextEntry = true
         statusLabel.lineBreakMode = .byWordWrapping
         statusLabel.numberOfLines = 0
-        
         self.continueBtn.titleLabel?.font = UIFont.menloCustom()
         
     }
@@ -53,16 +52,15 @@ class LoginViewController: UIViewController {
             self.username.alpha = 0
             self.repearUserKeyField.isUserInteractionEnabled = false
             self.username.isUserInteractionEnabled = false
-            self.continueBtn.setTitle("login", for: .normal)
+            self.continueBtn.setTitle("login",for: .normal)
+            self.continueBtn.titleLabel?.font = UIFont.menloCustom()
+        }else{
+            self.repearUserKeyField.alpha = 1
+            self.username.alpha = 1
+            self.repearUserKeyField.isUserInteractionEnabled = true
+            self.username.isUserInteractionEnabled = true
+            self.continueBtn.setTitle("register & login", for: .normal)
         }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        self.repearUserKeyField.alpha = 1
-        self.username.alpha = 1
-        self.repearUserKeyField.isUserInteractionEnabled = true
-        self.username.isUserInteractionEnabled = true
-        self.continueBtn.setTitle("register & login", for: .normal)
     }
     
     @IBAction func backBtnHit(_ sender: Any) {
@@ -74,8 +72,10 @@ class LoginViewController: UIViewController {
     
     //login or register
     @IBAction func continueBtnHit(_ sender: Any) {
-        let id = self.userId.text!
-        let pass = self.userKey.text!
+        //let id = self.userId.text!
+        //let pass = self.userKey.text!
+        let id = "matt@tst.com"
+        let pass = "qazxsw"
         let repPass = self.repearUserKeyField.text!
         let username = self.username.text!
         

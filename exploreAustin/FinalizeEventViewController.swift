@@ -63,6 +63,15 @@ class FinalizeEventViewController: UIViewController, UITextViewDelegate{
     
     @IBAction func createBtnHit(_ sender: Any) {
         let key = Date().timeIntervalSince1970
+        if self.data.contains(where: { user in
+            user["username"] as! String == "Click to invite friends!"
+        }){
+            self.data.remove(at: 0)
+        }
+        if self.descriptionTextView.text == "Event Description ..."{
+            self.descriptionTextView.text = nil
+        }
+        
         self.sendInvites(users: self.data, eventKey: key)
         let date = customDataFormat(date: self.eventDate, long: true)
         
@@ -79,7 +88,6 @@ class FinalizeEventViewController: UIViewController, UITextViewDelegate{
         }
         
         let eventEntity = NSEntityDescription.insertNewObject(forEntityName: "Event", into: context)
-        
         eventEntity.setValue(currUid, forKey: "ownerUid")
         eventEntity.setValue(invitedUidStr, forKey: "invitedUid")
         eventEntity.setValue(invitedStr, forKey: "participantsNames")//one less cd req

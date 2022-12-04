@@ -15,9 +15,7 @@ var locFromSearch = ""
 class CreateEventViewController: UIViewController,MKMapViewDelegate,UISearchBarDelegate{
     
     @IBOutlet weak var mapView: MKMapView!
-    
     @IBOutlet weak var eventDate: UIDatePicker!
-    
     
     let locationManager = CLLocationManager()
     var eventLocation:String?
@@ -28,6 +26,7 @@ class CreateEventViewController: UIViewController,MKMapViewDelegate,UISearchBarD
         super.viewDidLoad()
         self.mapView.delegate = self
         self.mapView.showsUserLocation = true
+        
         //self.locationManager.delegate = self
         //self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         //self.locationManager.requestWhenInUseAuthorization()
@@ -38,7 +37,7 @@ class CreateEventViewController: UIViewController,MKMapViewDelegate,UISearchBarD
         if DarkMode.darkModeIsEnabled == true{
             overrideUserInterfaceStyle = .dark
         }else{
-            overrideUserInterfaceStyle = .light
+            
         }
         let userLocation = mapView.userLocation
         let c = userLocation.location?.coordinate

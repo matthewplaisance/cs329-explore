@@ -33,7 +33,7 @@ class SearchUsersViewController: UIViewController {
         self.searchTableView.delegate = self
         self.searchTableView.dataSource = self
         
-        searchTableView.register(FriendsTableViewCell.nib(), forCellReuseIdentifier: FriendsTableViewCell.id)
+        self.searchTableView.register(FriendsTableViewCell.nib(), forCellReuseIdentifier: FriendsTableViewCell.id)
         
     }
     

@@ -9,15 +9,18 @@ import UIKit
 import MapKit
 import CoreData
 import CoreLocation
+import SwiftUI
 
 class EventsViewController: UIViewController{
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var toolBar: UIToolbar!
     
     var data = [NSManagedObject]()//cant really remember why I decided to use dictionaries for the dat on other pages... but dont fix what aint broke
     
     override func viewWillAppear(_ animated: Bool){
+        print("DARK MODE \(DarkMode.darkModeIsEnabled)")
         if DarkMode.darkModeIsEnabled == true{
             overrideUserInterfaceStyle = .dark
         }else{
@@ -35,8 +38,12 @@ class EventsViewController: UIViewController{
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
         leftSwipe.direction = .left
         rightSwipe.direction = .right
-        self.view.addGestureRecognizer(leftSwipe)
-        self.view.addGestureRecognizer(rightSwipe)
+        self.mapView.addGestureRecognizer(leftSwipe)
+        self.tableView.addGestureRecognizer(leftSwipe)
+        self.mapView.addGestureRecognizer(rightSwipe)
+        self.tableView.addGestureRecognizer(rightSwipe)
+        self.toolBar.addGestureRecognizer(rightSwipe)
+        self.toolBar.addGestureRecognizer(leftSwipe)
         
     }
     
@@ -95,15 +102,31 @@ class EventsViewController: UIViewController{
     {
         if sender.direction == .left
         {
-           //
+            print("right")
+            let pageVC = storyBoard.instantiateViewController(withIdentifier: "pageVC") as! PageViewController
+            
+            pageVC.isModalInPresentation = true
+            pageVC.modalPresentationStyle = .fullScreen
+            pageVC.modalTransitionStyle = .crossDissolve
+            self.present(pageVC, animated:true, completion:nil)
         }
 
-        if sender.direction == .right
+        if sender.direction == .right//move left on toolbar
         {
-           
+            //
         }
     }
     
+}
+
+struct CustomPrimaryView: View {
+    @Environment(\.colorScheme)
+    var colorScheme
+    var body: some View {
+        colorScheme == .light ?
+            Color(red: 0.1, green: 0.1, blue: 0.1) :
+            Color(red: 0.95, green: 0.95, blue: 0.95)
+    }
 }
 
 extension EventsViewController: MKMapViewDelegate {

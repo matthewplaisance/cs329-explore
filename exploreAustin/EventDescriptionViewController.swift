@@ -37,6 +37,8 @@ class EventDescriptionViewController: UIViewController, UITableViewDelegate, UIT
         let mems = self.data.value(forKey: "participantsNames") as! Substring
         self.attendees = mems.split(separator: "//")
         self.memsCount = self.attendees.count
+        
+       
     }
     
     override func viewDidLayoutSubviews() {

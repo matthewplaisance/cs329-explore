@@ -113,9 +113,7 @@ extension OthUserPageViewController:UICollectionViewDelegate,UICollectionViewDat
         print("row: \(row)")
         
         let feedVC = storyBoard.instantiateViewController(withIdentifier: "feedVC") as! FeedViewController
-        let dataAsDict = nsPostObjToDict(postCd: self.data)
-        
-        feedVC.data = dataAsDict
+        feedVC.data = nsPostObjToDict(postCd: self.data)
         feedVC.userPage = self.pageFor
         feedVC.scrollTo = row
         self.present(feedVC, animated:true, completion:nil)

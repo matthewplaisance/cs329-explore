@@ -26,6 +26,7 @@ func createUserCD(user:String,username:String){
 func clearCoreData (entity:String) {
     let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
     var fetchedResults:[NSManagedObject]
+    print("clearing..")
     do{
         try fetchedResults = context.fetch(request) as! [NSManagedObject]
         
@@ -39,6 +40,7 @@ func clearCoreData (entity:String) {
         appDelegate.saveContext()
     }catch {
         let nserror = error as NSError
+        print("cant")
         print(nserror)
     }
 }
@@ -182,6 +184,8 @@ func fetchUserCoreData(user:String,entity:String) -> [NSManagedObject]{
     }else{//passed specif user id
         if entity == "Event"{
             request.predicate = NSPredicate(format: "invitedUid CONTAINS %@ OR ownerUid = %@", currUid!,currUid!)
+            
+           
         }else{
             request.predicate = NSPredicate(format: "email = %@",user)
         }
@@ -200,7 +204,7 @@ func fetchUserCoreData(user:String,entity:String) -> [NSManagedObject]{
     return fetchedResults!//if filtered for specifc user, call res with [0]
 }
 
-func createPost(image:UIImage,profImage:UIImage,bio:String,username:String,email:String) {
+func createPost(image:UIImage,profImage:UIImage,bio:String,username:String,email:String,tags:String) {
     let postEntity = NSEntityDescription.insertNewObject(forEntityName: "Post", into: context)
     let date = Date().timeIntervalSince1970//unix time
     let imageData = image.jpegData(compressionQuality: 1)!
@@ -213,6 +217,7 @@ func createPost(image:UIImage,profImage:UIImage,bio:String,username:String,email
     postEntity.setValue(bio, forKey: "bio")
     postEntity.setValue(date, forKey: "date")
     postEntity.setValue("0", forKey: "hearts")
+    postEntity.setValue(tags, forKey: "tags")
     
     appDelegate.saveContext()
 }
@@ -281,6 +286,7 @@ func nsPostObjToDict(postCd:[NSManagedObject]) -> [Dictionary<String, Any>] {
         temp["hearts"] = post.value(forKey: "hearts")
         temp["username"] = post.value(forKey: "username")
         temp["email"] = post.value(forKey: "email")
+        temp["tags"] = post.value(forKey: "tags") as? String
         
         postData.append(temp)
     }
