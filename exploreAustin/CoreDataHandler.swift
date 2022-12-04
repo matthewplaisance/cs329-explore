@@ -183,9 +183,9 @@ func fetchUserCoreData(user:String,entity:String) -> [NSManagedObject]{
         request.predicate = NSPredicate(format: "email != %@",currUid!)
     }else{//passed specif user id
         if entity == "Event"{
-            request.predicate = NSPredicate(format: "invitedUid CONTAINS %@ OR ownerUid = %@", currUid!,currUid!)
             
-           
+            request.predicate = NSPredicate(format: "invitedUid CONTAINS %@ OR ownerUid == %@ OR privateEvent == %@", currUid!,currUid!,NSNumber(booleanLiteral: false))
+            
         }else{
             request.predicate = NSPredicate(format: "email = %@",user)
         }

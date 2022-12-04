@@ -15,12 +15,18 @@ import SwiftUI
 
 
 
-func mainFetchUserData() {
+func mainFetchUserData(){
     print("CURRENT USER :: \(currUid!)")
     let postData = fetchPostCdAsArray(user: currUid!)
+    let currData = fetchUserCoreData(user: currUid!, entity: "User")
+    if currData.count == 0 {
+        print("no core data for user, please sign up")
+        return
+    }
+    
     currPosts = postData.1
     currUserPosts = postData.0
-    currUsrData = fetchUserCoreData(user: currUid!, entity: "User")[0]
+    currUsrData = currData[0]
     currUserFriends = userFriends(key: "friends")
     otherUsers = getOtherUser()
     userEvents = fetchUserCoreData(user: currUid!, entity: "Event")

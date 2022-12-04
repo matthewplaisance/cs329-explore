@@ -27,10 +27,10 @@ class CreateEventViewController: UIViewController,MKMapViewDelegate,UISearchBarD
         self.mapView.delegate = self
         self.mapView.showsUserLocation = true
         
-        //self.locationManager.delegate = self
-        //self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        //self.locationManager.requestWhenInUseAuthorization()
-        //self.locationManager.requestLocation()
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.requestLocation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,7 +41,6 @@ class CreateEventViewController: UIViewController,MKMapViewDelegate,UISearchBarD
         }
         let userLocation = mapView.userLocation
         let c = userLocation.location?.coordinate
-        print("user location: \(c)")
         let center = CLLocationCoordinate2D(latitude: 30.2672, longitude: -97.7431)
         
         let NSdist = 10000.0
@@ -56,9 +55,6 @@ class CreateEventViewController: UIViewController,MKMapViewDelegate,UISearchBarD
             //self.locatinSearchField.text = locFromSearch
         }
     }
-    
-    
-    
     
     @IBAction func searchBtnHit(_ sender: Any) {
         let searchContr = UISearchController(searchResultsController: nil)
@@ -141,6 +137,19 @@ class CreateEventViewController: UIViewController,MKMapViewDelegate,UISearchBarD
     }
 }
 
+extension CreateEventViewController: CLLocationManagerDelegate{
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last{
+               let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+               let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+               self.mapView.setRegion(region, animated: true)
+           }
+    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
+    }
+}
+
 extension MKMapView {
 
     // delta is the zoom factor
@@ -154,15 +163,31 @@ extension MKMapView {
         _span.longitudeDelta *= delta;
         _region.span = _span;
 
-        setRegion(_region, animated: animated)
+        if ( (region.center.latitude + _span.latitudeDelta/2 <= 90) && (region.center.longitude + _span.longitudeDelta/2 <= 180)) && (region.center.latitude - _span.latitudeDelta/2 >= -90) && (region.center.longitude - _span.longitudeDelta/2 >= -180)
+        {
+            setRegion(_region, animated: animated)
+        }else{
+            print("invaled region")
+        }
+        
     }
     
     func zoomToRegion(lat:Double,long:Double,NSdist:Double,EWdist:Double){
+        print("LAT \(lat)")
+        print("LOng \(long)")
+        print("LATSPAN \(long + EWdist)")
+        print("LONGSPAN \(lat + NSdist)")
         let region = MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: lat, longitude: long),
             latitudinalMeters: NSdist,
             longitudinalMeters: EWdist)
         
-        setRegion(region, animated: true)
+        if ( (region.center.latitude >= -90) && (region.center.latitude + NSdist <= 90) && (region.center.longitude >= -180) && (region.center.longitude + EWdist <= 180)) {
+            setRegion(region, animated: true)
+                    
+        }else{
+            print("Invalid region!")
+        }
+        
     }
 }

@@ -32,6 +32,8 @@ class LoginViewController: UIViewController {
         statusLabel.lineBreakMode = .byWordWrapping
         statusLabel.numberOfLines = 0
         self.continueBtn.titleLabel?.font = UIFont.menloCustom()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        self.view.addGestureRecognizer(tap)
         
     }
     
@@ -61,6 +63,10 @@ class LoginViewController: UIViewController {
             self.username.isUserInteractionEnabled = true
             self.continueBtn.setTitle("register & login", for: .normal)
         }
+    }
+    
+    @objc func dismissKeyboard() {
+        self.view.endEditing(true)
     }
     
     @IBAction func backBtnHit(_ sender: Any) {

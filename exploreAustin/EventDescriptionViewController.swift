@@ -8,6 +8,8 @@
 import UIKit
 import CoreData
 
+var zoomToUS:Bool!
+
 class EventDescriptionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
@@ -37,8 +39,10 @@ class EventDescriptionViewController: UIViewController, UITableViewDelegate, UIT
         let mems = self.data.value(forKey: "participantsNames") as! Substring
         self.attendees = mems.split(separator: "//")
         self.memsCount = self.attendees.count
-        
-       
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        zoomToUS = true
     }
     
     override func viewDidLayoutSubviews() {

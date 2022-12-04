@@ -152,13 +152,6 @@ class ProfileViewController: UIViewController {
         
     }
     
-    
-    @IBAction func changeProfPhotoHit(_ sender: Any) {
-        self.performSegue(withIdentifier: "changeProfPhotoSeg", sender: self)
-    }
-    
-    
-    
     @IBAction func changePasswordHit(_ sender: Any) {
         let passwordAlert = UIAlertController(title: "Change Password: ", message: "", preferredStyle: .alert)
 
@@ -169,7 +162,6 @@ class ProfileViewController: UIViewController {
                 }else{
                     textField.placeholder = "Repeat password"
                 }
-                
             }
         }
 
