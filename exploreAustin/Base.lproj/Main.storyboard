@@ -1332,6 +1332,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="765"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Posts!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3LK-Kd-3uX">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </tableView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2AT-5Z-h8X">
                                 <rect key="frame" x="-5" y="764" width="394" height="47"/>
@@ -1378,6 +1385,7 @@
                         <outlet property="feedTable" destination="arb-qS-lET" id="iT3-RC-gBf"/>
                         <outlet property="homeBtn" destination="cjm-of-9kM" id="fMP-c0-ZkS"/>
                         <outlet property="profBtn" destination="KA3-Rz-GoZ" id="dUk-Me-hgQ"/>
+                        <outlet property="statusLabel" destination="3LK-Kd-3uX" id="sLL-20-Nxq"/>
                         <segue destination="dft-7i-0a1" kind="presentation" identifier="searchVcSeg" modalPresentationStyle="fullScreen" id="7PX-2w-2tA"/>
                     </connections>
                 </viewController>
