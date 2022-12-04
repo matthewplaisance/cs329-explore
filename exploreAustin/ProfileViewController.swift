@@ -77,8 +77,8 @@ class ProfileViewController: UIViewController {
         emailField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
     }
     
-    func playSound() {
-        if let asset = NSDataAsset(name:"TexasFightSong"){
+    func playSound(name:String = "TexasFightSong") {
+        if let asset = NSDataAsset(name: name){
            do {
                // Use NSDataAsset's data property to access the audio file stored in Sound.
                player = try AVAudioPlayer(data:asset.data, fileTypeHint:"caf")
@@ -215,7 +215,22 @@ class ProfileViewController: UIViewController {
     }
     
     
-    
+    @IBAction func chooseMusicSelected(_ sender: Any) {
+        let musicAlert = UIAlertController(title: "Choose Music: ", message: "Select your background music", preferredStyle: .actionSheet)
+        musicAlert.addAction(UIAlertAction(title: "UT Fight Song", style: .default, handler: { [weak musicAlert] (action) in
+            self.playSound(name: "TexasFightSong")
+        }))
+        musicAlert.addAction(UIAlertAction(title: "National Anthem", style: .default, handler: { [weak musicAlert] (action) in
+            self.playSound(name: "UnitedStates")
+        }))
+        musicAlert.addAction(UIAlertAction(title: "Olympics Theme Song", style: .default, handler: { [weak musicAlert] (action) in
+            self.playSound(name: "Olympics")
+        }))
+        musicAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak musicAlert] (action) in
+            return
+        }))
+        self.present(musicAlert, animated: true, completion: nil)
+    }
     
     @IBAction func backBtn(_ sender: Any) {
         performSegue(withIdentifier: "settingsBackSegue", sender: self)
