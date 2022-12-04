@@ -79,11 +79,13 @@ class SearchViewController: UIViewController {
         self.searchTerm(searchTerm: (title!))
     }
     
+    
     @IBAction func btnThreeHit(_ sender: Any) {
         let title = self.searchThree.titleLabel?.text
         self.searchBar.text = title
         self.searchTerm(searchTerm: (title!))
     }
+    
     
     @IBAction func btnFourHit(_ sender: Any) {
         let title = self.searchFour.titleLabel?.text
