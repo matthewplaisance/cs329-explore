@@ -8,6 +8,9 @@
 import UIKit
 import FirebaseAuth
 import CoreData
+import AVFoundation
+
+var player: AVAudioPlayer?
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let context = appDelegate.persistentContainer.viewContext
@@ -67,12 +70,27 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(recognizer:)))
         self.profImageView.isUserInteractionEnabled = true
         self.profImageView.addGestureRecognizer(tapGestureRecognizer)
         nameField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
         emailField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
+    }
+    
+    func playSound() {
+        if let asset = NSDataAsset(name:"TexasFightSong"){
+           do {
+               // Use NSDataAsset's data property to access the audio file stored in Sound.
+               player = try AVAudioPlayer(data:asset.data, fileTypeHint:"caf")
+               // Play the above sound file.
+               player?.volume = 1
+               player?.numberOfLoops = -1
+               player?.play()
+           } catch let error as NSError {
+               print(error.localizedDescription)
+           }
+        }
+        SoundPlaying.isPlaying = true
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -100,7 +118,17 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func SoundToggled(_ sender: Any) {
-        
+        if SoundOn.soundOn == true{
+            SoundOn.soundOn = false
+            if player != nil{
+                player!.stop()
+                SoundPlaying.isPlaying = false
+            }
+        }
+        else{
+            SoundOn.soundOn = true
+            playSound()
+        }
     }
     
     

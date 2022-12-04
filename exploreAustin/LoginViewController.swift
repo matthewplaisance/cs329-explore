@@ -81,8 +81,8 @@ class LoginViewController: UIViewController {
     @IBAction func continueBtnHit(_ sender: Any) {
         //let id = self.userId.text!
         //let pass = self.userKey.text!
-        let id = "matt@tst.com"
-        let pass = "qazxsw"
+        let id = self.userId.text!
+        let pass = self.userKey.text!
         let repPass = self.repearUserKeyField.text!
         let username = self.username.text!
         
@@ -153,7 +153,6 @@ class LoginViewController: UIViewController {
             let soundOn = user.value(forKey: "soundOn")
             let username = user.value(forKey: "username")
             print("user #\(cnt):\n email: \(String(describing: email)) username: \(String(describing: username)) darkMode: \(String(describing: darkMode)) soundOn: \(String(describing: soundOn))\n friends: \(friends ?? "")\n f reqs: \(req ?? "")")
-            
         }
     }
     

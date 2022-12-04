@@ -12,6 +12,9 @@ struct DarkMode{
 struct SoundOn{
     static var soundOn: Bool = false
 }
+struct SoundPlaying{
+    static var isPlaying: Bool = false
+}
 
 import UIKit
 import FirebaseAuth

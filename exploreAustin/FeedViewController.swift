@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseAuth
 import CoreData
+import AVFoundation
 
 var currUserUid = Auth.auth().currentUser?.email
 
@@ -54,10 +55,16 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         if let darkMode = currUsrData.value(forKey: "darkMode"){
                     DarkMode.darkModeIsEnabled = darkMode as! Bool
         }
+        if let soundOn = currUsrData.value(forKey: "soundOn"){
+                    SoundOn.soundOn = soundOn as! Bool
+        }
         if DarkMode.darkModeIsEnabled == true{
             overrideUserInterfaceStyle = .dark
         }else{
             self.view.backgroundColor = .systemGray3
+        }
+        if SoundOn.soundOn == true && SoundPlaying.isPlaying == false{
+            playSound()
         }
         self.homeBtn.image = UIImage(systemName: "house.fill")
         self.profBtn.image = UIImage(systemName: "person")
@@ -178,6 +185,21 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         if sender.direction == .right
         {
            print("RIGHT")
+        }
+    }
+    
+    func playSound() {
+        if let asset = NSDataAsset(name:"TexasFightSong"){
+           do {
+               // Use NSDataAsset's data property to access the audio file stored in Sound.
+               player = try AVAudioPlayer(data:asset.data, fileTypeHint:"caf")
+               // Play the above sound file.
+               player?.volume = 1
+               player?.numberOfLoops = -1
+               player?.play()
+           } catch let error as NSError {
+               print(error.localizedDescription)
+           }
         }
     }
 }
