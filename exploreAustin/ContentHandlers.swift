@@ -8,12 +8,30 @@
 import Foundation
 import UIKit
 import CoreData
+import SwiftUI
 
 
 
 
 
 
+func mainFetchUserData(){
+    print("CURRENT USER :: \(currUid!)")
+    let postData = fetchPostCdAsArray(user: currUid!)
+    let currData = fetchUserCoreData(user: currUid!, entity: "User")
+    if currData.count == 0 {
+        print("no core data for user, please sign up")
+        return
+    }
+    
+    currPosts = postData.1
+    currUserPosts = postData.0
+    currUsrData = currData[0]
+    currUserFriends = userFriends(key: "friends")
+    otherUsers = getOtherUser()
+    userEvents = fetchUserCoreData(user: currUid!, entity: "Event")
+    print("user events: \(userEvents)")
+}
 
 //removes nil string from seperating 
 func customSep (str:String,sepBy:String) -> Array<String>{
@@ -128,6 +146,71 @@ func rejectFriendReq(othUser:String){
     appDelegate.saveContext()
 }
 
+func getOtherUser() -> [Dictionary<String,Any>]{
+    let othUsers = fetchUserCoreData(user: "otherUsers", entity: "User")
+    var res = [Dictionary<String,Any>]()
+    for user in othUsers {
+        var temp = Dictionary<String,Any>()
+        
+        let photoData = user.value(forKey: "profilePhoto") as! Data
+        let photo = UIImage(data: photoData)
+        temp["username"] = user.value(forKey: "username") as! String
+        temp["email"] = user.value(forKey: "email") as! String
+        temp["profilePhoto"] = photo
+        res.append(temp)
+    }
+    return res
+}
+
+extension String {
+    func capitalizingFirstLetter() -> String {
+      return prefix(1).uppercased() + self.lowercased().dropFirst()
+    }
+}
+
+extension UIImageView {
+
+    func setRounded() {
+        self.layer.cornerRadius = (self.frame.width / 2) //instead of let radius = CGRectGetWidth(self.frame) / 2
+        self.layer.masksToBounds = true
+    }
+}
+
+extension UIFont {
+    class func menloCustom() -> UIFont {
+        return UIFont(name: "Menlo-Regular", size: 13)!
+    }
+}
+
+
+//no longer using, most likely
+func contentToDisplay(userPage:String) {
+    var res = [Dictionary<String,Any>]()
+    
+    if userPage != "all"{//clicked photo from user page view, data is already passed to var data, dont re-fetch
+        //pass
+    }else{
+        let posts = fetchUserCoreData(user: userPage, entity: "Post")
+        
+    
+        for post in posts {
+            var temp = Dictionary<String, Any>()
+            let postImageData = post.value(forKey: "content") as! Data
+            let postImage = UIImage(data: postImageData)
+            
+            temp["date"] = post.value(forKey: "date")
+            temp["bio"] = post.value(forKey: "bio")
+            temp["hearts"] = post.value(forKey: "hearts")
+            temp["content"] = postImage
+            temp["username"] = post.value(forKey: "username")
+            temp["email"] = post.value(forKey: "email")
+            
+            res.append(temp)
+        }
+    }
+}
+
+
 func handleFriendRequest(othUser:String,act:String) {
     let currUserData = fetchUserCoreData(user: currUid!, entity: "User")[0]
     let othUserData = fetchUserCoreData(user: othUser, entity: "User")[0]
@@ -178,55 +261,6 @@ func handleFriendRequest(othUser:String,act:String) {
     othUserData.setValue(othResStr, forKey: "friends")
     currUserData.setValue(currResStr, forKey: "friends")
     appDelegate.saveContext()
-}
-
-func getOtherUser() -> [Dictionary<String,Any>]{
-    let othUsers = fetchUserCoreData(user: "otherUsers", entity: "User")
-    var res = [Dictionary<String,Any>]()
-    for user in othUsers {
-        var temp = Dictionary<String,Any>()
-        
-        let photoData = user.value(forKey: "profilePhoto") as! Data
-        let photo = UIImage(data: photoData)
-        temp["username"] = user.value(forKey: "username") as! String
-        temp["email"] = user.value(forKey: "email") as! String
-        temp["profilePhoto"] = photo
-        res.append(temp)
-    }
-    return res
-}
-
-extension String {
-    func capitalizingFirstLetter() -> String {
-      return prefix(1).uppercased() + self.lowercased().dropFirst()
-    }
-}
-
-//no longer using, most likely
-func contentToDisplay(userPage:String) {
-    var res = [Dictionary<String,Any>]()
-    
-    if userPage != "all"{//clicked photo from user page view, data is already passed to var data, dont re-fetch
-        //pass
-    }else{
-        let posts = fetchUserCoreData(user: userPage, entity: "Post")
-        
-    
-        for post in posts {
-            var temp = Dictionary<String, Any>()
-            let postImageData = post.value(forKey: "content") as! Data
-            let postImage = UIImage(data: postImageData)
-            
-            temp["date"] = post.value(forKey: "date")
-            temp["bio"] = post.value(forKey: "bio")
-            temp["hearts"] = post.value(forKey: "hearts")
-            temp["content"] = postImage
-            temp["username"] = post.value(forKey: "username")
-            temp["email"] = post.value(forKey: "email")
-            
-            res.append(temp)
-        }
-    }
 }
 
 

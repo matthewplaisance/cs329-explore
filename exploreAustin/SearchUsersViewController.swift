@@ -33,7 +33,7 @@ class SearchUsersViewController: UIViewController {
         self.searchTableView.delegate = self
         self.searchTableView.dataSource = self
         
-        searchTableView.register(FriendsTableViewCell.nib(), forCellReuseIdentifier: FriendsTableViewCell.id)
+        self.searchTableView.register(FriendsTableViewCell.nib(), forCellReuseIdentifier: FriendsTableViewCell.id)
         
     }
     
@@ -93,7 +93,8 @@ extension SearchUsersViewController:UITableViewDelegate,UITableViewDataSource {
             let pageVC = storyboard?.instantiateViewController(withIdentifier: "othUserPage") as! OthUserPageViewController
             
             pageVC.pageFor = userEmail
-            
+            pageVC.isModalInPresentation = true
+            pageVC.modalPresentationStyle = .fullScreen
             self.present(pageVC, animated: true)
         }else if self.searchId == "friends"{
             if cell.checkImageView.image == UIImage(systemName: "checkmark"){

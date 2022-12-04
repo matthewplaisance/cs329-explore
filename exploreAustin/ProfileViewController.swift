@@ -8,6 +8,9 @@
 import UIKit
 import FirebaseAuth
 import CoreData
+import AVFoundation
+
+var player: AVAudioPlayer?
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let context = appDelegate.persistentContainer.viewContext
@@ -29,23 +32,17 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
-        // get CoreData settings
-        print("curruser: \(String(describing: currUID))\n user cd:")
-        //let userSettings = fetchUserCoreData(user: currUserID!, entity: "User")
-        //let userFriends = fetchUserCoreData(user: currUserID!, entity: "Friends")
-        let currUserData = fetchUserCoreData(user: currUID!, entity: "User")[0]
-        
-        
-        if let darkMode = currUserData.value(forKey: "darkMode"){
+    
+        if let darkMode = currUsrData.value(forKey: "darkMode"){
             DarkMode.darkModeIsEnabled = darkMode as! Bool
         }
-        if let loadedName = currUserData.value(forKey: "username"){
+        if let loadedName = currUsrData.value(forKey: "username"){
             nameField.text = loadedName as? String
         }
-        if let loadedEmail = currUserData.value(forKey: "email"){
+        if let loadedEmail = currUsrData.value(forKey: "email"){
             emailField.text = loadedEmail as? String
         }
-        if let loadedSound = currUserData.value(forKey: "soundOn"){
+        if let loadedSound = currUsrData.value(forKey: "soundOn"){
             SoundOn.soundOn = loadedSound as! Bool
         }
         
@@ -73,12 +70,27 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(recognizer:)))
         self.profImageView.isUserInteractionEnabled = true
         self.profImageView.addGestureRecognizer(tapGestureRecognizer)
         nameField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
         emailField.addTarget(self, action: #selector(ProfileViewController.textFieldDidChange(_:)), for: .editingChanged)
+    }
+    
+    func playSound() {
+        if let asset = NSDataAsset(name:"TexasFightSong"){
+           do {
+               // Use NSDataAsset's data property to access the audio file stored in Sound.
+               player = try AVAudioPlayer(data:asset.data, fileTypeHint:"caf")
+               // Play the above sound file.
+               player?.volume = 1
+               player?.numberOfLoops = -1
+               player?.play()
+           } catch let error as NSError {
+               print(error.localizedDescription)
+           }
+        }
+        SoundPlaying.isPlaying = true
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -106,12 +118,23 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func SoundToggled(_ sender: Any) {
-        
+        if SoundOn.soundOn == true{
+            SoundOn.soundOn = false
+            if player != nil{
+                player!.stop()
+                SoundPlaying.isPlaying = false
+            }
+        }
+        else{
+            SoundOn.soundOn = true
+            playSound()
+        }
     }
     
     
     @IBAction func saveButtonPressed(_ sender: Any) {
         updateUserData(user: currUID!)
+        currUsrData = fetchUserCoreData(user: currUid!, entity: "User")[0]
         performSegue(withIdentifier: "settingsBackSegue", sender: self)
     }
     
@@ -157,13 +180,6 @@ class ProfileViewController: UIViewController {
         
     }
     
-    
-    @IBAction func changeProfPhotoHit(_ sender: Any) {
-        self.performSegue(withIdentifier: "changeProfPhotoSeg", sender: self)
-    }
-    
-    
-    
     @IBAction func changePasswordHit(_ sender: Any) {
         let passwordAlert = UIAlertController(title: "Change Password: ", message: "", preferredStyle: .alert)
 
@@ -174,7 +190,6 @@ class ProfileViewController: UIViewController {
                 }else{
                     textField.placeholder = "Repeat password"
                 }
-                
             }
         }
 

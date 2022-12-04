@@ -24,16 +24,23 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var data = [Dictionary<String, Any>]()
     var othProfPhoto:UIImage?
     
-    @IBOutlet weak var homeBtn: UIBarButtonItem!
     @IBOutlet weak var profileBtn: UIBarButtonItem!
+    @IBOutlet weak var homeBtn: UIBarButtonItem!
     @IBOutlet weak var settingsBtn: UIButton!
     @IBOutlet weak var postBtn: UIButton!
-    
+    @IBOutlet weak var infoButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        pageCollectionView.delegate = self
-        pageCollectionView.dataSource = self
+        self.pageCollectionView.delegate = self
+        self.pageCollectionView.dataSource = self
+        
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+        leftSwipe.direction = .left
+        rightSwipe.direction = .right
+        self.view.addGestureRecognizer(leftSwipe)
+        self.view.addGestureRecognizer(rightSwipe)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,15 +85,13 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //let cell = collectionView.cellForItem(at: indexPath)
         let row = indexPath.row
         print("row: \(row)")
-        //let postKey = data[row]["date"]
         
         let feedVC = storyBoard.instantiateViewController(withIdentifier: "feedVC") as! FeedViewController
         
         feedVC.data = self.data
-        feedVC.userPage = self.userPage//implent later
+        feedVC.userPage = self.userPage
         feedVC.scrollTo = row
         self.present(feedVC, animated:true, completion:nil)
         
@@ -116,6 +121,7 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     @IBAction func eventsHit(_ sender: Any) {
+        print("event hit")
         let eventsVC = storyBoard.instantiateViewController(withIdentifier: "eventsNavController") as! UINavigationController
         eventsVC.isModalInPresentation = true
         eventsVC.modalPresentationStyle = .fullScreen
@@ -166,13 +172,19 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
         print("post data: \(data)")
     }
     
+    
+    @IBAction func eventBtnHit(_ sender: Any) {
+        let eventsVC = storyBoard.instantiateViewController(withIdentifier: "eventsNavController") as! UINavigationController
+        eventsVC.isModalInPresentation = true
+        eventsVC.modalPresentationStyle = .fullScreen
+        self.present(eventsVC, animated:true, completion:nil)
+    }
+    
+    
     @IBAction func homeToolBarHit(_ sender: Any) {
         performSegue(withIdentifier: "homeSeg", sender: self)
     }
     
-    @IBAction func profileBtnHit(_ sender: Any) {
-        //self.view.setNeedsLayout()
-    }
     @IBAction func settingBtnHit(_ sender: Any) {
         if self.userPage == currUid{
             performSegue(withIdentifier: "settingsSeg", sender: self)
@@ -180,16 +192,19 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
     }
     
-    
-    func contentToDisplay() {
-        if self.userPage == currUid{
-            self.updatePage(user: currUid!)
-            settingsBtn.alpha = 1
-            postBtn.alpha = 1
-        }else{
-            self.updatePage(user: self.userPage)
-            settingsBtn.alpha = 0
-            postBtn.alpha = 0
+    @objc func handleSwipes(_ sender: UISwipeGestureRecognizer)
+    {
+        if sender.direction == .left
+        {
+            
+        }
+
+        if sender.direction == .right//move left on toolbar
+        {
+            let eventsVC = storyBoard.instantiateViewController(withIdentifier: "eventsNavController") as! UINavigationController
+            eventsVC.isModalInPresentation = true
+            eventsVC.modalPresentationStyle = .fullScreen
+            self.present(eventsVC, animated:true, completion:nil)
         }
     }
 }

@@ -12,5 +12,5 @@ class PagePhotoCell: UICollectionViewCell {
     
     @IBOutlet weak var pageImageView: UIImageView!
     
-    
+    @IBOutlet weak var searchImageView: UIImageView!
 }
