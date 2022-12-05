@@ -45,12 +45,12 @@ class LoadingScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         UIView.animate(
-            withDuration: 0.5,
+            withDuration: 2,
                animations: {
                    self.loadingImage.alpha = 1.0
                },
                completion: { finished in
-                   UIView.animate(withDuration: 0.5, animations: {
+                   UIView.animate(withDuration: 2, animations: {
                        self.loadingImage.alpha = 0.0
                    }, completion: {finished in
                        self.performSegue(withIdentifier: "initialLoginSegue", sender: self)
