@@ -58,7 +58,9 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         let profPhoto = fetchUIImage(uid: currUid!)
         profileImage.image = profPhoto
-            
+        self.data.sort{
+            ((($0 as Dictionary<String, AnyObject>)["date"] as? Double)!) > ((($1 as Dictionary<String, AnyObject>)["date"] as? Double)!)
+          }
         pageCollectionView.reloadData()
     }
     

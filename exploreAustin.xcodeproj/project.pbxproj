@@ -38,8 +38,6 @@
 		C9C05C93292D52800094CBB3 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C05C91292D52800094CBB3 /* FeedTableViewCell.swift */; };
 		C9C05C94292D52800094CBB3 /* FeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9C05C92292D52800094CBB3 /* FeedTableViewCell.xib */; };
 		C9CCC7AF2934322D009731F1 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CCC7AE2934322D009731F1 /* CreateEventViewController.swift */; };
-		C9F67574293C557D001EAC6D /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F67573293C557D001EAC6D /* MessagesViewController.swift */; };
-		C9F67576293C5618001EAC6D /* DMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F67575293C5618001EAC6D /* DMViewController.swift */; };
 		E02991CF29087E8500316F3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02991CE29087E8500316F3B /* AppDelegate.swift */; };
 		E02991D129087E8500316F3B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02991D029087E8500316F3B /* SceneDelegate.swift */; };
 		E02991D629087E8500316F3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E02991D429087E8500316F3B /* Main.storyboard */; };
@@ -84,8 +82,6 @@
 		C9C05C91292D52800094CBB3 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		C9C05C92292D52800094CBB3 /* FeedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedTableViewCell.xib; sourceTree = "<group>"; };
 		C9CCC7AE2934322D009731F1 /* CreateEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
-		C9F67573293C557D001EAC6D /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
-		C9F67575293C5618001EAC6D /* DMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMViewController.swift; sourceTree = "<group>"; };
 		E02991CB29087E8500316F3B /* exploreAustin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = exploreAustin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E02991CE29087E8500316F3B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E02991D029087E8500316F3B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -166,8 +162,6 @@
 				C9471EAF2939A876002B6570 /* EventDescriptionViewController.swift */,
 				C9595F0429367B9500ADAA46 /* SearchUsersViewController.swift */,
 				C9471EB3293C056E002B6570 /* SearchViewController.swift */,
-				C9F67573293C557D001EAC6D /* MessagesViewController.swift */,
-				C9F67575293C5618001EAC6D /* DMViewController.swift */,
 				E02991D429087E8500316F3B /* Main.storyboard */,
 				C922DB77293840710092B61B /* NotificationTableViewCell.xib */,
 				C94307C929342F150088D1A8 /* EventsTableViewCell.xib */,
@@ -279,7 +273,6 @@
 				E02991D929087E8500316F3B /* exploreAustin.xcdatamodeld in Sources */,
 				C906D2B52931909600A026BE /* FriendsTableViewCell.swift in Sources */,
 				C98CE3E82927EA9700E545E5 /* PagePhotoCell.swift in Sources */,
-				C9F67576293C5618001EAC6D /* DMViewController.swift in Sources */,
 				C92377922931BBAC00BCCBC5 /* CommentsViewController.swift in Sources */,
 				C92377942931C94F00BCCBC5 /* ContentHandlers.swift in Sources */,
 				C9C05C90292D4D4C0094CBB3 /* FeedViewController.swift in Sources */,
@@ -288,7 +281,6 @@
 				C91CFC6C2936E57D005351EB /* FinalizeEventViewController.swift in Sources */,
 				C9C05C93292D52800094CBB3 /* FeedTableViewCell.swift in Sources */,
 				E02991CF29087E8500316F3B /* AppDelegate.swift in Sources */,
-				C9F67574293C557D001EAC6D /* MessagesViewController.swift in Sources */,
 				C9791CA029298583007DACE5 /* FriendsViewController.swift in Sources */,
 				E02991EB290881F800316F3B /* LoginViewController.swift in Sources */,
 				C9595F0529367B9500ADAA46 /* SearchUsersViewController.swift in Sources */,

@@ -47,6 +47,8 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
             user.append(bioAttr)
             postedBioLabel.attributedText = user
         }
+        let date = Date(timeIntervalSince1970: self.postKey)
+        self.postedDateLabel.text = customDataFormat(date: date, long: false)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -111,9 +113,9 @@ class CommentsViewController: UIViewController,UITableViewDelegate,UITableViewDa
         let post = filterPosts(posts: posts, key: self.postKey)
         var comments:String?
         if let currComments = post.value(forKey: "comments") as? String{
-            comments = "\(comm)//\(currUid)///\(currComments)"
+            comments = "\(comm)//\(currUid!)///\(currComments)"
         }else{
-            comments = "\(comm)//\(currUid)"
+            comments = "\(comm)//\(currUid!)"
         }
         
         post.setValue(comments, forKey: "comments")

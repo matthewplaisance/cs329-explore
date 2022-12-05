@@ -181,13 +181,7 @@ extension MKMapView {
             center: CLLocationCoordinate2D(latitude: lat, longitude: long),
             latitudinalMeters: NSdist,
             longitudinalMeters: EWdist)
-        
-        if ( (region.center.latitude >= -90) && (region.center.latitude + NSdist <= 90) && (region.center.longitude >= -180) && (region.center.longitude + EWdist <= 180)) {
-            setRegion(region, animated: true)
-                    
-        }else{
-            print("Invalid region!")
-        }
-        
+    
+        setRegion(region, animated: true)
     }
 }

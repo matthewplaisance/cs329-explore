@@ -29,8 +29,8 @@ class SearchViewController: UIViewController {
         
         self.searchOne.setTitle("Austin", for: .normal)
         self.searchTwo.setTitle("Music", for: .normal)
-        self.searchThree.setTitle("New Years", for: .normal)
-        self.searchFour.setTitle("Christmas", for: .normal)
+        self.searchThree.setTitle("fc", for: .normal)
+        self.searchFour.setTitle("football", for: .normal)
         self.searchFive.setTitle("Lake", for: .normal)
     }
     

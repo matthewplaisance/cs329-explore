@@ -43,12 +43,11 @@ class LoginViewController: UIViewController {
         }
         
         print("Loading Core Data...")
-        print("COMMENT OUT clearCoreData for posts")
         self.viewCoreData()
         self.viewPosts()
         self.viewEvents()
         //clearCoreData(entity: "Event")
-        clearCoreData(entity: "Post")
+        //clearCoreData(entity: "Post")
         //clearCoreData(entity: "User")
         if self.state == "login"{
             self.repearUserKeyField.alpha = 0
