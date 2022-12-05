@@ -1359,7 +1359,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="dwr-KB-eH2"/>
                                     <barButtonItem title="Item" image="map" catalog="system" id="Ins-27-6Yl">
                                         <connections>
-                                            <segue destination="U99-HZ-kk7" kind="presentation" identifier="mapSeg" modalPresentationStyle="automatic" id="YJL-5x-OOw"/>
+                                            <action selector="topictureScence:" destination="9vT-79-mxk" id="4p5-jb-ydi"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="y0N-ye-4xV"/>
@@ -1742,7 +1742,7 @@
             <objects>
                 <viewController id="U99-HZ-kk7" customClass="MapViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TGg-1t-P2L">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="344-qh-9J4">
