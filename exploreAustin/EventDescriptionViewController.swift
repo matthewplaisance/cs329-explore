@@ -36,6 +36,11 @@ class EventDescriptionViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if DarkMode.darkModeIsEnabled == true{
+            overrideUserInterfaceStyle = .dark
+        }else{
+            overrideUserInterfaceStyle = .light
+        }
         let mems = self.data.value(forKey: "participantsNames") as! Substring
         self.attendees = mems.split(separator: "//")
         self.memsCount = self.attendees.count
