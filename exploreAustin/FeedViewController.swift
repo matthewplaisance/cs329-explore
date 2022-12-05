@@ -64,7 +64,7 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }else{
             self.view.backgroundColor = .systemGray3
         }
-        if SoundOn.soundOn == true && SoundPlaying.isPlaying == false{
+        if SoundOn.soundOn == true && SoundOn.isPlaying == false{
             playSound()
         }
         self.homeBtn.image = UIImage(systemName: "house.fill")

@@ -78,10 +78,11 @@ class ProfileViewController: UIViewController {
     }
     
     func playSound(name:String = "TexasFightSong") {
+        soundToggle.isOn = true
         if let asset = NSDataAsset(name: name){
            do {
                // Use NSDataAsset's data property to access the audio file stored in Sound.
-               player = try AVAudioPlayer(data:asset.data, fileTypeHint:"caf")
+               player = try AVAudioPlayer(data:asset.data, fileTypeHint:"mp3")
                // Play the above sound file.
                player?.volume = 1
                player?.numberOfLoops = -1
@@ -90,7 +91,8 @@ class ProfileViewController: UIViewController {
                print(error.localizedDescription)
            }
         }
-        SoundPlaying.isPlaying = true
+        SoundOn.isPlaying = true
+        SoundOn.soundOn = true
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -122,11 +124,10 @@ class ProfileViewController: UIViewController {
             SoundOn.soundOn = false
             if player != nil{
                 player!.stop()
-                SoundPlaying.isPlaying = false
+                SoundOn.isPlaying = false
             }
         }
         else{
-            SoundOn.soundOn = true
             playSound()
         }
     }
@@ -219,6 +220,7 @@ class ProfileViewController: UIViewController {
         let musicAlert = UIAlertController(title: "Choose Music: ", message: "Select your background music", preferredStyle: .actionSheet)
         musicAlert.addAction(UIAlertAction(title: "UT Fight Song", style: .default, handler: { [weak musicAlert] (action) in
             self.playSound(name: "TexasFightSong")
+            self.soundToggle.isOn = true
         }))
         musicAlert.addAction(UIAlertAction(title: "National Anthem", style: .default, handler: { [weak musicAlert] (action) in
             self.playSound(name: "UnitedStates")
