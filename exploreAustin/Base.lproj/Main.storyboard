@@ -763,7 +763,11 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="VYf-So-qdg"/>
-                                    <barButtonItem title="Item" image="map" catalog="system" id="TDG-eL-Xbz"/>
+                                    <barButtonItem title="Item" image="map" catalog="system" id="TDG-eL-Xbz">
+                                        <connections>
+                                            <action selector="searchVCToPicVC:" destination="dft-7i-0a1" id="NzI-Jy-xAt"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="0Z0-uR-tf3"/>
                                     <barButtonItem title="Item" image="party.popper" catalog="system" id="sm1-JJ-Ijl">
                                         <connections>
@@ -1782,7 +1786,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="oXW-ga-eRR"/>
+        <segue reference="QkM-8P-iDy"/>
         <segue reference="i7W-sT-ZKt"/>
         <segue reference="v7V-Il-LN7"/>
         <segue reference="Rxi-4g-uot"/>
