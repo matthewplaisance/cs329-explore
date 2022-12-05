@@ -11,10 +11,10 @@ import FirebaseAuth
 
 class HomeViewController: UIViewController {
     
-    var images : [String] = ["ZilkerPark", "BartonSprings", "MountBonnell" ]
-    var imageTitles : [String] = ["Zilker Park", "Barton Springs", "Mount Bonnell" ]
-    var imageDescription : [String] = ["Zilker Metropolitan Park is considered \"Austin's most-loved park.\" This 351-acre metropolitan park is home to a variety of recreation opportunities, facilities and special events for individuals and families.", "Within Zilker Park's 358 acres lies one of the crown jewels of Austin - Barton Springs Pool. The pool itself measures three acres in size, and is fed from underground springs with an average temperature of 68-70 degrees, ideal for year-round swimming", "Mount Bonnell is one of the highest points in Austin at 781 feet! The peak is named for George Bonnell, who served as Commissioner of Indian Affairs for the Texas Republic.",]
-    var imageSources : [String] = ["austintexas.gov", "austintexas.org", "austintexas.org"]
+    var images : [String] = ["ZilkerPark", "BartonSprings", "MountBonnell", "picture5" ]
+    var imageTitles : [String] = ["Zilker Park", "Barton Springs", "Mount Bonnell", "Lady Bird Johnson Wildflower Center" ]
+    var imageDescription : [String] = ["Zilker Metropolitan Park is considered \"Austin's most-loved park.\" This 351-acre metropolitan park is home to a variety of recreation opportunities, facilities and special events for individuals and families.", "Within Zilker Park's 358 acres lies one of the crown jewels of Austin - Barton Springs Pool. The pool itself measures three acres in size, and is fed from underground springs with an average temperature of 68-70 degrees, ideal for year-round swimming", "Mount Bonnell is one of the highest points in Austin at 781 feet! The peak is named for George Bonnell, who served as Commissioner of Indian Affairs for the Texas Republic.", "The Lady Bird Johnson Wildflower Center in Austin, Texas, is dedicated to inspiring the conservation of native plants. Located a quick but quiet ten miles from downtown, we are a botanical garden open to the public year-round and have become a favored venue for everything from conservation-focused conventions to beautiful weddings."]
+    var imageSources : [String] = ["austintexas.gov", "austintexas.org", "austintexas.org", "wildflower.org"]
     var imageNumber = 0
     
     @IBOutlet weak var imageView: UIImageView!
@@ -50,14 +50,15 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         changePicture()
-        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
-            UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations:{self.imageView.alpha = 0; self.titleLabel.alpha = 0; self.descriptionLabel.alpha = 0; self.imageCredit.alpha = 0}){_ in
-                self.changePicture()
-            }
-        }
+//        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
+//            UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations:{self.imageView.alpha = 0; self.titleLabel.alpha = 0; self.descriptionLabel.alpha = 0; self.imageCredit.alpha = 0}){_ in
+//                self.changePicture()
+//            }
+//        }
 
         // Do any additional setup after loading the view.
     }
+    
     
     func changePicture(){
         if imageNumber >= images.count{
@@ -72,5 +73,18 @@ class HomeViewController: UIViewController {
         imageNumber += 1
     }
 
+    @IBAction func rightArrowHit(_ sender: Any) {
+        changePicture()
+    }
     
+    @IBAction func leftArrowHit(_ sender: Any) {
+        if imageNumber - 2 < 0{
+            return
+        }
+        else{
+            imageNumber -= 2
+            changePicture()
+        }
+        
+    }
 }
