@@ -18,6 +18,14 @@ class picScenceVC: UIViewController,UIScrollViewDelegate {
     
     var timer: Timer!
     
+    override func viewWillAppear(_ animated: Bool) {
+        if DarkMode.darkModeIsEnabled == true{
+            overrideUserInterfaceStyle = .dark
+        }else{
+            overrideUserInterfaceStyle = .light
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.navigationItem.title = "Introduction"

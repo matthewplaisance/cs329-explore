@@ -78,6 +78,7 @@ class ProfileViewController: UIViewController {
     }
     
     func playSound(name:String = "TexasFightSong") {
+        soundToggle.isOn = true
         if let asset = NSDataAsset(name: name){
            do {
                // Use NSDataAsset's data property to access the audio file stored in Sound.
@@ -90,7 +91,8 @@ class ProfileViewController: UIViewController {
                print(error.localizedDescription)
            }
         }
-        SoundPlaying.isPlaying = true
+        SoundOn.isPlaying = true
+        SoundOn.soundOn = true
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -122,11 +124,10 @@ class ProfileViewController: UIViewController {
             SoundOn.soundOn = false
             if player != nil{
                 player!.stop()
-                SoundPlaying.isPlaying = false
+                SoundOn.isPlaying = false
             }
         }
         else{
-            SoundOn.soundOn = true
             playSound()
         }
     }
