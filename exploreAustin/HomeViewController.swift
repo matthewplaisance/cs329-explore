@@ -50,12 +50,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         changePicture()
-//        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
-//            UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations:{self.imageView.alpha = 0; self.titleLabel.alpha = 0; self.descriptionLabel.alpha = 0; self.imageCredit.alpha = 0}){_ in
-//                self.changePicture()
-//            }
-//        }
-
         // Do any additional setup after loading the view.
     }
     
@@ -74,7 +68,9 @@ class HomeViewController: UIViewController {
     }
 
     @IBAction func rightArrowHit(_ sender: Any) {
-        changePicture()
+        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations:{self.imageView.alpha = 0; self.titleLabel.alpha = 0; self.descriptionLabel.alpha = 0; self.imageCredit.alpha = 0}){_ in
+            self.changePicture()
+        }
     }
     
     @IBAction func leftArrowHit(_ sender: Any) {
@@ -83,7 +79,9 @@ class HomeViewController: UIViewController {
         }
         else{
             imageNumber -= 2
-            changePicture()
+            UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations:{self.imageView.alpha = 0; self.titleLabel.alpha = 0; self.descriptionLabel.alpha = 0; self.imageCredit.alpha = 0}){_ in
+                self.changePicture()
+            }
         }
         
     }
