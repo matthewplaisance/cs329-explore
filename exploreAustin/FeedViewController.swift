@@ -23,6 +23,7 @@ var userEvents = [NSManagedObject]()
 
 class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,FeedCellDelegator {
     
+    @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var homeBtn: UIBarButtonItem!
     @IBOutlet weak var feedTable: UITableView!
     @IBOutlet weak var profBtn: UIBarButtonItem!
@@ -72,7 +73,12 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         if  userPage == "all" {
             print("posts:")
             self.data = currPosts
-            
+            if self.data.isEmpty {
+                statusLabel.alpha = 1
+            }
+            else{
+                statusLabel.alpha = 0
+            }
             for post in self.data{
                 print("user:")
                 print(post["email"])

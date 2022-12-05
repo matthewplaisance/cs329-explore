@@ -14,6 +14,7 @@ struct SoundOn{
 }
 struct SoundPlaying{
     static var isPlaying: Bool = false
+    static var songName: String = ""
 }
 
 import UIKit
