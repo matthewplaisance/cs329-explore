@@ -10,7 +10,7 @@ import MapKit
 import CoreData
 import CoreLocation
 
-var locFromSearch = ""
+var locFromSearch = "No location!"
 
 class CreateEventViewController: UIViewController,MKMapViewDelegate,UISearchBarDelegate{
     

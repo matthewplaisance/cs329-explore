@@ -13,7 +13,7 @@
         <!--Information View Controller-->
         <scene sceneID="2Sq-8a-a8s">
             <objects>
-                <viewController id="e1A-ex-duL" customClass="InformationViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="infoVC" id="e1A-ex-duL" customClass="InformationViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="afC-jh-Bf1">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -24,7 +24,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <string key="text">We at ExploreAustin want you to understand what information we collect, and how we use and share it. That’s why we encourage you to read our Privacy Policy. This helps you use ExploreAustin Products in the way that’s right for you.</string>
                                 <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ufr-JO-RJy">
@@ -33,7 +33,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <string key="text">In the Privacy Policy, we explain how we collect, use, share, retain and transfer information. We also let you know your rights. Each section of the Policy includes helpful examples and simpler language to make our practices easier to understand. We’ve also added links to resources where you can learn more about the privacy topics that interest you.</string>
                                 <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="We keep your information relatively secure. Use at your own risk." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zL3-XA-ho2">
@@ -41,27 +41,27 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" Privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A4X-3L-OR9">
-                                <rect key="frame" x="16" y="138" width="100" height="17"/>
+                                <rect key="frame" x="16" y="138" width="109" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2022 ExploreAustin inc" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ywE-dD-09Q">
-                                <rect key="frame" x="135" y="513" width="121" height="14"/>
+                                <rect key="frame" x="135" y="513" width="146" height="13"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="11"/>
                                 <color key="textColor" systemColor="systemGrayColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Information" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VfH-mZ-Oxh">
                                 <rect key="frame" x="115" y="62" width="161" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -73,12 +73,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5DS-bj-Es1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2420" y="2238.6255924170614"/>
+            <point key="canvasLocation" x="-6652" y="2288"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="HomeViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="middleVC" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="HomeViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -86,7 +86,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Things to Do" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ff1-a0-e5c">
                                 <rect key="frame" x="138" y="91" width="114" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -106,7 +106,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21q-xf-Ce0">
                                 <rect key="frame" x="19" y="448" width="358" height="103"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -117,9 +117,26 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ee-rX-lC0">
+                                <rect key="frame" x="312" y="405" width="51" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrowshape.right" catalog="system"/>
+                                <connections>
+                                    <action selector="rightArrowHit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1K9-pe-Qr8"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Source" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avg-4M-kxL">
+                                <rect key="frame" x="18" y="405" width="365" height="73"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N3m-mc-F6d">
-                                <rect key="frame" x="11" y="763" width="379" height="47"/>
+                                <rect key="frame" x="0.0" y="774" width="390" height="47"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBrownColor"/>
                                 <items>
                                     <barButtonItem title="Item" image="house" catalog="system" id="9J8-0c-nRt">
                                         <connections>
@@ -137,6 +154,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="uqV-fc-4GL"/>
                                     <barButtonItem title="Item" image="party.popper" catalog="system" id="4aS-c2-94m">
                                         <connections>
+                                            <action selector="eventBtnHit:" destination="BYZ-38-t0r" id="gsm-Au-d9F"/>
                                             <segue destination="cju-ZI-s4Q" kind="presentation" identifier="eventSeg" modalPresentationStyle="fullScreen" id="j0p-lU-qUB"/>
                                         </connections>
                                     </barButtonItem>
@@ -148,22 +166,6 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ee-rX-lC0">
-                                <rect key="frame" x="312" y="405" width="51" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="arrowshape.right" catalog="system"/>
-                                <connections>
-                                    <action selector="rightArrowHit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1K9-pe-Qr8"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Source" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avg-4M-kxL">
-                                <rect key="frame" x="18" y="405" width="365" height="73"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -180,7 +182,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1569.2307692307693" y="2238.6255924170614"/>
+            <point key="canvasLocation" x="-3280" y="1429.6208530805686"/>
         </scene>
         <!--Friends View Controller-->
         <scene sceneID="Q2v-Id-nP3">
@@ -224,7 +226,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eBQ-Y9-aO1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="443.07692307692304" y="812.55924170616106"/>
+            <point key="canvasLocation" x="-1769" y="-43"/>
         </scene>
         <!--Events-->
         <scene sceneID="JNE-9X-S7o">
@@ -249,7 +251,11 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="4WB-qn-I51"/>
                                     <barButtonItem title="Item" image="magnifyingglass" catalog="system" id="iCP-5f-uud"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="LK4-jI-bds"/>
-                                    <barButtonItem title="Item" image="map" catalog="system" id="Wv6-OJ-Max"/>
+                                    <barButtonItem title="Item" image="map" catalog="system" id="Wv6-OJ-Max">
+                                        <connections>
+                                            <action selector="midBtnHit:" destination="GSs-sA-KPj" id="it3-bA-x7c"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Af9-je-tN0"/>
                                     <barButtonItem title="Item" image="party.popper" catalog="system" id="aHu-8U-K12">
                                         <connections>
@@ -356,7 +362,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iV4-dt-MdU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="443.07692307692304" y="-525.35545023696682"/>
+            <point key="canvasLocation" x="-2557" y="1430"/>
         </scene>
         <!--Create Event View Controller-->
         <scene sceneID="GJT-K0-iLF">
@@ -455,7 +461,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UbO-NX-xhz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1281.5384615384614" y="-525.35545023696682"/>
+            <point key="canvasLocation" x="-2558" y="648"/>
         </scene>
         <!--Finalize Event View Controller-->
         <scene sceneID="nAG-wQ-8Bg">
@@ -466,10 +472,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="acH-xh-Xp4">
-                                <rect key="frame" x="136" y="718" width="122" height="35"/>
+                                <rect key="frame" x="139" y="724" width="118" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Create Event">
+                                    <fontDescription key="titleFontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
                                     <color key="baseForegroundColor" systemColor="linkColor"/>
                                     <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
                                 </buttonConfiguration>
@@ -516,7 +523,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lx7-2T-VP9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2116.9230769230767" y="-525.35545023696682"/>
+            <point key="canvasLocation" x="-2558" y="-43"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="bV9-x9-58f">
@@ -551,10 +558,12 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Kv-Pn-zZ4">
-                                <rect key="frame" x="166" y="620" width="58" height="35"/>
+                                <rect key="frame" x="169" y="626" width="61" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Post"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Post">
+                                    <fontDescription key="titleFontDescription" name="Menlo-Regular" family="Menlo" pointSize="15"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="postBtnHit:" destination="YYV-dH-Sbb" eventType="touchUpInside" id="3Ub-iN-8zD"/>
                                 </connections>
@@ -566,28 +575,48 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s6I-qS-184">
-                                <rect key="frame" x="16" y="497" width="75" height="35"/>
+                                <rect key="frame" x="19" y="503" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Austin">
+                                    <fontDescription key="titleFontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="tagOneHit:" destination="YYV-dH-Sbb" eventType="touchUpInside" id="4GI-vq-wvI"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epR-9T-szG">
-                                <rect key="frame" x="205" y="497" width="75" height="35"/>
+                                <rect key="frame" x="226" y="503" width="40" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="UT">
+                                    <fontDescription key="titleFontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="tagThreeHit:" destination="YYV-dH-Sbb" eventType="touchUpInside" id="k48-84-kB4"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3rf-Ld-h44">
-                                <rect key="frame" x="299" y="497" width="75" height="35"/>
+                                <rect key="frame" x="319" y="503" width="40" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="FC">
+                                    <fontDescription key="titleFontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="tagFourHit:" destination="YYV-dH-Sbb" eventType="touchUpInside" id="ykl-nr-GJW"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFl-SJ-YBz">
-                                <rect key="frame" x="111" y="497" width="75" height="35"/>
+                                <rect key="frame" x="122" y="504" width="64" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Music">
+                                    <fontDescription key="titleFontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="tagTwoHit:" destination="YYV-dH-Sbb" eventType="touchUpInside" id="taf-ZU-hLT"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ytf-eM-R2a"/>
@@ -613,11 +642,15 @@
                         <outlet property="postBio" destination="Pmg-yN-smv" id="r2Q-Bz-1W6"/>
                         <outlet property="postTags" destination="Cwr-ji-vFd" id="aL5-kL-0iX"/>
                         <outlet property="selectedImageView" destination="Vlt-zo-FRC" id="OqU-H0-qbw"/>
+                        <outlet property="tagFour" destination="3rf-Ld-h44" id="zeZ-LR-89T"/>
+                        <outlet property="tagOne" destination="s6I-qS-184" id="OLq-vh-n3v"/>
+                        <outlet property="tagThree" destination="epR-9T-szG" id="3qW-bY-Lsh"/>
+                        <outlet property="tagTwo" destination="KFl-SJ-YBz" id="IvD-bd-q1L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iIh-OT-cCu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-486.15384615384613" y="145.73459715639811"/>
+            <point key="canvasLocation" x="-1769" y="649"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="FVf-CV-eBX">
@@ -653,18 +686,30 @@
                                 <rect key="frame" x="31" y="284" width="329" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxO-2F-heJ">
+                                <rect key="frame" x="31" y="775" width="329" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="About">
+                                    <color key="baseBackgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="aboutBtnHit:" destination="OBL-kc-zQW" eventType="touchUpInside" id="bez-2l-elt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cCh-oI-vrH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="aboutBtn" destination="vxO-2F-heJ" id="ghb-sI-Mze"/>
                         <outlet property="loginBtn" destination="C0p-hn-531" id="LwY-ea-UTQ"/>
                         <outlet property="registerBtn" destination="mNK-jI-hy3" id="Ab5-UT-wKJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1bC-Cs-LTZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2420" y="145.73459715639811"/>
+            <point key="canvasLocation" x="-6652.3076923076924" y="1429.6208530805686"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="tU6-jK-mxP">
@@ -681,46 +726,54 @@
                                         <rect key="frame" x="0.0" y="0.0" width="623" height="79"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGh-6W-Pu7">
-                                                <rect key="frame" x="8" y="22" width="75" height="35"/>
+                                                <rect key="frame" x="11" y="28" width="71" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Austin">
+                                                    <fontDescription key="titleFontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
+                                                </buttonConfiguration>
                                                 <connections>
                                                     <action selector="btnOneHit:" destination="dft-7i-0a1" eventType="touchUpInside" id="I3f-wY-kIe"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uQa-yT-Szs">
-                                                <rect key="frame" x="504" y="22" width="75" height="35"/>
+                                                <rect key="frame" x="517" y="28" width="56" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Lake">
+                                                    <fontDescription key="titleFontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
+                                                </buttonConfiguration>
                                                 <connections>
                                                     <action selector="btnFiveHit:" destination="dft-7i-0a1" eventType="touchUpInside" id="bd3-Qz-jhn"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uqq-rA-Sko">
-                                                <rect key="frame" x="261" y="22" width="75" height="35"/>
+                                                <rect key="frame" x="281" y="28" width="40" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="FC">
+                                                    <fontDescription key="titleFontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
+                                                </buttonConfiguration>
                                                 <connections>
                                                     <action selector="btnThreeHit:" destination="dft-7i-0a1" eventType="touchUpInside" id="1uH-BI-3zJ"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MdA-SY-9wG">
-                                                <rect key="frame" x="389" y="22" width="75" height="35"/>
+                                                <rect key="frame" x="410" y="28" width="40" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="UT">
+                                                    <fontDescription key="titleFontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
+                                                </buttonConfiguration>
                                                 <connections>
                                                     <action selector="btnFourHit:" destination="dft-7i-0a1" eventType="touchUpInside" id="ZRh-fQ-Xh1"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Nt-xq-T8c">
-                                                <rect key="frame" x="132" y="22" width="75" height="35"/>
+                                                <rect key="frame" x="135" y="22" width="70" height="35"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Music"/>
                                                 <connections>
                                                     <action selector="btnTwoHit:" destination="dft-7i-0a1" eventType="touchUpInside" id="4n9-dG-qip"/>
                                                 </connections>
@@ -846,7 +899,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AvU-2u-olG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2766.1538461538462" y="-525.35545023696682"/>
+            <point key="canvasLocation" x="-4091" y="1430"/>
         </scene>
         <!--Search Users View Controller-->
         <scene sceneID="Sai-XD-AYU">
@@ -895,7 +948,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sRd-je-FZv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1569.2307692307693" y="-525.35545023696682"/>
+            <point key="canvasLocation" x="-2558" y="-763"/>
         </scene>
         <!--Comments View Controller-->
         <scene sceneID="yVF-Fi-iVN">
@@ -991,7 +1044,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1wv-7U-W52" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-486.15384615384613" y="2238.6255924170614"/>
+            <point key="canvasLocation" x="-4932" y="2239"/>
         </scene>
         <!--Oth User Page View Controller-->
         <scene sceneID="z9t-pu-BnD">
@@ -1061,7 +1114,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="uox-sr-BdA"/>
                                     <barButtonItem title="Item" image="party.popper" catalog="system" id="D89-ye-K2p">
                                         <connections>
-                                            <action selector="eventBtnHit:" destination="srk-rH-yBl" id="i43-wv-51R"/>
+                                            <action selector="eventsBtnHit:" destination="cXJ-AJ-wCn" id="9ha-Yq-sYU"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="l5e-mu-ZPq"/>
@@ -1075,7 +1128,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eB6-cl-nBi">
                                 <rect key="frame" x="117" y="211" width="157" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1084,6 +1137,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Add Friend">
+                                    <fontDescription key="titleFontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
                                     <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -1106,7 +1160,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jO3-jY-i20" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="441.53846153846155" y="2238.6255924170614"/>
+            <point key="canvasLocation" x="-1769" y="2239"/>
         </scene>
         <!--Notifications View Controller-->
         <scene sceneID="y0z-Wd-Gk8">
@@ -1136,7 +1190,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ir-9Y-0aC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1281.5384615384614" y="2238.6255924170614"/>
+            <point key="canvasLocation" x="435" y="2261"/>
         </scene>
         <!--Event Description View Controller-->
         <scene sceneID="3be-4Z-KBP">
@@ -1162,50 +1216,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QwW-JZ-Bu9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2204.6153846153848" y="2238.6255924170614"/>
-        </scene>
-        <!--Messages-->
-        <scene sceneID="DTI-q4-1Vg">
-            <objects>
-                <viewController id="FqE-IA-n00" customClass="MessagesViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Of2-Fs-GVU">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="pzZ-zM-p1z">
-                                <rect key="frame" x="0.0" y="91" width="390" height="719"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="QSg-oz-eb7"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="QSg-oz-eb7" firstAttribute="trailing" secondItem="pzZ-zM-p1z" secondAttribute="trailing" id="FtX-WZ-46x"/>
-                            <constraint firstItem="QSg-oz-eb7" firstAttribute="bottom" secondItem="pzZ-zM-p1z" secondAttribute="bottom" id="PSu-7T-vKY"/>
-                            <constraint firstItem="pzZ-zM-p1z" firstAttribute="top" secondItem="QSg-oz-eb7" secondAttribute="top" id="a7d-Rc-pP6"/>
-                            <constraint firstItem="pzZ-zM-p1z" firstAttribute="leading" secondItem="QSg-oz-eb7" secondAttribute="leading" id="oHF-96-iky"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Messages" id="ba6-Iw-djb"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="q0A-A2-Do1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3956.9230769230767" y="2238.6255924170614"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="Qu9-wg-zIB">
-            <objects>
-                <viewController id="Vgv-Rr-UlA" customClass="DMViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="YL7-OR-oMW">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="vcE-ww-ZW2"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cWB-m6-U2R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4786" y="2239"/>
+            <point key="canvasLocation" x="-3402" y="-43"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="Zx3-Bf-GS0">
@@ -1255,10 +1266,11 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n24-5A-XdT">
-                                <rect key="frame" x="13" y="240" width="81" height="35"/>
+                                <rect key="frame" x="17" y="246" width="79" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Friends">
+                                    <fontDescription key="titleFontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
                                     <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -1266,10 +1278,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SJO-bS-2fD">
-                                <rect key="frame" x="299" y="240" width="75" height="35"/>
+                                <rect key="frame" x="302" y="246" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Events">
+                                    <fontDescription key="titleFontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
                                     <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -1315,7 +1328,11 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="hbH-H3-AoS"/>
-                                    <barButtonItem title="Item" image="magnifyingglass" catalog="system" id="pY8-xT-1gK"/>
+                                    <barButtonItem title="Item" image="magnifyingglass" catalog="system" id="pY8-xT-1gK">
+                                        <connections>
+                                            <action selector="searchBtnHit:" destination="srk-rH-yBl" id="aQK-8N-uuK"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="brl-Gy-hb0"/>
                                     <barButtonItem title="Item" image="map" catalog="system" id="8te-OT-22O">
                                         <connections>
@@ -1352,6 +1369,8 @@
                         <barButtonItem key="rightBarButtonItem" title="Item" image="gear" catalog="system" id="chq-kt-NVt"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="eventsBtn" destination="SJO-bS-2fD" id="Zh7-wJ-Vv5"/>
+                        <outlet property="friendsBtn" destination="n24-5A-XdT" id="gn6-us-wVe"/>
                         <outlet property="homeBtn" destination="dWU-8R-SI5" id="QAK-hQ-Gau"/>
                         <outlet property="notificationsBtn" destination="pqh-RG-Cki" id="5mZ-m6-cD9"/>
                         <outlet property="pageCollectionView" destination="DWN-Zt-25s" id="qSS-NM-9Fo"/>
@@ -1365,7 +1384,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Im-B5-CEO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-486.15384615384613" y="1468.7203791469194"/>
+            <point key="canvasLocation" x="-1769" y="1430"/>
         </scene>
         <!--Feed View Controller-->
         <scene sceneID="fH7-wG-FUS">
@@ -1438,7 +1457,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pok-Ua-35q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1569.2307692307693" y="1468.7203791469194"/>
+            <point key="canvasLocation" x="-4931" y="1431"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="fTj-YD-NOi">
@@ -1449,11 +1468,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C2V-d4-U08">
-                                <rect key="frame" x="16" y="712" width="85" height="35"/>
+                                <rect key="frame" x="16" y="717" width="88" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" systemColor="systemRedColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Log Out"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Log Out">
+                                    <fontDescription key="titleFontDescription" name="Menlo-Regular" family="Menlo" pointSize="15"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="logOutButtonPressed:" destination="N6W-gE-jKV" eventType="touchUpInside" id="Mwz-Kt-tte"/>
                                 </connections>
@@ -1462,7 +1483,9 @@
                                 <rect key="frame" x="281" y="712" width="77" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Ok"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Ok">
+                                    <fontDescription key="titleFontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="saveButtonPressed:" destination="N6W-gE-jKV" eventType="touchUpInside" id="RW7-Gc-654"/>
                                 </connections>
@@ -1476,7 +1499,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dark Mode:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Cu-oj-YH0">
                                 <rect key="frame" x="21" y="482" width="168" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1497,7 +1520,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sound:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W9l-TY-W6I">
                                 <rect key="frame" x="21" y="543" width="168" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1509,10 +1532,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="COK-yi-5bN">
-                                <rect key="frame" x="113" y="439" width="161" height="35"/>
+                                <rect key="frame" x="113" y="445" width="142" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Change password"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Change password">
+                                    <fontDescription key="titleFontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="changePasswordHit:" destination="N6W-gE-jKV" eventType="touchUpInside" id="5KW-tb-UMh"/>
                                 </connections>
@@ -1531,10 +1556,12 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SGc-ni-ZYO">
-                                <rect key="frame" x="73" y="604" width="227" height="35"/>
+                                <rect key="frame" x="87" y="610" width="205" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Choose background music"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Choose background music">
+                                    <fontDescription key="titleFontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="chooseMusicSelected:" destination="N6W-gE-jKV" eventType="touchUpInside" id="2cP-2R-ycB"/>
                                 </connections>
@@ -1565,7 +1592,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Io-2R-LAG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1370.7692307692307" y="1468.7203791469194"/>
+            <point key="canvasLocation" x="-909" y="1430"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="hiB-Jd-yr3">
@@ -1605,6 +1632,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Register &amp; Log in">
+                                    <fontDescription key="titleFontDescription" name="Menlo-Regular" family="Menlo" pointSize="13"/>
                                     <color key="baseBackgroundColor" systemColor="labelColor"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -1645,7 +1673,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jf7-Ka-hUC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1569.2307692307693" y="145.73459715639811"/>
+            <point key="canvasLocation" x="-5803" y="1430"/>
         </scene>
         <!--Loading Screen View Controller-->
         <scene sceneID="HJ9-b6-RjR">
@@ -1672,7 +1700,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uzS-kG-ciK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1569" y="813"/>
+            <point key="canvasLocation" x="-7683" y="1430"/>
         </scene>
         <!--Profile Photo View Controller-->
         <scene sceneID="fKn-pL-Uk2">
@@ -1701,10 +1729,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P8B-8x-QLw">
-                                <rect key="frame" x="165" y="511" width="61" height="35"/>
+                                <rect key="frame" x="168" y="517" width="61" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Save"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Save">
+                                    <fontDescription key="titleFontDescription" name="Menlo-Regular" family="Menlo" pointSize="15"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="saveBtnHit:" destination="nok-cZ-VNw" eventType="touchUpInside" id="XAw-yd-utL"/>
                                 </connections>
@@ -1727,7 +1757,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lZU-U1-umD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2206.1538461538462" y="1458.7677725118483"/>
+            <point key="canvasLocation" x="-95" y="1430"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="XEg-q0-isi">
@@ -1745,7 +1775,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fVU-xZ-IOZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-486.15384615384613" y="-525.35545023696682"/>
+            <point key="canvasLocation" x="-2558" y="2239"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="D9w-DK-L8w">
@@ -1764,7 +1794,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hLK-co-Mmr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="441.53846153846155" y="1468.7203791469194"/>
+            <point key="canvasLocation" x="-780" y="2239"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VDz-jU-S7a">
@@ -1782,60 +1812,17 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NKh-my-nSW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-486.15384615384613" y="812.55924170616106"/>
-        </scene>
-        <!--Map View Controller-->
-        <scene sceneID="8PT-Tg-5Rv">
-            <objects>
-                <viewController id="U99-HZ-kk7" customClass="MapViewController" customModule="exploreAustin" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="TGg-1t-P2L">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="344-qh-9J4">
-                                <rect key="frame" x="0.0" y="47" width="390" height="763"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <standardMapConfiguration key="preferredConfiguration"/>
-                            </mapView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="zeS-ar-uYO"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <connections>
-                        <outlet property="mapView" destination="344-qh-9J4" id="rum-Bt-TwD"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xZT-T7-OsO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1370.7692307692307" y="812.55924170616106"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="T0h-U6-AQD">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bM5-GO-h4O" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="M9y-ve-0Y2">
-                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="FqE-IA-n00" kind="relationship" relationship="rootViewController" id="kVZ-Te-YYu"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2s5-KZ-OTq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3027.6923076923076" y="2238.6255924170614"/>
+            <point key="canvasLocation" x="-1769" y="-764"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="j0p-lU-qUB"/>
-        <segue reference="Qoz-N5-X0A"/>
-        <segue reference="nZ7-U2-PfZ"/>
+        <segue reference="ubf-m0-0rl"/>
+        <segue reference="i7W-sT-ZKt"/>
+        <segue reference="oXW-ga-eRR"/>
         <segue reference="v7V-Il-LN7"/>
         <segue reference="9Ld-Ib-bqF"/>
         <segue reference="Rxi-4g-uot"/>
-        <segue reference="07W-AT-BuF"/>
+        <segue reference="7Bf-aT-inv"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AustinSkyline1" width="604" height="180"/>

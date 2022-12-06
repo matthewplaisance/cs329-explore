@@ -48,6 +48,7 @@ class OthUserPageViewController: UIViewController {
             }
         }
         self.pageBtn.image = UIImage(systemName: "person.fill")
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -63,6 +64,12 @@ class OthUserPageViewController: UIViewController {
         }
     }
     
+    @IBAction func eventsBtnHit(_ sender: Any) {
+        let eventsVC = storyBoard.instantiateViewController(withIdentifier: "eventsNavController") as! UINavigationController
+        eventsVC.isModalInPresentation = true
+        eventsVC.modalPresentationStyle = .fullScreen
+        self.present(eventsVC, animated:true, completion:nil)
+    }
     
     @IBAction func homeBtnHit(_ sender: Any) {
         let feedVC = storyBoard.instantiateViewController(withIdentifier: "feedVC") as! FeedViewController

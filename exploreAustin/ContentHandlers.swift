@@ -178,7 +178,7 @@ extension UIImageView {
 
 extension UIFont {
     class func menloCustom() -> UIFont {
-        return UIFont(name: "Menlo-Regular", size: 13)!
+        return UIFont(name: "Menlo", size: 13)!
     }
 }
 

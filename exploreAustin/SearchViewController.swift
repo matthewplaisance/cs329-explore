@@ -27,11 +27,13 @@ class SearchViewController: UIViewController {
         self.collectionView.dataSource = self
         self.searchBar.delegate = self
         
-        self.searchOne.setTitle("Austin", for: .normal)
-        self.searchTwo.setTitle("Music", for: .normal)
-        self.searchThree.setTitle("fc", for: .normal)
-        self.searchFour.setTitle("football", for: .normal)
-        self.searchFive.setTitle("Lake", for: .normal)
+        
+        
+        self.searchOne.titleLabel?.font = UIFont.menloCustom()
+        self.searchTwo.titleLabel?.font = UIFont.menloCustom()
+        self.searchThree.titleLabel?.font = UIFont.menloCustom()
+        self.searchFour.titleLabel?.font = UIFont.menloCustom()
+        self.searchFive.titleLabel?.font = UIFont.menloCustom()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,6 +72,7 @@ class SearchViewController: UIViewController {
         let title = self.searchOne.titleLabel?.text
         self.searchBar.text = title
         self.searchTerm(searchTerm: (title!))
+        self.searchOne.titleLabel?.font = UIFont.menloCustom()
         
     }
     
@@ -77,6 +80,7 @@ class SearchViewController: UIViewController {
         let title = self.searchTwo.titleLabel?.text
         self.searchBar.text = title
         self.searchTerm(searchTerm: (title!))
+        self.searchTwo.titleLabel?.font = UIFont.menloCustom()
     }
     
     
@@ -84,6 +88,7 @@ class SearchViewController: UIViewController {
         let title = self.searchThree.titleLabel?.text
         self.searchBar.text = title
         self.searchTerm(searchTerm: (title!))
+        self.searchThree.titleLabel?.font = UIFont.menloCustom()
     }
     
     
@@ -91,12 +96,14 @@ class SearchViewController: UIViewController {
         let title = self.searchFour.titleLabel?.text
         self.searchBar.text = title
         self.searchTerm(searchTerm: (title!))
+        self.searchFour.titleLabel?.font = UIFont.menloCustom()
     }
     
     @IBAction func btnFiveHit(_ sender: Any) {
         let title = self.searchFive.titleLabel?.text
         self.searchBar.text = title
         self.searchTerm(searchTerm: (title!))
+        self.searchFive.titleLabel?.font = UIFont.menloCustom()
     }
     
     @IBAction func feedBtnHit(_ sender: Any) {

@@ -11,6 +11,7 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet weak var registerBtn: UIButton!
     @IBOutlet weak var loginBtn: UIButton!
+    @IBOutlet weak var aboutBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +19,7 @@ class RegisterViewController: UIViewController {
         self.registerBtn.layer.shadowRadius = 10
         self.loginBtn.titleLabel?.font = UIFont.menloCustom()
         self.registerBtn.titleLabel?.font = UIFont.menloCustom()
+        self.aboutBtn.titleLabel?.font = UIFont.menloCustom()
         
     }
     
@@ -33,4 +35,8 @@ class RegisterViewController: UIViewController {
         self.present(vc, animated: true)
     }
 
+    @IBAction func aboutBtnHit(_ sender: Any) {
+        let ivc = storyBoard.instantiateViewController(withIdentifier: "infoVC") as! InformationViewController
+        self.present(ivc, animated: true)
+    }
 }

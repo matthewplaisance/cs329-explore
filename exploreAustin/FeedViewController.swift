@@ -53,6 +53,7 @@ class FeedViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("CURR DaTA \(currUsrData)")
         if let darkMode = currUsrData.value(forKey: "darkMode"){
                     DarkMode.darkModeIsEnabled = darkMode as! Bool
         }

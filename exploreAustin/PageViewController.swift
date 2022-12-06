@@ -16,8 +16,10 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var pageCollectionView: UICollectionView!
     @IBOutlet weak var profileImage: UIImageView!
-    
     @IBOutlet weak var notificationsBtn: UIButton!
+    @IBOutlet weak var friendsBtn: UIButton!
+    @IBOutlet weak var eventsBtn: UIButton!
+    
     var data1 : [String] = ["ZilkerPark","MountBonnell"]
     //var currUid = Auth.auth().currentUser?.email
     var userPage: String = currUid!//user email
@@ -28,7 +30,6 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var homeBtn: UIBarButtonItem!
     @IBOutlet weak var settingsBtn: UIButton!
     @IBOutlet weak var postBtn: UIButton!
-    @IBOutlet weak var infoButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,9 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
         rightSwipe.direction = .right
         self.view.addGestureRecognizer(leftSwipe)
         self.view.addGestureRecognizer(rightSwipe)
+        self.friendsBtn.titleLabel?.font = UIFont.menloCustom()
+        self.eventsBtn.titleLabel?.font = UIFont.menloCustom()
+        self.usernameLabel.font = UIFont.menloCustom()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -122,8 +126,14 @@ class PageViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.present(friendsVC, animated:true, completion:nil)
     }
     
+    @IBAction func searchBtnHit(_ sender: Any) {
+        let svc = storyBoard.instantiateViewController(withIdentifier: "searchVC") as! SearchViewController
+        svc.isModalInPresentation = true
+        svc.modalPresentationStyle = .fullScreen
+        self.present(svc, animated:true, completion:nil)
+    }
+    
     @IBAction func eventsHit(_ sender: Any) {
-        print("event hit")
         let eventsVC = storyBoard.instantiateViewController(withIdentifier: "eventsNavController") as! UINavigationController
         eventsVC.isModalInPresentation = true
         eventsVC.modalPresentationStyle = .fullScreen

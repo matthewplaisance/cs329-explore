@@ -4,6 +4,7 @@
 //
 //  Created by Matthew Plaisance on 11/22/22.
 //
+//quite embarassed I just found out tabVCs today... wouldve saved alot of segue code.
 
 import UIKit
 

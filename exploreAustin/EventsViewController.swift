@@ -65,7 +65,13 @@ class EventsViewController: UIViewController{
         self.toolBar.addGestureRecognizer(leftSwipe)
     }
     
-
+    @IBAction func midBtnHit(_ sender: Any) {
+        let mvc = storyBoard.instantiateViewController(withIdentifier: "middleVC") as! HomeViewController
+        mvc.isModalInPresentation = true
+        mvc.modalPresentationStyle = .fullScreen
+        self.present(mvc, animated: false,completion: nil)
+    }
+    
     @IBAction func addEventBtnHit(_ sender: Any) {
         self.performSegue(withIdentifier: "createEventSeg", sender: self)
     }

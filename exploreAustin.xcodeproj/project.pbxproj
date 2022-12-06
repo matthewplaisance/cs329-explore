@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8B4D3E0E290B863500DC5F21 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D3E0D290B863500DC5F21 /* HomeViewController.swift */; };
-		8B8AC79329395E8A00A45ACE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8AC79229395E8A00A45ACE /* MapViewController.swift */; };
 		8BCEFE3D290DAC04005D6C92 /* LoadingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCEFE3C290DAC04005D6C92 /* LoadingScreenViewController.swift */; };
 		A062FB0F293AEAE200E6CDC3 /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A062FB0E293AEAE200E6CDC3 /* InformationViewController.swift */; };
 		C906D2B52931909600A026BE /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C906D2B32931909600A026BE /* FriendsTableViewCell.swift */; };
@@ -52,7 +51,6 @@
 
 /* Begin PBXFileReference section */
 		8B4D3E0D290B863500DC5F21 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		8B8AC79229395E8A00A45ACE /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		8BCEFE3C290DAC04005D6C92 /* LoadingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreenViewController.swift; sourceTree = "<group>"; };
 		A062FB0E293AEAE200E6CDC3 /* InformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
 		C906D2B32931909600A026BE /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
@@ -162,20 +160,19 @@
 				C9471EAF2939A876002B6570 /* EventDescriptionViewController.swift */,
 				C9595F0429367B9500ADAA46 /* SearchUsersViewController.swift */,
 				C9471EB3293C056E002B6570 /* SearchViewController.swift */,
+				A062FB0E293AEAE200E6CDC3 /* InformationViewController.swift */,
+				C9791C9D29297C68007DACE5 /* CoreDataHandler.swift */,
+				C92377932931C94F00BCCBC5 /* ContentHandlers.swift */,
 				E02991D429087E8500316F3B /* Main.storyboard */,
 				C922DB77293840710092B61B /* NotificationTableViewCell.xib */,
 				C94307C929342F150088D1A8 /* EventsTableViewCell.xib */,
 				C9C05C92292D52800094CBB3 /* FeedTableViewCell.xib */,
 				C906D2B42931909600A026BE /* FriendsTableViewCell.xib */,
 				E02991DC29087E8600316F3B /* LaunchScreen.storyboard */,
-				A062FB0E293AEAE200E6CDC3 /* InformationViewController.swift */,
-				8B8AC79229395E8A00A45ACE /* MapViewController.swift */,
 				E02991DA29087E8600316F3B /* Assets.xcassets */,
 				E02991DF29087E8600316F3B /* Info.plist */,
 				E02991E529087FF300316F3B /* GoogleService-Info.plist */,
 				E02991D729087E8500316F3B /* exploreAustin.xcdatamodeld */,
-				C9791C9D29297C68007DACE5 /* CoreDataHandler.swift */,
-				C92377932931C94F00BCCBC5 /* ContentHandlers.swift */,
 			);
 			path = exploreAustin;
 			sourceTree = "<group>";
@@ -285,7 +282,6 @@
 				E02991EB290881F800316F3B /* LoginViewController.swift in Sources */,
 				C9595F0529367B9500ADAA46 /* SearchUsersViewController.swift in Sources */,
 				C91CFC67293688A7005351EB /* OthUserPageViewController.swift in Sources */,
-				8B8AC79329395E8A00A45ACE /* MapViewController.swift in Sources */,
 				C9CCC7AF2934322D009731F1 /* CreateEventViewController.swift in Sources */,
 				C9471EB02939A876002B6570 /* EventDescriptionViewController.swift in Sources */,
 				E02991D129087E8500316F3B /* SceneDelegate.swift in Sources */,

@@ -3,7 +3,8 @@
 //  exploreAustin
 //
 //  Created by Matthew Plaisance on 11/19/22.
-//
+// should  have used one to many relationships bt core data instead of predicating
+// ie each user would have a one to relationship w/ post & event , then post & event would have a one to one relationship w/ user and a one to relationship w/ partipants for the latter and likes/comments for the former (add like & comment entity instead of parsing strings)...
 import Foundation
 import CoreData
 import UIKit
@@ -85,95 +86,6 @@ func fetchUIImage(uid:String) -> UIImage? {
     return resImage
 }
 
-func fetchUserPosts(uid:String) -> [UIImage] {
-    let request = NSFetchRequest<NSManagedObject>(entityName: "Post")
-    request.predicate = NSPredicate(format: "email CONTAINS %@",uid)
-    
-    var fetchedImages = [Data]()
-    var fetchedImagesData = [Data]()
-    
-    do {
-      let result = try context.fetch(request)
-        for data in result {
-            fetchedImages.append(data.value(forKey: "content") as! Data)
-      }
-    } catch let error as NSError {
-      print("\(error), \(error.userInfo)")
-    }
-
-    
-    fetchedImages.forEach { (imageData) in
-        var dataArray = [Data]()
-        do {
-            dataArray = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSArray.self, from: imageData) as! [Data]
-            fetchedImagesData.append(contentsOf: dataArray)
-        } catch {
-            print("Error: \(error)")
-        }
-    }
-    
-    var fetchedUIImages = convertDataToImages(imageDataArray: fetchedImagesData)
-    
-    return fetchedUIImages
-}
-
-func convertImagesToData(myImagesArray: [UIImage]) -> [Data]{
-  var myImagesDataArray = [Data]()
-  myImagesArray.forEach({ (image) in
-      myImagesDataArray.append(image.jpegData(compressionQuality: 1)!)
-  })
-  return myImagesDataArray
-}
-
-func saveUIImages(imagesData:[Data]) {
-    let entityName =  NSEntityDescription.entity(forEntityName: "Photo", in: context)!
-    let image = NSManagedObject(entity: entityName, insertInto: context)
-
-    var images: Data?
-    do {
-        images = try NSKeyedArchiver.archivedData(withRootObject: imagesData, requiringSecureCoding: true)
-    } catch {
-        print("error")
-    }
-    image.setValue(images, forKeyPath: "content")
-
-    appDelegate.saveContext()
-}
-
-func fetchUIimages() -> Array<Data>{
-    var imageDataArray = [Data]()
-    let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Photo")
-    do {
-      let result = try context.fetch(fetchRequest)
-        for data in result {
-         imageDataArray.append(data.value(forKey: "content") as! Data)
-      }
-    } catch let error as NSError {
-      print("\(error), \(error.userInfo)")
-    }
-    
-    var myImagesdataArray = [Data]()
-    //get binaryData of images
-    imageDataArray.forEach { (imageData) in
-        var dataArray = [Data]()
-        do {
-            dataArray = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSArray.self, from: imageData) as! [Data]
-            myImagesdataArray.append(contentsOf: dataArray)
-        } catch {
-            print("Error: \(error)")
-        }
-    }
-    return myImagesdataArray
-}
-
-func convertDataToImages(imageDataArray: [Data]) -> [UIImage] {
-  var myImagesArray = [UIImage]()
-  imageDataArray.forEach { (imageData) in
-      myImagesArray.append(UIImage(data: imageData)!)
-  }
-  return myImagesArray
-}
-
 func fetchUserCoreData(user:String,entity:String) -> [NSManagedObject]{
     let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
     
@@ -185,12 +97,10 @@ func fetchUserCoreData(user:String,entity:String) -> [NSManagedObject]{
         if entity == "Event"{
             
             request.predicate = NSPredicate(format: "invitedUid CONTAINS %@ OR ownerUid == %@ OR privateEvent == %@", currUid!,currUid!,NSNumber(booleanLiteral: false))
-            
         }else{
             request.predicate = NSPredicate(format: "email = %@",user)
         }
     }
-    
     
     var fetchedResults:[NSManagedObject]? = nil
     
@@ -294,3 +204,90 @@ func nsPostObjToDict(postCd:[NSManagedObject]) -> [Dictionary<String, Any>] {
 }
 
 
+func fetchUserPosts(uid:String) -> [UIImage] {
+    let request = NSFetchRequest<NSManagedObject>(entityName: "Post")
+    request.predicate = NSPredicate(format: "email CONTAINS %@",uid)
+    
+    var fetchedImages = [Data]()
+    var fetchedImagesData = [Data]()
+    
+    do {
+      let result = try context.fetch(request)
+        for data in result {
+            fetchedImages.append(data.value(forKey: "content") as! Data)
+      }
+    } catch let error as NSError {
+      print("\(error), \(error.userInfo)")
+    }
+
+    
+    fetchedImages.forEach { (imageData) in
+        var dataArray = [Data]()
+        do {
+            dataArray = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSArray.self, from: imageData) as! [Data]
+            fetchedImagesData.append(contentsOf: dataArray)
+        } catch {
+            print("Error: \(error)")
+        }
+    }
+    
+    var fetchedUIImages = convertDataToImages(imageDataArray: fetchedImagesData)
+    
+    return fetchedUIImages
+}
+func convertImagesToData(myImagesArray: [UIImage]) -> [Data]{
+  var myImagesDataArray = [Data]()
+  myImagesArray.forEach({ (image) in
+      myImagesDataArray.append(image.jpegData(compressionQuality: 1)!)
+  })
+  return myImagesDataArray
+}
+
+func saveUIImages(imagesData:[Data]) {
+    let entityName =  NSEntityDescription.entity(forEntityName: "Photo", in: context)!
+    let image = NSManagedObject(entity: entityName, insertInto: context)
+
+    var images: Data?
+    do {
+        images = try NSKeyedArchiver.archivedData(withRootObject: imagesData, requiringSecureCoding: true)
+    } catch {
+        print("error")
+    }
+    image.setValue(images, forKeyPath: "content")
+
+    appDelegate.saveContext()
+}
+
+func fetchUIimages() -> Array<Data>{
+    var imageDataArray = [Data]()
+    let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Photo")
+    do {
+      let result = try context.fetch(fetchRequest)
+        for data in result {
+         imageDataArray.append(data.value(forKey: "content") as! Data)
+      }
+    } catch let error as NSError {
+      print("\(error), \(error.userInfo)")
+    }
+    
+    var myImagesdataArray = [Data]()
+    //get binaryData of images
+    imageDataArray.forEach { (imageData) in
+        var dataArray = [Data]()
+        do {
+            dataArray = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSArray.self, from: imageData) as! [Data]
+            myImagesdataArray.append(contentsOf: dataArray)
+        } catch {
+            print("Error: \(error)")
+        }
+    }
+    return myImagesdataArray
+}
+
+func convertDataToImages(imageDataArray: [Data]) -> [UIImage] {
+  var myImagesArray = [UIImage]()
+  imageDataArray.forEach { (imageData) in
+      myImagesArray.append(UIImage(data: imageData)!)
+  }
+  return myImagesArray
+}

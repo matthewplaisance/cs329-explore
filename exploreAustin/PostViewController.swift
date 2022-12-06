@@ -18,6 +18,10 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var selectedImageView: UIImageView!
     @IBOutlet weak var postBio: UITextField!
     @IBOutlet weak var postTags: UITextField!
+    @IBOutlet weak var tagOne: UIButton!
+    @IBOutlet weak var tagTwo: UIButton!
+    @IBOutlet weak var tagThree: UIButton!
+    @IBOutlet weak var tagFour: UIButton!
     
     var username:String = ""
     var profilePhoto:UIImage!
@@ -33,6 +37,13 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     override func viewDidLoad() {
         super.viewDidLoad()
         postImagePicker.delegate = self
+        
+        var config = UIButton.Configuration.plain()
+           config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+           var outgoing = incoming
+           outgoing.font = UIFont(name: "menlo", size: 13) ?? .systemFont(ofSize: 20)
+           return outgoing
+        }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -103,7 +114,27 @@ class PostViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
     }
     
-    func formatTags(){
-        
+    @IBAction func tagOneHit(_ sender: Any) {
+        var currText = self.postTags.text ?? ""
+        currText += self.tagOne.titleLabel?.text ?? ""
+        self.postTags.text = currText
+    }
+    
+    @IBAction func tagTwoHit(_ sender: Any) {
+        var currText = self.postTags.text ?? ""
+        currText += self.tagTwo.titleLabel?.text ?? ""
+        self.postTags.text = currText
+    }
+    
+    @IBAction func tagThreeHit(_ sender: Any) {
+        var currText = self.postTags.text ?? ""
+        currText += self.tagThree.titleLabel?.text ?? ""
+        self.postTags.text = currText
+    }
+    
+    @IBAction func tagFourHit(_ sender: Any) {
+        var currText = self.postTags.text ?? ""
+        currText += self.tagFour.titleLabel?.text ?? ""
+        self.postTags.text = currText
     }
 }
